@@ -32,7 +32,7 @@ void sqlconnector::createTableFromData() {
 
 
     // Fill table with data
-    QFile file("/home/sgamdou/PersonalPlanner/PersonalPlanner/data.txt");
+    QFile file("data.txt");
     if(!file.open(QIODevice::ReadOnly)) {
         qDebug() << "Error: " << file.errorString();
         return;
