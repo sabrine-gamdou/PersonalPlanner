@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
 
     sqlconnector c;
     c.openConnection();
- // c.createTableFromData();
-    c.queryDataAndPrintData();
+    c.createTableFromData();
+    //c.queryDataAndPrintData();
     return a.exec();
 }

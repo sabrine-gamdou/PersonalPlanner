@@ -10,10 +10,10 @@ sqlconnector::sqlconnector()
 
 void sqlconnector::openConnection() {
     QSqlDatabase db = QSqlDatabase::addDatabase("QPSQL");
-    db.setHostName("127.0.0.1");
-    db.setDatabaseName("postgres");
-    db.setUserName("postgres");
-    db.setPassword("notsecure");
+    db.setHostName("personalplaner.c8g5ukkpvryv.eu-central-1.rds.amazonaws.com");
+    db.setDatabaseName("PersonalPlanner");
+    db.setUserName("anastasiya");
+    db.setPassword("personalplaner");
     bool success = db.open();
     qDebug()<<"Database connection established: "<<success;
 }
@@ -28,11 +28,11 @@ void sqlconnector::createTableFromData() {
                  healthpointsmax INTEGER NOT NULL \
                  );");
 
-    qDebug() << "Was creating table successful: " << q.exec();
+    qDebug() << "Creating table was successful: " << q.exec();
 
 
     // Fill table with data
-    QFile file("data.txt");
+    QFile file("/home/sgamdou/PersonalPlanner/PersonalPlanner/data.txt");
     if(!file.open(QIODevice::ReadOnly)) {
         qDebug() << "Error: " << file.errorString();
         return;
