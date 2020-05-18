@@ -26,11 +26,19 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    sqlconnector.cpp
+    sqlconnector.cpp \
+    login.cpp
 
 HEADERS += \
         mainwindow.h \
-    sqlconnector.h
+    sqlconnector.h \
+    login.h
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+    login.ui
+
+STATECHARTS +=
+
+DISTFILES += \
+    uml.qmodel

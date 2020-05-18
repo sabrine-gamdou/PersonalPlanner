@@ -20,7 +20,7 @@
       <item row="0" column="1">
        <widget class="QTabWidget" name="tabWidget">
         <property name="currentIndex">
-         <number>1</number>
+         <number>3</number>
         </property>
         <widget class="QWidget" name="tab">
          <attribute name="title">
@@ -401,28 +401,28 @@
                <item>
                 <widget class="QPushButton" name="pushButton">
                  <property name="text">
-                  <string>Name</string>
+                  <string>Firstname</string>
                  </property>
                 </widget>
                </item>
                <item>
                 <widget class="QPushButton" name="pushButton_2">
                  <property name="text">
-                  <string>Vorname</string>
+                  <string>Lastname</string>
                  </property>
                 </widget>
                </item>
                <item>
                 <widget class="QPushButton" name="pushButton_4">
                  <property name="text">
-                  <string>Geburtstag</string>
+                  <string>Birthday</string>
                  </property>
                 </widget>
                </item>
                <item>
                 <widget class="QPushButton" name="pushButton_3">
                  <property name="text">
-                  <string>Adresse</string>
+                  <string>Address</string>
                  </property>
                 </widget>
                </item>
