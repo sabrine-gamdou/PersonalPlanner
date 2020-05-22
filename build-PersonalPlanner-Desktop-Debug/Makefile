@@ -52,13 +52,19 @@ OBJECTS_DIR   = ./
 
 SOURCES       = ../PersonalPlanner/main.cpp \
 		../PersonalPlanner/mainwindow.cpp \
-		../PersonalPlanner/sqlconnector.cpp \
-		../PersonalPlanner/login.cpp moc_mainwindow.cpp \
+		../PersonalPlanner/login.cpp \
+		../PersonalPlanner/databasesingleton.cpp \
+		../PersonalPlanner/task.cpp \
+		../PersonalPlanner/dao.cpp \
+		../PersonalPlanner/taskdaoimp.cpp moc_mainwindow.cpp \
 		moc_login.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
-		sqlconnector.o \
 		login.o \
+		databasesingleton.o \
+		task.o \
+		dao.o \
+		taskdaoimp.o \
 		moc_mainwindow.o \
 		moc_login.o
 DIST          = ../PersonalPlanner/uml.qmodel \
@@ -115,6 +121,7 @@ DIST          = ../PersonalPlanner/uml.qmodel \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/qt_config.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-clang/qmake.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_post.prf \
+		../PersonalPlanner/.qmake.stash \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exclusive_builds.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/toolchain.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/default_pre.prf \
@@ -135,11 +142,18 @@ DIST          = ../PersonalPlanner/uml.qmodel \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/yacc.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf \
 		../PersonalPlanner/PersonalPlanner.pro ../PersonalPlanner/mainwindow.h \
-		../PersonalPlanner/sqlconnector.h \
-		../PersonalPlanner/login.h ../PersonalPlanner/main.cpp \
+		../PersonalPlanner/login.h \
+		../PersonalPlanner/storagelayer.h \
+		../PersonalPlanner/databasesingleton.h \
+		../PersonalPlanner/task.h \
+		../PersonalPlanner/dao.h \
+		../PersonalPlanner/taskdaoimp.h ../PersonalPlanner/main.cpp \
 		../PersonalPlanner/mainwindow.cpp \
-		../PersonalPlanner/sqlconnector.cpp \
-		../PersonalPlanner/login.cpp
+		../PersonalPlanner/login.cpp \
+		../PersonalPlanner/databasesingleton.cpp \
+		../PersonalPlanner/task.cpp \
+		../PersonalPlanner/dao.cpp \
+		../PersonalPlanner/taskdaoimp.cpp
 QMAKE_TARGET  = PersonalPlanner
 DESTDIR       = 
 TARGET        = PersonalPlanner
@@ -204,6 +218,7 @@ Makefile: ../PersonalPlanner/PersonalPlanner.pro /usr/lib/x86_64-linux-gnu/qt5/m
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/qt_config.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-clang/qmake.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exclusive_builds.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/toolchain.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/default_pre.prf \
@@ -282,6 +297,7 @@ Makefile: ../PersonalPlanner/PersonalPlanner.pro /usr/lib/x86_64-linux-gnu/qt5/m
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/qt_config.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-clang/qmake.conf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_post.prf:
+.qmake.stash:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exclusive_builds.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/toolchain.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/default_pre.prf:
@@ -321,8 +337,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../PersonalPlanner/mainwindow.h ../PersonalPlanner/sqlconnector.h ../PersonalPlanner/login.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../PersonalPlanner/main.cpp ../PersonalPlanner/mainwindow.cpp ../PersonalPlanner/sqlconnector.cpp ../PersonalPlanner/login.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../PersonalPlanner/mainwindow.h ../PersonalPlanner/login.h ../PersonalPlanner/storagelayer.h ../PersonalPlanner/databasesingleton.h ../PersonalPlanner/task.h ../PersonalPlanner/dao.h ../PersonalPlanner/taskdaoimp.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../PersonalPlanner/main.cpp ../PersonalPlanner/mainwindow.cpp ../PersonalPlanner/login.cpp ../PersonalPlanner/databasesingleton.cpp ../PersonalPlanner/task.cpp ../PersonalPlanner/dao.cpp ../PersonalPlanner/taskdaoimp.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../PersonalPlanner/mainwindow.ui ../PersonalPlanner/login.ui $(DISTDIR)/
 
 
@@ -392,20 +408,31 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean compiler_ui
 ####### Compile
 
 main.o: ../PersonalPlanner/main.cpp ../PersonalPlanner/mainwindow.h \
-		../PersonalPlanner/sqlconnector.h \
-		../PersonalPlanner/login.h
+		../PersonalPlanner/login.h \
+		../PersonalPlanner/task.h \
+		../PersonalPlanner/databasesingleton.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../PersonalPlanner/main.cpp
 
 mainwindow.o: ../PersonalPlanner/mainwindow.cpp ../PersonalPlanner/mainwindow.h \
 		ui_mainwindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../PersonalPlanner/mainwindow.cpp
 
-sqlconnector.o: ../PersonalPlanner/sqlconnector.cpp ../PersonalPlanner/sqlconnector.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o sqlconnector.o ../PersonalPlanner/sqlconnector.cpp
-
 login.o: ../PersonalPlanner/login.cpp ../PersonalPlanner/login.h \
 		ui_login.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o login.o ../PersonalPlanner/login.cpp
+
+databasesingleton.o: ../PersonalPlanner/databasesingleton.cpp ../PersonalPlanner/databasesingleton.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o databasesingleton.o ../PersonalPlanner/databasesingleton.cpp
+
+task.o: ../PersonalPlanner/task.cpp ../PersonalPlanner/task.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o task.o ../PersonalPlanner/task.cpp
+
+dao.o: ../PersonalPlanner/dao.cpp ../PersonalPlanner/dao.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o dao.o ../PersonalPlanner/dao.cpp
+
+taskdaoimp.o: ../PersonalPlanner/taskdaoimp.cpp ../PersonalPlanner/taskdaoimp.h \
+		../PersonalPlanner/dao.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o taskdaoimp.o ../PersonalPlanner/taskdaoimp.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp

@@ -290,7 +290,7 @@
                          <context>Object Layer</context>
                          <name>Task</name>
                          <pos>x:290;y:770</pos>
-                         <rect>x:-65;y:-95;w:130;h:190</rect>
+                         <rect>x:-65;y:-90;w:130;h:180</rect>
                          <visual-role>0</visual-role>
                         </DObject>
                        </base-DObject>
@@ -312,7 +312,7 @@
                          <context>Object Layer</context>
                          <name>User</name>
                          <pos>x:955;y:780</pos>
-                         <rect>x:-80;y:-110;w:160;h:220</rect>
+                         <rect>x:-80;y:-115;w:160;h:230</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
                         </DObject>
@@ -442,7 +442,7 @@
                          </base-DElement>
                          <object>{be91238f-3ec8-40da-977c-60ec41448103}</object>
                          <context>Darabase Layer</context>
-                         <name>Database</name>
+                         <name>DatabasesSingleton</name>
                          <pos>x:560;y:1330</pos>
                          <rect>x:-95;y:-60;w:190;h:120</rect>
                          <visual-role>0</visual-role>
@@ -1687,7 +1687,7 @@
                             <qlist>
                              <item>
                               <MClassMember>
-                               <uid>{2b0e67f3-3943-4231-8520-e711a16d3444}</uid>
+                               <uid>{632d66e8-0695-4fe5-9749-3232a66d4662}</uid>
                                <visibility>3</visibility>
                                <type>1</type>
                                <declaration>taskID: Integer</declaration>
@@ -1695,7 +1695,7 @@
                              </item>
                              <item>
                               <MClassMember>
-                               <uid>{306d4561-1b7e-4dec-a776-66155757a568}</uid>
+                               <uid>{10f65608-aa6b-4148-9157-209379636baa}</uid>
                                <visibility>3</visibility>
                                <type>1</type>
                                <declaration>title: String</declaration>
@@ -1703,7 +1703,7 @@
                              </item>
                              <item>
                               <MClassMember>
-                               <uid>{243b76c4-8b13-42aa-b6f4-3e7cf1db301f}</uid>
+                               <uid>{6a97a5c2-dfbf-4411-a017-0ed01800d5da}</uid>
                                <visibility>3</visibility>
                                <type>1</type>
                                <declaration>date: Date</declaration>
@@ -1711,7 +1711,7 @@
                              </item>
                              <item>
                               <MClassMember>
-                               <uid>{9c3e8588-d475-428b-8e05-7ad4b933650a}</uid>
+                               <uid>{3577445c-eb7b-43aa-b4f7-9ca615a6d072}</uid>
                                <visibility>3</visibility>
                                <type>1</type>
                                <declaration>description: String</declaration>
@@ -1719,7 +1719,7 @@
                              </item>
                              <item>
                               <MClassMember>
-                               <uid>{507b446e-a17b-49a7-8a3d-20793ab49982}</uid>
+                               <uid>{97105b65-a83f-49a6-8640-b4b94fd22468}</uid>
                                <visibility>3</visibility>
                                <type>1</type>
                                <declaration>icon: File</declaration>
@@ -1727,7 +1727,7 @@
                              </item>
                              <item>
                               <MClassMember>
-                               <uid>{cd75fb68-3b77-4538-a66c-f970d43745c6}</uid>
+                               <uid>{68477802-bc32-4929-a21a-6bf23dff4274}</uid>
                                <visibility>3</visibility>
                                <type>1</type>
                                <declaration>importance: Integer</declaration>
@@ -1735,15 +1735,7 @@
                              </item>
                              <item>
                               <MClassMember>
-                               <uid>{2daeedab-3ada-4f50-9e4f-ade7255bd701}</uid>
-                               <visibility>3</visibility>
-                               <type>1</type>
-                               <declaration>score: String</declaration>
-                              </MClassMember>
-                             </item>
-                             <item>
-                              <MClassMember>
-                               <uid>{7d23ccd2-7bdb-4449-bf93-c1177e5c8910}</uid>
+                               <uid>{ebb63d41-e573-4779-8101-d5f151d5fcb3}</uid>
                                <visibility>1</visibility>
                                <type>2</type>
                                <declaration>Task Task()</declaration>
@@ -1751,7 +1743,7 @@
                              </item>
                              <item>
                               <MClassMember>
-                               <uid>{a869fc0f-d824-4484-be09-6a61839eefec}</uid>
+                               <uid>{98267303-4b6c-4367-b875-a7c0728a5996}</uid>
                                <visibility>1</visibility>
                                <type>2</type>
                                <declaration>String toString()</declaration>
@@ -1841,7 +1833,7 @@
                             <qlist>
                              <item>
                               <MClassMember>
-                               <uid>{26d3f70b-1435-431c-9ed9-0ebce4975bb8}</uid>
+                               <uid>{bd4b2470-f600-4c94-92ac-e9790c6d3113}</uid>
                                <visibility>3</visibility>
                                <type>1</type>
                                <declaration>firstname: String</declaration>
@@ -1849,7 +1841,7 @@
                              </item>
                              <item>
                               <MClassMember>
-                               <uid>{10a43945-b010-49bf-a93e-d2847bccddfc}</uid>
+                               <uid>{4a7bbcf8-0377-4074-a219-dcbc14576e15}</uid>
                                <visibility>3</visibility>
                                <type>1</type>
                                <declaration>lastname: String</declaration>
@@ -1857,7 +1849,7 @@
                              </item>
                              <item>
                               <MClassMember>
-                               <uid>{0899df8e-dcea-44ab-bdfb-cae143b099f9}</uid>
+                               <uid>{2596cc7a-e606-43a6-8c54-65f1a6aee057}</uid>
                                <visibility>3</visibility>
                                <type>1</type>
                                <declaration>e-mail: String</declaration>
@@ -1865,7 +1857,7 @@
                              </item>
                              <item>
                               <MClassMember>
-                               <uid>{b2825bd9-ca38-48cf-96a5-fe5cdf00f4ed}</uid>
+                               <uid>{f5217599-8790-4e69-95ac-6957afe804cc}</uid>
                                <visibility>3</visibility>
                                <type>1</type>
                                <declaration>birthday: Date</declaration>
@@ -1873,7 +1865,7 @@
                              </item>
                              <item>
                               <MClassMember>
-                               <uid>{baba0003-e3d3-42a5-880a-d77832926f66}</uid>
+                               <uid>{c2996071-a8bf-4145-b9b4-8f11e42d89c6}</uid>
                                <visibility>3</visibility>
                                <type>1</type>
                                <declaration>adress: String</declaration>
@@ -1881,7 +1873,7 @@
                              </item>
                              <item>
                               <MClassMember>
-                               <uid>{6967ca98-2009-47c7-81c5-15032a4fd56e}</uid>
+                               <uid>{948ab98f-918f-4fce-876c-150b72d11432}</uid>
                                <visibility>3</visibility>
                                <type>1</type>
                                <declaration>taskList: TaskList</declaration>
@@ -1889,7 +1881,7 @@
                              </item>
                              <item>
                               <MClassMember>
-                               <uid>{ff848b4b-a2a6-4533-99fa-6f1dfa073ed7}</uid>
+                               <uid>{cb95b1c7-a92f-47a0-9b93-3749728457b6}</uid>
                                <visibility>3</visibility>
                                <type>1</type>
                                <declaration>username: String</declaration>
@@ -1897,7 +1889,7 @@
                              </item>
                              <item>
                               <MClassMember>
-                               <uid>{c2493257-71d3-4c91-a97b-26d4776cc757}</uid>
+                               <uid>{fd1b8ff1-7de6-4d0d-bd19-46525904929e}</uid>
                                <visibility>3</visibility>
                                <type>1</type>
                                <declaration>password: String</declaration>
@@ -1905,7 +1897,15 @@
                              </item>
                              <item>
                               <MClassMember>
-                               <uid>{19a442c1-4bbc-4d44-9dfe-0e64123c8a0a}</uid>
+                               <uid>{ac8ee570-4c74-4d85-ae8a-1e9a14d71381}</uid>
+                               <visibility>3</visibility>
+                               <type>1</type>
+                               <declaration>score: String</declaration>
+                              </MClassMember>
+                             </item>
+                             <item>
+                              <MClassMember>
+                               <uid>{75d0261e-b10a-49ea-91df-20d790a3e4de}</uid>
                                <visibility>1</visibility>
                                <type>2</type>
                                <declaration>User User()</declaration>
@@ -1913,7 +1913,7 @@
                              </item>
                              <item>
                               <MClassMember>
-                               <uid>{6fbf26e6-1984-4315-ad03-b90bff72082e}</uid>
+                               <uid>{0cdeb0e3-1cbd-469b-b783-363b08ae146c}</uid>
                                <visibility>1</visibility>
                                <type>2</type>
                                <declaration>String toString()</declaration>
@@ -2084,7 +2084,7 @@
                             <qlist>
                              <item>
                               <MClassMember>
-                               <uid>{b1113b13-a4ea-4713-9e48-20925175ac2d}</uid>
+                               <uid>{14bf72d9-cb26-4047-ac74-89955a3246dd}</uid>
                                <visibility>1</visibility>
                                <type>2</type>
                                <declaration>List&lt;Task&gt; getTasks()</declaration>
@@ -2092,7 +2092,7 @@
                              </item>
                              <item>
                               <MClassMember>
-                               <uid>{d36d4e89-cf0e-402b-aafc-7458946b4cba}</uid>
+                               <uid>{0e9eec96-1ff8-41a3-8ed9-31f84bad80cb}</uid>
                                <visibility>1</visibility>
                                <type>2</type>
                                <declaration>Task getTask()</declaration>
@@ -2100,7 +2100,7 @@
                              </item>
                              <item>
                               <MClassMember>
-                               <uid>{a7ffa68c-d3d7-4294-86d0-b0376b3dbdd4}</uid>
+                               <uid>{7d47389a-e947-42ed-a133-a2ba2466143b}</uid>
                                <visibility>1</visibility>
                                <type>2</type>
                                <declaration>Task updateTask()</declaration>
@@ -2108,7 +2108,7 @@
                              </item>
                              <item>
                               <MClassMember>
-                               <uid>{dd0baffc-bdb5-47ba-b23a-a51cb09a76a6}</uid>
+                               <uid>{5a1e0cc3-8a96-4742-8586-e01856c1e766}</uid>
                                <visibility>1</visibility>
                                <type>2</type>
                                <declaration>void newTask()</declaration>
@@ -2116,7 +2116,7 @@
                              </item>
                              <item>
                               <MClassMember>
-                               <uid>{07923d7f-48b1-4041-9dbd-777e50185478}</uid>
+                               <uid>{d4fd019d-6b53-45bc-9d74-b2918a0d9faa}</uid>
                                <visibility>1</visibility>
                                <type>2</type>
                                <declaration>Boolean deleteTask()</declaration>
@@ -2437,14 +2437,14 @@
                                <uid>{be91238f-3ec8-40da-977c-60ec41448103}</uid>
                               </MElement>
                              </base-MElement>
-                             <name>Database</name>
+                             <name>DatabasesSingleton</name>
                             </MObject>
                            </base-MObject>
                            <members>
                             <qlist>
                              <item>
                               <MClassMember>
-                               <uid>{342a3536-14be-4f2b-ba34-1f0ea8257fe2}</uid>
+                               <uid>{87c124cb-38e2-43ee-bc49-3b86907dc794}</uid>
                                <visibility>3</visibility>
                                <type>1</type>
                                <declaration>connection: SqlConnection</declaration>
@@ -2452,7 +2452,7 @@
                              </item>
                              <item>
                               <MClassMember>
-                               <uid>{f240d7a7-7755-40fb-a7b0-789c9dd3c669}</uid>
+                               <uid>{bb6ebfa2-e0a5-4433-b538-1f8b1955ad79}</uid>
                                <visibility>1</visibility>
                                <type>2</type>
                                <declaration>void openConnection()</declaration>
@@ -2460,7 +2460,7 @@
                              </item>
                              <item>
                               <MClassMember>
-                               <uid>{e53b45a2-3840-45af-9883-15542ef5b69d}</uid>
+                               <uid>{cf8c462a-83bd-4135-b373-4f3af51593bc}</uid>
                                <visibility>1</visibility>
                                <type>2</type>
                                <declaration>void createTable()</declaration>
@@ -2468,7 +2468,7 @@
                              </item>
                              <item>
                               <MClassMember>
-                               <uid>{52bb3108-f0ea-425f-bb5a-9e38f846842f}</uid>
+                               <uid>{550354db-147a-4832-8ed6-e10e5cdf7049}</uid>
                                <visibility>1</visibility>
                                <type>2</type>
                                <declaration>SqlConnection getConnection()</declaration>

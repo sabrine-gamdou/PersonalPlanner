@@ -26,13 +26,20 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    sqlconnector.cpp \
-    login.cpp
+    login.cpp \
+    databasesingleton.cpp \
+    task.cpp \
+    dao.cpp \
+    taskdaoimp.cpp
 
 HEADERS += \
         mainwindow.h \
-    sqlconnector.h \
-    login.h
+    login.h \
+    storagelayer.h \
+    databasesingleton.h \
+    task.h \
+    dao.h \
+    taskdaoimp.h
 
 FORMS += \
         mainwindow.ui \

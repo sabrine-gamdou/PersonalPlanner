@@ -1,11 +1,14 @@
 #ifndef STORAGELAYER_H
 #define STORAGELAYER_H
 
-
-class StorageLayer
-{
+namespace StorageLayer {
+class UserHandler{
 public:
-    StorageLayer();
-};
+    UserHandler();
+    ~UserHandler();
+
+}
+
+}
 
 #endif // STORAGELAYER_H
