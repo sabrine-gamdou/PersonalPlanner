@@ -2,11 +2,11 @@
 CREATE TABLE users
 (
 	username VARCHAR(30) PRIMARY KEY,
-	password VARCHAR(30) NOT NULL,
-	firstname VARCHAR(30) NOT NULL,
-	lastname VARCHAR(30) NOT NULL,
-	email VARCHAR(50) NOT NULL,
-	birthday DATE NOT NULL,
+	password VARCHAR(30),
+	firstname VARCHAR(30),
+	lastname VARCHAR(30),
+	email VARCHAR(50),
+	birthday DATE,
 	address VARCHAR(50)
 );
 
