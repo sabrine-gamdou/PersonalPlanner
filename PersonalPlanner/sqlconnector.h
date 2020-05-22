@@ -4,13 +4,21 @@
 #include <QtSql/QSqlDatabase>
 #include <QtSql/QSqlQuery>
 
-class sqlconnector
+class Sqlconnector
 {
 public:
-    sqlconnector();
-    void openConnection();
-    void createTableFromData();
-    void queryDataAndPrintData();
+    Sqlconnector();
+    ~Sqlconnector();
+
+    void connect();
+    bool disconnect();
+    QSqlQuery Query(QString q);
+    //void openConnection();
+    //void createTableFromData();
+    //void queryDataAndPrintData();
+
+
+    QSqlDatabase db;
 };
 
 #endif // SQLCONNECTOR_H

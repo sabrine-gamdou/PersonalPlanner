@@ -27,12 +27,16 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     sqlconnector.cpp \
-    login.cpp
+    user.cpp \
+    userhandler.cpp \
+    loginForm.cpp
 
 HEADERS += \
         mainwindow.h \
     sqlconnector.h \
-    login.h
+    user.h \
+    userhandler.h \
+    loginForm.h
 
 FORMS += \
         mainwindow.ui \

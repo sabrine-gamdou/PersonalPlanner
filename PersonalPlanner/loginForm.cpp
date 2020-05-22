@@ -1,4 +1,4 @@
-#include "login.h"
+#include "loginForm.h"
 #include "ui_login.h"
 
 Login::Login(QWidget *parent) :
