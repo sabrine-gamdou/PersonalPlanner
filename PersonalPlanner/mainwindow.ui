@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>873</width>
-    <height>532</height>
+    <width>903</width>
+    <height>537</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,12 +20,42 @@
       <item row="0" column="1">
        <widget class="QTabWidget" name="tabWidget">
         <property name="currentIndex">
-         <number>3</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="tab">
          <attribute name="title">
           <string>Tasks</string>
          </attribute>
+         <widget class="QTableWidget" name="tableWidget_2">
+          <property name="geometry">
+           <rect>
+            <x>5</x>
+            <y>1</y>
+            <width>401</width>
+            <height>361</height>
+           </rect>
+          </property>
+          <column>
+           <property name="text">
+            <string>Title</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Description</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Date</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Importance</string>
+           </property>
+          </column>
+         </widget>
         </widget>
         <widget class="QWidget" name="Aufgabe">
          <attribute name="title">
@@ -485,7 +515,7 @@
     <item row="3" column="0">
      <widget class="QLabel" name="label_4">
       <property name="text">
-       <string>Weekly Archivements: </string>
+       <string>Weekly Achievements: </string>
       </property>
      </widget>
     </item>
@@ -503,7 +533,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>873</width>
+     <width>903</width>
      <height>22</height>
     </rect>
    </property>

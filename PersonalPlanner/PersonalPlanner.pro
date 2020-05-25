@@ -30,7 +30,9 @@ SOURCES += \
     databasesingleton.cpp \
     task.cpp \
     dao.cpp \
-    taskdaoimp.cpp
+    taskdaoimp.cpp \
+    user.cpp \
+    userdaoimp.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -39,7 +41,9 @@ HEADERS += \
     databasesingleton.h \
     task.h \
     dao.h \
-    taskdaoimp.h
+    taskdaoimp.h \
+    user.h \
+    userdaoimp.h
 
 FORMS += \
         mainwindow.ui \

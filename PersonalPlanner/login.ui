@@ -247,7 +247,7 @@
                 </widget>
                </item>
                <item>
-                <widget class="QLineEdit" name="lineEdit"/>
+                <widget class="QLineEdit" name="usernameText"/>
                </item>
               </layout>
              </item>
@@ -269,7 +269,7 @@
                 </widget>
                </item>
                <item>
-                <widget class="QLineEdit" name="lineEdit_2"/>
+                <widget class="QLineEdit" name="passText"/>
                </item>
               </layout>
              </item>

@@ -57,7 +57,7 @@ Task* TaskDaoImp::read(int t_taskID){
 
     while (query.next()) {
         t_taskID = query.value(0).toInt();
-        m_title = query.value(1).toString();,
+        m_title = query.value(1).toString();
         t_date = query.value(2).toDate();
         m_description = query.value(3).toString();
         m_importance = query.value(5).toInt();
@@ -93,18 +93,18 @@ bool TaskDaoImp::delete_(Task& task){
 
     QSqlQuery query;
 
-    qDebug() << "Prepare Query: " << query.prepare("UPDATE tasks SET (task_id, title, date, description,importance, status) "
-                                                   "VALUES (:task_id, :title, :date, :description, :importance, :status)");
+//    qDebug() << "Prepare Query: " << query.prepare("UPDATE tasks SET (task_id, title, date, description,importance, status) "
+//                                                   "VALUES (:task_id, :title, :date, :description, :importance, :status)");
 
-    query.bindValue(":task_id", task.setTaskID(););
-    query.bindValue(":title", task.title());
-    query.bindValue(":date", task.date());
-    query.bindValue(":description",task.description());
-    query.bindValue(":importance", task.importance());
-    query.bindValue(":status", task.status());
+//    query.bindValue(":task_id", task.taskID(););
+//    query.bindValue(":title", task.title());
+//    query.bindValue(":date", task.date());
+//    query.bindValue(":description",task.description());
+//    query.bindValue(":importance", task.importance());
+//    query.bindValue(":status", task.status());
 
-        qDebug() << t_taskID << m_title << t_date << m_description << m_importance
-                 << m_status;
+//        qDebug() << t_taskID << m_title << t_date << m_description << m_importance
+//                 << m_status;
 
 
     return query.exec();
