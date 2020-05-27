@@ -18,21 +18,21 @@
 
 
     void DatabaseSingleton::openConnection() {
-//        QSqlDatabase db = QSqlDatabase::addDatabase("QPSQL");
-//        db.setHostName("personalplaner.c8g5ukkpvryv.eu-central-1.rds.amazonaws.com");
-//        db.setDatabaseName("PersonalPlanner");
-//        db.setUserName("anastasiya");
-//        db.setPassword("personalplaner");
-//        bool success = db.open();
-//        qDebug()<<"Database connection established: "<<success;
+        m_pInstance = QSqlDatabase::addDatabase("QPSQL");
+        m_pInstance.setHostName("personalplaner.c8g5ukkpvryv.eu-central-1.rds.amazonaws.com");
+        m_pInstance.setDatabaseName("PersonalPlanner");
+        m_pInstance.setUserName("anastasiya");
+        m_pInstance.setPassword("personalplaner");
+        bool success = m_pInstance.open();
+        qDebug()<<"Database connection established: "<<success;
 
-                m_pInstance = QSqlDatabase::addDatabase("QPSQL");
-                m_pInstance.setHostName("127.0.0.1");
-                m_pInstance.setDatabaseName("postgres");
-                m_pInstance.setUserName("postgres");
-                m_pInstance.setPassword("1234");
-                bool success = m_pInstance.open();
-                qDebug()<<"Database connection established: "<<success;
+//                m_pInstance = QSqlDatabase::addDatabase("QPSQL");
+//                m_pInstance.setHostName("127.0.0.1");
+//                m_pInstance.setDatabaseName("postgres");
+//                m_pInstance.setUserName("postgres");
+//                m_pInstance.setPassword("1234");
+//                bool success = m_pInstance.open();
+//                qDebug()<<"Database connection established: "<<success;
     }
 
     void DatabaseSingleton::closeConnection(){
