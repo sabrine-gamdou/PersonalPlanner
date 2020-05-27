@@ -5,17 +5,17 @@
 //using namespace DatabaseLayer;
 
 
-    DatabaseSingleton* volatile DatabaseSingleton::m_pInstance = 0;
+    QSqlDatabase DatabaseSingleton::m_pInstance ;
 
-
-
-    DatabaseSingleton* DatabaseSingleton::getInstance(){
-        if(!m_pInstance){
-            DatabaseSingleton* volatile temp = new DatabaseSingleton;
-            m_pInstance = temp;
-        }
-        return m_pInstance;
+    DatabaseSingleton::DatabaseSingleton(){
     }
+
+    DatabaseSingleton::~DatabaseSingleton(){
+        closeConnection();
+    }
+
+
+
 
     void DatabaseSingleton::openConnection() {
 //        QSqlDatabase db = QSqlDatabase::addDatabase("QPSQL");
@@ -26,13 +26,28 @@
 //        bool success = db.open();
 //        qDebug()<<"Database connection established: "<<success;
 
-                QSqlDatabase db = QSqlDatabase::addDatabase("QPSQL");
-                db.setHostName("127.0.0.1");
-                db.setDatabaseName("postgres");
-                db.setUserName("postgres");
-                db.setPassword("1234");
-                bool success = db.open();
+                m_pInstance = QSqlDatabase::addDatabase("QPSQL");
+                m_pInstance.setHostName("127.0.0.1");
+                m_pInstance.setDatabaseName("postgres");
+                m_pInstance.setUserName("postgres");
+                m_pInstance.setPassword("1234");
+                bool success = m_pInstance.open();
                 qDebug()<<"Database connection established: "<<success;
     }
 
+    void DatabaseSingleton::closeConnection(){
+        if (m_pInstance.isOpen())
+            {
+                m_pInstance.close();
+            }
+    }
+
+    QSqlDatabase DatabaseSingleton::getInstance(){
+        if(!m_pInstance.isOpen()){
+            openConnection();
+//            DatabaseSingleton* volatile temp = new DatabaseSingleton;
+         //   m_pInstance = temp;
+        }
+        return m_pInstance;
+    }
 

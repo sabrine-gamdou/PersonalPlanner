@@ -8,20 +8,24 @@
 class DatabaseSingleton{
 private:
     /* Instance is stored here */
-    static DatabaseSingleton* volatile m_pInstance;
-
+    static QSqlDatabase m_pInstance;
     /* SqlConnection Instance is stored here */
     // static SqlConnection connection;
 
     /* Private constructor to prevent instancing. */
-    DatabaseSingleton(){}
+    DatabaseSingleton();
+    ~DatabaseSingleton();
+
+    static void openConnection();
+    static void closeConnection();
+
 public:
     // ~DatabaseSingleton();
     /* Static Access Method. */
-    static DatabaseSingleton* getInstance();
+    static QSqlDatabase getInstance();
 
     /* Create and Open Connection to Database */
-    void openConnection();
+
 };
 
 //}

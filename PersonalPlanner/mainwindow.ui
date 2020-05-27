@@ -20,7 +20,7 @@
       <item row="0" column="1">
        <widget class="QTabWidget" name="tabWidget">
         <property name="currentIndex">
-         <number>0</number>
+         <number>3</number>
         </property>
         <widget class="QWidget" name="tab">
          <attribute name="title">
@@ -375,7 +375,7 @@
            <string>Profile Picture</string>
           </property>
          </widget>
-         <widget class="QCommandLinkButton" name="commandLinkButton">
+         <widget class="QCommandLinkButton" name="logoutBtn">
           <property name="geometry">
            <rect>
             <x>240</x>
@@ -388,7 +388,7 @@
            <string>LogOut</string>
           </property>
          </widget>
-         <widget class="QCommandLinkButton" name="commandLinkButton_2">
+         <widget class="QCommandLinkButton" name="deleteAccountBtn">
           <property name="geometry">
            <rect>
             <x>240</x>
@@ -401,7 +401,10 @@
            <string>Delete Account</string>
           </property>
          </widget>
-         <widget class="QCheckBox" name="checkBox">
+         <widget class="QCheckBox" name="editInfoCheckBox">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
           <property name="geometry">
            <rect>
             <x>240</x>
@@ -410,8 +413,20 @@
             <height>23</height>
            </rect>
           </property>
+          <property name="mouseTracking">
+           <bool>true</bool>
+          </property>
+          <property name="tabletTracking">
+           <bool>false</bool>
+          </property>
           <property name="text">
            <string>Edit Information</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <property name="checked">
+           <bool>false</bool>
           </property>
          </widget>
          <widget class="QWidget" name="gridLayoutWidget_2">
@@ -419,8 +434,8 @@
            <rect>
             <x>19</x>
             <y>89</y>
-            <width>331</width>
-            <height>201</height>
+            <width>321</width>
+            <height>161</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="gridLayout_3">
@@ -429,37 +444,37 @@
              <item>
               <layout class="QVBoxLayout" name="verticalLayout_2">
                <item>
-                <widget class="QPushButton" name="pushButton">
+                <widget class="QLabel" name="firstnameLb">
                  <property name="text">
                   <string>Firstname</string>
                  </property>
                 </widget>
                </item>
                <item>
-                <widget class="QPushButton" name="pushButton_2">
+                <widget class="QLabel" name="lastnameLb">
                  <property name="text">
                   <string>Lastname</string>
                  </property>
                 </widget>
                </item>
                <item>
-                <widget class="QPushButton" name="pushButton_4">
+                <widget class="QLabel" name="emailLb">
+                 <property name="text">
+                  <string>E-Mail</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="birthdayLb">
                  <property name="text">
                   <string>Birthday</string>
                  </property>
                 </widget>
                </item>
                <item>
-                <widget class="QPushButton" name="pushButton_3">
+                <widget class="QLabel" name="addressLb">
                  <property name="text">
                   <string>Address</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QPushButton" name="pushButton_5">
-                 <property name="text">
-                  <string>E-Mail</string>
                  </property>
                 </widget>
                </item>
@@ -470,25 +485,32 @@
            <item row="0" column="1">
             <layout class="QVBoxLayout" name="verticalLayout_3">
              <item>
-              <widget class="QLineEdit" name="lineEdit_2"/>
+              <widget class="QLineEdit" name="firstnameTxt">
+               <property name="enabled">
+                <bool>true</bool>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="lineEdit"/>
+              <widget class="QLineEdit" name="lastnameTxt"/>
              </item>
              <item>
-              <widget class="QLineEdit" name="lineEdit_3"/>
+              <widget class="QLineEdit" name="emailTxt"/>
              </item>
              <item>
-              <widget class="QLineEdit" name="lineEdit_5"/>
+              <widget class="QDateEdit" name="dateEdit"/>
              </item>
              <item>
-              <widget class="QLineEdit" name="lineEdit_4"/>
+              <widget class="QLineEdit" name="addressTxt"/>
              </item>
             </layout>
            </item>
           </layout>
          </widget>
-         <widget class="QPushButton" name="pushButton_6">
+         <widget class="QPushButton" name="saveChangesBtn">
           <property name="geometry">
            <rect>
             <x>20</x>

@@ -21,7 +21,7 @@ TaskDaoImp::~TaskDaoImp(){
 
 bool TaskDaoImp::create(Task& task){
 
-    DatabaseSingleton::getInstance()->openConnection();
+    DatabaseSingleton::getInstance();
 
     QSqlQuery query;
 
@@ -46,7 +46,7 @@ Task* TaskDaoImp::read(int t_taskID){
     QString m_status;
     QDate t_date(1,2,3);
 
-    DatabaseSingleton::getInstance()->openConnection();
+    DatabaseSingleton::getInstance();
 
     QSqlQuery query;
 
@@ -70,17 +70,19 @@ Task* TaskDaoImp::read(int t_taskID){
     m_task = new Task(t_taskID, m_title, t_date, m_importance);
     m_task->setDescription(m_description);
     m_task->setStatus(m_status);
+
     return m_task;
 }
 
 bool TaskDaoImp::update(Task& task){
 
-    DatabaseSingleton::getInstance()->openConnection();
+    DatabaseSingleton::getInstance();
 
     QSqlQuery query;
 
     qDebug() << "Prepare Query: " << query.prepare( " UPDATE tasks SET WHERE task_id=" ":t_id");
     query.bindValue(":t_id", task.taskID());
+
 
     return query.exec();
 }
@@ -89,7 +91,7 @@ bool TaskDaoImp::delete_(Task& task){
 
     int t_id = task.taskID();
 
-    DatabaseSingleton::getInstance()->openConnection();
+    DatabaseSingleton::getInstance();
 
     QSqlQuery query;
 
@@ -105,7 +107,6 @@ bool TaskDaoImp::delete_(Task& task){
 
 //        qDebug() << t_taskID << m_title << t_date << m_description << m_importance
 //                 << m_status;
-
 
     return query.exec();
 }

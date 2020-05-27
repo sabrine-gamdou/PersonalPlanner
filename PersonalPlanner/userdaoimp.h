@@ -14,6 +14,9 @@ public:
     bool update(User &t_user);
     bool delete_(User &t_user);
     bool checkLogin(QString t_username, QString t_password);
+    User *user() const;
+    void setUser(User *user);
+
 private:
     User* m_user;
 };

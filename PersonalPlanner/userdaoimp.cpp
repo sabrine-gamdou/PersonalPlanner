@@ -20,7 +20,7 @@ UserDaoImp::~UserDaoImp()
 
 bool UserDaoImp::create (User &t_user){
 
-    DatabaseSingleton::getInstance()->openConnection();
+    DatabaseSingleton::getInstance();
 
     QSqlQuery query;
 
@@ -38,9 +38,11 @@ bool UserDaoImp::create (User &t_user){
     if( !query.exec())
     {
         qDebug() << query.lastError().text();
+        return false;
     }
 
-    return query.exec();
+
+    return true;
 
 }
 
@@ -54,7 +56,7 @@ User *UserDaoImp::read(QString t_username){
     QString t_password;
     int t_score;
 
-    DatabaseSingleton::getInstance()->openConnection();
+    DatabaseSingleton::getInstance();
 
     QSqlQuery query;
 
@@ -100,7 +102,7 @@ bool UserDaoImp::delete_(User &t_user){
 
 bool UserDaoImp::checkLogin(QString t_username, QString t_password){
 
-    DatabaseSingleton::getInstance()->openConnection();
+    DatabaseSingleton::getInstance();
 
     QSqlQuery query;
 
@@ -123,5 +125,15 @@ bool UserDaoImp::checkLogin(QString t_username, QString t_password){
 
     qDebug() << exists;
     return exists;
+}
+
+User *UserDaoImp::user() const
+{
+    return m_user;
+}
+
+void UserDaoImp::setUser(User *user)
+{
+    m_user = user;
 }
 

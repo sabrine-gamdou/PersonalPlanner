@@ -1,17 +1,25 @@
 #include "login.h"
 #include "ui_login.h"
 #include <QMessageBox>
-
+#include <QFile>
 Login::Login(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Login)
 {
     ui->setupUi(this);
 
+   // this->setStyleSheet("stylesheet.qss");
+//    QFile File("stylesheet.qss");
+//    File.open(QFile::ReadOnly);
+//    QString StyleSheet = QLatin1String(File.readAll());
+
+//    this->setStyleSheet(StyleSheet);
+
     ui->passText->setEchoMode(QLineEdit::Password);
     ui->passText->setInputMethodHints(Qt::ImhHiddenText| Qt::ImhNoPredictiveText|Qt::ImhNoAutoUppercase);
 
-    QObject::connect(ui->login, &QPushButton::clicked, this, &Login::on_login_clicked);
+    QObject::connect(ui->loginBtn, &QPushButton::clicked, this, &Login::on_loginBtn_clicked);
+    QObject::connect(ui->registerBtn, &QPushButton::clicked, this, &Login::on_registerBtn_clicked);
 }
 
 Login::~Login()
@@ -19,41 +27,46 @@ Login::~Login()
     delete ui;
 }
 
-void Login::on_login_clicked(){
+void Login::on_loginBtn_clicked(){
 
-    loggedIn = login(ui->usernameText->text(), ui->passText->text());
+    m_username = ui->usernameText->text();
+    m_password = ui->passText->text();
+
+    loggedIn = login(m_username,m_password);
 
     if(this->loggedIn)
     {
         //        this->username = ui->usernameText->text();
         //        this->password = ui->passText->text();
 
-        QMessageBox::information(this, "Information", "You are logged in!");
-       // ui->usernameText->setText("checked");
-        // ui->loginLabel->setText("");
-        //ui->winStack->setCurrentIndex(2);
+  //      QMessageBox::information(this, "Information", "You are logged in!");
+        initialize(m_username,m_password);
+
     }
     else
     {
-        QMessageBox::warning(this, "Warning", "Login failed: Invalid credentials!");
-        // ui->loginLabel->setText("Login failed: Invalid credentials!");
+        //QMessageBox::warning(this, "Warning", "Login failed: Invalid credentials!");
+        ui->loginLabel->setText("Login failed: Invalid credentials!");
+        ui->usernameText->setStyleSheet("border: 1px solid red");
+        ui->passText->setStyleSheet("border: 1px solid red");
+
     }
 }
 
-bool Login::login(QString u, QString p){
-    //ui->adminButton->setVisible(false);
-
-    //    bool exists = false;
-
+bool Login::login(QString un, QString pass){
+    return this->m_userManager->checkLogin(un,pass);
+}
 
 
-    //    if (checkQuery.exec())
-    //    {
-    //        if (checkQuery.next())
-    //        {
-    //            exists = true;
-    //        }
-    //    }
+void Login::on_registerBtn_clicked(){
+    r.show();
+    //this->setDisabled(true);
+}
 
-    return this->m_userManager->checkLogin(u,p);
+
+void Login::initialize(QString un, QString pass){
+
+
+    w.show();
+    this->close();
 }
