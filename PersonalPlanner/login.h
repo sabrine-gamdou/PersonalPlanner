@@ -31,7 +31,7 @@ private:
     bool loggedIn;
     UserDaoImp* m_userManager;
     TaskDaoImp* m_taskManager;
-    void initialize(QString un, QString pass);
+    void initialize(const QString &un, const QString &pass);
 
 
 };

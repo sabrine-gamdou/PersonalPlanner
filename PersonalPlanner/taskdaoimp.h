@@ -1,9 +1,9 @@
 
-#include "task.h"
 
 #ifndef TASKDAOIMP_H
 #define TASKDAOIMP_H
 
+#include "task.h"
 #include <QtSql/QSqlDatabase>
 #include <QtSql/QSqlQuery>
 

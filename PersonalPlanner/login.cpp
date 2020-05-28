@@ -64,7 +64,7 @@ void Login::on_registerBtn_clicked(){
 }
 
 
-void Login::initialize(QString un, QString pass){
+void Login::initialize(const QString & un, const QString &pass) {
 
 
     w.show();

@@ -20,9 +20,9 @@
       <item row="0" column="1">
        <widget class="QTabWidget" name="tabWidget">
         <property name="currentIndex">
-         <number>3</number>
+         <number>1</number>
         </property>
-        <widget class="QWidget" name="tab">
+        <widget class="QWidget" name="tasksTab">
          <attribute name="title">
           <string>Tasks</string>
          </attribute>
@@ -32,7 +32,7 @@
             <x>5</x>
             <y>1</y>
             <width>401</width>
-            <height>361</height>
+            <height>291</height>
            </rect>
           </property>
           <column>
@@ -56,198 +56,183 @@
            </property>
           </column>
          </widget>
-        </widget>
-        <widget class="QWidget" name="Aufgabe">
-         <attribute name="title">
-          <string>Add / Delete</string>
-         </attribute>
-         <widget class="QTabWidget" name="tabWidget_2">
+         <widget class="QPushButton" name="editBtn">
           <property name="geometry">
            <rect>
-            <x>20</x>
-            <y>20</y>
-            <width>341</width>
-            <height>331</height>
+            <x>100</x>
+            <y>330</y>
+            <width>89</width>
+            <height>25</height>
            </rect>
           </property>
-          <property name="currentIndex">
-           <number>0</number>
+          <property name="text">
+           <string>Edit</string>
           </property>
-          <widget class="QWidget" name="tab_4">
-           <attribute name="title">
-            <string>Add Task</string>
-           </attribute>
-           <layout class="QGridLayout" name="gridLayout_6">
-            <item row="0" column="1">
-             <layout class="QVBoxLayout" name="verticalLayout_8">
-              <item>
-               <widget class="QLineEdit" name="lineEdit_6"/>
-              </item>
-              <item>
-               <widget class="QPushButton" name="pushButton_17">
-                <property name="text">
-                 <string>Pick Icon</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLineEdit" name="lineEdit_7"/>
-              </item>
-              <item>
-               <widget class="QSpinBox" name="spinBox">
-                <property name="maximum">
-                 <number>5</number>
-                </property>
-                <property name="value">
-                 <number>1</number>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QDateTimeEdit" name="dateTimeEdit"/>
-              </item>
-              <item>
-               <widget class="QComboBox" name="comboBox">
-                <item>
-                 <property name="text">
-                  <string>Hour</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Day</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Week</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Month</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Year</string>
-                 </property>
-                </item>
-               </widget>
-              </item>
-             </layout>
-            </item>
-            <item row="0" column="0">
-             <layout class="QGridLayout" name="gridLayout_5">
-              <item row="0" column="0">
-               <layout class="QHBoxLayout" name="horizontalLayout_3">
-                <item>
-                 <layout class="QVBoxLayout" name="verticalLayout_6">
-                  <item>
-                   <widget class="QPushButton" name="pushButton_11">
-                    <property name="text">
-                     <string>Title</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QPushButton" name="pushButton_15">
-                    <property name="text">
-                     <string>Icon</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QPushButton" name="pushButton_12">
-                    <property name="text">
-                     <string>Description</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QPushButton" name="pushButton_13">
-                    <property name="text">
-                     <string>Importance</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QPushButton" name="pushButton_14">
-                    <property name="text">
-                     <string>Duration</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QPushButton" name="pushButton_16">
-                    <property name="text">
-                     <string>Repeat Task every...</string>
-                    </property>
-                   </widget>
-                  </item>
-                 </layout>
-                </item>
-               </layout>
-              </item>
-             </layout>
-            </item>
-            <item row="1" column="1">
-             <widget class="QDialogButtonBox" name="buttonBox">
-              <property name="layoutDirection">
-               <enum>Qt::LeftToRight</enum>
-              </property>
-              <property name="standardButtons">
-               <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-              </property>
-              <property name="centerButtons">
-               <bool>false</bool>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </widget>
-          <widget class="QWidget" name="tab_5">
-           <attribute name="title">
-            <string>Delete Task</string>
-           </attribute>
-           <widget class="QTableWidget" name="tableWidget">
-            <property name="geometry">
-             <rect>
-              <x>15</x>
-              <y>11</y>
-              <width>311</width>
-              <height>271</height>
-             </rect>
-            </property>
-            <column>
+         </widget>
+         <widget class="QPushButton" name="deleteBtn">
+          <property name="geometry">
+           <rect>
+            <x>210</x>
+            <y>330</y>
+            <width>89</width>
+            <height>25</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Delete</string>
+          </property>
+         </widget>
+        </widget>
+        <widget class="QWidget" name="addTab">
+         <attribute name="title">
+          <string>Add </string>
+         </attribute>
+         <widget class="QWidget" name="">
+          <property name="geometry">
+           <rect>
+            <x>210</x>
+            <y>40</y>
+            <width>172</width>
+            <height>251</height>
+           </rect>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_8">
+           <item>
+            <widget class="QLineEdit" name="titleTxt"/>
+           </item>
+           <item>
+            <widget class="QPushButton" name="IconBtn">
              <property name="text">
-              <string>ID</string>
+              <string>Pick Icon</string>
              </property>
-            </column>
-            <column>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="descriptionTxt"/>
+           </item>
+           <item>
+            <widget class="QSpinBox" name="importanceSb">
+             <property name="maximum">
+              <number>5</number>
+             </property>
+             <property name="value">
+              <number>1</number>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QDateTimeEdit" name="dateTimeEdit"/>
+           </item>
+           <item>
+            <widget class="QComboBox" name="repeatCb">
+             <item>
+              <property name="text">
+               <string>Hour</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Day</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Week</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Month</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Year</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="">
+          <property name="geometry">
+           <rect>
+            <x>50</x>
+            <y>40</y>
+            <width>137</width>
+            <height>251</height>
+           </rect>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_6">
+           <item>
+            <widget class="QLabel" name="titleLb">
              <property name="text">
               <string>Title</string>
              </property>
-            </column>
-            <column>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="iconLb">
              <property name="text">
-              <string>Date</string>
+              <string>Icon</string>
              </property>
-            </column>
-           </widget>
-          </widget>
-          <widget class="QWidget" name="tab_6">
-           <attribute name="title">
-            <string>Edit Task</string>
-           </attribute>
-          </widget>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="descriptionLb">
+             <property name="text">
+              <string>Description</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="importancLb">
+             <property name="text">
+              <string>Importance</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="durationLb">
+             <property name="text">
+              <string>Duration</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="repeatLb">
+             <property name="text">
+              <string>Repeat Task every...</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QDialogButtonBox" name="confirm_cancelBtnB">
+          <property name="geometry">
+           <rect>
+            <x>110</x>
+            <y>320</y>
+            <width>170</width>
+            <height>25</height>
+           </rect>
+          </property>
+          <property name="layoutDirection">
+           <enum>Qt::LeftToRight</enum>
+          </property>
+          <property name="standardButtons">
+           <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+          </property>
+          <property name="centerButtons">
+           <bool>false</bool>
+          </property>
          </widget>
         </widget>
-        <widget class="QWidget" name="tab_3">
+        <widget class="QWidget" name="scoreTab">
          <attribute name="title">
           <string>Score</string>
          </attribute>
-         <widget class="QProgressBar" name="progressBar_2">
+         <widget class="QProgressBar" name="levelPb">
           <property name="geometry">
            <rect>
             <x>0</x>
@@ -260,7 +245,7 @@
            <number>24</number>
           </property>
          </widget>
-         <widget class="QLabel" name="label_2">
+         <widget class="QLabel" name="levelLb">
           <property name="geometry">
            <rect>
             <x>10</x>
@@ -301,21 +286,21 @@
              <item>
               <layout class="QVBoxLayout" name="verticalLayout_4">
                <item>
-                <widget class="QPushButton" name="pushButton_7">
+                <widget class="QLabel" name="completedLb">
                  <property name="text">
                   <string>Completed Tasks</string>
                  </property>
                 </widget>
                </item>
                <item>
-                <widget class="QPushButton" name="pushButton_8">
+                <widget class="QLabel" name="failedLb">
                  <property name="text">
                   <string>Failed Tasks</string>
                  </property>
                 </widget>
                </item>
                <item>
-                <widget class="QPushButton" name="pushButton_9">
+                <widget class="QLabel" name="progressLb">
                  <property name="text">
                   <string>Tasks in progress</string>
                  </property>
@@ -326,17 +311,17 @@
              <item>
               <layout class="QVBoxLayout" name="verticalLayout_5">
                <item>
-                <widget class="QLCDNumber" name="lcdNumber">
+                <widget class="QLCDNumber" name="completedLCD">
                  <property name="digitCount">
                   <number>5</number>
                  </property>
                 </widget>
                </item>
                <item>
-                <widget class="QLCDNumber" name="lcdNumber_2"/>
+                <widget class="QLCDNumber" name="failedLCD"/>
                </item>
                <item>
-                <widget class="QLCDNumber" name="lcdNumber_3"/>
+                <widget class="QLCDNumber" name="progressLCD"/>
                </item>
               </layout>
              </item>
@@ -344,7 +329,7 @@
            </item>
           </layout>
          </widget>
-         <widget class="QPushButton" name="pushButton_10">
+         <widget class="QPushButton" name="statisticBtn">
           <property name="geometry">
            <rect>
             <x>10</x>
@@ -358,7 +343,7 @@
           </property>
          </widget>
         </widget>
-        <widget class="QWidget" name="tab_2">
+        <widget class="QWidget" name="accountTab">
          <attribute name="title">
           <string>Account</string>
          </attribute>
@@ -535,14 +520,14 @@
      <layout class="QVBoxLayout" name="verticalLayout"/>
     </item>
     <item row="3" column="0">
-     <widget class="QLabel" name="label_4">
+     <widget class="QLabel" name="weeklyLb">
       <property name="text">
        <string>Weekly Achievements: </string>
       </property>
      </widget>
     </item>
     <item row="4" column="0">
-     <widget class="QProgressBar" name="progressBar">
+     <widget class="QProgressBar" name="weeklyPb">
       <property name="value">
        <number>24</number>
       </property>
