@@ -2,6 +2,9 @@
 #include "ui_login.h"
 #include <QMessageBox>
 #include <QFile>
+#include <QDesktopWidget>
+
+
 Login::Login(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Login)
@@ -14,12 +17,10 @@ Login::Login(QWidget *parent) :
 //    QString StyleSheet = QLatin1String(File.readAll());
 
 //    this->setStyleSheet(StyleSheet);
-
+    this->adjustSize();
+    this->move(QApplication::desktop()->screen()->rect().center() - this->rect().center());
     ui->passText->setEchoMode(QLineEdit::Password);
     ui->passText->setInputMethodHints(Qt::ImhHiddenText| Qt::ImhNoPredictiveText|Qt::ImhNoAutoUppercase);
-
-    QObject::connect(ui->loginBtn, &QPushButton::clicked, this, &Login::on_loginBtn_clicked);
-    QObject::connect(ui->registerBtn, &QPushButton::clicked, this, &Login::on_registerBtn_clicked);
 }
 
 Login::~Login()
@@ -34,24 +35,17 @@ void Login::on_loginBtn_clicked(){
 
     loggedIn = login(m_username,m_password);
 
-    if(this->loggedIn)
-    {
-        //        this->username = ui->usernameText->text();
-        //        this->password = ui->passText->text();
-
-  //      QMessageBox::information(this, "Information", "You are logged in!");
+    if(this->loggedIn){
         initialize(m_username,m_password);
-
     }
-    else
-    {
+    else {
         //QMessageBox::warning(this, "Warning", "Login failed: Invalid credentials!");
         ui->loginLabel->setText("Login failed: Invalid credentials!");
         ui->usernameText->setStyleSheet("border: 1px solid red");
         ui->passText->setStyleSheet("border: 1px solid red");
-
     }
 }
+
 
 bool Login::login(QString un, QString pass){
     return this->m_userManager->checkLogin(un,pass);
@@ -65,8 +59,10 @@ void Login::on_registerBtn_clicked(){
 
 
 void Login::initialize(const QString & un, const QString &pass) {
-
-
+    w.setUsername(un);
+    w.setPassword(pass);
+    w.getUserData();
+    w.getTasks();
     w.show();
     this->close();
 }

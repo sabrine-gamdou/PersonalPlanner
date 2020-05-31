@@ -3,17 +3,12 @@
 #include <QDebug>
 #include <QSqlError>
 
-User* m_user;
 
-UserDaoImp::UserDaoImp()
-{
-
-}
+UserDaoImp::UserDaoImp(){}
 
 
-UserDaoImp::~UserDaoImp()
-{
-
+UserDaoImp::~UserDaoImp(){
+    delete m_user;
 }
 
 
@@ -54,7 +49,7 @@ User *UserDaoImp::read(QString t_username){
     QDate t_birthday(1,2,3);
     QString t_address;
     QString t_password;
-    int t_score;
+    int t_score = 0;
 
     DatabaseSingleton::getInstance();
 
@@ -80,6 +75,7 @@ User *UserDaoImp::read(QString t_username){
     }
 
     m_user = new User(t_username, t_password, t_firstname, t_lastname, t_email);
+
     m_user->setBirthday(t_birthday);
     m_user->setAddress(t_address);
     m_user->setScore(t_score);
@@ -94,13 +90,27 @@ bool UserDaoImp::update(User &t_user){
 }
 
 
-bool UserDaoImp::delete_(User &t_user){
+bool UserDaoImp::delete_(const QString t_username){
 
-    return false;
+
+    DatabaseSingleton::getInstance();
+
+    QSqlQuery query;
+
+    bool deleted= false;
+
+    qDebug() << "Prepare Query: "<< query.prepare("DELETE FROM users WHERE username = (:un)");
+    query.bindValue(":un", t_username);
+
+    if( query.exec()){
+        deleted = true;
+    }
+
+    return deleted;
 }
 
 
-bool UserDaoImp::checkLogin(QString t_username, QString t_password){
+bool UserDaoImp::checkLogin(const QString t_username, const QString t_password){
 
     DatabaseSingleton::getInstance();
 
@@ -112,10 +122,8 @@ bool UserDaoImp::checkLogin(QString t_username, QString t_password){
     query.bindValue(":un", t_username);
     query.bindValue(":pass", t_password);
 
-    if( query.exec())
-    {
-        if (query.next())
-        {
+    if( query.exec()){
+        if (query.next()){
             exists = true;
         }
 

@@ -2,18 +2,20 @@
 #include "ui_registrationform.h"
 #include <QDebug>
 #include <QMessageBox>
+#include <QDesktopWidget>
 
 RegistrationForm::RegistrationForm(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::RegistrationForm)
 {
+    this->adjustSize();
+    this->move(QApplication::desktop()->screen()->rect().center() - this->rect().center());
+
     ui->setupUi(this);
 
     ui->passTxt->setEchoMode(QLineEdit::Password);
     ui->passTxt->setInputMethodHints(Qt::ImhHiddenText| Qt::ImhNoPredictiveText|Qt::ImhNoAutoUppercase);
 
-    QObject::connect(ui->confirmBtn, &QPushButton::clicked, this, &RegistrationForm::on_confirmBtn_clicked);
-    QObject::connect(ui->cancelBtn, &QPushButton::clicked, this, &RegistrationForm::on_cancelBtn_clicked);
 }
 
 RegistrationForm::~RegistrationForm()
@@ -77,7 +79,7 @@ void RegistrationForm::on_confirmBtn_clicked(){
     if(ui->lastnameTxt->text() == "")
     {
         ui->lastnameTxt->setStyleSheet("border: 1px solid red");
-        ui->lastnameTxt->setPlaceholderText("Last Name (optional)");
+        ui->lastnameTxt->setPlaceholderText("Last Name EMPTY!");
         stop = false;
     }else{
         ui->lastnameTxt->setStyleSheet("");
@@ -107,12 +109,11 @@ void RegistrationForm::on_confirmBtn_clicked(){
         ui->errLb->setStyleSheet("border: 1px solid red");
         ui->errLb->setEnabled(true);
         ui->errLb->setText("Please correct your mistakes.");
-    }
-    else{
-        User t_user(un,pass,firstname,lastname,email);
-        userCreatedConfirmed(m_userManager->create(t_user));
+    }else{
         ui->errLb->setText("");
         ui->errLb->setEnabled(false);
+        User t_user(un,pass,firstname,lastname,email);
+        userCreatedConfirmed(m_userManager->create(t_user));
     }
 }
 
@@ -126,9 +127,10 @@ void RegistrationForm::on_cancelBtn_clicked(){
 
 
 
-void RegistrationForm::userCreatedConfirmed(bool t_userCreated){
+void RegistrationForm::userCreatedConfirmed(const bool t_userCreated){
+    qDebug() << "Bug here"<< t_userCreated;
     if(t_userCreated){
-        QMessageBox::information(this, "Information", "Welcome in Personal Planner!");
+        QMessageBox::information(this, "Information", "Welcome to Personal Planner!");
         this->close();
     }else{
         QMessageBox::warning(this, "Warning", "Something went wrong ... Please try again later.");

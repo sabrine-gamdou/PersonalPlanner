@@ -17,10 +17,28 @@
    <layout class="QGridLayout" name="gridLayout_2">
     <item row="1" column="0">
      <layout class="QGridLayout" name="gridLayout">
+      <item row="0" column="0">
+       <widget class="QCalendarWidget" name="calendarWidget"/>
+      </item>
       <item row="0" column="1">
        <widget class="QTabWidget" name="tabWidget">
         <property name="currentIndex">
-         <number>1</number>
+         <number>0</number>
+        </property>
+        <property name="usesScrollButtons">
+         <bool>true</bool>
+        </property>
+        <property name="documentMode">
+         <bool>false</bool>
+        </property>
+        <property name="tabsClosable">
+         <bool>false</bool>
+        </property>
+        <property name="movable">
+         <bool>false</bool>
+        </property>
+        <property name="tabBarAutoHide">
+         <bool>false</bool>
         </property>
         <widget class="QWidget" name="tasksTab">
          <attribute name="title">
@@ -31,7 +49,7 @@
            <rect>
             <x>5</x>
             <y>1</y>
-            <width>401</width>
+            <width>411</width>
             <height>291</height>
            </rect>
           </property>
@@ -87,13 +105,13 @@
          <attribute name="title">
           <string>Add </string>
          </attribute>
-         <widget class="QWidget" name="">
+         <widget class="QWidget" name="layoutWidget">
           <property name="geometry">
            <rect>
-            <x>210</x>
+            <x>161</x>
             <y>40</y>
-            <width>172</width>
-            <height>251</height>
+            <width>221</width>
+            <height>261</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -154,10 +172,10 @@
            </item>
           </layout>
          </widget>
-         <widget class="QWidget" name="">
+         <widget class="QWidget" name="layoutWidget">
           <property name="geometry">
            <rect>
-            <x>50</x>
+            <x>20</x>
             <y>40</y>
             <width>137</width>
             <height>251</height>
@@ -235,7 +253,7 @@
          <widget class="QProgressBar" name="levelPb">
           <property name="geometry">
            <rect>
-            <x>0</x>
+            <x>10</x>
             <y>320</y>
             <width>371</width>
             <height>23</height>
@@ -261,7 +279,7 @@
          <widget class="QLabel" name="label_3">
           <property name="geometry">
            <rect>
-            <x>130</x>
+            <x>160</x>
             <y>20</y>
             <width>101</width>
             <height>71</height>
@@ -274,7 +292,7 @@
          <widget class="QWidget" name="gridLayoutWidget_3">
           <property name="geometry">
            <rect>
-            <x>10</x>
+            <x>20</x>
             <y>90</y>
             <width>361</width>
             <height>131</height>
@@ -332,18 +350,24 @@
          <widget class="QPushButton" name="statisticBtn">
           <property name="geometry">
            <rect>
-            <x>10</x>
+            <x>120</x>
             <y>240</y>
             <width>174</width>
             <height>25</height>
            </rect>
           </property>
           <property name="text">
-           <string>Statistic</string>
+           <string>Statistics</string>
           </property>
          </widget>
         </widget>
         <widget class="QWidget" name="accountTab">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="autoFillBackground">
+          <bool>false</bool>
+         </property>
          <attribute name="title">
           <string>Account</string>
          </attribute>
@@ -472,7 +496,7 @@
              <item>
               <widget class="QLineEdit" name="firstnameTxt">
                <property name="enabled">
-                <bool>true</bool>
+                <bool>false</bool>
                </property>
                <property name="text">
                 <string/>
@@ -480,22 +504,41 @@
               </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="lastnameTxt"/>
+              <widget class="QLineEdit" name="lastnameTxt">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
+              </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="emailTxt"/>
+              <widget class="QLineEdit" name="emailTxt">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
+              </widget>
              </item>
              <item>
-              <widget class="QDateEdit" name="dateEdit"/>
+              <widget class="QDateEdit" name="dateEdit">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
+              </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="addressTxt"/>
+              <widget class="QLineEdit" name="addressTxt">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
+              </widget>
              </item>
             </layout>
            </item>
           </layout>
          </widget>
          <widget class="QPushButton" name="saveChangesBtn">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
           <property name="geometry">
            <rect>
             <x>20</x>
@@ -510,9 +553,6 @@
          </widget>
         </widget>
        </widget>
-      </item>
-      <item row="0" column="0">
-       <widget class="QCalendarWidget" name="calendarWidget"/>
       </item>
      </layout>
     </item>
@@ -548,7 +588,7 @@
     <property name="title">
      <string>Menu</string>
     </property>
-    <addaction name="actionAdd_Delete"/>
+    <addaction name="actionAdd"/>
     <addaction name="actionAbout"/>
     <addaction name="actionHelp"/>
    </widget>
@@ -569,9 +609,9 @@
    </attribute>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
-  <action name="actionAdd_Delete">
+  <action name="actionAdd">
    <property name="text">
-    <string>Add / Delete</string>
+    <string>Add Task</string>
    </property>
   </action>
   <action name="actionAbout">

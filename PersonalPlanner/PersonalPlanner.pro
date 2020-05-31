@@ -29,7 +29,6 @@ SOURCES += \
     login.cpp \
     databasesingleton.cpp \
     task.cpp \
-    dao.cpp \
     taskdaoimp.cpp \
     user.cpp \
     userdaoimp.cpp \
@@ -38,10 +37,8 @@ SOURCES += \
 HEADERS += \
         mainwindow.h \
     login.h \
-    storagelayer.h \
     databasesingleton.h \
     task.h \
-    dao.h \
     taskdaoimp.h \
     user.h \
     userdaoimp.h \

@@ -10,14 +10,10 @@
 
 Task* m_task;
 
-TaskDaoImp::TaskDaoImp()
-{
+TaskDaoImp::TaskDaoImp(){}
 
-}
+TaskDaoImp::~TaskDaoImp(){}
 
-TaskDaoImp::~TaskDaoImp(){
-
-}
 
 bool TaskDaoImp::create(Task& task){
 
@@ -37,6 +33,8 @@ bool TaskDaoImp::create(Task& task){
 
     return query.exec();
 }
+
+
 
 Task* TaskDaoImp::read(int t_taskID){
 
@@ -87,7 +85,7 @@ bool TaskDaoImp::update(Task& task){
     return query.exec();
 }
 
-bool TaskDaoImp::delete_(Task& task){
+bool TaskDaoImp::delete_(Task& task){ // or taskID?
 
     int t_id = task.taskID();
 

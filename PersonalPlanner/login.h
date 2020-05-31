@@ -17,10 +17,13 @@ class Login : public QWidget
 
 public:
     explicit Login(QWidget *parent = 0);
-    void on_loginBtn_clicked();
-    void on_registerBtn_clicked();
+
     bool login(QString un, QString pass);
     ~Login();
+
+private slots:
+    void on_loginBtn_clicked();
+    void on_registerBtn_clicked();
 
 private:
     QString m_username;

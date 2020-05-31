@@ -2,20 +2,14 @@
 #include <QtSql/QSqlDatabase>
 #include <QDebug>
 
-//using namespace DatabaseLayer;
-
 
     QSqlDatabase DatabaseSingleton::m_pInstance ;
 
-    DatabaseSingleton::DatabaseSingleton(){
-    }
+    DatabaseSingleton::DatabaseSingleton(){}
 
     DatabaseSingleton::~DatabaseSingleton(){
         closeConnection();
     }
-
-
-
 
     void DatabaseSingleton::openConnection() {
         m_pInstance = QSqlDatabase::addDatabase("QPSQL");
@@ -25,14 +19,6 @@
         m_pInstance.setPassword("personalplaner");
         bool success = m_pInstance.open();
         qDebug()<<"Database connection established: "<<success;
-
-//                m_pInstance = QSqlDatabase::addDatabase("QPSQL");
-//                m_pInstance.setHostName("127.0.0.1");
-//                m_pInstance.setDatabaseName("postgres");
-//                m_pInstance.setUserName("postgres");
-//                m_pInstance.setPassword("1234");
-//                bool success = m_pInstance.open();
-//                qDebug()<<"Database connection established: "<<success;
     }
 
     void DatabaseSingleton::closeConnection(){
@@ -45,8 +31,6 @@
     QSqlDatabase DatabaseSingleton::getInstance(){
         if(!m_pInstance.isOpen()){
             openConnection();
-//            DatabaseSingleton* volatile temp = new DatabaseSingleton;
-         //   m_pInstance = temp;
         }
         return m_pInstance;
     }
