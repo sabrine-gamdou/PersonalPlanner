@@ -11,12 +11,17 @@ class TaskDaoImp{
 public:
     TaskDaoImp();
     ~TaskDaoImp();
-    bool create (Task &task);
+    bool create (Task &task, QString m_username);
     Task *read(int t_taskID);
     bool update(Task &task);
     bool delete_(Task &task);
+    int counter() const;
+    void setCounter(int counter);
+
 private:
-     Task* m_task;
+    Task* m_task;
+    int m_counter;
+
 };
 
 #endif // TASKDAOIMP_H

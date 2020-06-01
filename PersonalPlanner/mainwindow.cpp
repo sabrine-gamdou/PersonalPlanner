@@ -107,3 +107,17 @@ void MainWindow::setPassword(const QString &password)
 {
     m_password = password;
 }
+
+
+void MainWindow::readTaskFromMainWindow() {
+    Task new_task (m_taskManager.counter(), ui->titleTxt->text(),ui->dateTimeEdit->date(), ui->importanceSb->text().toInt());
+        qDebug() << "TaskManager created" << m_taskManager.create(new_task, m_username);
+}
+
+
+void MainWindow::on_confirm_cancelBtnB_accepted()
+{
+  MainWindow::readTaskFromMainWindow();
+
+}
+

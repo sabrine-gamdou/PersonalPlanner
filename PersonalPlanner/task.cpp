@@ -2,6 +2,7 @@
 #include <iostream>
 
 /*how to generate taskID? It shouldnt be the user who generates it! */
+
 Task::Task(int t_taskID, QString t_title, QDate t_date, int t_importance) : m_taskID(t_taskID), m_title(t_title), m_date(t_date), m_importance(t_importance){
 
 }
@@ -17,6 +18,7 @@ void Task::setTaskID(int taskID)
 {
     m_taskID = taskID;
 }
+
 
 QString Task::title() const
 {
@@ -77,7 +79,6 @@ void Task::setStatus(const QString &status)
 {
     m_status = status;
 }
-
 
 QString Task::toString(){
     QString string ;

@@ -1,5 +1,3 @@
-#include "taskdaoimp.h"
-#include "task.h"
 #include <QDebug>
 #include <QFile>
 #include <QDate>
@@ -7,34 +5,43 @@
 #include <QDebug>
 #include <iostream>
 #include "databasesingleton.h"
+#include "taskdaoimp.h"
+#include "task.h"
+#include "user.h"
 
 Task* m_task;
+User* m_user;
 
 TaskDaoImp::TaskDaoImp(){}
 
 TaskDaoImp::~TaskDaoImp(){}
 
 
-bool TaskDaoImp::create(Task& task){
+bool TaskDaoImp::create(Task& task, QString m_username){
 
     DatabaseSingleton::getInstance();
 
     QSqlQuery query;
 
-    qDebug() << "Prepare Query: "<< query.prepare("INSERT INTO tasks (task_id, title, date, description,importance, status) "
-                  "VALUES (:task_id, :title, :date, :description, :importance, :status)");
+    qDebug() << "Prepare Query: "<< query.prepare("INSERT INTO tasks (task_id, title, date, description,importance, status, username) "
+                  "VALUES (:task_id, :title, :date, :description, :importance, :status, :m_username)");
     query.bindValue(":task_id", task.taskID());
     query.bindValue(":title", task.title());
     query.bindValue(":date", task.date());
     query.bindValue(":description",task.description());
     query.bindValue(":importance", task.importance());
     query.bindValue(":status", task.status());
+    query.bindValue(":m_username", m_username);
 
+    bool checkState = query.exec();
 
-    return query.exec();
+    if (checkState) {
+        m_counter++;
+        return true;
+    }
+    return false;
+
 }
-
-
 
 Task* TaskDaoImp::read(int t_taskID){
 
@@ -90,21 +97,26 @@ bool TaskDaoImp::delete_(Task& task){ // or taskID?
     int t_id = task.taskID();
 
     DatabaseSingleton::getInstance();
-
     QSqlQuery query;
 
-//    qDebug() << "Prepare Query: " << query.prepare("UPDATE tasks SET (task_id, title, date, description,importance, status) "
-//                                                   "VALUES (:task_id, :title, :date, :description, :importance, :status)");
+    qDebug() << "Prepare Query: "<< query.prepare("DELETE FROM tasks WHERE task_id=" ":t_id");
+    query.bindValue(":t_id", t_id);
 
-//    query.bindValue(":task_id", task.taskID(););
-//    query.bindValue(":title", task.title());
-//    query.bindValue(":date", task.date());
-//    query.bindValue(":description",task.description());
-//    query.bindValue(":importance", task.importance());
-//    query.bindValue(":status", task.status());
+    bool checkState = query.exec();
 
-//        qDebug() << t_taskID << m_title << t_date << m_description << m_importance
-//                 << m_status;
+    if (checkState) {
+        m_counter--;
+        return true;
+    }
+    return false;
+}
 
-    return query.exec();
+int TaskDaoImp::counter() const
+{
+    return m_counter;
+}
+
+void TaskDaoImp::setCounter(int counter)
+{
+    m_counter = counter;
 }

@@ -27,12 +27,15 @@ public:
     void getUserData();
     void editInfoCheckBox_checked(const bool checked);
     void menuLogOut_clicked();
+    void readTaskFromMainWindow();
 
 private slots:
 
     void on_deleteAccountBtn_clicked();
     void on_logoutBtn_clicked();
 
+
+    void on_confirm_cancelBtnB_accepted();
 
 private:
     Ui::MainWindow *ui;

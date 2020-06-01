@@ -22,9 +22,6 @@ public:
 
     QString toString();
 
-    int taskID() const;
-    void setTaskID(int taskID);
-
     QString title() const;
     void setTitle(const QString &title);
 
@@ -45,6 +42,8 @@ public:
 
 
 
+    int taskID() const;
+    void setTaskID(int taskID);
 };
 
 #endif // TASK_H
