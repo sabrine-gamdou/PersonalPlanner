@@ -37,6 +37,8 @@ private slots:
 
     void on_confirm_cancelBtnB_accepted();
 
+    void on_confirm_cancelBtnB_rejected();
+
 private:
     Ui::MainWindow *ui;
 

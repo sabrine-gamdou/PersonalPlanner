@@ -15,9 +15,11 @@ private:
     QImage m_icon;
     int m_importance;
     QString m_status;
+    QString m_repetition;
+    QString m_username;
 
 public:
-    Task(int t_taskID, QString t_title, QDate t_date, int t_importance);
+    Task(int t_taskID, QString t_title, QDate t_date, int t_importance, QString m_username);
     ~Task();
 
     QString toString();
@@ -40,10 +42,14 @@ public:
     QString status() const;
     void setStatus(const QString &status);
 
-
-
     int taskID() const;
     void setTaskID(int taskID);
+
+    QString repetition() const;
+    void setRepetition(const QString &repetition);
+
+    QString username() const;
+    void setUsername(const QString &username);
 };
 
 #endif // TASK_H

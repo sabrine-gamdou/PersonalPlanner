@@ -110,8 +110,12 @@ void MainWindow::setPassword(const QString &password)
 
 
 void MainWindow::readTaskFromMainWindow() {
-    Task new_task (m_taskManager.counter(), ui->titleTxt->text(),ui->dateTimeEdit->date(), ui->importanceSb->text().toInt());
-        qDebug() << "TaskManager created" << m_taskManager.create(new_task, m_username);
+    Task new_task (0, ui->titleTxt->text(), ui->dateTimeEdit->date(), ui->importanceSb->text().toInt(), m_username);
+    new_task.setDescription(ui->descriptionTxt->text());
+    new_task.setRepetition(ui->repeatCb->currentText());
+
+    qDebug() <<  "TaskManager created" << m_taskManager.create(new_task, m_username);
+
 }
 
 
@@ -121,3 +125,12 @@ void MainWindow::on_confirm_cancelBtnB_accepted()
 
 }
 
+
+void MainWindow::on_confirm_cancelBtnB_rejected()
+{
+    ui->titleTxt->clear();
+    ui->dateTimeEdit->clear();
+    ui->descriptionTxt->clear();
+    ui->importanceSb->clear();
+
+}

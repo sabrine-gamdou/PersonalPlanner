@@ -145,6 +145,11 @@
             <widget class="QComboBox" name="repeatCb">
              <item>
               <property name="text">
+               <string>Never</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
                <string>Hour</string>
               </property>
              </item>

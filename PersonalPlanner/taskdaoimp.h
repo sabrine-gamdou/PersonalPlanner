@@ -15,12 +15,11 @@ public:
     Task *read(int t_taskID);
     bool update(Task &task);
     bool delete_(Task &task);
-    int counter() const;
-    void setCounter(int counter);
+
 
 private:
     Task* m_task;
-    int m_counter;
+    //unsigned int m_counter = 1;
 
 };
 

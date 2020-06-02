@@ -1,5 +1,6 @@
 #include <QDebug>
 #include <QFile>
+#include <QSqlError>
 #include <QDate>
 #include <string>
 #include <QDebug>
@@ -23,24 +24,19 @@ bool TaskDaoImp::create(Task& task, QString m_username){
 
     QSqlQuery query;
 
-    qDebug() << "Prepare Query: "<< query.prepare("INSERT INTO tasks (task_id, title, date, description,importance, status, username) "
-                  "VALUES (:task_id, :title, :date, :description, :importance, :status, :m_username)");
-    query.bindValue(":task_id", task.taskID());
+    qDebug() << "Prepare Query: "<< query.prepare("INSERT INTO tasks (title, date, description,importance, status, repetition, username) "
+                  "VALUES (:title, :date, :description, :importance, :status, :repetition, :username)");
+
     query.bindValue(":title", task.title());
     query.bindValue(":date", task.date());
     query.bindValue(":description",task.description());
     query.bindValue(":importance", task.importance());
     query.bindValue(":status", task.status());
-    query.bindValue(":m_username", m_username);
+    query.bindValue(":repetition", task.repetition());
+    query.bindValue(":username", m_username);
 
-    bool checkState = query.exec();
 
-    if (checkState) {
-        m_counter++;
-        return true;
-    }
-    return false;
-
+    return query.exec();
 }
 
 Task* TaskDaoImp::read(int t_taskID){
@@ -50,6 +46,8 @@ Task* TaskDaoImp::read(int t_taskID){
     QString m_description;
     QString m_status;
     QDate t_date(1,2,3);
+    QString m_repetition;
+    QString m_username;
 
     DatabaseSingleton::getInstance();
 
@@ -67,14 +65,17 @@ Task* TaskDaoImp::read(int t_taskID){
         m_description = query.value(3).toString();
         m_importance = query.value(5).toInt();
         m_status = query.value(6).toString();
+        m_repetition = query.value(7).toString();
+        m_username = query.value(8).toString();
 
         qDebug() << t_taskID << m_title << t_date << m_description << m_importance
-                 << m_status;
+                 << m_status << m_repetition << m_username;
     }
 
-    m_task = new Task(t_taskID, m_title, t_date, m_importance);
+    m_task = new Task(t_taskID, m_title, t_date, m_importance, m_username);
     m_task->setDescription(m_description);
     m_task->setStatus(m_status);
+    m_task->setRepetition(m_repetition);
 
     return m_task;
 }
@@ -102,21 +103,6 @@ bool TaskDaoImp::delete_(Task& task){ // or taskID?
     qDebug() << "Prepare Query: "<< query.prepare("DELETE FROM tasks WHERE task_id=" ":t_id");
     query.bindValue(":t_id", t_id);
 
-    bool checkState = query.exec();
-
-    if (checkState) {
-        m_counter--;
-        return true;
-    }
-    return false;
+    return query.exec();
 }
 
-int TaskDaoImp::counter() const
-{
-    return m_counter;
-}
-
-void TaskDaoImp::setCounter(int counter)
-{
-    m_counter = counter;
-}
