@@ -1,8 +1,5 @@
 #include "registrationform.h"
 #include "ui_registrationform.h"
-#include <QDebug>
-#include <QMessageBox>
-#include <QDesktopWidget>
 
 RegistrationForm::RegistrationForm(QWidget *parent) :
     QWidget(parent),

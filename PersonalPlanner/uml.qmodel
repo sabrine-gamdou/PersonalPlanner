@@ -1976,7 +1976,7 @@
                             <qlist>
                              <item>
                               <MClassMember>
-                               <uid>{91a92729-f9be-4946-ba39-d4b44ab305e9}</uid>
+                               <uid>{26d23e09-f7a7-4e5e-9e34-c540bbd2db14}</uid>
                                <visibility>3</visibility>
                                <type>1</type>
                                <declaration>tasks: List&lt;Task&gt;</declaration>
@@ -1984,7 +1984,7 @@
                              </item>
                              <item>
                               <MClassMember>
-                               <uid>{20bb1f39-ccc8-4b2e-928c-e4895298620c}</uid>
+                               <uid>{cb1c3e3d-8a35-46b6-afd2-e526075872c0}</uid>
                                <visibility>1</visibility>
                                <type>2</type>
                                <declaration>TaskList TaskList()</declaration>
@@ -1992,7 +1992,7 @@
                              </item>
                              <item>
                               <MClassMember>
-                               <uid>{6574e62d-2ebb-4c3f-8512-054f9f53a429}</uid>
+                               <uid>{259a2468-b022-4d87-8d9a-a32a46e628a6}</uid>
                                <visibility>1</visibility>
                                <type>2</type>
                                <declaration>String toString()</declaration>

@@ -1,31 +1,30 @@
-#include <QDebug>
-#include <QFile>
-#include <QSqlError>
-#include <QDate>
-#include <string>
-#include <QDebug>
-#include <iostream>
 #include "databasesingleton.h"
 #include "taskdaoimp.h"
 #include "task.h"
 #include "user.h"
+#include "tasklistmodel.h"
 
-Task* m_task;
-User* m_user;
 
 TaskDaoImp::TaskDaoImp(){}
 
 TaskDaoImp::~TaskDaoImp(){}
 
 
-bool TaskDaoImp::create(Task& task, QString m_username){
+TaskListModel *taskModel = new TaskListModel(this);
+
+bool TaskDaoImp::create(const Task& task, const QString& username){
 
     DatabaseSingleton::getInstance();
+    QList<QString> titleList;
+    QList<QString> dateList;
+    QList<QString> descriptionList;
+    QList<QString> importanceList;
+    QList<QString> repetitionList;
 
     QSqlQuery query;
 
     qDebug() << "Prepare Query: "<< query.prepare("INSERT INTO tasks (title, date, description,importance, status, repetition, username) "
-                  "VALUES (:title, :date, :description, :importance, :status, :repetition, :username)");
+                                                  "VALUES (:title, :date, :description, :importance, :status, :repetition, :username)");
 
     query.bindValue(":title", task.title());
     query.bindValue(":date", task.date());
@@ -33,21 +32,30 @@ bool TaskDaoImp::create(Task& task, QString m_username){
     query.bindValue(":importance", task.importance());
     query.bindValue(":status", task.status());
     query.bindValue(":repetition", task.repetition());
-    query.bindValue(":username", m_username);
+    query.bindValue(":username", username);
+
+    titleList.append(task.title());
+    dateList.append(task.date());
+    descriptionList.append(task.description());
+    importanceList.append(task.importance());
+    repetitionList.append(task.repetition());
+
+    taskModel->populateData(titleList, dateList, descriptionList, importanceList, repetitionList);
+
 
 
     return query.exec();
 }
 
-Task* TaskDaoImp::read(int t_taskID){
+Task TaskDaoImp::read(int t_taskID){
 
-    QString m_title ;
-    int m_importance ;
-    QString m_description;
-    QString m_status;
-    QDate t_date(1,2,3);
-    QString m_repetition;
-    QString m_username;
+    QString title ;
+    int importance ;
+    QString description;
+    QString status;
+    QDate date(1,2,3);
+    QString repetition;
+    QString username;
 
     DatabaseSingleton::getInstance();
 
@@ -60,24 +68,24 @@ Task* TaskDaoImp::read(int t_taskID){
 
     while (query.next()) {
         t_taskID = query.value(0).toInt();
-        m_title = query.value(1).toString();
-        t_date = query.value(2).toDate();
-        m_description = query.value(3).toString();
-        m_importance = query.value(5).toInt();
-        m_status = query.value(6).toString();
-        m_repetition = query.value(7).toString();
-        m_username = query.value(8).toString();
+        title = query.value(1).toString();
+        date = query.value(2).toDate();
+        description = query.value(3).toString();
+        importance = query.value(5).toInt();
+        status = query.value(6).toString();
+        repetition = query.value(7).toString();
+        username = query.value(8).toString();
 
-        qDebug() << t_taskID << m_title << t_date << m_description << m_importance
-                 << m_status << m_repetition << m_username;
+        qDebug() << t_taskID << title << date << description << importance
+                 << status << repetition << username;
     }
 
-    m_task = new Task(t_taskID, m_title, t_date, m_importance, m_username);
-    m_task->setDescription(m_description);
-    m_task->setStatus(m_status);
-    m_task->setRepetition(m_repetition);
+    Task task(t_taskID, title, date, importance, username);
+    task.setDescription(description);
+    task.setStatus(status);
+    task.setRepetition(repetition);
 
-    return m_task;
+    return task;
 }
 
 bool TaskDaoImp::update(Task& task){

@@ -1,11 +1,14 @@
 #ifndef LOGIN_H
 #define LOGIN_H
 
-#include <QWidget>
 #include "userdaoimp.h"
 #include "taskdaoimp.h"
 #include "mainwindow.h"
 #include "registrationform.h"
+#include <QMessageBox>
+#include <QFile>
+#include <QDesktopWidget>
+#include <QWidget>
 
 namespace Ui {
 class Login;

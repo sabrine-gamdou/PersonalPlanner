@@ -1,8 +1,11 @@
 #ifndef REGISTRATIONFORM_H
 #define REGISTRATIONFORM_H
 
-#include <QWidget>
 #include "userdaoimp.h"
+#include <QWidget>
+#include <QDesktopWidget>
+#include <QDebug>
+#include <QMessageBox>
 
 namespace Ui {
 class RegistrationForm;

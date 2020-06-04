@@ -32,7 +32,8 @@ SOURCES += \
     taskdaoimp.cpp \
     user.cpp \
     userdaoimp.cpp \
-    registrationform.cpp
+    registrationform.cpp \
+    tasklistmodel.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -42,7 +43,8 @@ HEADERS += \
     taskdaoimp.h \
     user.h \
     userdaoimp.h \
-    registrationform.h
+    registrationform.h \
+    tasklistmodel.h
 
 FORMS += \
         mainwindow.ui \

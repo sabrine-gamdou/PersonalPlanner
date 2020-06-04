@@ -1,18 +1,23 @@
-
-
 #ifndef TASKDAOIMP_H
 #define TASKDAOIMP_H
 
 #include "task.h"
 #include <QtSql/QSqlDatabase>
 #include <QtSql/QSqlQuery>
+#include <QDebug>
+#include <QFile>
+#include <QSqlError>
+#include <QDate>
+#include <string>
+#include <QDebug>
+#include <iostream>
 
 class TaskDaoImp{
 public:
     TaskDaoImp();
     ~TaskDaoImp();
-    bool create (Task &task, QString m_username);
-    Task *read(int t_taskID);
+    bool create (const Task &task, const QString& username);
+    Task read(int t_taskID);
     bool update(Task &task);
     bool delete_(Task &task);
 

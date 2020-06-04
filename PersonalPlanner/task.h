@@ -1,9 +1,10 @@
-#include <string>
-#include <QDate>
-#include <QImage>
 #ifndef TASK_H
 #define TASK_H
 
+#include <string>
+#include <QDate>
+#include <QImage>
+#include <iostream>
 
 class Task{
 

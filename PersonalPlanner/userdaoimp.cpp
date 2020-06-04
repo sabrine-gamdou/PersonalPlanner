@@ -1,8 +1,5 @@
 #include "userdaoimp.h"
 #include "databasesingleton.h"
-#include <QDebug>
-#include <QSqlError>
-
 
 UserDaoImp::UserDaoImp(){}
 
@@ -41,7 +38,7 @@ bool UserDaoImp::create (User &t_user){
 
 }
 
-User *UserDaoImp::read(QString t_username){
+User UserDaoImp::read(QString t_username){
 
     QString t_firstname;
     QString t_lastname;
@@ -74,13 +71,12 @@ User *UserDaoImp::read(QString t_username){
                  << t_birthday << t_address << t_score;
     }
 
-    m_user = new User(t_username, t_password, t_firstname, t_lastname, t_email);
+    User user(t_username, t_password, t_firstname, t_lastname, t_email);
+    user.setBirthday(t_birthday);
+    user.setAddress(t_address);
+    user.setScore(t_score);
 
-    m_user->setBirthday(t_birthday);
-    m_user->setAddress(t_address);
-    m_user->setScore(t_score);
-
-    return m_user;
+    return user;
 }
 
 

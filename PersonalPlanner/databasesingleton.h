@@ -1,7 +1,8 @@
 #ifndef DATABASESINGLETON_H
 #define DATABASESINGLETON_H
-#include <QtSql/QSqlDatabase>
 
+#include <QtSql/QSqlDatabase>
+#include <QDebug>
 
 
 

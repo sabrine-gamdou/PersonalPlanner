@@ -1,9 +1,15 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <QMainWindow>
 #include "userdaoimp.h"
 #include "taskdaoimp.h"
+
+#include <QMainWindow>
+#include <QFile>
+#include <QMessageBox>
+#include <QDebug>
+#include <QDesktopWidget>
+#include <QAbstractTableModel>
 
 namespace Ui {
 class MainWindow;
@@ -38,6 +44,8 @@ private slots:
     void on_confirm_cancelBtnB_accepted();
 
     void on_confirm_cancelBtnB_rejected();
+
+    void on_tabWidget_tabBarClicked(int index);
 
 private:
     Ui::MainWindow *ui;

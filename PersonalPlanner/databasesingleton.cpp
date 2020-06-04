@@ -1,6 +1,5 @@
 #include "databasesingleton.h"
-#include <QtSql/QSqlDatabase>
-#include <QDebug>
+
 
 
     QSqlDatabase DatabaseSingleton::m_pInstance ;
