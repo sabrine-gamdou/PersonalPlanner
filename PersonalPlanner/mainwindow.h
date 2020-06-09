@@ -45,7 +45,11 @@ private slots:
 
     void on_confirm_cancelBtnB_rejected();
 
-    void on_tabWidget_tabBarClicked(int index);
+    void on_tabWidget_tabBarClicked();
+
+    void on_deleteBtn_clicked();
+
+    void on_taskView_pressed();
 
 private:
     Ui::MainWindow *ui;

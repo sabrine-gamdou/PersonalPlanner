@@ -37,6 +37,21 @@ int TaskListModel::columnCount(const QModelIndex &parent) const
     return 5;
 }
 
+bool TaskListModel::removeRow(int position, int rows, const QModelIndex &parent) {
+    beginRemoveRows(QModelIndex(), position, position+rows-1);
+
+      for (int row = 0; row < rows; ++row) {
+         m_titleList.removeAt(position);
+         m_dateList.removeAt(position);
+         m_descriptionList.removeAt(position);
+         m_importanceList.removeAt(position);
+         m_repetitionList.removeAt(position);
+      }
+
+      endRemoveRows();
+      return true;
+}
+
 QVariant TaskListModel::data(const QModelIndex &index, int role) const
 {
     if (!index.isValid() || role != Qt::DisplayRole) {

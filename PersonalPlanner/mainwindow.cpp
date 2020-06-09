@@ -135,9 +135,23 @@ void MainWindow::on_confirm_cancelBtnB_rejected()
     ui->importanceSb->clear();
 
 }
-void MainWindow::on_tabWidget_tabBarClicked(int index)
+void MainWindow::on_tabWidget_tabBarClicked()
 {  
-
-
+    m_taskManager.readAll(m_username);
+    ui->taskView->setModel(m_taskManager.getTaskModel());
 }
 
+
+
+void MainWindow::on_deleteBtn_clicked()
+{
+    m_taskManager.getTaskModel()->removeRow(ui->taskView->currentIndex().row(), 1 , ui->taskView->currentIndex());
+    ui->deleteBtn->setEnabled(false);
+}
+
+void MainWindow::on_taskView_pressed()
+{
+
+    ui->taskView->setSelectionBehavior(QAbstractItemView::SelectRows);
+    ui->deleteBtn->setEnabled(true);
+}

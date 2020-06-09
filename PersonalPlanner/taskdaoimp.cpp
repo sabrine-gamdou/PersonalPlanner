@@ -39,6 +39,11 @@ bool TaskDaoImp::create(const Task& task, const QString& username){
 
 
 bool TaskDaoImp::readAll(QString &username){
+    m_titleList.clear();
+    m_dateList.clear();
+    m_descriptionList.clear();
+    m_importanceList.clear();
+    m_repetitionList.clear();
 
     QString title ;
     int importance ;
