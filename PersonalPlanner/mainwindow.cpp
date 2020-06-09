@@ -3,6 +3,7 @@
 #include "tasklistmodel.h"
 #include "taskdaoimp.h"
 
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -40,8 +41,14 @@ void MainWindow::getUserData(){
     ui->emailTxt->setText(t_user.email());
     ui->dateEdit->setDate(t_user.birthday());
     ui->addressTxt->setText(t_user.address());
+    m_taskManager.readAll(m_username);
 
 
+    ui->taskView->setModel(m_taskManager.getTaskModel());
+    ui->taskView->horizontalHeader()->setVisible(true);
+    m_taskManager.getTaskModel()->populateData(m_taskManager.getTitleList(), m_taskManager.getDateList(), m_taskManager.getDescriptionList(), m_taskManager.getImportanceList(), m_taskManager.getRepetitionList());
+
+    ui->taskView->show();
     //move to seperate method
     //ui->editInfoCheckBox->setChecked(false);
 }
@@ -130,8 +137,7 @@ void MainWindow::on_confirm_cancelBtnB_rejected()
 }
 void MainWindow::on_tabWidget_tabBarClicked(int index)
 {  
-//    ui->taskView->setModel(m_taskManager.getTaskModel());
-//    ui->taskView->horizontalHeader()->setVisible(true);
-//    ui->taskView->show();
+
+
 }
 

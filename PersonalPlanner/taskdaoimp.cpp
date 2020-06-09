@@ -27,16 +27,66 @@ bool TaskDaoImp::create(const Task& task, const QString& username){
     query.bindValue(":username", username);
 
 
-    taskModel->titleList().append(task.title());
-    taskModel->dateList().append(task.date().toString());
-    taskModel->descriptionList().append(task.description());
-    taskModel->importanceList().append(QString::number(task.importance()));
-    taskModel->repetitionList().append(task.repetition());
+//    taskModel->titleList().append(task.title());
+//    taskModel->dateList().append(task.date().toString());
+//    taskModel->descriptionList().append(task.description());
+//    taskModel->importanceList().append(QString::number(task.importance()));
+//    taskModel->repetitionList().append(task.repetition());
 
-    taskModel->populateData(taskModel->titleList(), taskModel->dateList(), taskModel->descriptionList(), taskModel->importanceList(), taskModel->repetitionList());
 
     return query.exec();
 }
+
+
+bool TaskDaoImp::readAll(QString &username){
+
+    QString title ;
+    int importance ;
+    QString description;
+    QString status;
+    QDate date(1,2,3);
+    QString repetition;
+    //QString username;
+
+    DatabaseSingleton::getInstance();
+
+    QSqlQuery query;
+
+    query.prepare( " SELECT * FROM tasks WHERE username=" ":t_username");
+    query.bindValue(":t_username", username);
+
+    bool stat = false;
+            if(query.exec()){
+            status = true;
+        }
+
+    while (query.next()) {
+        int t_taskID = query.value(0).toInt();
+        title = query.value(1).toString();
+        date = query.value(2).toDate();
+        description = query.value(3).toString();
+        importance = query.value(5).toInt();
+        status = query.value(6).toString();
+        repetition = query.value(7).toString();
+       // username = query.value(8).toString();
+
+        qDebug() << title << date << description << importance
+                 << status << repetition << username;
+
+        m_titleList.append(title);
+        m_dateList.append(date.toString());
+        m_descriptionList.append(description);
+        m_importanceList.append(QString::number(importance));
+        m_repetitionList.append(repetition);
+
+
+    }
+    taskModel = new TaskListModel;
+    taskModel->populateData(m_titleList, m_dateList, m_descriptionList, m_importanceList, m_repetitionList);
+
+    return stat;
+}
+
 
 Task TaskDaoImp::read(int t_taskID){
 
@@ -113,6 +163,56 @@ TaskListModel *TaskDaoImp::getTaskModel() const
 void TaskDaoImp::setTaskModel(TaskListModel *value)
 {
     taskModel = value;
+}
+
+QList<QString> TaskDaoImp::getTitleList() const
+{
+    return m_titleList;
+}
+
+void TaskDaoImp::setTitleList(const QList<QString> &titleList)
+{
+    m_titleList = titleList;
+}
+
+QList<QString> TaskDaoImp::getDateList() const
+{
+    return m_dateList;
+}
+
+void TaskDaoImp::setDateList(const QList<QString> &dateList)
+{
+    m_dateList = dateList;
+}
+
+QList<QString> TaskDaoImp::getDescriptionList() const
+{
+    return m_descriptionList;
+}
+
+void TaskDaoImp::setDescriptionList(const QList<QString> &descriptionList)
+{
+    m_descriptionList = descriptionList;
+}
+
+QList<QString> TaskDaoImp::getImportanceList() const
+{
+    return m_importanceList;
+}
+
+void TaskDaoImp::setImportanceList(const QList<QString> &importanceList)
+{
+    m_importanceList = importanceList;
+}
+
+QList<QString> TaskDaoImp::getRepetitionList() const
+{
+    return m_repetitionList;
+}
+
+void TaskDaoImp::setRepetitionList(const QList<QString> &repetitionList)
+{
+    m_repetitionList = repetitionList;
 }
 
 
