@@ -1,12 +1,17 @@
 #include "tasklistmodel.h"
-
+#include <QDebug>
 TaskListModel::TaskListModel(QObject *parent) : QAbstractTableModel(parent)
 {
 
 }
 
-void TaskListModel::populateData(const QList<QString> &titleList, const QList<QString> &dateList, const QList<QString> &descriptionList, const QList<QString> &importanceList, const QList<QString> &repetitionList)
+void TaskListModel::populateData(const QList<int> &taskIDList, const QList<QString> &titleList,
+                                 const QList<QString> &dateList, const QList<QString> &descriptionList,
+                                 const QList<QString> &importanceList, const QList<QString> &repetitionList)
 {
+    m_taskIDList.clear();
+    m_taskIDList = taskIDList;
+
     m_titleList.clear();
     m_titleList = titleList;
 
@@ -40,16 +45,17 @@ int TaskListModel::columnCount(const QModelIndex &parent) const
 bool TaskListModel::removeRow(int position, int rows, const QModelIndex &parent) {
     beginRemoveRows(QModelIndex(), position, position+rows-1);
 
-      for (int row = 0; row < rows; ++row) {
-         m_titleList.removeAt(position);
-         m_dateList.removeAt(position);
-         m_descriptionList.removeAt(position);
-         m_importanceList.removeAt(position);
-         m_repetitionList.removeAt(position);
-      }
+    for (int row = 0; row < rows; ++row) {
+        m_taskIDList.removeAt(position);
+        m_titleList.removeAt(position);
+        m_dateList.removeAt(position);
+        m_descriptionList.removeAt(position);
+        m_importanceList.removeAt(position);
+        m_repetitionList.removeAt(position);
+    }
 
-      endRemoveRows();
-      return true;
+    endRemoveRows();
+    return true;
 }
 
 QVariant TaskListModel::data(const QModelIndex &index, int role) const
@@ -137,4 +143,14 @@ QList<QString> TaskListModel::repetitionList() const
 void TaskListModel::setRepetitionList(const QList<QString> &repetitionList)
 {
     m_repetitionList = repetitionList;
+}
+
+QList<int> TaskListModel::taskIDList() const
+{
+    return m_taskIDList;
+}
+
+void TaskListModel::setTaskIDList(const QList<int> &taskIDList)
+{
+    m_taskIDList = taskIDList;
 }

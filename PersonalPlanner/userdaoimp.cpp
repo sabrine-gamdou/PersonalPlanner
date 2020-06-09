@@ -5,7 +5,7 @@ UserDaoImp::UserDaoImp(){}
 
 
 UserDaoImp::~UserDaoImp(){
-    delete m_user;
+   // delete m_user;
 }
 
 
@@ -82,7 +82,24 @@ User UserDaoImp::read(QString t_username){
 
 bool UserDaoImp::update(User &t_user){
 
-    return false;
+    DatabaseSingleton::getInstance();
+
+    QSqlQuery query;
+
+
+    qDebug() << "Prepare Query: "<< query.prepare("UPDATE users SET pass = (:pass), firstname = (:firstname), "
+                                                  "lastname = (:lastname), email = (:email), birthday = (:birthday),"
+                                                  "address = (:address), score = (:score) WHERE username = (:un)");
+    query.bindValue(":un", t_user.username());
+    query.bindValue(":pass", t_user.password());
+    query.bindValue(":firstname", t_user.firstname());
+    query.bindValue(":lastname", t_user.lastname());
+    query.bindValue(":email", t_user.email());
+    query.bindValue(":birthday", t_user.birthday());
+    query.bindValue(":address", t_user.address());
+    query.bindValue(":score", t_user.score());
+
+    return query.exec();
 }
 
 
@@ -93,16 +110,10 @@ bool UserDaoImp::delete_(const QString t_username){
 
     QSqlQuery query;
 
-    bool deleted= false;
-
     qDebug() << "Prepare Query: "<< query.prepare("DELETE FROM users WHERE username = (:un)");
     query.bindValue(":un", t_username);
 
-    if( query.exec()){
-        deleted = true;
-    }
-
-    return deleted;
+    return query.exec();
 }
 
 

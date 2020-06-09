@@ -9,7 +9,9 @@ class TaskListModel : public QAbstractTableModel
 public:
     TaskListModel(QObject *parent = 0);
 
-    void populateData(const QList<QString> &titleList, const QList<QString> &dateList, const QList<QString> &descriptionList, const QList<QString> &importanceList, const QList<QString> &repetitionList);
+    void populateData(const QList<int> &taskIDList,const QList<QString> &titleList,
+                      const QList<QString> &dateList, const QList<QString> &descriptionList,
+                      const QList<QString> &importanceList, const QList<QString> &repetitionList);
 
     int rowCount(const QModelIndex &parent = QModelIndex()) const Q_DECL_OVERRIDE;
     int columnCount(const QModelIndex &parent = QModelIndex()) const Q_DECL_OVERRIDE;
@@ -35,7 +37,11 @@ public:
     QList<QString> repetitionList() const;
     void setRepetitionList(const QList<QString> &repetitionList);
 
+    QList<int> taskIDList() const;
+    void setTaskIDList(const QList<int> &taskIDList);
+
 private:
+    QList<int> m_taskIDList;
     QList<QString> m_titleList;
     QList<QString> m_dateList;
     QList<QString> m_descriptionList;

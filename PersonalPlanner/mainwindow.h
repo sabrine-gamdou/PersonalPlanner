@@ -34,6 +34,7 @@ public:
     void editInfoCheckBox_checked(const bool checked);
     void menuLogOut_clicked();
     void readTaskFromMainWindow();
+    void userUpdatedConfirmed(const bool t_userUpdated);
 
 private slots:
 
@@ -45,16 +46,17 @@ private slots:
 
     void on_confirm_cancelBtnB_rejected();
 
-    void on_tabWidget_tabBarClicked();
-
     void on_deleteBtn_clicked();
 
     void on_taskView_pressed();
 
+    void on_editBtn_clicked();
+
+    void on_saveChangesBtn_clicked();
+
 private:
     Ui::MainWindow *ui;
 
-    User* m_user;
 
     UserDaoImp m_userManager;
     TaskDaoImp m_taskManager;

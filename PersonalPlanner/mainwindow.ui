@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>903</width>
-    <height>537</height>
+    <width>1109</width>
+    <height>558</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -23,7 +23,7 @@
       <item row="0" column="1">
        <widget class="QTabWidget" name="tabWidget">
         <property name="currentIndex">
-         <number>0</number>
+         <number>3</number>
         </property>
         <property name="usesScrollButtons">
          <bool>true</bool>
@@ -45,9 +45,12 @@
           <string>Tasks</string>
          </attribute>
          <widget class="QPushButton" name="editBtn">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
           <property name="geometry">
            <rect>
-            <x>100</x>
+            <x>160</x>
             <y>330</y>
             <width>89</width>
             <height>25</height>
@@ -58,9 +61,12 @@
           </property>
          </widget>
          <widget class="QPushButton" name="deleteBtn">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
           <property name="geometry">
            <rect>
-            <x>210</x>
+            <x>300</x>
             <y>330</y>
             <width>89</width>
             <height>25</height>
@@ -73,10 +79,10 @@
          <widget class="QTableView" name="taskView">
           <property name="geometry">
            <rect>
-            <x>25</x>
-            <y>31</y>
-            <width>361</width>
-            <height>271</height>
+            <x>15</x>
+            <y>11</y>
+            <width>511</width>
+            <height>311</height>
            </rect>
           </property>
          </widget>
@@ -565,7 +571,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>903</width>
+     <width>1109</width>
      <height>22</height>
     </rect>
    </property>

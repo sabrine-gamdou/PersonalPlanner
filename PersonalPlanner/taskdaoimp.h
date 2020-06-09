@@ -20,7 +20,7 @@ public:
     bool create (const Task &task, const QString& username);
     Task read(int t_taskID);
     bool update(Task &task);
-    bool delete_(Task &task);
+    bool delete_(int t_id);
     bool readAll(QString &username);
 
     TaskListModel *getTaskModel() const;
@@ -42,12 +42,15 @@ public:
     QList<QString> getRepetitionList() const;
     void setRepetitionList(const QList<QString> &repetitionList);
 
+    QList<int> getTaskIDList() const;
+    void setTaskIDList(const QList<int> &taskIDList);
+
 private:
     Task* m_task;
-    TaskListModel *taskModel;
+    TaskListModel* taskModel;
     //unsigned int m_counter = 1;
 
-
+    QList<int> m_taskIDList;
     QList<QString> m_titleList;
     QList<QString> m_dateList;
     QList<QString> m_descriptionList;

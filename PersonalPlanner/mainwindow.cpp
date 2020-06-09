@@ -13,10 +13,9 @@ MainWindow::MainWindow(QWidget *parent) :
     //    QString StyleSheet = QLatin1String(File.readAll());
 
     //    this->setStyleSheet(StyleSheet);
-    //QObject::connect(ui->editInfoCheckBox, &QCheckBox::stateChanged, this, &MainWindow::on_editInfoCheckBox_clicked);
 
     ui->setupUi(this);
-    //this->adjustSize();
+    ui->taskView->setSelectionBehavior(QAbstractItemView::SelectRows);
     this->move(QApplication::desktop()->screen()->rect().center() - this->rect().center());
     QObject::connect(ui->editInfoCheckBox, &QCheckBox::stateChanged, this, &MainWindow::editInfoCheckBox_checked);
     QObject::connect(ui->menuLogOut, &QMenu::triggered, this, &MainWindow::menuLogOut_clicked);
@@ -29,30 +28,28 @@ MainWindow::~MainWindow()
 }
 
 
-void MainWindow::getTasks(){
-
-}
 
 void MainWindow::getUserData(){
+
     User t_user=  this->m_userManager.read(m_username);
+
     qDebug() << t_user.toString();
     ui->firstnameTxt->setText(t_user.firstname());
     ui->lastnameTxt->setText(t_user.lastname());
     ui->emailTxt->setText(t_user.email());
     ui->dateEdit->setDate(t_user.birthday());
     ui->addressTxt->setText(t_user.address());
-    m_taskManager.readAll(m_username);
+}
 
+
+void MainWindow::getTasks(){
+    m_taskManager.readAll(m_username);
 
     ui->taskView->setModel(m_taskManager.getTaskModel());
     ui->taskView->horizontalHeader()->setVisible(true);
-    m_taskManager.getTaskModel()->populateData(m_taskManager.getTitleList(), m_taskManager.getDateList(), m_taskManager.getDescriptionList(), m_taskManager.getImportanceList(), m_taskManager.getRepetitionList());
 
     ui->taskView->show();
-    //move to seperate method
-    //ui->editInfoCheckBox->setChecked(false);
 }
-
 
 void MainWindow::editInfoCheckBox_checked(const bool checked){
 
@@ -76,6 +73,67 @@ void MainWindow::on_deleteAccountBtn_clicked(){
 
 }
 
+
+
+void MainWindow::on_saveChangesBtn_clicked()
+{
+    User m_user(m_username, m_password, "", "", "");
+    bool stop = false;
+
+
+    if(ui->firstnameTxt->text() == "")
+    {
+        ui->firstnameTxt->setStyleSheet("border: 1px solid red");
+        ui->firstnameTxt->setPlaceholderText("First Name EMPTY!");
+        stop = true;
+    }else{
+        ui->firstnameTxt->setStyleSheet("");
+        m_user.setFirstname(ui->firstnameTxt->text());
+        stop = false;
+    }
+
+
+    if(ui->lastnameTxt->text() == "")
+    {
+        ui->lastnameTxt->setStyleSheet("border: 1px solid red");
+        ui->lastnameTxt->setPlaceholderText("Last Name EMPTY!");
+        stop = false;
+    }else{
+        ui->lastnameTxt->setStyleSheet("");
+        m_user.setLastname(ui->lastnameTxt->text());
+        stop = false;
+    }
+
+
+    if(ui->emailTxt->text() == "")
+    {
+        ui->emailTxt->setStyleSheet("border: 1px solid red");
+        ui->emailTxt->setPlaceholderText("E-mail EMPTY!");
+        stop = true;
+    }else{
+        ui->emailTxt->setStyleSheet("");
+        m_user.setEmail(ui->emailTxt->text());
+        stop = false;
+    }
+
+    m_user.setBirthday(ui->dateEdit->date());
+    m_user.setAddress(ui->addressTxt->text());
+
+    if(!stop){
+        userUpdatedConfirmed(m_userManager.update(m_user));
+    }
+}
+
+void MainWindow::userUpdatedConfirmed(const bool t_userUpdated){
+    qDebug() << "User Updated status: "<< t_userUpdated;
+    if(t_userUpdated){
+        QMessageBox::information(this, "Information", "You successfully updated your profile information!");
+    }else{
+        QMessageBox::warning(this, "Warning", "Something went wrong ... Please try again later.");
+    }
+
+}
+
 void MainWindow::logout(){
     this->m_username = "";
     this->m_password = "";
@@ -89,6 +147,69 @@ void MainWindow::on_logoutBtn_clicked(){
 void MainWindow::menuLogOut_clicked(){
     logout();
 }
+
+
+
+void MainWindow::readTaskFromMainWindow() {
+
+    Task new_task (0, ui->titleTxt->text(), ui->dateTimeEdit->date(), ui->importanceSb->text().toInt(), m_username);
+    new_task.setDescription(ui->descriptionTxt->text());
+    new_task.setRepetition(ui->repeatCb->currentText());
+
+    qDebug() <<  "TaskManager created" << m_taskManager.create(new_task, m_username);
+
+}
+
+
+void MainWindow::on_confirm_cancelBtnB_accepted()
+{
+    readTaskFromMainWindow();
+    getTasks();
+}
+
+
+void MainWindow::on_confirm_cancelBtnB_rejected()
+{
+    ui->titleTxt->clear();
+    ui->dateTimeEdit->clear();
+    ui->descriptionTxt->clear();
+    ui->importanceSb->clear();
+
+}
+
+
+void MainWindow::on_deleteBtn_clicked()
+{
+    QModelIndex index = ui->taskView->selectionModel()->currentIndex();
+
+    int taskID = m_taskManager.getTaskModel()->taskIDList().at(index.row());
+
+    qDebug() << "list size" << m_taskManager.getTaskModel()->taskIDList().size();
+
+    qDebug() << "Task deleted: " << index.row() << m_taskManager.delete_(taskID);
+
+    m_taskManager.getTaskModel()->removeRow(ui->taskView->currentIndex().row(), 1 , ui->taskView->currentIndex());
+
+    m_taskManager.setTaskIDList(m_taskManager.getTaskModel()->taskIDList());
+
+    ui->deleteBtn->setEnabled(false);
+}
+
+
+void MainWindow::on_taskView_pressed()
+{
+    ui->deleteBtn->setEnabled(true);
+    ui->editBtn->setEnabled(true);
+}
+
+
+
+void MainWindow::on_editBtn_clicked()
+{
+    QModelIndex index = ui->taskView->selectionModel()->currentIndex();
+    QVariant value = index.sibling(index.row(),index.column()).data();
+}
+
 
 QString MainWindow::username() const
 {
@@ -111,47 +232,3 @@ void MainWindow::setPassword(const QString &password)
 }
 
 
-void MainWindow::readTaskFromMainWindow() {
-    Task new_task (0, ui->titleTxt->text(), ui->dateTimeEdit->date(), ui->importanceSb->text().toInt(), m_username);
-    new_task.setDescription(ui->descriptionTxt->text());
-    new_task.setRepetition(ui->repeatCb->currentText());
-
-    qDebug() <<  "TaskManager created" << m_taskManager.create(new_task, m_username);
-
-}
-
-
-void MainWindow::on_confirm_cancelBtnB_accepted()
-{
-    MainWindow::readTaskFromMainWindow();
-}
-
-
-void MainWindow::on_confirm_cancelBtnB_rejected()
-{
-    ui->titleTxt->clear();
-    ui->dateTimeEdit->clear();
-    ui->descriptionTxt->clear();
-    ui->importanceSb->clear();
-
-}
-void MainWindow::on_tabWidget_tabBarClicked()
-{  
-    m_taskManager.readAll(m_username);
-    ui->taskView->setModel(m_taskManager.getTaskModel());
-}
-
-
-
-void MainWindow::on_deleteBtn_clicked()
-{
-    m_taskManager.getTaskModel()->removeRow(ui->taskView->currentIndex().row(), 1 , ui->taskView->currentIndex());
-    ui->deleteBtn->setEnabled(false);
-}
-
-void MainWindow::on_taskView_pressed()
-{
-
-    ui->taskView->setSelectionBehavior(QAbstractItemView::SelectRows);
-    ui->deleteBtn->setEnabled(true);
-}

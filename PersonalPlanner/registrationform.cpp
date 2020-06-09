@@ -125,7 +125,7 @@ void RegistrationForm::on_cancelBtn_clicked(){
 
 
 void RegistrationForm::userCreatedConfirmed(const bool t_userCreated){
-    qDebug() << "Bug here"<< t_userCreated;
+    qDebug() << "User created status: "<< t_userCreated;
     if(t_userCreated){
         QMessageBox::information(this, "Information", "Welcome to Personal Planner!");
         this->close();
