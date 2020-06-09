@@ -17,6 +17,21 @@ public:
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const Q_DECL_OVERRIDE;
     QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const Q_DECL_OVERRIDE;
 
+    QList<QString> titleList() const;
+    void setTitleList(const QList<QString> &titleList);
+
+    QList<QString> dateList() const;
+    void setDateList(const QList<QString> &dateList);
+
+    QList<QString> descriptionList() const;
+    void setDescriptionList(const QList<QString> &descriptionList);
+
+    QList<QString> importanceList() const;
+    void setImportanceList(const QList<QString> &importanceList);
+
+    QList<QString> repetitionList() const;
+    void setRepetitionList(const QList<QString> &repetitionList);
+
 private:
     QList<QString> m_titleList;
     QList<QString> m_dateList;

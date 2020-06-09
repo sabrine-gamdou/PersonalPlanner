@@ -2,6 +2,7 @@
 #define TASKDAOIMP_H
 
 #include "task.h"
+#include "tasklistmodel.h"
 #include <QtSql/QSqlDatabase>
 #include <QtSql/QSqlQuery>
 #include <QDebug>
@@ -22,8 +23,12 @@ public:
     bool delete_(Task &task);
 
 
+    TaskListModel *getTaskModel() const;
+    void setTaskModel(TaskListModel *value);
+
 private:
     Task* m_task;
+    TaskListModel *taskModel;
     //unsigned int m_counter = 1;
 
 };

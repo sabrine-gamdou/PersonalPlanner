@@ -17,18 +17,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     //this->adjustSize();
     this->move(QApplication::desktop()->screen()->rect().center() - this->rect().center());
-    //QObject::connect(this, SIGNAL(clicked(bool)), this, SLOT(editInfoCheckBox_checked(bool)));
     QObject::connect(ui->editInfoCheckBox, &QCheckBox::stateChanged, this, &MainWindow::editInfoCheckBox_checked);
     QObject::connect(ui->menuLogOut, &QMenu::triggered, this, &MainWindow::menuLogOut_clicked);
-    //   QObject::connect(ui->logoutBtn, &QCommandLinkButton::clicked, this, &MainWindow::on_logoutBtn_clicked);
-    //   QObject::connect(ui->deleteAccountBtn, &QCommandLinkButton::clicked, this, &MainWindow::on_deleteAccountBtn_clicked);
-
-    QList<QString> titleList;
-    QList<QString> dateList;
-    QList<QString> descriptionList;
-    QList<QString> importanceList;
-    QList<QString> repetitionList;
-
 
 }
 
@@ -121,17 +111,12 @@ void MainWindow::readTaskFromMainWindow() {
 
     qDebug() <<  "TaskManager created" << m_taskManager.create(new_task, m_username);
 
-    ui->taskView->setModel(taskModel);
-    ui->taskView->horizontalHeader()->setVisible(true);
-    ui->taskView->show();
 }
 
 
 void MainWindow::on_confirm_cancelBtnB_accepted()
 {
     MainWindow::readTaskFromMainWindow();
-
-
 }
 
 
@@ -144,7 +129,9 @@ void MainWindow::on_confirm_cancelBtnB_rejected()
 
 }
 void MainWindow::on_tabWidget_tabBarClicked(int index)
-{
-
+{  
+//    ui->taskView->setModel(m_taskManager.getTaskModel());
+//    ui->taskView->horizontalHeader()->setVisible(true);
+//    ui->taskView->show();
 }
 

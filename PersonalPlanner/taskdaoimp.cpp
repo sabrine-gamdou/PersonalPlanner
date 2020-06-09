@@ -9,17 +9,9 @@ TaskDaoImp::TaskDaoImp(){}
 
 TaskDaoImp::~TaskDaoImp(){}
 
-
-TaskListModel *taskModel = new TaskListModel(this);
-
 bool TaskDaoImp::create(const Task& task, const QString& username){
 
     DatabaseSingleton::getInstance();
-    QList<QString> titleList;
-    QList<QString> dateList;
-    QList<QString> descriptionList;
-    QList<QString> importanceList;
-    QList<QString> repetitionList;
 
     QSqlQuery query;
 
@@ -34,15 +26,14 @@ bool TaskDaoImp::create(const Task& task, const QString& username){
     query.bindValue(":repetition", task.repetition());
     query.bindValue(":username", username);
 
-    titleList.append(task.title());
-    dateList.append(task.date());
-    descriptionList.append(task.description());
-    importanceList.append(task.importance());
-    repetitionList.append(task.repetition());
 
-    taskModel->populateData(titleList, dateList, descriptionList, importanceList, repetitionList);
+    taskModel->titleList().append(task.title());
+    taskModel->dateList().append(task.date().toString());
+    taskModel->descriptionList().append(task.description());
+    taskModel->importanceList().append(QString::number(task.importance()));
+    taskModel->repetitionList().append(task.repetition());
 
-
+    taskModel->populateData(taskModel->titleList(), taskModel->dateList(), taskModel->descriptionList(), taskModel->importanceList(), taskModel->repetitionList());
 
     return query.exec();
 }
@@ -113,4 +104,15 @@ bool TaskDaoImp::delete_(Task& task){ // or taskID?
 
     return query.exec();
 }
+
+TaskListModel *TaskDaoImp::getTaskModel() const
+{
+    return taskModel;
+}
+
+void TaskDaoImp::setTaskModel(TaskListModel *value)
+{
+    taskModel = value;
+}
+
 

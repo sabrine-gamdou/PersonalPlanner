@@ -73,3 +73,53 @@ QVariant TaskListModel::headerData(int section, Qt::Orientation orientation, int
     }
     return QVariant();
 }
+
+QList<QString> TaskListModel::titleList() const
+{
+    return m_titleList;
+}
+
+void TaskListModel::setTitleList(const QList<QString> &titleList)
+{
+    m_titleList = titleList;
+}
+
+QList<QString> TaskListModel::dateList() const
+{
+    return m_dateList;
+}
+
+void TaskListModel::setDateList(const QList<QString> &dateList)
+{
+    m_dateList = dateList;
+}
+
+QList<QString> TaskListModel::descriptionList() const
+{
+    return m_descriptionList;
+}
+
+void TaskListModel::setDescriptionList(const QList<QString> &descriptionList)
+{
+    m_descriptionList = descriptionList;
+}
+
+QList<QString> TaskListModel::importanceList() const
+{
+    return m_importanceList;
+}
+
+void TaskListModel::setImportanceList(const QList<QString> &importanceList)
+{
+    m_importanceList = importanceList;
+}
+
+QList<QString> TaskListModel::repetitionList() const
+{
+    return m_repetitionList;
+}
+
+void TaskListModel::setRepetitionList(const QList<QString> &repetitionList)
+{
+    m_repetitionList = repetitionList;
+}
