@@ -35,12 +35,13 @@ public:
     void menuLogOut_clicked();
     void readTaskFromMainWindow();
     void userUpdatedConfirmed(const bool t_userUpdated);
+    void deleteTask ();
 
 private slots:
 
     void on_deleteAccountBtn_clicked();
-    void on_logoutBtn_clicked();
 
+    void on_logoutBtn_clicked();
 
     void on_confirm_cancelBtnB_accepted();
 
@@ -60,6 +61,7 @@ private:
 
     UserDaoImp m_userManager;
     TaskDaoImp m_taskManager;
+
 
     QString m_username;
     QString m_password;

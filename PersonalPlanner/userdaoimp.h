@@ -13,15 +13,11 @@ public:
     UserDaoImp();
     ~UserDaoImp();
     bool create (User &t_user);
-    User read(QString t_username);
+    User read(const QString &t_username);
     bool update(User &t_user);
-    bool delete_(const QString t_username);
-    bool checkLogin(const QString t_username, const QString t_password);
-    User *user() const;
-    void setUser(User *user);
+    bool delete_(const QString& t_username);
+    bool checkLogin(const QString& t_username, const QString& t_password);
 
-private:
-    User* m_user;
 };
 
 #endif // USERDAOIMP_H

@@ -161,15 +161,13 @@ void MainWindow::readTaskFromMainWindow() {
 }
 
 
-void MainWindow::on_confirm_cancelBtnB_accepted()
-{
+void MainWindow::on_confirm_cancelBtnB_accepted() {
     readTaskFromMainWindow();
     getTasks();
 }
 
 
-void MainWindow::on_confirm_cancelBtnB_rejected()
-{
+void MainWindow::on_confirm_cancelBtnB_rejected() {
     ui->titleTxt->clear();
     ui->dateTimeEdit->clear();
     ui->descriptionTxt->clear();
@@ -177,37 +175,40 @@ void MainWindow::on_confirm_cancelBtnB_rejected()
 
 }
 
-
-void MainWindow::on_deleteBtn_clicked()
-{
+void MainWindow::deleteTask () {
     QModelIndex index = ui->taskView->selectionModel()->currentIndex();
+    Task task = m_taskManager.getTaskModel()->taskList().at(index.row());
 
-    int taskID = m_taskManager.getTaskModel()->taskIDList().at(index.row());
+    m_taskManager.getTaskModel()->removeRow( index.row(),1 , index);
 
-    qDebug() << "list size" << m_taskManager.getTaskModel()->taskIDList().size();
+    qDebug() << "list size" << m_taskManager.getTaskModel()->taskList().size();
 
-    qDebug() << "Task deleted: " << index.row() << m_taskManager.delete_(taskID);
+    qDebug() << "Task deleted: " << index.row() << m_taskManager.delete_(task);
 
-    m_taskManager.getTaskModel()->removeRow(ui->taskView->currentIndex().row(), 1 , ui->taskView->currentIndex());
+    m_taskManager.setTaskList(m_taskManager.getTaskModel()->taskList());
 
-    m_taskManager.setTaskIDList(m_taskManager.getTaskModel()->taskIDList());
+    ui->deleteBtn->setEnabled(false);
 
+}
+
+void MainWindow::on_deleteBtn_clicked() {
+    deleteTask();
     ui->deleteBtn->setEnabled(false);
 }
 
 
-void MainWindow::on_taskView_pressed()
-{
+void MainWindow::on_taskView_pressed() {
     ui->deleteBtn->setEnabled(true);
     ui->editBtn->setEnabled(true);
 }
 
 
-
-void MainWindow::on_editBtn_clicked()
-{
+void MainWindow::on_editBtn_clicked() {
     QModelIndex index = ui->taskView->selectionModel()->currentIndex();
     QVariant value = index.sibling(index.row(),index.column()).data();
+
+
+    deleteTask();
 }
 
 

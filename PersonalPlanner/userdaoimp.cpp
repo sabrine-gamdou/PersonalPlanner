@@ -38,7 +38,7 @@ bool UserDaoImp::create (User &t_user){
 
 }
 
-User UserDaoImp::read(QString t_username){
+User UserDaoImp::read(const QString& t_username){
 
     QString t_firstname;
     QString t_lastname;
@@ -58,7 +58,7 @@ User UserDaoImp::read(QString t_username){
     query.exec();
 
     while (query.next()) {
-        t_username = query.value(0).toString();
+        //t_username = query.value(0).toString();
         t_password = query.value(1).toString();
         t_firstname = query.value(2).toString();
         t_lastname = query.value(3).toString();
@@ -103,7 +103,7 @@ bool UserDaoImp::update(User &t_user){
 }
 
 
-bool UserDaoImp::delete_(const QString t_username){
+bool UserDaoImp::delete_(const QString &t_username){
 
 
     DatabaseSingleton::getInstance();
@@ -117,7 +117,7 @@ bool UserDaoImp::delete_(const QString t_username){
 }
 
 
-bool UserDaoImp::checkLogin(const QString t_username, const QString t_password){
+bool UserDaoImp::checkLogin(const QString &t_username, const QString &t_password){
 
     DatabaseSingleton::getInstance();
 
@@ -131,24 +131,13 @@ bool UserDaoImp::checkLogin(const QString t_username, const QString t_password){
 
     if( query.exec()){
         if (query.next()){
-            exists = true;
+            qDebug() << exists; //Error Message instead
+            return true;
         }
-
-    }else{
-        qDebug() << query.lastError().text();
     }
 
-    qDebug() << exists;
-    return exists;
+    qDebug() << query.lastError().text();
+    return false;
 }
 
-User *UserDaoImp::user() const
-{
-    return m_user;
-}
-
-void UserDaoImp::setUser(User *user)
-{
-    m_user = user;
-}
 
