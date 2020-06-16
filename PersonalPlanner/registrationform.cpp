@@ -29,12 +29,14 @@ void RegistrationForm::on_confirmBtn_clicked(){
     QString lastname;
     QString email;
 
+    QString style = "border: 1px solid red";
+
     bool stop = false;
 
 
     if(ui->usernameTxt->text() == "")
     {
-        ui->usernameTxt->setStyleSheet("border: 1px solid red");
+        ui->usernameTxt->setStyleSheet(style);
         ui->usernameTxt->setPlaceholderText("Username EMPTY!");
         stop = true;
     }else{
@@ -47,7 +49,7 @@ void RegistrationForm::on_confirmBtn_clicked(){
 
     if(ui->passTxt->text() == "")
     {
-        ui->passTxt->setStyleSheet("border: 1px solid red");
+        ui->passTxt->setStyleSheet(style);
         ui->passTxt->setPlaceholderText("Password EMPTY!");
         stop = true;
     }else{
@@ -61,7 +63,7 @@ void RegistrationForm::on_confirmBtn_clicked(){
 
     if(ui->firstnameTxt->text() == "")
     {
-        ui->firstnameTxt->setStyleSheet("border: 1px solid red");
+        ui->firstnameTxt->setStyleSheet(style);
         ui->firstnameTxt->setPlaceholderText("First Name EMPTY!");
         stop = true;
     }else{
@@ -75,7 +77,7 @@ void RegistrationForm::on_confirmBtn_clicked(){
 
     if(ui->lastnameTxt->text() == "")
     {
-        ui->lastnameTxt->setStyleSheet("border: 1px solid red");
+        ui->lastnameTxt->setStyleSheet(style);
         ui->lastnameTxt->setPlaceholderText("Last Name EMPTY!");
         stop = false;
     }else{
@@ -89,7 +91,7 @@ void RegistrationForm::on_confirmBtn_clicked(){
 
     if(ui->emailTxt->text() == "")
     {
-        ui->emailTxt->setStyleSheet("border: 1px solid red");
+        ui->emailTxt->setStyleSheet(style);
         ui->emailTxt->setPlaceholderText("E-mail EMPTY!");
         stop = true;
     }else{
@@ -103,7 +105,7 @@ void RegistrationForm::on_confirmBtn_clicked(){
     //check if email available
 
     if(stop){
-        ui->errLb->setStyleSheet("border: 1px solid red");
+        ui->errLb->setStyleSheet(style);
         ui->errLb->setEnabled(true);
         ui->errLb->setText("Please correct your mistakes.");
     }else{

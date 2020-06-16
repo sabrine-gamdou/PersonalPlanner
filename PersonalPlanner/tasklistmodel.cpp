@@ -20,17 +20,18 @@ int TaskListModel::rowCount(const QModelIndex &parent) const
 int TaskListModel::columnCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent);
-    return 5;
+    return static_cast<int>(ColumnNames::Count);
 }
 
 bool TaskListModel::removeRow(int position, int rows, const QModelIndex &parent) {
+
     beginRemoveRows(QModelIndex(), position, position+rows-1);
 
     for (int row = 0; row < rows; ++row)
         m_taskList.removeAt(position);
 
-
     endRemoveRows();
+
     return true;
 }
 
@@ -40,18 +41,19 @@ QVariant TaskListModel::data(const QModelIndex &index, int role) const
         return QVariant();
     }
 
-    if (index.column() == 0) {
+    switch(static_cast<ColumnNames>(index.column())){
+    case ColumnNames::Title:
         return m_taskList[index.row()].title();
-    } else if (index.column() == 1) {
+    case ColumnNames::Date:
         return m_taskList[index.row()].date();
-    } else if (index.column() == 2) {
+    case ColumnNames::Description:
         return m_taskList[index.row()].description();
-    } else if (index.column() == 3) {
+    case ColumnNames::Importance:
         return m_taskList[index.row()].importance();
-    } else if (index.column() == 4) {
+    case ColumnNames::Repetition:
         return m_taskList[index.row()].repetition();
+    default:break;
     }
-
 
     return QVariant();
 }
@@ -59,16 +61,18 @@ QVariant TaskListModel::data(const QModelIndex &index, int role) const
 QVariant TaskListModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
     if (role == Qt::DisplayRole && orientation == Qt::Horizontal) {
-        if (section == 0) {
+        switch(static_cast<ColumnNames>(section)){
+        case ColumnNames::Title:
             return QString("Title");
-        } else if (section == 1) {
+        case ColumnNames::Date:
             return QString("Date");
-        }else if (section == 2) {
+        case ColumnNames::Description:
             return QString("Description");
-        }else if (section == 3) {
+        case ColumnNames::Importance:
             return QString("Importance");
-        }else if (section == 4) {
+        case ColumnNames::Repetition:
             return QString("Repetition");
+        default: break;
         }
     }
     return QVariant();

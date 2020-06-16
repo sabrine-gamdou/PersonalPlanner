@@ -18,7 +18,7 @@ public:
     TaskDaoImp();
     ~TaskDaoImp();
     bool create (const Task &task, const QString& username);
-    Task read(int t_taskID);
+    Task read(int t_taskID, QString &username);
     bool update(Task &task);
     bool delete_(Task task);
     bool readAll(QString &username);
@@ -30,7 +30,6 @@ public:
     void setTaskList(const QList<Task> &taskList);
 
 private:
-    Task* newTask;
     TaskListModel* taskModel;
     QList<Task> m_taskList;
 

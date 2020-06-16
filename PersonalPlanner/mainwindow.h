@@ -35,7 +35,10 @@ public:
     void menuLogOut_clicked();
     void readTaskFromMainWindow();
     void userUpdatedConfirmed(const bool t_userUpdated);
-    void deleteTask ();
+    void deleteTask();
+    void setStatus();
+    QString readStatusFromWindow();
+  //  int setRepetitionIndex(QString repetitionString);
 
 private slots:
 

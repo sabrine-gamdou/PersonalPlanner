@@ -11,6 +11,8 @@ class TaskListModel : public QAbstractTableModel
 public:
     TaskListModel(QObject *parent = 0);
 
+    enum class ColumnNames{Title, Date, Description, Importance, Repetition, Count};
+
     void populateData(const QList<Task> &taskList);
 
     int rowCount(const QModelIndex &parent = QModelIndex()) const Q_DECL_OVERRIDE;

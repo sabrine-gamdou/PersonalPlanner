@@ -19,7 +19,7 @@ MainWindow::MainWindow(QWidget *parent) :
     this->move(QApplication::desktop()->screen()->rect().center() - this->rect().center());
     QObject::connect(ui->editInfoCheckBox, &QCheckBox::stateChanged, this, &MainWindow::editInfoCheckBox_checked);
     QObject::connect(ui->menuLogOut, &QMenu::triggered, this, &MainWindow::menuLogOut_clicked);
-
+    setStatus();
 }
 
 MainWindow::~MainWindow()
@@ -79,11 +79,11 @@ void MainWindow::on_saveChangesBtn_clicked()
 {
     User m_user(m_username, m_password, "", "", "");
     bool stop = false;
-
+    QString style = "border: 1px solid red" ;
 
     if(ui->firstnameTxt->text() == "")
     {
-        ui->firstnameTxt->setStyleSheet("border: 1px solid red");
+        ui->firstnameTxt->setStyleSheet(style);
         ui->firstnameTxt->setPlaceholderText("First Name EMPTY!");
         stop = true;
     }else{
@@ -95,7 +95,7 @@ void MainWindow::on_saveChangesBtn_clicked()
 
     if(ui->lastnameTxt->text() == "")
     {
-        ui->lastnameTxt->setStyleSheet("border: 1px solid red");
+        ui->lastnameTxt->setStyleSheet(style);
         ui->lastnameTxt->setPlaceholderText("Last Name EMPTY!");
         stop = false;
     }else{
@@ -107,7 +107,7 @@ void MainWindow::on_saveChangesBtn_clicked()
 
     if(ui->emailTxt->text() == "")
     {
-        ui->emailTxt->setStyleSheet("border: 1px solid red");
+        ui->emailTxt->setStyleSheet(style);
         ui->emailTxt->setPlaceholderText("E-mail EMPTY!");
         stop = true;
     }else{
@@ -155,11 +155,22 @@ void MainWindow::readTaskFromMainWindow() {
     Task new_task (0, ui->titleTxt->text(), ui->dateTimeEdit->date(), ui->importanceSb->text().toInt(), m_username);
     new_task.setDescription(ui->descriptionTxt->text());
     new_task.setRepetition(ui->repeatCb->currentText());
+    new_task.setStatus(readStatusFromWindow());
 
     qDebug() <<  "TaskManager created" << m_taskManager.create(new_task, m_username);
 
 }
 
+QString MainWindow::readStatusFromWindow(){
+    if(ui->rbCompleted->isChecked()){
+        return "Completed";
+    }else if(ui->rbInProgress->isChecked()){
+        return "In-Progress";
+    }else if(ui->rbFailed->isChecked()){
+        return "Failed";
+    }
+    return "";
+}
 
 void MainWindow::on_confirm_cancelBtnB_accepted() {
     readTaskFromMainWindow();
@@ -198,17 +209,43 @@ void MainWindow::on_deleteBtn_clicked() {
 
 
 void MainWindow::on_taskView_pressed() {
-    ui->deleteBtn->setEnabled(true);
-    ui->editBtn->setEnabled(true);
+    ui->deleteBtn->setEnabled(ui->taskView->currentIndex().isValid());
+    ui->editBtn->setEnabled(ui->taskView->currentIndex().isValid());
 }
 
+void MainWindow::setStatus(){
+
+    QPalette palette;
+    palette.setColor(QPalette::Window, QColor(50,205,50));
+    ui->lbCompleted->setAutoFillBackground(true);
+    ui->lbCompleted->setPalette(palette);
+
+    palette.setColor(QPalette::Window, QColor(255,215,0));
+    ui->lbInProgress->setAutoFillBackground(true);
+    ui->lbInProgress->setPalette(palette);
+
+    palette.setColor(QPalette::Window, QColor(220,220,220));
+    ui->lbFailed->setAutoFillBackground(true);
+    ui->lbFailed->setPalette(palette);
+}
 
 void MainWindow::on_editBtn_clicked() {
+
     QModelIndex index = ui->taskView->selectionModel()->currentIndex();
-    QVariant value = index.sibling(index.row(),index.column()).data();
+    Task task = m_taskManager.getTaskModel()->taskList().at(index.row());
 
+   // m_taskManager.getTaskModel()->removeRow( index.row(),1 , index);
+    ui->tabWidget->setCurrentIndex(1);
 
-    deleteTask();
+    ui->titleTxt->setText(task.title());
+    ui->descriptionTxt->setText(task.description());
+    ui->importanceSb->setValue(task.importance());
+    ui->dateTimeEdit->setDate(task.date());
+    ui->repeatCb->setCurrentIndex();
+
+    m_taskManager.setTaskList(m_taskManager.getTaskModel()->taskList());
+
+    ui->deleteBtn->setEnabled(false);
 }
 
 
