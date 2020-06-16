@@ -19,7 +19,7 @@ MainWindow::MainWindow(QWidget *parent) :
     this->move(QApplication::desktop()->screen()->rect().center() - this->rect().center());
     QObject::connect(ui->editInfoCheckBox, &QCheckBox::stateChanged, this, &MainWindow::editInfoCheckBox_checked);
     QObject::connect(ui->menuLogOut, &QMenu::triggered, this, &MainWindow::menuLogOut_clicked);
-    setStatus();
+
 }
 
 MainWindow::~MainWindow()
@@ -49,6 +49,16 @@ void MainWindow::getTasks(){
     ui->taskView->horizontalHeader()->setVisible(true);
 
     ui->taskView->show();
+}
+
+void MainWindow::taskConfirmed(const bool taskUpdated) {
+
+    qDebug() << "Task Updated status: "<< taskUpdated;
+    if(taskUpdated){
+        QMessageBox::information(this, "Information", "You successfully added/updated your task!");
+    }else{
+        QMessageBox::warning(this, "Warning", "Something went wrong ... Please try again later.");
+    }
 }
 
 void MainWindow::editInfoCheckBox_checked(const bool checked){
@@ -150,39 +160,32 @@ void MainWindow::menuLogOut_clicked(){
 
 
 
-void MainWindow::readTaskFromMainWindow() {
+bool MainWindow::readTaskFromMainWindow() {
 
     Task new_task (0, ui->titleTxt->text(), ui->dateTimeEdit->date(), ui->importanceSb->text().toInt(), m_username);
     new_task.setDescription(ui->descriptionTxt->text());
     new_task.setRepetition(ui->repeatCb->currentText());
-    new_task.setStatus(readStatusFromWindow());
-
-    qDebug() <<  "TaskManager created" << m_taskManager.create(new_task, m_username);
+    bool status =  m_taskManager.create(new_task, m_username);
+    qDebug() <<  "TaskManager created" << status;
+    return status;
 
 }
 
-QString MainWindow::readStatusFromWindow(){
-    if(ui->rbCompleted->isChecked()){
-        return "Completed";
-    }else if(ui->rbInProgress->isChecked()){
-        return "In-Progress";
-    }else if(ui->rbFailed->isChecked()){
-        return "Failed";
-    }
-    return "";
-}
-
-void MainWindow::on_confirm_cancelBtnB_accepted() {
-    readTaskFromMainWindow();
-    getTasks();
-}
-
-
-void MainWindow::on_confirm_cancelBtnB_rejected() {
+void MainWindow::resetTaskInput() {
     ui->titleTxt->clear();
     ui->dateTimeEdit->clear();
     ui->descriptionTxt->clear();
     ui->importanceSb->clear();
+}
+void MainWindow::on_confirm_cancelBtnB_accepted() {
+    taskConfirmed(readTaskFromMainWindow());
+    getTasks();
+    resetTaskInput();
+}
+
+
+void MainWindow::on_confirm_cancelBtnB_rejected() {
+    resetTaskInput();
 
 }
 
@@ -213,20 +216,23 @@ void MainWindow::on_taskView_pressed() {
     ui->editBtn->setEnabled(ui->taskView->currentIndex().isValid());
 }
 
-void MainWindow::setStatus(){
+int MainWindow::setRepetitionIndex(QString repetitionString) {
+    int index = -1;
+    if (repetitionString == "Never") {
+        index = 0;
+    } else if(repetitionString == "Hour") {
+        index = 1;
+    }else if(repetitionString == "Day") {
+        index = 2;
+    }else if(repetitionString == "Week") {
+        index = 3;
+    }else if(repetitionString == "Month") {
+        index = 4;
+    }else if(repetitionString == "Year") {
+        index = 5;
+    }
 
-    QPalette palette;
-    palette.setColor(QPalette::Window, QColor(50,205,50));
-    ui->lbCompleted->setAutoFillBackground(true);
-    ui->lbCompleted->setPalette(palette);
-
-    palette.setColor(QPalette::Window, QColor(255,215,0));
-    ui->lbInProgress->setAutoFillBackground(true);
-    ui->lbInProgress->setPalette(palette);
-
-    palette.setColor(QPalette::Window, QColor(220,220,220));
-    ui->lbFailed->setAutoFillBackground(true);
-    ui->lbFailed->setPalette(palette);
+    return index;
 }
 
 void MainWindow::on_editBtn_clicked() {
@@ -234,18 +240,20 @@ void MainWindow::on_editBtn_clicked() {
     QModelIndex index = ui->taskView->selectionModel()->currentIndex();
     Task task = m_taskManager.getTaskModel()->taskList().at(index.row());
 
-   // m_taskManager.getTaskModel()->removeRow( index.row(),1 , index);
+
     ui->tabWidget->setCurrentIndex(1);
 
     ui->titleTxt->setText(task.title());
     ui->descriptionTxt->setText(task.description());
     ui->importanceSb->setValue(task.importance());
     ui->dateTimeEdit->setDate(task.date());
-    ui->repeatCb->setCurrentIndex();
+    ui->repeatCb->setCurrentIndex(setRepetitionIndex(task.status()));
 
     m_taskManager.setTaskList(m_taskManager.getTaskModel()->taskList());
+    m_taskManager.getTaskModel()->removeRow( index.row(),1 , index);
+    m_taskManager.delete_(task);
+    ui->editBtn->setEnabled(false);
 
-    ui->deleteBtn->setEnabled(false);
 }
 
 
@@ -270,3 +278,13 @@ void MainWindow::setPassword(const QString &password)
 }
 
 
+
+void MainWindow::on_statusBtn_clicked()
+{
+    QModelIndex index = ui->taskView->selectionModel()->currentIndex();
+    Task task = m_taskManager.getTaskModel()->taskList().at(index.row());
+
+    ui->statusBtn->setEnabled(true);
+    sf.show();
+    //setStatusColors(task.status(), index );
+}

@@ -52,8 +52,34 @@ QVariant TaskListModel::data(const QModelIndex &index, int role) const
         return m_taskList[index.row()].importance();
     case ColumnNames::Repetition:
         return m_taskList[index.row()].repetition();
-    default:break;
+    case ColumnNames::Status:
+        if (m_taskList[index.row()].status() == "Completed");
+         //  TaskListModel::setData(index,QBrush (QColor(50,205,50)), Qt::BackgroundRole );
+
+        else if (m_taskList[index.row()].status() == "Failed")
+             QBrush (QColor(255,0,0));
+
+        else if (m_taskList[index.row()].status() == "In-Progress")
+             QBrush (QColor(255,215,0));
+
+        return m_taskList[index.row()].status();
+
     }
+
+//    switch(role ) {
+//    case Qt::BackgroundRole: {
+//        if (m_taskList[index.row()].status() == "Completed")
+//            return QBrush (QColor(50,205,50));
+
+//        else if (m_taskList[index.row()].status() == "Failed")
+//            return QBrush (QColor(255,0,0));
+
+//        else if (m_taskList[index.row()].status() == "In-Progress")
+//            return QBrush (QColor(255,215,0));
+//    default:break;
+//    }
+
+//    }
 
     return QVariant();
 }
@@ -72,6 +98,8 @@ QVariant TaskListModel::headerData(int section, Qt::Orientation orientation, int
             return QString("Importance");
         case ColumnNames::Repetition:
             return QString("Repetition");
+        case ColumnNames::Status:
+            return QString("Status");
         default: break;
         }
     }

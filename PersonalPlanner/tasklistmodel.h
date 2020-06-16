@@ -2,6 +2,7 @@
 #define TASKLISTMODEL_H
 
 #include <QAbstractTableModel>
+#include <QBrush>
 #include "task.h"
 
 class TaskListModel : public QAbstractTableModel
@@ -11,7 +12,7 @@ class TaskListModel : public QAbstractTableModel
 public:
     TaskListModel(QObject *parent = 0);
 
-    enum class ColumnNames{Title, Date, Description, Importance, Repetition, Count};
+    enum class ColumnNames{Title, Date, Description, Importance, Repetition, Status, Count};
 
     void populateData(const QList<Task> &taskList);
 

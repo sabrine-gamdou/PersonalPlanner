@@ -33,7 +33,8 @@ SOURCES += \
     user.cpp \
     userdaoimp.cpp \
     registrationform.cpp \
-    tasklistmodel.cpp
+    tasklistmodel.cpp \
+    statusform.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -44,12 +45,14 @@ HEADERS += \
     user.h \
     userdaoimp.h \
     registrationform.h \
-    tasklistmodel.h
+    tasklistmodel.h \
+    statusform.h
 
 FORMS += \
         mainwindow.ui \
     login.ui \
-    registrationform.ui
+    registrationform.ui \
+    statusform.ui
 
 STATECHARTS +=
 

@@ -3,6 +3,7 @@
 
 #include "userdaoimp.h"
 #include "taskdaoimp.h"
+#include "statusform.h"
 
 #include <QMainWindow>
 #include <QFile>
@@ -10,6 +11,8 @@
 #include <QDebug>
 #include <QDesktopWidget>
 #include <QAbstractTableModel>
+#include <QBrush>
+#include <QtCore>
 
 namespace Ui {
 class MainWindow;
@@ -33,12 +36,13 @@ public:
     void getUserData();
     void editInfoCheckBox_checked(const bool checked);
     void menuLogOut_clicked();
-    void readTaskFromMainWindow();
+    bool readTaskFromMainWindow();
     void userUpdatedConfirmed(const bool t_userUpdated);
     void deleteTask();
-    void setStatus();
-    QString readStatusFromWindow();
-  //  int setRepetitionIndex(QString repetitionString);
+    int setRepetitionIndex(QString repetitionString);
+    void taskConfirmed(const bool taskUpdated);
+    void resetTaskInput();
+
 
 private slots:
 
@@ -58,8 +62,11 @@ private slots:
 
     void on_saveChangesBtn_clicked();
 
+    void on_statusBtn_clicked();
+
 private:
     Ui::MainWindow *ui;
+    StatusForm sf;
 
 
     UserDaoImp m_userManager;
