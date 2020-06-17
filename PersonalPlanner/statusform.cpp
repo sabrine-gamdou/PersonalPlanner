@@ -1,10 +1,12 @@
 #include "statusform.h"
 #include "ui_statusform.h"
 
+
 StatusForm::StatusForm(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::StatusForm)
 {
+    m_task = Task(-1,"", QDate(1,2,3), -1, "");
     ui->setupUi(this);
 }
 
@@ -24,7 +26,11 @@ void StatusForm::setStatus(const QString &value)
     status = value;
 }
 
-void StatusForm::readStatusFromWindow() {
+void StatusForm::giveTask(Task &task){
+    m_task = task;
+}
+
+Task* StatusForm::readStatusFromWindow() {
     if(ui->completedRb->isChecked()){
         status = "Completed";
     } else if(ui->failedRb->isChecked()){
@@ -32,6 +38,8 @@ void StatusForm::readStatusFromWindow() {
     } else if(ui->inProgressRb->isChecked()){
         status = "In-Progress";
     }
+    m_task.setStatus(status);
+    return &m_task;
 }
 
 void StatusForm::on_confirm_cancel_btn_accepted()

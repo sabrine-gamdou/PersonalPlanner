@@ -8,18 +8,12 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
-    //    QFile File("stylesheet.qss");
-    //    File.open(QFile::ReadOnly);
-    //    QString StyleSheet = QLatin1String(File.readAll());
-
-    //    this->setStyleSheet(StyleSheet);
-
     ui->setupUi(this);
     ui->taskView->setSelectionBehavior(QAbstractItemView::SelectRows);
     this->move(QApplication::desktop()->screen()->rect().center() - this->rect().center());
     QObject::connect(ui->editInfoCheckBox, &QCheckBox::stateChanged, this, &MainWindow::editInfoCheckBox_checked);
     QObject::connect(ui->menuLogOut, &QMenu::triggered, this, &MainWindow::menuLogOut_clicked);
-
+    mode = 0;
 }
 
 MainWindow::~MainWindow()
@@ -44,12 +38,16 @@ void MainWindow::getUserData(){
 
 void MainWindow::getTasks(){
     m_taskManager.readAll(m_username);
+    setStatusColor();
 
     ui->taskView->setModel(m_taskManager.getTaskModel());
     ui->taskView->horizontalHeader()->setVisible(true);
 
+    statusCounter();
+    synchronizeCalendar();
     ui->taskView->show();
 }
+
 
 void MainWindow::taskConfirmed(const bool taskUpdated) {
 
@@ -161,11 +159,30 @@ void MainWindow::menuLogOut_clicked(){
 
 
 bool MainWindow::readTaskFromMainWindow() {
+    bool status = false;
+    if(mode == 1){
+        QModelIndex index = ui->taskView->selectionModel()->currentIndex();
+        Task task = m_taskManager.getTaskModel()->taskList().at(index.row());
+        int taskID = task.taskID();
+        qDebug() << taskID ;
+        Task new_task (taskID, ui->titleTxt->text(), ui->dateTimeEdit->date(), ui->importanceSb->text().toInt(), m_username);
 
-    Task new_task (0, ui->titleTxt->text(), ui->dateTimeEdit->date(), ui->importanceSb->text().toInt(), m_username);
-    new_task.setDescription(ui->descriptionTxt->text());
-    new_task.setRepetition(ui->repeatCb->currentText());
-    bool status =  m_taskManager.create(new_task, m_username);
+        new_task.setDescription(ui->descriptionTxt->text());
+        new_task.setRepetition(ui->repeatCb->currentText());
+
+        qDebug() << new_task.toString();
+        status =  m_taskManager.update(new_task);
+    }else{
+        Task new_task (0, ui->titleTxt->text(), ui->dateTimeEdit->date(), ui->importanceSb->text().toInt(), m_username);
+
+        new_task.setDescription(ui->descriptionTxt->text());
+        new_task.setRepetition(ui->repeatCb->currentText());
+
+        qDebug() << new_task.toString();
+        status =  m_taskManager.create(new_task,m_username);
+
+    }
+    mode = 0;
     qDebug() <<  "TaskManager created" << status;
     return status;
 
@@ -186,8 +203,8 @@ void MainWindow::on_confirm_cancelBtnB_accepted() {
 
 void MainWindow::on_confirm_cancelBtnB_rejected() {
     resetTaskInput();
-
 }
+
 
 void MainWindow::deleteTask () {
     QModelIndex index = ui->taskView->selectionModel()->currentIndex();
@@ -205,6 +222,18 @@ void MainWindow::deleteTask () {
 
 }
 
+
+//Needs to be changed still
+void MainWindow::setStatusColor(){
+    for (int row = 0; row < m_taskManager.getTaskList().length(); ++row){
+        for(int column = 0; column < m_taskManager.getTaskModel()->columnCount(); ++column){
+            m_taskManager.getTaskModel()->setData(m_taskManager.getTaskModel()->index(row,column),QBrush (QColor(255,0,0)), Qt::BackgroundRole );
+        }
+    }
+    
+    
+}
+
 void MainWindow::on_deleteBtn_clicked() {
     deleteTask();
     ui->deleteBtn->setEnabled(false);
@@ -214,7 +243,9 @@ void MainWindow::on_deleteBtn_clicked() {
 void MainWindow::on_taskView_pressed() {
     ui->deleteBtn->setEnabled(ui->taskView->currentIndex().isValid());
     ui->editBtn->setEnabled(ui->taskView->currentIndex().isValid());
+    ui->statusBtn->setEnabled(ui->taskView->currentIndex().isValid());
 }
+
 
 int MainWindow::setRepetitionIndex(QString repetitionString) {
     int index = -1;
@@ -250,9 +281,8 @@ void MainWindow::on_editBtn_clicked() {
     ui->repeatCb->setCurrentIndex(setRepetitionIndex(task.status()));
 
     m_taskManager.setTaskList(m_taskManager.getTaskModel()->taskList());
-    m_taskManager.getTaskModel()->removeRow( index.row(),1 , index);
-    m_taskManager.delete_(task);
     ui->editBtn->setEnabled(false);
+    mode = 1;
 
 }
 
@@ -283,8 +313,84 @@ void MainWindow::on_statusBtn_clicked()
 {
     QModelIndex index = ui->taskView->selectionModel()->currentIndex();
     Task task = m_taskManager.getTaskModel()->taskList().at(index.row());
-
-    ui->statusBtn->setEnabled(true);
+    sf.giveTask(task);
     sf.show();
-    //setStatusColors(task.status(), index );
 }
+
+
+//should be deleted later
+void MainWindow::on_refreshBtn_clicked()
+{
+    Task task = *sf.readStatusFromWindow();
+    qDebug() << m_taskManager.create(task,m_username);
+    getTasks();
+}
+
+
+void MainWindow::statusCounter(){
+    int completed = 0;
+    int failed = 0;
+    int inProgress = 0;
+    for(int i = 0; i<m_taskManager.getTaskList().length();++i){
+        if(m_taskManager.getTaskList().at(i).status() == "Completed"){
+            ++completed;
+        }else if(m_taskManager.getTaskList().at(i).status() == "Failed"){
+            ++failed;
+        }else if(m_taskManager.getTaskList().at(i).status() == "In-Progress"){
+            ++inProgress;
+        }
+    }
+    ui->completedLCD->display(completed);
+    ui->failedLCD->display(failed);
+    ui->progressLCD->display(inProgress);
+}
+
+
+
+void MainWindow::on_pictureBtn_clicked(){
+    QString pathToImgFile = QFileDialog::getOpenFileName(this, tr("Open Image"), "/home/", tr("Image Files (*.png)"));
+    if(!pathToImgFile.size())
+        QMessageBox::critical(this, "Error", "No image selected. Please use \"Open Image\" first!");
+    else{
+        loadImage(pathToImgFile);
+    }
+}
+
+
+
+void MainWindow::loadImage(const QString& path) {
+    QImageReader reader(path);
+    const QImage img(reader.read());
+
+    if(img.isNull()) {
+        QMessageBox::information(this, QGuiApplication::applicationDisplayName(), "Could not open image");
+    } else {
+
+        QPixmap pixmap = (QPixmap::fromImage(img));
+        ui->pictureLb->setPixmap(pixmap);
+        ui->pictureLb->setScaledContents(true);
+    }
+
+}
+
+
+
+void MainWindow::synchronizeCalendar(){
+
+    for(int i =0 ; i<m_taskManager.getTaskList().length(); ++i){
+        QDate date = m_taskManager.getTaskList().at(i).date();
+        qDebug() << "Date: " << date << "   " << i;
+        ui->calendarWidget->getDates(date);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+

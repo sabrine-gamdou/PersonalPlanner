@@ -34,7 +34,8 @@ SOURCES += \
     userdaoimp.cpp \
     registrationform.cpp \
     tasklistmodel.cpp \
-    statusform.cpp
+    statusform.cpp \
+    calendarmanager.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -46,7 +47,8 @@ HEADERS += \
     userdaoimp.h \
     registrationform.h \
     tasklistmodel.h \
-    statusform.h
+    statusform.h \
+    calendarmanager.h
 
 FORMS += \
         mainwindow.ui \

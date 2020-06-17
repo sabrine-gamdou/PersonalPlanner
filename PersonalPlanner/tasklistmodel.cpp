@@ -35,8 +35,7 @@ bool TaskListModel::removeRow(int position, int rows, const QModelIndex &parent)
     return true;
 }
 
-QVariant TaskListModel::data(const QModelIndex &index, int role) const
-{
+QVariant TaskListModel::data(const QModelIndex &index, int role) const{
     if (!index.isValid() || role != Qt::DisplayRole) {
         return QVariant();
     }
@@ -53,16 +52,7 @@ QVariant TaskListModel::data(const QModelIndex &index, int role) const
     case ColumnNames::Repetition:
         return m_taskList[index.row()].repetition();
     case ColumnNames::Status:
-        if (m_taskList[index.row()].status() == "Completed");
-         //  TaskListModel::setData(index,QBrush (QColor(50,205,50)), Qt::BackgroundRole );
-
-        else if (m_taskList[index.row()].status() == "Failed")
-             QBrush (QColor(255,0,0));
-
-        else if (m_taskList[index.row()].status() == "In-Progress")
-             QBrush (QColor(255,215,0));
-
-        return m_taskList[index.row()].status();
+       return m_taskList[index.row()].status();
 
     }
 
@@ -83,6 +73,7 @@ QVariant TaskListModel::data(const QModelIndex &index, int role) const
 
     return QVariant();
 }
+
 
 QVariant TaskListModel::headerData(int section, Qt::Orientation orientation, int role) const
 {

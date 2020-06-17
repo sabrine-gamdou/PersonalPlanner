@@ -4,6 +4,7 @@
 #include "userdaoimp.h"
 #include "taskdaoimp.h"
 #include "statusform.h"
+#include "calendarmanager.h"
 
 #include <QMainWindow>
 #include <QFile>
@@ -13,6 +14,9 @@
 #include <QAbstractTableModel>
 #include <QBrush>
 #include <QtCore>
+#include <QFileDialog>
+#include <QImageReader>
+#include <QPainter>
 
 namespace Ui {
 class MainWindow;
@@ -42,6 +46,10 @@ public:
     int setRepetitionIndex(QString repetitionString);
     void taskConfirmed(const bool taskUpdated);
     void resetTaskInput();
+    void setStatusColor();
+    void statusCounter();
+    void loadImage(const QString& path);
+    void synchronizeCalendar();
 
 
 private slots:
@@ -64,7 +72,13 @@ private slots:
 
     void on_statusBtn_clicked();
 
+    void on_pictureBtn_clicked();
+
+    void on_refreshBtn_clicked();
+
 private:
+
+
     Ui::MainWindow *ui;
     StatusForm sf;
 
@@ -72,6 +86,7 @@ private:
     UserDaoImp m_userManager;
     TaskDaoImp m_taskManager;
 
+    int mode;
 
     QString m_username;
     QString m_password;

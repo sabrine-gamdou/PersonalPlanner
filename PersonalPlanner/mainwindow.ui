@@ -18,7 +18,7 @@
     <item row="1" column="0">
      <layout class="QGridLayout" name="gridLayout">
       <item row="0" column="0">
-       <widget class="QCalendarWidget" name="calendarWidget"/>
+       <widget class="CalendarManager" name="calendarWidget"/>
       </item>
       <item row="0" column="1">
        <widget class="QTabWidget" name="tabWidget">
@@ -97,6 +97,19 @@
           </property>
           <property name="text">
            <string>Status</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="refreshBtn">
+          <property name="geometry">
+           <rect>
+            <x>470</x>
+            <y>340</y>
+            <width>89</width>
+            <height>25</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>refresh</string>
           </property>
          </widget>
         </widget>
@@ -181,7 +194,7 @@
            <rect>
             <x>20</x>
             <y>40</y>
-            <width>137</width>
+            <width>148</width>
             <height>251</height>
            </rect>
           </property>
@@ -375,13 +388,13 @@
          <attribute name="title">
           <string>Account</string>
          </attribute>
-         <widget class="QLabel" name="label">
+         <widget class="QLabel" name="pictureLb">
           <property name="geometry">
            <rect>
-            <x>20</x>
-            <y>30</y>
-            <width>111</width>
-            <height>31</height>
+            <x>400</x>
+            <y>70</y>
+            <width>171</width>
+            <height>191</height>
            </rect>
           </property>
           <property name="text">
@@ -448,7 +461,7 @@
             <x>19</x>
             <y>89</y>
             <width>321</width>
-            <height>161</height>
+            <height>163</height>
            </rect>
           </property>
           <layout class="QGridLayout" name="gridLayout_3">
@@ -555,6 +568,19 @@
            <string>Save changes</string>
           </property>
          </widget>
+         <widget class="QPushButton" name="pictureBtn">
+          <property name="geometry">
+           <rect>
+            <x>430</x>
+            <y>270</y>
+            <width>121</width>
+            <height>25</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Change picture</string>
+          </property>
+         </widget>
         </widget>
        </widget>
       </item>
@@ -597,7 +623,7 @@
    </widget>
    <widget class="QMenu" name="menuLogOut">
     <property name="title">
-     <string>LogOut</string>
+     <string>Logout</string>
     </property>
    </widget>
    <addaction name="menuMenu"/>
@@ -629,6 +655,13 @@
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>CalendarManager</class>
+   <extends>QCalendarWidget</extends>
+   <header>calendarmanager.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

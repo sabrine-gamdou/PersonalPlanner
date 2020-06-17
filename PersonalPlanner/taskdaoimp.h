@@ -17,7 +17,7 @@ class TaskDaoImp{
 public:
     TaskDaoImp();
     ~TaskDaoImp();
-    bool create (const Task &task, const QString& username);
+    bool create (Task &task, const QString& username);
     Task read(int t_taskID, QString &username);
     bool update(Task &task);
     bool delete_(Task task);

@@ -20,7 +20,7 @@ private:
     QString m_username;
 
 public:
-    Task(int t_taskID, QString t_title, QDate t_date, int t_importance, QString m_username);
+    Task(int t_taskID = -1, QString t_title = "", QDate t_date =  QDate(1,2,3), int t_importance = -1, QString m_username = "");
     ~Task();
 
     QString toString();

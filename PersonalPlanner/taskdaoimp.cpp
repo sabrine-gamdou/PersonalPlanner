@@ -12,11 +12,13 @@ TaskDaoImp::~TaskDaoImp(){
     delete taskModel;
 }
 
-bool TaskDaoImp::create(const Task& task, const QString& username){
+bool TaskDaoImp::create(Task& task, const QString& username){
 
     DatabaseSingleton::getInstance();
 
     QSqlQuery query;
+
+    task.setStatus("In-Progress");
 
     qDebug() << "Prepare Query: "<< query.prepare("INSERT INTO tasks (title, date, description,importance, status, repetition, username) "
                                                   "VALUES (:title, :date, :description, :importance, :status, :repetition, :username)");
@@ -81,6 +83,8 @@ Task TaskDaoImp::read(int t_taskID, QString &username){
 
     Task task(-1, "title",QDate(1,2,3), -1, username);
 
+
+
     DatabaseSingleton::getInstance();
 
     QSqlQuery query;
@@ -116,9 +120,9 @@ bool TaskDaoImp::update(Task& task){
 
     qDebug() << "Prepare Query: "<< query.prepare("UPDATE tasks SET title = (:title), date = (:date), "
                                                   "description = (:description), importance = (:importance), "
-                                                  "status = (:status), repetition = (:repetition), "
+                                                  "status = (:status), repetition = (:repetition) "
                                                   "WHERE username = (:un)"
-                                                  "AND task_id=(:taskID)");
+                                                  "AND task_id=(:taskID);");
     query.bindValue(":un", task.username());
     query.bindValue(":taskID", task.taskID());
     query.bindValue(":title", task.title());

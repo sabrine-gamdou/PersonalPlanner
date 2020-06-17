@@ -6,12 +6,16 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>379</width>
+    <width>402</width>
     <height>300</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">font: 11pt &quot;URW Gothic L&quot;;
+background: linear-gradient(to right, #c6ffdd, #fbd786, #f7797d);</string>
   </property>
   <widget class="QDialogButtonBox" name="confirm_cancel_btn">
    <property name="geometry">
@@ -76,6 +80,9 @@
      <width>351</width>
      <height>17</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 11pt &quot;URW Gothic L&quot;;</string>
    </property>
    <property name="text">
     <string>Please choose the status of your seleceted task: </string>

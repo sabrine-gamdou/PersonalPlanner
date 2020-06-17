@@ -6,13 +6,6 @@ Login::Login(QWidget *parent) :
     ui(new Ui::Login)
 {
     ui->setupUi(this);
-
-   // this->setStyleSheet("stylesheet.qss");
-//    QFile File("stylesheet.qss");
-//    File.open(QFile::ReadOnly);
-//    QString StyleSheet = QLatin1String(File.readAll());
-
-//    this->setStyleSheet(StyleSheet);
     this->adjustSize();
     this->move(QApplication::desktop()->screen()->rect().center() - this->rect().center());
     ui->passText->setEchoMode(QLineEdit::Password);
@@ -35,10 +28,9 @@ void Login::on_loginBtn_clicked(){
         initialize(m_username,m_password);
     }
     else {
-        //QMessageBox::warning(this, "Warning", "Login failed: Invalid credentials!");
         ui->loginLabel->setText("Login failed: Invalid credentials!");
-        ui->usernameText->setStyleSheet("border: 1px solid red");
-        ui->passText->setStyleSheet("border: 1px solid red");
+        ui->usernameText->setStyleSheet("border: 1px solid #4A001F");
+        ui->passText->setStyleSheet("border: 1px solid #4A001F");
     }
 }
 
@@ -50,7 +42,6 @@ bool Login::login(QString un, QString pass){
 
 void Login::on_registerBtn_clicked(){
     r.show();
-    //this->setDisabled(true);
 }
 
 

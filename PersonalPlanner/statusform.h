@@ -1,6 +1,8 @@
 #ifndef STATUSFORM_H
 #define STATUSFORM_H
 
+#include "task.h"
+
 #include <QDialog>
 #include <QString>
 
@@ -18,8 +20,8 @@ public:
 
     QString getStatus() const;
     void setStatus(const QString &value);
-    void readStatusFromWindow();
-
+    Task *readStatusFromWindow();
+    void giveTask(Task &task);
 
 private slots:
     void on_confirm_cancel_btn_accepted();
@@ -29,6 +31,8 @@ private slots:
 private:
     Ui::StatusForm *ui;
     QString status;
+
+    Task m_task;
 };
 
 #endif // STATUSFORM_H
