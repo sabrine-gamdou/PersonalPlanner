@@ -19,6 +19,7 @@ private:
     QString m_repetition;
     QString m_username;
 
+
 public:
     Task(int t_taskID = -1, QString t_title = "", QDate t_date =  QDate(1,2,3), int t_importance = -1, QString m_username = "");
     ~Task();
@@ -51,6 +52,8 @@ public:
 
     QString username() const;
     void setUsername(const QString &username);
+    bool getActive() const;
+    void setActive(bool value);
 };
 
 #endif // TASK_H

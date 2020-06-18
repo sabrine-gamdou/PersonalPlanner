@@ -11,7 +11,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     ui->taskView->setSelectionBehavior(QAbstractItemView::SelectRows);
     this->move(QApplication::desktop()->screen()->rect().center() - this->rect().center());
-
+    QObject::connect(&sf, &StatusForm::refreshGUI, this, &MainWindow::refreshData);
     QObject::connect(ui->editInfoCheckBox, &QCheckBox::stateChanged, this, &MainWindow::editInfoCheckBox_checked);
 
     QObject::connect(ui->actionAbout, &QAction::triggered, this, &MainWindow::on_actionAbout_clicked);
@@ -223,6 +223,12 @@ void MainWindow::synchronizeCalendar(){
     }
 }
 
+void MainWindow::refreshData()
+{
+    sf.readStatusFromWindow();
+    getTasks();
+}
+
 void MainWindow::logout(){
     this->m_username = "";
     this->m_password = "";
@@ -340,25 +346,23 @@ void MainWindow::on_statusBtn_clicked()
     QModelIndex index = ui->taskView->selectionModel()->currentIndex();
     Task task = m_taskManager.getTaskModel()->taskList().at(index.row());
     sf.giveTask(task);
+    task = *sf.readStatusFromWindow();
     sf.show();
+
+    //  m_taskManager.setTaskList(m_taskManager.getTaskModel()->taskList());
 }
 
 void MainWindow::on_pictureBtn_clicked(){
-    QString pathToImgFile = QFileDialog::getOpenFileName(this, tr("Open Image"), "/home/", tr("Image Files (*.png)"));
+    QString pathToImgFile = QFileDialog::getOpenFileName(this, tr("Open Image"), "/home/", tr("Image Files (*.png *.xpm *.jpg)"));
     if(!pathToImgFile.size())
-        QMessageBox::critical(this, "Error", "No image selected. Please use \"Open Image\" first!");
+        QMessageBox::critical(this, "Error", "No image selected. Please pick an Image first!");
     else{
         loadImage(pathToImgFile);
     }
 }
 
-//should be deleted later
-void MainWindow::on_refreshBtn_clicked()
-{
-    Task task = *sf.readStatusFromWindow();
-    qDebug() << m_taskManager.create(task,m_username);
-    getTasks();
-}
+
+
 
 void MainWindow::on_actionAbout_clicked(){
     //QMessageBox::information(this, "About", "Our Application");
@@ -372,19 +376,29 @@ void MainWindow::on_actionAbout_clicked(){
 void MainWindow::on_actionHelp_clicked(){
     //QMessageBox::information(this, "Help", "Here is some text");
     QMessageBox help;
-    about.setText("Hallo Test Versuch");
-    about.setInformativeText("Das ist ein Untertitel mit ganz viel text und so");
-    about.setStyleSheet("QLabel{min-width: 700px;}");
-    about.exec();
+    help.setText("Hallo Test Versuch");
+    help.setInformativeText("Das ist ein Untertitel mit ganz viel text und so");
+    help.setStyleSheet("QLabel{min-width: 700px;}");
+    help.exec();
 }
 
 void MainWindow::on_menuLogOut_clicked(){
     logout();
 }
 
+void MainWindow::on_calendarWidget_clicked(const QDate &date)
+{
+    ui->taskView->clearSelection();
+    QList<int> indexes;
+    ui->taskView->setSelectionMode(QAbstractItemView::MultiSelection);
+
+    for (int i = 0; i < m_taskManager.getTaskList().length(); ++i) {
+        if (m_taskManager.getTaskList().at(i).date() == date)
+            indexes.append(i);
+    }
+    for (int i = 0; i < indexes.length(); ++i)
+             ui->taskView->selectRow(indexes.at(i));
 
 
-
-
-
-
+   ui->taskView->setSelectionMode(QAbstractItemView::SingleSelection);
+}

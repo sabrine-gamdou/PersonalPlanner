@@ -39,12 +39,15 @@ Task* StatusForm::readStatusFromWindow() {
         status = "In-Progress";
     }
     m_task.setStatus(status);
+    m_taskDao.update(m_task);
+
+
     return &m_task;
 }
 
 void StatusForm::on_confirm_cancel_btn_accepted()
 {
-    readStatusFromWindow();
+    emit refreshGUI();
 }
 
 void StatusForm::on_confirm_cancel_btn_rejected()

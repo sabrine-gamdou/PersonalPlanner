@@ -73,13 +73,14 @@ private slots:
 
     void on_pictureBtn_clicked();
 
-    void on_refreshBtn_clicked();
-
     void on_actionAbout_clicked();
 
     void on_actionHelp_clicked();
 
     void on_menuLogOut_clicked();
+
+    void refreshData();
+    void on_calendarWidget_clicked(const QDate &date);
 
 private:
 
