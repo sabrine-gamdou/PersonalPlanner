@@ -22,6 +22,7 @@ public:
     bool update(Task &task);
     bool delete_(Task task);
     bool readAll(QString &username);
+    void sortByStatus(QString &username);
 
     TaskListModel *getTaskModel() const;
     void setTaskModel(TaskListModel *value);

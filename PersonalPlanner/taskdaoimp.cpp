@@ -45,8 +45,9 @@ bool TaskDaoImp::readAll(QString &username){
 
     QSqlQuery query;
 
-    query.prepare( " SELECT * FROM tasks WHERE username=" ":t_username");
-    query.bindValue(":t_username", username);
+   // query.prepare( " SELECT * FROM tasks WHERE username=" ":t_username");
+    query.prepare("SELECT * FROM tasks WHERE username=(:username) ORDER BY date ASC,  (CASE status WHEN 'Completed' THEN 1 WHEN 'In-Progress' THEN 2 WHEN 'Failed' THEN 3 END), status DESC");
+    query.bindValue(":username", username);
 
     bool status = false;
     if(query.exec()){
@@ -71,6 +72,8 @@ bool TaskDaoImp::readAll(QString &username){
                  << newTask.status() << newTask.repetition() << newTask.username();
 
     }
+
+
 
     taskModel = new TaskListModel;
     taskModel->populateData(m_taskList);

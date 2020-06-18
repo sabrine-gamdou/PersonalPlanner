@@ -81,6 +81,7 @@ private slots:
 
     void refreshData();
     void on_calendarWidget_clicked(const QDate &date);
+    void sort_();
 
 private:
 

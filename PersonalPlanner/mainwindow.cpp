@@ -13,12 +13,14 @@ MainWindow::MainWindow(QWidget *parent) :
     this->move(QApplication::desktop()->screen()->rect().center() - this->rect().center());
     QObject::connect(&sf, &StatusForm::refreshGUI, this, &MainWindow::refreshData);
     QObject::connect(ui->editInfoCheckBox, &QCheckBox::stateChanged, this, &MainWindow::editInfoCheckBox_checked);
-
     QObject::connect(ui->actionAbout, &QAction::triggered, this, &MainWindow::on_actionAbout_clicked);
     QObject::connect(ui->actionHelp, &QAction::triggered, this, &MainWindow::on_actionHelp_clicked);
 
     QObject::connect(ui->actionLogOut, &QAction::triggered, this, &MainWindow::on_menuLogOut_clicked);
+
+
     mode = 0;
+
 }
 
 MainWindow::~MainWindow(){
@@ -51,6 +53,7 @@ void MainWindow::getTasks(){
 
     statusCounter();
     synchronizeCalendar();
+
     ui->taskView->show();
 }
 
@@ -362,8 +365,6 @@ void MainWindow::on_pictureBtn_clicked(){
 }
 
 
-
-
 void MainWindow::on_actionAbout_clicked(){
     //QMessageBox::information(this, "About", "Our Application");
     QMessageBox about;
@@ -399,6 +400,12 @@ void MainWindow::on_calendarWidget_clicked(const QDate &date)
     for (int i = 0; i < indexes.length(); ++i)
              ui->taskView->selectRow(indexes.at(i));
 
+    ui->taskView->setSelectionMode(QAbstractItemView::SingleSelection);
+}
 
-   ui->taskView->setSelectionMode(QAbstractItemView::SingleSelection);
+void MainWindow::sort_() {
+    TaskListModel model;
+    QSortFilterProxyModel proxyModel;
+    proxyModel.setSourceModel(&model);
+    ui->taskView->setModel(&proxyModel);
 }
