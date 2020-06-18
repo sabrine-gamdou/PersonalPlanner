@@ -625,6 +625,7 @@
     <property name="title">
      <string>Logout</string>
     </property>
+    <addaction name="actionLogOut"/>
    </widget>
    <addaction name="menuMenu"/>
    <addaction name="menuLogOut"/>
@@ -651,6 +652,11 @@
   <action name="actionHelp">
    <property name="text">
     <string>Help</string>
+   </property>
+  </action>
+  <action name="actionLogOut">
+   <property name="text">
+    <string>LogOut</string>
    </property>
   </action>
  </widget>

@@ -39,7 +39,6 @@ public:
     void getTasks();
     void getUserData();
     void editInfoCheckBox_checked(const bool checked);
-    void menuLogOut_clicked();
     bool readTaskFromMainWindow();
     void userUpdatedConfirmed(const bool t_userUpdated);
     void deleteTask();
@@ -75,6 +74,12 @@ private slots:
     void on_pictureBtn_clicked();
 
     void on_refreshBtn_clicked();
+
+    void on_actionAbout_clicked();
+
+    void on_actionHelp_clicked();
+
+    void on_menuLogOut_clicked();
 
 private:
 

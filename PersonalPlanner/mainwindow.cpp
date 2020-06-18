@@ -11,30 +11,36 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     ui->taskView->setSelectionBehavior(QAbstractItemView::SelectRows);
     this->move(QApplication::desktop()->screen()->rect().center() - this->rect().center());
+
     QObject::connect(ui->editInfoCheckBox, &QCheckBox::stateChanged, this, &MainWindow::editInfoCheckBox_checked);
-    QObject::connect(ui->menuLogOut, &QMenu::triggered, this, &MainWindow::menuLogOut_clicked);
+
+    QObject::connect(ui->actionAbout, &QAction::triggered, this, &MainWindow::on_actionAbout_clicked);
+    QObject::connect(ui->actionHelp, &QAction::triggered, this, &MainWindow::on_actionHelp_clicked);
+
+    QObject::connect(ui->actionLogOut, &QAction::triggered, this, &MainWindow::on_menuLogOut_clicked);
     mode = 0;
 }
 
-MainWindow::~MainWindow()
-{
+MainWindow::~MainWindow(){
     delete ui;
 }
 
-
-
-void MainWindow::getUserData(){
-
-    User t_user=  this->m_userManager.read(m_username);
-
-    qDebug() << t_user.toString();
-    ui->firstnameTxt->setText(t_user.firstname());
-    ui->lastnameTxt->setText(t_user.lastname());
-    ui->emailTxt->setText(t_user.email());
-    ui->dateEdit->setDate(t_user.birthday());
-    ui->addressTxt->setText(t_user.address());
+QString MainWindow::username() const{
+    return m_username;
 }
 
+void MainWindow::setUsername(const QString &username){
+    m_username = username;
+}
+
+QString MainWindow::password() const{
+    return m_password;
+}
+
+void MainWindow::setPassword(const QString &password)
+{
+    m_password = password;
+}
 
 void MainWindow::getTasks(){
     m_taskManager.readAll(m_username);
@@ -48,15 +54,16 @@ void MainWindow::getTasks(){
     ui->taskView->show();
 }
 
+void MainWindow::getUserData(){
 
-void MainWindow::taskConfirmed(const bool taskUpdated) {
+    User t_user=  this->m_userManager.read(m_username);
 
-    qDebug() << "Task Updated status: "<< taskUpdated;
-    if(taskUpdated){
-        QMessageBox::information(this, "Information", "You successfully added/updated your task!");
-    }else{
-        QMessageBox::warning(this, "Warning", "Something went wrong ... Please try again later.");
-    }
+    qDebug() << t_user.toString();
+    ui->firstnameTxt->setText(t_user.firstname());
+    ui->lastnameTxt->setText(t_user.lastname());
+    ui->emailTxt->setText(t_user.email());
+    ui->dateEdit->setDate(t_user.birthday());
+    ui->addressTxt->setText(t_user.address());
 }
 
 void MainWindow::editInfoCheckBox_checked(const bool checked){
@@ -71,7 +78,158 @@ void MainWindow::editInfoCheckBox_checked(const bool checked){
 
 }
 
+bool MainWindow::readTaskFromMainWindow() {
+    bool status = false;
+    if(mode == 1){
+        QModelIndex index = ui->taskView->selectionModel()->currentIndex();
+        Task task = m_taskManager.getTaskModel()->taskList().at(index.row());
+        int taskID = task.taskID();
+        qDebug() << taskID ;
+        Task new_task (taskID, ui->titleTxt->text(), ui->dateTimeEdit->date(), ui->importanceSb->text().toInt(), m_username);
 
+        new_task.setDescription(ui->descriptionTxt->text());
+        new_task.setRepetition(ui->repeatCb->currentText());
+
+        qDebug() << new_task.toString();
+        status =  m_taskManager.update(new_task);
+    }else{
+        Task new_task (0, ui->titleTxt->text(), ui->dateTimeEdit->date(), ui->importanceSb->text().toInt(), m_username);
+
+        new_task.setDescription(ui->descriptionTxt->text());
+        new_task.setRepetition(ui->repeatCb->currentText());
+
+        qDebug() << new_task.toString();
+        status =  m_taskManager.create(new_task,m_username);
+
+    }
+    mode = 0;
+    qDebug() <<  "TaskManager created" << status;
+    return status;
+
+}
+
+void MainWindow::userUpdatedConfirmed(const bool t_userUpdated){
+    qDebug() << "User Updated status: "<< t_userUpdated;
+    if(t_userUpdated){
+        QMessageBox::information(this, "Information", "You successfully updated your profile information!");
+    }else{
+        QMessageBox::warning(this, "Warning", "Something went wrong ... Please try again later.");
+    }
+
+}
+
+void MainWindow::deleteTask () {
+    QModelIndex index = ui->taskView->selectionModel()->currentIndex();
+    Task task = m_taskManager.getTaskModel()->taskList().at(index.row());
+
+    m_taskManager.getTaskModel()->removeRow( index.row(),1 , index);
+
+    qDebug() << "list size" << m_taskManager.getTaskModel()->taskList().size();
+
+    qDebug() << "Task deleted: " << index.row() << m_taskManager.delete_(task);
+
+    m_taskManager.setTaskList(m_taskManager.getTaskModel()->taskList());
+
+    ui->deleteBtn->setEnabled(false);
+
+}
+
+int MainWindow::setRepetitionIndex(QString repetitionString) {
+    int index = -1;
+    if (repetitionString == "Never") {
+        index = 0;
+    } else if(repetitionString == "Hour") {
+        index = 1;
+    }else if(repetitionString == "Day") {
+        index = 2;
+    }else if(repetitionString == "Week") {
+        index = 3;
+    }else if(repetitionString == "Month") {
+        index = 4;
+    }else if(repetitionString == "Year") {
+        index = 5;
+    }
+
+    return index;
+}
+
+void MainWindow::taskConfirmed(const bool taskUpdated) {
+
+    qDebug() << "Task Updated status: "<< taskUpdated;
+    if(taskUpdated){
+        QMessageBox::information(this, "Information", "You successfully added/updated your task!");
+    }else{
+        QMessageBox::warning(this, "Warning", "Something went wrong ... Please try again later.");
+    }
+}
+
+void MainWindow::resetTaskInput() {
+    ui->titleTxt->clear();
+    ui->dateTimeEdit->clear();
+    ui->descriptionTxt->clear();
+    ui->importanceSb->clear();
+}
+
+//Needs to be changed still
+void MainWindow::setStatusColor(){
+    for (int row = 0; row < m_taskManager.getTaskList().length(); ++row){
+        for(int column = 0; column < m_taskManager.getTaskModel()->columnCount(); ++column){
+            m_taskManager.getTaskModel()->setData(m_taskManager.getTaskModel()->index(row,column),QBrush (QColor(255,0,0)), Qt::BackgroundRole );
+        }
+    }
+
+
+}
+
+void MainWindow::statusCounter(){
+    int completed = 0;
+    int failed = 0;
+    int inProgress = 0;
+    for(int i = 0; i<m_taskManager.getTaskList().length();++i){
+        if(m_taskManager.getTaskList().at(i).status() == "Completed"){
+            ++completed;
+        }else if(m_taskManager.getTaskList().at(i).status() == "Failed"){
+            ++failed;
+        }else if(m_taskManager.getTaskList().at(i).status() == "In-Progress"){
+            ++inProgress;
+        }
+    }
+    ui->completedLCD->display(completed);
+    ui->failedLCD->display(failed);
+    ui->progressLCD->display(inProgress);
+}
+
+void MainWindow::loadImage(const QString& path) {
+    QImageReader reader(path);
+    const QImage img(reader.read());
+
+    if(img.isNull()) {
+        QMessageBox::information(this, QGuiApplication::applicationDisplayName(), "Could not open image");
+    } else {
+
+        QPixmap pixmap = (QPixmap::fromImage(img));
+        ui->pictureLb->setPixmap(pixmap);
+        ui->pictureLb->setScaledContents(true);
+    }
+
+}
+
+void MainWindow::synchronizeCalendar(){
+
+    for(int i =0 ; i<m_taskManager.getTaskList().length(); ++i){
+        QDate date = m_taskManager.getTaskList().at(i).date();
+        qDebug() << "Date: " << date << "   " << i;
+        ui->calendarWidget->getDates(date);
+    }
+}
+
+void MainWindow::logout(){
+    this->m_username = "";
+    this->m_password = "";
+    this->close();
+}
+
+//Slots
 void MainWindow::on_deleteAccountBtn_clicked(){
     if(QMessageBox(QMessageBox::Question,
                    "Login System", "Are you sure you want to delete your account?",
@@ -81,7 +239,52 @@ void MainWindow::on_deleteAccountBtn_clicked(){
 
 }
 
+void MainWindow::on_logoutBtn_clicked(){
+    logout();
+}
 
+void MainWindow::on_confirm_cancelBtnB_accepted() {
+    taskConfirmed(readTaskFromMainWindow());
+    getTasks();
+    resetTaskInput();
+}
+
+
+void MainWindow::on_confirm_cancelBtnB_rejected() {
+    resetTaskInput();
+}
+
+void MainWindow::on_deleteBtn_clicked() {
+    deleteTask();
+    ui->deleteBtn->setEnabled(false);
+}
+
+
+void MainWindow::on_taskView_pressed() {
+    ui->deleteBtn->setEnabled(ui->taskView->currentIndex().isValid());
+    ui->editBtn->setEnabled(ui->taskView->currentIndex().isValid());
+    ui->statusBtn->setEnabled(ui->taskView->currentIndex().isValid());
+}
+
+void MainWindow::on_editBtn_clicked() {
+
+    QModelIndex index = ui->taskView->selectionModel()->currentIndex();
+    Task task = m_taskManager.getTaskModel()->taskList().at(index.row());
+
+
+    ui->tabWidget->setCurrentIndex(1);
+
+    ui->titleTxt->setText(task.title());
+    ui->descriptionTxt->setText(task.description());
+    ui->importanceSb->setValue(task.importance());
+    ui->dateTimeEdit->setDate(task.date());
+    ui->repeatCb->setCurrentIndex(setRepetitionIndex(task.status()));
+
+    m_taskManager.setTaskList(m_taskManager.getTaskModel()->taskList());
+    ui->editBtn->setEnabled(false);
+    mode = 1;
+
+}
 
 void MainWindow::on_saveChangesBtn_clicked()
 {
@@ -132,183 +335,6 @@ void MainWindow::on_saveChangesBtn_clicked()
     }
 }
 
-void MainWindow::userUpdatedConfirmed(const bool t_userUpdated){
-    qDebug() << "User Updated status: "<< t_userUpdated;
-    if(t_userUpdated){
-        QMessageBox::information(this, "Information", "You successfully updated your profile information!");
-    }else{
-        QMessageBox::warning(this, "Warning", "Something went wrong ... Please try again later.");
-    }
-
-}
-
-void MainWindow::logout(){
-    this->m_username = "";
-    this->m_password = "";
-    this->close();
-}
-
-void MainWindow::on_logoutBtn_clicked(){
-    logout();
-}
-
-void MainWindow::menuLogOut_clicked(){
-    logout();
-}
-
-
-
-bool MainWindow::readTaskFromMainWindow() {
-    bool status = false;
-    if(mode == 1){
-        QModelIndex index = ui->taskView->selectionModel()->currentIndex();
-        Task task = m_taskManager.getTaskModel()->taskList().at(index.row());
-        int taskID = task.taskID();
-        qDebug() << taskID ;
-        Task new_task (taskID, ui->titleTxt->text(), ui->dateTimeEdit->date(), ui->importanceSb->text().toInt(), m_username);
-
-        new_task.setDescription(ui->descriptionTxt->text());
-        new_task.setRepetition(ui->repeatCb->currentText());
-
-        qDebug() << new_task.toString();
-        status =  m_taskManager.update(new_task);
-    }else{
-        Task new_task (0, ui->titleTxt->text(), ui->dateTimeEdit->date(), ui->importanceSb->text().toInt(), m_username);
-
-        new_task.setDescription(ui->descriptionTxt->text());
-        new_task.setRepetition(ui->repeatCb->currentText());
-
-        qDebug() << new_task.toString();
-        status =  m_taskManager.create(new_task,m_username);
-
-    }
-    mode = 0;
-    qDebug() <<  "TaskManager created" << status;
-    return status;
-
-}
-
-void MainWindow::resetTaskInput() {
-    ui->titleTxt->clear();
-    ui->dateTimeEdit->clear();
-    ui->descriptionTxt->clear();
-    ui->importanceSb->clear();
-}
-void MainWindow::on_confirm_cancelBtnB_accepted() {
-    taskConfirmed(readTaskFromMainWindow());
-    getTasks();
-    resetTaskInput();
-}
-
-
-void MainWindow::on_confirm_cancelBtnB_rejected() {
-    resetTaskInput();
-}
-
-
-void MainWindow::deleteTask () {
-    QModelIndex index = ui->taskView->selectionModel()->currentIndex();
-    Task task = m_taskManager.getTaskModel()->taskList().at(index.row());
-
-    m_taskManager.getTaskModel()->removeRow( index.row(),1 , index);
-
-    qDebug() << "list size" << m_taskManager.getTaskModel()->taskList().size();
-
-    qDebug() << "Task deleted: " << index.row() << m_taskManager.delete_(task);
-
-    m_taskManager.setTaskList(m_taskManager.getTaskModel()->taskList());
-
-    ui->deleteBtn->setEnabled(false);
-
-}
-
-
-//Needs to be changed still
-void MainWindow::setStatusColor(){
-    for (int row = 0; row < m_taskManager.getTaskList().length(); ++row){
-        for(int column = 0; column < m_taskManager.getTaskModel()->columnCount(); ++column){
-            m_taskManager.getTaskModel()->setData(m_taskManager.getTaskModel()->index(row,column),QBrush (QColor(255,0,0)), Qt::BackgroundRole );
-        }
-    }
-    
-    
-}
-
-void MainWindow::on_deleteBtn_clicked() {
-    deleteTask();
-    ui->deleteBtn->setEnabled(false);
-}
-
-
-void MainWindow::on_taskView_pressed() {
-    ui->deleteBtn->setEnabled(ui->taskView->currentIndex().isValid());
-    ui->editBtn->setEnabled(ui->taskView->currentIndex().isValid());
-    ui->statusBtn->setEnabled(ui->taskView->currentIndex().isValid());
-}
-
-
-int MainWindow::setRepetitionIndex(QString repetitionString) {
-    int index = -1;
-    if (repetitionString == "Never") {
-        index = 0;
-    } else if(repetitionString == "Hour") {
-        index = 1;
-    }else if(repetitionString == "Day") {
-        index = 2;
-    }else if(repetitionString == "Week") {
-        index = 3;
-    }else if(repetitionString == "Month") {
-        index = 4;
-    }else if(repetitionString == "Year") {
-        index = 5;
-    }
-
-    return index;
-}
-
-void MainWindow::on_editBtn_clicked() {
-
-    QModelIndex index = ui->taskView->selectionModel()->currentIndex();
-    Task task = m_taskManager.getTaskModel()->taskList().at(index.row());
-
-
-    ui->tabWidget->setCurrentIndex(1);
-
-    ui->titleTxt->setText(task.title());
-    ui->descriptionTxt->setText(task.description());
-    ui->importanceSb->setValue(task.importance());
-    ui->dateTimeEdit->setDate(task.date());
-    ui->repeatCb->setCurrentIndex(setRepetitionIndex(task.status()));
-
-    m_taskManager.setTaskList(m_taskManager.getTaskModel()->taskList());
-    ui->editBtn->setEnabled(false);
-    mode = 1;
-
-}
-
-
-QString MainWindow::username() const
-{
-    return m_username;
-}
-
-void MainWindow::setUsername(const QString &username)
-{
-    m_username = username;
-}
-
-QString MainWindow::password() const
-{
-    return m_password;
-}
-
-void MainWindow::setPassword(const QString &password)
-{
-    m_password = password;
-}
-
-
-
 void MainWindow::on_statusBtn_clicked()
 {
     QModelIndex index = ui->taskView->selectionModel()->currentIndex();
@@ -316,36 +342,6 @@ void MainWindow::on_statusBtn_clicked()
     sf.giveTask(task);
     sf.show();
 }
-
-
-//should be deleted later
-void MainWindow::on_refreshBtn_clicked()
-{
-    Task task = *sf.readStatusFromWindow();
-    qDebug() << m_taskManager.create(task,m_username);
-    getTasks();
-}
-
-
-void MainWindow::statusCounter(){
-    int completed = 0;
-    int failed = 0;
-    int inProgress = 0;
-    for(int i = 0; i<m_taskManager.getTaskList().length();++i){
-        if(m_taskManager.getTaskList().at(i).status() == "Completed"){
-            ++completed;
-        }else if(m_taskManager.getTaskList().at(i).status() == "Failed"){
-            ++failed;
-        }else if(m_taskManager.getTaskList().at(i).status() == "In-Progress"){
-            ++inProgress;
-        }
-    }
-    ui->completedLCD->display(completed);
-    ui->failedLCD->display(failed);
-    ui->progressLCD->display(inProgress);
-}
-
-
 
 void MainWindow::on_pictureBtn_clicked(){
     QString pathToImgFile = QFileDialog::getOpenFileName(this, tr("Open Image"), "/home/", tr("Image Files (*.png)"));
@@ -356,37 +352,35 @@ void MainWindow::on_pictureBtn_clicked(){
     }
 }
 
-
-
-void MainWindow::loadImage(const QString& path) {
-    QImageReader reader(path);
-    const QImage img(reader.read());
-
-    if(img.isNull()) {
-        QMessageBox::information(this, QGuiApplication::applicationDisplayName(), "Could not open image");
-    } else {
-
-        QPixmap pixmap = (QPixmap::fromImage(img));
-        ui->pictureLb->setPixmap(pixmap);
-        ui->pictureLb->setScaledContents(true);
-    }
-
+//should be deleted later
+void MainWindow::on_refreshBtn_clicked()
+{
+    Task task = *sf.readStatusFromWindow();
+    qDebug() << m_taskManager.create(task,m_username);
+    getTasks();
 }
 
-
-
-void MainWindow::synchronizeCalendar(){
-
-    for(int i =0 ; i<m_taskManager.getTaskList().length(); ++i){
-        QDate date = m_taskManager.getTaskList().at(i).date();
-        qDebug() << "Date: " << date << "   " << i;
-        ui->calendarWidget->getDates(date);
-    }
+void MainWindow::on_actionAbout_clicked(){
+    //QMessageBox::information(this, "About", "Our Application");
+    QMessageBox about;
+    about.setText("Hallo Test Versuch");
+    about.setInformativeText("Das ist ein Untertitel mit ganz viel text und so");
+    about.setStyleSheet("QLabel{min-width: 700px;}");
+    about.exec();
 }
 
+void MainWindow::on_actionHelp_clicked(){
+    //QMessageBox::information(this, "Help", "Here is some text");
+    QMessageBox help;
+    about.setText("Hallo Test Versuch");
+    about.setInformativeText("Das ist ein Untertitel mit ganz viel text und so");
+    about.setStyleSheet("QLabel{min-width: 700px;}");
+    about.exec();
+}
 
-
-
+void MainWindow::on_menuLogOut_clicked(){
+    logout();
+}
 
 
 
