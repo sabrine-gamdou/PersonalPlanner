@@ -36,6 +36,15 @@ public:
     int score() const;
     void setScore(int score);
 
+    int getWidth() const;
+    void setWidth(int value);
+
+    int getHeight() const;
+    void setHeight(int value);
+
+    QByteArray getProfilePicture() const;
+    void setProfilePicture(const QByteArray &profilePicture);
+
 private:
     QString m_firstname;
     QString m_lastname;
@@ -45,7 +54,11 @@ private:
     QString m_taskList;
     QString m_username;
     QString m_password;
+    QByteArray m_profilePicture;
     int m_score;
+
+    int width;
+    int height;
 };
 
 #endif // USER_H

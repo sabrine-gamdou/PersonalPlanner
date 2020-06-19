@@ -36,44 +36,46 @@ bool TaskListModel::removeRow(int position, int rows, const QModelIndex &parent)
 }
 
 QVariant TaskListModel::data(const QModelIndex &index, int role) const{
-    if (!index.isValid() || role != Qt::DisplayRole) {
+    if (!index.isValid()) {
         return QVariant();
     }
 
-    switch(static_cast<ColumnNames>(index.column())){
-    case ColumnNames::Title:
-        return m_taskList[index.row()].title();
-    case ColumnNames::Date:
-        return m_taskList[index.row()].date();
-    case ColumnNames::Description:
-        return m_taskList[index.row()].description();
-    case ColumnNames::Importance:
-        return m_taskList[index.row()].importance();
-    case ColumnNames::Repetition:
-        return m_taskList[index.row()].repetition();
-    case ColumnNames::Status:
-       return m_taskList[index.row()].status();
+    switch(role ) {
+    case Qt::DisplayRole:{
+        switch(static_cast<ColumnNames>(index.column())){
+        case ColumnNames::Title:
+            return m_taskList[index.row()].title();
+        case ColumnNames::Date:
+            return m_taskList[index.row()].date();
+        case ColumnNames::Description:
+            return m_taskList[index.row()].description();
+        case ColumnNames::Importance:
+            return m_taskList[index.row()].importance();
+        case ColumnNames::Repetition:
+            return m_taskList[index.row()].repetition();
+        case ColumnNames::Status:
+           return m_taskList[index.row()].status();
+
+        }
+    }
+
+    case Qt::BackgroundRole: {
+        if (m_taskList[index.row()].status() == "Completed")
+            return QBrush (QColor(50,205,50));
+
+        else if (m_taskList[index.row()].status() == "Failed")
+            return QBrush (QColor(255,0,0));
+
+        else if (m_taskList[index.row()].status() == "In-Progress")
+            return QBrush (QColor(255,215,0));
+        break;
+    default:break;
+    }
 
     }
 
-//    switch(role ) {
-//    case Qt::BackgroundRole: {
-//        if (m_taskList[index.row()].status() == "Completed")
-//            return QBrush (QColor(50,205,50));
-
-//        else if (m_taskList[index.row()].status() == "Failed")
-//            return QBrush (QColor(255,0,0));
-
-//        else if (m_taskList[index.row()].status() == "In-Progress")
-//            return QBrush (QColor(255,215,0));
-//    default:break;
-//    }
-
-//    }
-
     return QVariant();
 }
-
 
 QVariant TaskListModel::headerData(int section, Qt::Orientation orientation, int role) const
 {

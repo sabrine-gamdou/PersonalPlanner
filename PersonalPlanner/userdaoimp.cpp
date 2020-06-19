@@ -5,7 +5,7 @@ UserDaoImp::UserDaoImp(){}
 
 
 UserDaoImp::~UserDaoImp(){
-   // delete m_user;
+    // delete m_user;
 }
 
 
@@ -46,7 +46,10 @@ User UserDaoImp::read(const QString& t_username){
     QDate t_birthday(1,2,3);
     QString t_address;
     QString t_password;
+    QByteArray t_profilePicture;
     int t_score = 0;
+    int width;
+    int height;
 
     DatabaseSingleton::getInstance();
 
@@ -66,6 +69,9 @@ User UserDaoImp::read(const QString& t_username){
         t_birthday = query.value(5).toDate();
         t_address = query.value(6).toString();
         t_score = query.value(7).toInt();
+        t_profilePicture = query.value(8).toByteArray();
+        width = query.value(9).toInt();
+        height = query.value(10).toInt();
 
         qDebug() << t_username << t_password << t_firstname << t_lastname << t_email
                  << t_birthday << t_address << t_score;
@@ -75,9 +81,13 @@ User UserDaoImp::read(const QString& t_username){
     user.setBirthday(t_birthday);
     user.setAddress(t_address);
     user.setScore(t_score);
+    user.setProfilePicture(t_profilePicture);
+    user.setWidth(width);
+    user.setHeight(height);
 
     return user;
 }
+
 
 
 bool UserDaoImp::update(User &t_user){
@@ -123,21 +133,31 @@ bool UserDaoImp::checkLogin(const QString &t_username, const QString &t_password
 
     QSqlQuery query;
 
-    bool exists = false;
-
     qDebug() << "Prepare Query: "<< query.prepare("SELECT username FROM users WHERE username = (:un) AND pass = (:pass)");
     query.bindValue(":un", t_username);
     query.bindValue(":pass", t_password);
 
     if( query.exec()){
         if (query.next()){
-            qDebug() << exists; //Error Message instead
             return true;
         }
     }
-
-    qDebug() << query.lastError().text();
     return false;
+}
+
+bool UserDaoImp::updateProfilePicture(QByteArray &arr, QString &username, int width, int height){
+
+    DatabaseSingleton::getInstance();
+
+    QSqlQuery query;
+
+    qDebug() << "Prepare updateProfilePicture Query: "<< query.prepare("UPDATE users SET profile_picture = (:pic), width = (:width), height = (:height) WHERE username = (:un)");
+    query.bindValue(":un", username);
+    query.bindValue(":pic", arr);
+    query.bindValue(":width",width);
+    query.bindValue(":height",height);
+
+    return query.exec();
 }
 
 

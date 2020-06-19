@@ -17,6 +17,7 @@
 #include <QFileDialog>
 #include <QImageReader>
 #include <QPainter>
+#include <QByteArray>
 
 namespace Ui {
 class MainWindow;
@@ -49,6 +50,8 @@ public:
     void statusCounter();
     void loadImage(const QString& path);
     void synchronizeCalendar();
+    QByteArray convertImageToByteArray(QImage &img);
+    void convertByteArrayToImage(QByteArray &arr);
 
 
 private slots:
@@ -73,11 +76,11 @@ private slots:
 
     void on_pictureBtn_clicked();
 
-    void on_actionAbout_clicked();
+    void on_actionAboutClicked();
 
-    void on_actionHelp_clicked();
+    void on_actionHelpClicked();
 
-    void on_menuLogOut_clicked();
+    void on_menuLogOutClicked();
 
     void refreshData();
     void on_calendarWidget_clicked(const QDate &date);
@@ -94,6 +97,8 @@ private:
     TaskDaoImp m_taskManager;
 
     int mode;
+    int width;
+    int height;
 
     QString m_username;
     QString m_password;

@@ -13,11 +13,10 @@ MainWindow::MainWindow(QWidget *parent) :
     this->move(QApplication::desktop()->screen()->rect().center() - this->rect().center());
     QObject::connect(&sf, &StatusForm::refreshGUI, this, &MainWindow::refreshData);
     QObject::connect(ui->editInfoCheckBox, &QCheckBox::stateChanged, this, &MainWindow::editInfoCheckBox_checked);
-    QObject::connect(ui->actionAbout, &QAction::triggered, this, &MainWindow::on_actionAbout_clicked);
-    QObject::connect(ui->actionHelp, &QAction::triggered, this, &MainWindow::on_actionHelp_clicked);
+    QObject::connect(ui->actionAbout, &QAction::triggered, this, &MainWindow::on_actionAboutClicked);
+    QObject::connect(ui->actionHelp, &QAction::triggered, this, &MainWindow::on_actionHelpClicked);
 
-    QObject::connect(ui->actionLogOut, &QAction::triggered, this, &MainWindow::on_menuLogOut_clicked);
-
+    QObject::connect(ui->actionLogOut, &QAction::triggered, this, &MainWindow::on_menuLogOutClicked);
 
     mode = 0;
 
@@ -60,6 +59,7 @@ void MainWindow::getTasks(){
 void MainWindow::getUserData(){
 
     User t_user=  this->m_userManager.read(m_username);
+    QByteArray profile_picture = t_user.getProfilePicture();
 
     qDebug() << t_user.toString();
     ui->firstnameTxt->setText(t_user.firstname());
@@ -67,6 +67,11 @@ void MainWindow::getUserData(){
     ui->emailTxt->setText(t_user.email());
     ui->dateEdit->setDate(t_user.birthday());
     ui->addressTxt->setText(t_user.address());
+
+    width = t_user.getWidth();
+    height = t_user.getWidth();
+
+    convertByteArrayToImage(profile_picture);
 }
 
 void MainWindow::editInfoCheckBox_checked(const bool checked){
@@ -92,6 +97,7 @@ bool MainWindow::readTaskFromMainWindow() {
 
         new_task.setDescription(ui->descriptionTxt->text());
         new_task.setRepetition(ui->repeatCb->currentText());
+        new_task.setStatus("In-Progress");
 
         qDebug() << new_task.toString();
         status =  m_taskManager.update(new_task);
@@ -175,11 +181,11 @@ void MainWindow::resetTaskInput() {
 
 //Needs to be changed still
 void MainWindow::setStatusColor(){
-    for (int row = 0; row < m_taskManager.getTaskList().length(); ++row){
-        for(int column = 0; column < m_taskManager.getTaskModel()->columnCount(); ++column){
-            m_taskManager.getTaskModel()->setData(m_taskManager.getTaskModel()->index(row,column),QBrush (QColor(255,0,0)), Qt::BackgroundRole );
-        }
-    }
+    //    for (int row = 0; row < m_taskManager.getTaskList().length(); ++row){
+    //        for(int column = 0; column < m_taskManager.getTaskModel()->columnCount(); ++column){
+    //            m_taskManager.getTaskModel()->setData(m_taskManager.getTaskModel()->index(row,column),QBrush (QColor(255,0,0)), Qt::BackgroundRole );
+    //        }
+    //    }
 
 
 }
@@ -204,15 +210,19 @@ void MainWindow::statusCounter(){
 
 void MainWindow::loadImage(const QString& path) {
     QImageReader reader(path);
-    const QImage img(reader.read());
+    QImage img(reader.read());
 
     if(img.isNull()) {
         QMessageBox::information(this, QGuiApplication::applicationDisplayName(), "Could not open image");
     } else {
-
+        width = img.width();
+        height = img.height();
+        QByteArray arr = convertImageToByteArray(img);
         QPixmap pixmap = (QPixmap::fromImage(img));
         ui->pictureLb->setPixmap(pixmap);
         ui->pictureLb->setScaledContents(true);
+
+        m_userManager.updateProfilePicture(arr, m_username, width, height);
     }
 
 }
@@ -225,6 +235,24 @@ void MainWindow::synchronizeCalendar(){
         ui->calendarWidget->getDates(date);
     }
 }
+
+QByteArray MainWindow::convertImageToByteArray(QImage &img){
+    QByteArray arr = QByteArray::fromRawData((const char*)img.bits(), img.byteCount());
+    return arr;
+}
+
+void MainWindow::convertByteArrayToImage(QByteArray &arr){
+
+    QImage img(reinterpret_cast<unsigned char*>(arr.data()),width,height, QImage::Format_ARGB32);
+
+    QPixmap pixmap;
+
+    qDebug() << "Loading Profile Picture from DB: " << !arr.isEmpty() ;
+    qDebug() << "converting: "<< pixmap.convertFromImage(img);
+    ui->pictureLb->setPixmap(pixmap);
+    ui->pictureLb->setScaledContents(true);
+}
+
 
 void MainWindow::refreshData()
 {
@@ -365,7 +393,7 @@ void MainWindow::on_pictureBtn_clicked(){
 }
 
 
-void MainWindow::on_actionAbout_clicked(){
+void MainWindow::on_actionAboutClicked(){
     //QMessageBox::information(this, "About", "Our Application");
     QMessageBox about;
     about.setText("Hallo Test Versuch");
@@ -374,7 +402,7 @@ void MainWindow::on_actionAbout_clicked(){
     about.exec();
 }
 
-void MainWindow::on_actionHelp_clicked(){
+void MainWindow::on_actionHelpClicked(){
     //QMessageBox::information(this, "Help", "Here is some text");
     QMessageBox help;
     help.setText("Hallo Test Versuch");
@@ -383,7 +411,7 @@ void MainWindow::on_actionHelp_clicked(){
     help.exec();
 }
 
-void MainWindow::on_menuLogOut_clicked(){
+void MainWindow::on_menuLogOutClicked(){
     logout();
 }
 
@@ -398,7 +426,7 @@ void MainWindow::on_calendarWidget_clicked(const QDate &date)
             indexes.append(i);
     }
     for (int i = 0; i < indexes.length(); ++i)
-             ui->taskView->selectRow(indexes.at(i));
+        ui->taskView->selectRow(indexes.at(i));
 
     ui->taskView->setSelectionMode(QAbstractItemView::SingleSelection);
 }

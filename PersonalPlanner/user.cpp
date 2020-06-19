@@ -87,6 +87,36 @@ void User::setScore(int score)
     m_score = score;
 }
 
+int User::getWidth() const
+{
+    return width;
+}
+
+void User::setWidth(int value)
+{
+    width = value;
+}
+
+int User::getHeight() const
+{
+    return height;
+}
+
+void User::setHeight(int value)
+{
+    height = value;
+}
+
+QByteArray User::getProfilePicture() const
+{
+    return m_profilePicture;
+}
+
+void User::setProfilePicture(const QByteArray &profilePicture)
+{
+    m_profilePicture = profilePicture;
+}
+
 QString User::toString(){
     QString string ;
     string.append("Username: " );
