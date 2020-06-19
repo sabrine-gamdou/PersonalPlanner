@@ -10,6 +10,15 @@
     <height>189</height>
    </rect>
   </property>
+  <property name="font">
+   <font>
+    <family>URW Bookman L</family>
+    <pointsize>11</pointsize>
+    <weight>9</weight>
+    <italic>false</italic>
+    <bold>false</bold>
+   </font>
+  </property>
   <property name="windowTitle">
    <string>Personal Planner</string>
   </property>
@@ -30,6 +39,15 @@ font: 75 11pt &quot;URW Bookman L&quot;;</string>
             <layout class="QHBoxLayout" name="horizontalLayout_5">
              <item>
               <widget class="QLabel" name="username">
+               <property name="font">
+                <font>
+                 <family>URW Bookman L</family>
+                 <pointsize>11</pointsize>
+                 <weight>9</weight>
+                 <italic>false</italic>
+                 <bold>false</bold>
+                </font>
+               </property>
                <property name="text">
                 <string>Username</string>
                </property>
@@ -49,7 +67,17 @@ font: 75 11pt &quot;URW Bookman L&quot;;</string>
               </spacer>
              </item>
              <item>
-              <widget class="QLineEdit" name="usernameText"/>
+              <widget class="QLineEdit" name="usernameText">
+               <property name="font">
+                <font>
+                 <family>URW Bookman L</family>
+                 <pointsize>11</pointsize>
+                 <weight>9</weight>
+                 <italic>false</italic>
+                 <bold>false</bold>
+                </font>
+               </property>
+              </widget>
              </item>
             </layout>
            </item>
@@ -94,6 +122,15 @@ font: 75 11pt &quot;URW Bookman L&quot;;</string>
        </item>
        <item>
         <widget class="QPushButton" name="loginBtn">
+         <property name="font">
+          <font>
+           <family>URW Bookman L</family>
+           <pointsize>11</pointsize>
+           <weight>9</weight>
+           <italic>false</italic>
+           <bold>false</bold>
+          </font>
+         </property>
          <property name="text">
           <string>Login</string>
          </property>

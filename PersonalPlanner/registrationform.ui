@@ -18,6 +18,11 @@
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
       <widget class="QPushButton" name="cancelBtn">
+       <property name="font">
+        <font>
+         <family>URW Gothic L</family>
+        </font>
+       </property>
        <property name="text">
         <string>Cancel</string>
        </property>
@@ -25,6 +30,11 @@
      </item>
      <item>
       <widget class="QPushButton" name="confirmBtn">
+       <property name="font">
+        <font>
+         <family>URW Gothic L</family>
+        </font>
+       </property>
        <property name="text">
         <string>Confirm</string>
        </property>
@@ -39,6 +49,11 @@
      </item>
      <item row="0" column="0">
       <widget class="QLabel" name="usernameLb">
+       <property name="font">
+        <font>
+         <family>URW Gothic L</family>
+        </font>
+       </property>
        <property name="text">
         <string>Username</string>
        </property>
@@ -49,6 +64,11 @@
      </item>
      <item row="4" column="0">
       <widget class="QLabel" name="emailLb">
+       <property name="font">
+        <font>
+         <family>URW Gothic L</family>
+        </font>
+       </property>
        <property name="text">
         <string>E-Mail</string>
        </property>
@@ -59,6 +79,11 @@
      </item>
      <item row="3" column="0">
       <widget class="QLabel" name="lastnameLb">
+       <property name="font">
+        <font>
+         <family>URW Gothic L</family>
+        </font>
+       </property>
        <property name="text">
         <string>Lastname</string>
        </property>
@@ -66,6 +91,11 @@
      </item>
      <item row="2" column="0">
       <widget class="QLabel" name="firstnameLb">
+       <property name="font">
+        <font>
+         <family>URW Gothic L</family>
+        </font>
+       </property>
        <property name="text">
         <string>Firstname</string>
        </property>
@@ -79,6 +109,11 @@
      </item>
      <item row="1" column="0">
       <widget class="QLabel" name="passwordLb">
+       <property name="font">
+        <font>
+         <family>URW Gothic L</family>
+        </font>
+       </property>
        <property name="text">
         <string>Password</string>
        </property>
