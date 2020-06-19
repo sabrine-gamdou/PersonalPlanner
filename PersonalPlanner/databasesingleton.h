@@ -5,7 +5,6 @@
 #include <QDebug>
 
 
-
 class DatabaseSingleton{
 private:
     /* Instance is stored here */

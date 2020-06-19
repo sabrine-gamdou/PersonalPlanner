@@ -15,8 +15,8 @@ RegistrationForm::RegistrationForm(QWidget *parent) :
 
 }
 
-RegistrationForm::~RegistrationForm()
-{
+RegistrationForm::~RegistrationForm(){
+
     delete ui;
 }
 
@@ -46,7 +46,6 @@ void RegistrationForm::on_confirmBtn_clicked(){
     }
 
 
-
     if(ui->passTxt->text() == "")
     {
         ui->passTxt->setStyleSheet(style);
@@ -57,8 +56,6 @@ void RegistrationForm::on_confirmBtn_clicked(){
         pass = ui->passTxt->text();
         stop = false;
     }
-
-
 
 
     if(ui->firstnameTxt->text() == "")
@@ -73,8 +70,6 @@ void RegistrationForm::on_confirmBtn_clicked(){
     }
 
 
-
-
     if(ui->lastnameTxt->text() == "")
     {
         ui->lastnameTxt->setStyleSheet(style);
@@ -87,8 +82,6 @@ void RegistrationForm::on_confirmBtn_clicked(){
     }
 
 
-
-
     if(ui->emailTxt->text() == "")
     {
         ui->emailTxt->setStyleSheet(style);
@@ -99,7 +92,6 @@ void RegistrationForm::on_confirmBtn_clicked(){
         email = ui->emailTxt->text();
         stop = false;
     }
-
 
     //check if username available
     //check if email available
@@ -116,23 +108,19 @@ void RegistrationForm::on_confirmBtn_clicked(){
     }
 }
 
-
-
-
 void RegistrationForm::on_cancelBtn_clicked(){
+
     this->close();
 }
 
-
-
-
 void RegistrationForm::userCreatedConfirmed(const bool t_userCreated){
+
     qDebug() << "User created status: "<< t_userCreated;
+
     if(t_userCreated){
         QMessageBox::information(this, "Information", "Welcome to Personal Planner!");
         this->close();
     }else{
         QMessageBox::warning(this, "Warning", "Something went wrong ... Please try again later.");
     }
-
 }

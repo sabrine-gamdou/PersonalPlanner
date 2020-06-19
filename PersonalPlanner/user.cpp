@@ -1,123 +1,125 @@
 #include "user.h"
 
-User::User(QString t_username, QString t_password, QString t_firstname, QString t_lastname, QString t_email) : m_username(t_username), m_password(t_password), m_firstname(t_firstname), m_lastname(t_lastname), m_email(t_email)
-{
+User::User(QString t_username, QString t_password, QString t_firstname, QString t_lastname, QString t_email) : m_username(t_username), m_password(t_password), m_firstname(t_firstname), m_lastname(t_lastname), m_email(t_email){
 
 }
 
-User::~User(){}
+User::~User(){
 
-QString User::firstname() const
-{
+}
+
+QString User::firstname() const{
+
     return m_firstname;
 }
 
-void User::setFirstname(const QString &firstname)
-{
+void User::setFirstname(const QString &firstname){
+
     m_firstname = firstname;
 }
 
-QString User::lastname() const
-{
+QString User::lastname() const{
+
     return m_lastname;
 }
 
-void User::setLastname(const QString &lastname)
-{
+void User::setLastname(const QString &lastname){
+
     m_lastname = lastname;
 }
 
-QString User::email() const
-{
+QString User::email() const{
+
     return m_email;
 }
 
-void User::setEmail(const QString &email)
-{
+void User::setEmail(const QString &email){
+
     m_email = email;
 }
 
-QDate User::birthday() const
-{
+QDate User::birthday() const{
+
     return m_birthday;
 }
 
-void User::setBirthday(const QDate &birthday)
-{
+void User::setBirthday(const QDate &birthday){
+
     m_birthday = birthday;
 }
 
-QString User::address() const
-{
+QString User::address() const{
+
     return m_address;
 }
 
-void User::setAddress(const QString &address)
-{
+void User::setAddress(const QString &address){
+
     m_address = address;
 }
 
-QString User::username() const
-{
+QString User::username() const{
+
     return m_username;
 }
 
-void User::setUsername(const QString &username)
-{
+void User::setUsername(const QString &username){
+
     m_username = username;
 }
 
-QString User::password() const
-{
+QString User::password() const{
+
     return m_password;
 }
 
-void User::setPassword(const QString &password)
-{
+void User::setPassword(const QString &password){
+
     m_password = password;
 }
 
-int User::score() const
-{
+int User::score() const{
+
     return m_score;
 }
 
-void User::setScore(int score)
-{
+void User::setScore(int score){
+
     m_score = score;
 }
 
-int User::getWidth() const
-{
+int User::getWidth() const{
+
     return width;
 }
 
-void User::setWidth(int value)
-{
+void User::setWidth(int value){
+
     width = value;
 }
 
-int User::getHeight() const
-{
+int User::getHeight() const{
+
     return height;
 }
 
-void User::setHeight(int value)
-{
+void User::setHeight(int value){
+
     height = value;
 }
 
-QByteArray User::getProfilePicture() const
-{
+QByteArray User::getProfilePicture() const{
+
     return m_profilePicture;
 }
 
-void User::setProfilePicture(const QByteArray &profilePicture)
-{
+void User::setProfilePicture(const QByteArray &profilePicture){
+
     m_profilePicture = profilePicture;
 }
 
 QString User::toString(){
+
     QString string ;
     string.append("Username: " );
     string.append(m_username);
@@ -135,6 +137,6 @@ QString User::toString(){
     string.append(m_address);
     string.append("\nScore: ");
     string.append(QString::number(m_score));
-    return string;
 
+    return string;
 }

@@ -18,11 +18,11 @@ public:
     TaskDaoImp();
     ~TaskDaoImp();
     bool create (Task &task, const QString& username);
+    bool readAll(QString &username);
     Task read(int t_taskID, QString &username);
     bool update(Task &task);
     bool delete_(Task task);
-    bool readAll(QString &username);
-    void sortByStatus(QString &username);
+    void sortByStatus(QString &username); //Wird auch nicht verwendet?
 
     TaskListModel *getTaskModel() const;
     void setTaskModel(TaskListModel *value);

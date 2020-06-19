@@ -11,39 +11,45 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     ui->taskView->setSelectionBehavior(QAbstractItemView::SelectRows);
     this->move(QApplication::desktop()->screen()->rect().center() - this->rect().center());
+
     QObject::connect(&sf, &StatusForm::refreshGUI, this, &MainWindow::refreshData);
     QObject::connect(ui->editInfoCheckBox, &QCheckBox::stateChanged, this, &MainWindow::editInfoCheckBox_checked);
-    QObject::connect(ui->actionAbout, &QAction::triggered, this, &MainWindow::on_actionAboutClicked);
-    QObject::connect(ui->actionHelp, &QAction::triggered, this, &MainWindow::on_actionHelpClicked);
+    QObject::connect(ui->actionAbout, &QAction::triggered, this, &MainWindow::on_actionAbout_clicked);
+    QObject::connect(ui->actionHelp, &QAction::triggered, this, &MainWindow::on_actionHelp_clicked);
 
-    QObject::connect(ui->actionLogOut, &QAction::triggered, this, &MainWindow::on_menuLogOutClicked);
+    QObject::connect(ui->actionLogOut, &QAction::triggered, this, &MainWindow::on_menuLogOut_clicked);
 
     mode = 0;
 
 }
 
 MainWindow::~MainWindow(){
+
     delete ui;
 }
 
 QString MainWindow::username() const{
+
     return m_username;
 }
 
 void MainWindow::setUsername(const QString &username){
+
     m_username = username;
 }
 
 QString MainWindow::password() const{
+
     return m_password;
 }
 
-void MainWindow::setPassword(const QString &password)
-{
+void MainWindow::setPassword(const QString &password){
+
     m_password = password;
 }
 
 void MainWindow::getTasks(){
+
     m_taskManager.readAll(m_username);
     setStatusColor();
 
@@ -87,7 +93,9 @@ void MainWindow::editInfoCheckBox_checked(const bool checked){
 }
 
 bool MainWindow::readTaskFromMainWindow() {
+
     bool status = false;
+
     if(mode == 1){
         QModelIndex index = ui->taskView->selectionModel()->currentIndex();
         Task task = m_taskManager.getTaskModel()->taskList().at(index.row());
@@ -111,23 +119,25 @@ bool MainWindow::readTaskFromMainWindow() {
         status =  m_taskManager.create(new_task,m_username);
 
     }
+
     mode = 0;
     qDebug() <<  "TaskManager created" << status;
     return status;
-
 }
 
 void MainWindow::userUpdatedConfirmed(const bool t_userUpdated){
+
     qDebug() << "User Updated status: "<< t_userUpdated;
+
     if(t_userUpdated){
         QMessageBox::information(this, "Information", "You successfully updated your profile information!");
     }else{
         QMessageBox::warning(this, "Warning", "Something went wrong ... Please try again later.");
     }
-
 }
 
 void MainWindow::deleteTask () {
+
     QModelIndex index = ui->taskView->selectionModel()->currentIndex();
     Task task = m_taskManager.getTaskModel()->taskList().at(index.row());
 
@@ -140,10 +150,10 @@ void MainWindow::deleteTask () {
     m_taskManager.setTaskList(m_taskManager.getTaskModel()->taskList());
 
     ui->deleteBtn->setEnabled(false);
-
 }
 
 int MainWindow::setRepetitionIndex(QString repetitionString) {
+
     int index = -1;
     if (repetitionString == "Never") {
         index = 0;
@@ -173,6 +183,7 @@ void MainWindow::taskConfirmed(const bool taskUpdated) {
 }
 
 void MainWindow::resetTaskInput() {
+
     ui->titleTxt->clear();
     ui->dateTimeEdit->clear();
     ui->descriptionTxt->clear();
@@ -191,9 +202,11 @@ void MainWindow::setStatusColor(){
 }
 
 void MainWindow::statusCounter(){
+
     int completed = 0;
     int failed = 0;
     int inProgress = 0;
+
     for(int i = 0; i<m_taskManager.getTaskList().length();++i){
         if(m_taskManager.getTaskList().at(i).status() == "Completed"){
             ++completed;
@@ -209,6 +222,7 @@ void MainWindow::statusCounter(){
 }
 
 void MainWindow::loadImage(const QString& path) {
+
     QImageReader reader(path);
     QImage img(reader.read());
 
@@ -224,7 +238,6 @@ void MainWindow::loadImage(const QString& path) {
 
         m_userManager.updateProfilePicture(arr, m_username, width, height);
     }
-
 }
 
 void MainWindow::synchronizeCalendar(){
@@ -237,6 +250,7 @@ void MainWindow::synchronizeCalendar(){
 }
 
 QByteArray MainWindow::convertImageToByteArray(QImage &img){
+
     QByteArray arr = QByteArray::fromRawData((const char*)img.bits(), img.byteCount());
     return arr;
 }
@@ -253,14 +267,8 @@ void MainWindow::convertByteArrayToImage(QByteArray &arr){
     ui->pictureLb->setScaledContents(true);
 }
 
-
-void MainWindow::refreshData()
-{
-    sf.readStatusFromWindow();
-    getTasks();
-}
-
 void MainWindow::logout(){
+
     this->m_username = "";
     this->m_password = "";
     this->close();
@@ -268,6 +276,7 @@ void MainWindow::logout(){
 
 //Slots
 void MainWindow::on_deleteAccountBtn_clicked(){
+
     if(QMessageBox(QMessageBox::Question,
                    "Login System", "Are you sure you want to delete your account?",
                    QMessageBox::Yes|QMessageBox::No).exec()){
@@ -277,10 +286,12 @@ void MainWindow::on_deleteAccountBtn_clicked(){
 }
 
 void MainWindow::on_logoutBtn_clicked(){
+
     logout();
 }
 
 void MainWindow::on_confirm_cancelBtnB_accepted() {
+
     taskConfirmed(readTaskFromMainWindow());
     getTasks();
     resetTaskInput();
@@ -288,16 +299,19 @@ void MainWindow::on_confirm_cancelBtnB_accepted() {
 
 
 void MainWindow::on_confirm_cancelBtnB_rejected() {
+
     resetTaskInput();
 }
 
 void MainWindow::on_deleteBtn_clicked() {
+
     deleteTask();
     ui->deleteBtn->setEnabled(false);
 }
 
 
 void MainWindow::on_taskView_pressed() {
+
     ui->deleteBtn->setEnabled(ui->taskView->currentIndex().isValid());
     ui->editBtn->setEnabled(ui->taskView->currentIndex().isValid());
     ui->statusBtn->setEnabled(ui->taskView->currentIndex().isValid());
@@ -307,7 +321,6 @@ void MainWindow::on_editBtn_clicked() {
 
     QModelIndex index = ui->taskView->selectionModel()->currentIndex();
     Task task = m_taskManager.getTaskModel()->taskList().at(index.row());
-
 
     ui->tabWidget->setCurrentIndex(1);
 
@@ -320,11 +333,10 @@ void MainWindow::on_editBtn_clicked() {
     m_taskManager.setTaskList(m_taskManager.getTaskModel()->taskList());
     ui->editBtn->setEnabled(false);
     mode = 1;
-
 }
 
-void MainWindow::on_saveChangesBtn_clicked()
-{
+void MainWindow::on_saveChangesBtn_clicked(){
+
     User m_user(m_username, m_password, "", "", "");
     bool stop = false;
     QString style = "border: 1px solid red" ;
@@ -372,8 +384,8 @@ void MainWindow::on_saveChangesBtn_clicked()
     }
 }
 
-void MainWindow::on_statusBtn_clicked()
-{
+void MainWindow::on_statusBtn_clicked(){
+
     QModelIndex index = ui->taskView->selectionModel()->currentIndex();
     Task task = m_taskManager.getTaskModel()->taskList().at(index.row());
     sf.giveTask(task);
@@ -384,6 +396,7 @@ void MainWindow::on_statusBtn_clicked()
 }
 
 void MainWindow::on_pictureBtn_clicked(){
+
     QString pathToImgFile = QFileDialog::getOpenFileName(this, tr("Open Image"), "/home/", tr("Image Files (*.png *.xpm *.jpg)"));
     if(!pathToImgFile.size())
         QMessageBox::critical(this, "Error", "No image selected. Please pick an Image first!");
@@ -392,31 +405,58 @@ void MainWindow::on_pictureBtn_clicked(){
     }
 }
 
+void MainWindow::on_actionAbout_clicked(){
 
-void MainWindow::on_actionAboutClicked(){
-    //QMessageBox::information(this, "About", "Our Application");
     QMessageBox about;
-    about.setText("Hallo Test Versuch");
-    about.setInformativeText("Das ist ein Untertitel mit ganz viel text und so");
-    about.setStyleSheet("QLabel{min-width: 700px;}");
-    about.exec();
+       QFont font( "URW Gothic L" );
+       font.setPointSize(12);
+       font.setItalic(true);
+       about.setFont(font);
+       about.setText("<h1>About<h1>");
+       about.setInformativeText(tr("Our project idea is a personnel planner.\n"
+                                   "It should be possible for students from different universities and colleges to use it.\n"
+                                   "The application should offer three different functions: A calendar with an overview of all tasks, the creation of the actual tasks and a separate account with two additional subfunctions.\n"
+                                   "The tasks can be homework or other things that need to be done.\n"
+                                   "The user can assign a name, a description, a date and an importance to these ToDos.\n"
+                                   "The calendar is automatically synchronized when a new task is created and displays it by name.\n"
+                                   "The account of a user consists of two parts: The actual profile and a score, which is made up of homework.\n"
+                                   "The profile contains a profile picture and a profile name. Here the user can edit or delete his account."));
+       about.setStyleSheet("QLabel{min-width: 700px;}");
+       about.exec();
 }
 
-void MainWindow::on_actionHelpClicked(){
-    //QMessageBox::information(this, "Help", "Here is some text");
+void MainWindow::on_actionHelp_clicked(){
+
     QMessageBox help;
-    help.setText("Hallo Test Versuch");
-    help.setInformativeText("Das ist ein Untertitel mit ganz viel text und so");
+    QFont font("URW Gothic L");
+    font.setPointSize(12);
+    font.setItalic(true);
+    help.setFont(font);
+    help.setText("<h1>Help<h1>");
+    help.setInformativeText(tr("#Guidance 1\n"
+                            "Red is failed\n"
+                            "Orange is in-process\n"
+                            "Green is completed\n\n"
+                            "#Guidance 2\n"));
     help.setStyleSheet("QLabel{min-width: 700px;}");
+
     help.exec();
 }
 
-void MainWindow::on_menuLogOutClicked(){
+
+void MainWindow::on_menuLogOut_clicked(){
+
     logout();
 }
 
-void MainWindow::on_calendarWidget_clicked(const QDate &date)
-{
+void MainWindow::refreshData(){
+
+    sf.readStatusFromWindow();
+    getTasks();
+}
+
+void MainWindow::on_calendarWidget_clicked(const QDate &date){
+
     ui->taskView->clearSelection();
     QList<int> indexes;
     ui->taskView->setSelectionMode(QAbstractItemView::MultiSelection);
@@ -432,6 +472,7 @@ void MainWindow::on_calendarWidget_clicked(const QDate &date)
 }
 
 void MainWindow::sort_() {
+
     TaskListModel model;
     QSortFilterProxyModel proxyModel;
     proxyModel.setSourceModel(&model);

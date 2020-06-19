@@ -9,100 +9,102 @@ Task::Task(int t_taskID, QString t_title, QDate t_date, int t_importance, QStrin
 
 }
 
-Task::~Task(){}
+Task::~Task(){
 
-int Task::taskID() const
-{
+}
+
+int Task::taskID() const{
+
     return m_taskID;
 }
 
-void Task::setTaskID(int taskID)
-{
+void Task::setTaskID(int taskID){
+
     m_taskID = taskID;
 }
 
+QString Task::title() const{
 
-QString Task::title() const
-{
     return m_title;
 }
 
-void Task::setTitle(const QString &title)
-{
+void Task::setTitle(const QString &title){
+
     m_title = title;
 }
 
-QDate Task::date() const
-{
+QDate Task::date() const{
+
     return m_date;
 }
 
-void Task::setDate(const QDate &date)
-{
+void Task::setDate(const QDate &date){
+
     m_date = date;
 }
 
-QString Task::description() const
-{
+QString Task::description() const{
+
     return m_description;
 }
 
-void Task::setDescription(const QString &description)
-{
+void Task::setDescription(const QString &description){
+
     m_description = description;
 }
 
-QImage Task::icon() const
-{
+QImage Task::icon() const{
+
     return m_icon;
 }
 
-void Task::setIcon(const QImage &icon)
-{
+void Task::setIcon(const QImage &icon){
+
     m_icon = icon;
 }
 
-int Task::importance() const
-{
+int Task::importance() const{
+
     return m_importance;
 }
 
-void Task::setImportance(int importance)
-{
+void Task::setImportance(int importance){
+
     m_importance = importance;
 }
 
-QString Task::status() const
-{
+QString Task::status() const{
+
     return m_status;
 }
 
-void Task::setStatus(const QString &status)
-{
+void Task::setStatus(const QString &status){
+
     m_status = status;
 }
 
-QString Task::repetition() const
-{
+QString Task::repetition() const{
+
     return m_repetition;
 }
 
-void Task::setRepetition(const QString &repetition)
-{
+void Task::setRepetition(const QString &repetition){
+
     m_repetition = repetition;
 }
 
-QString Task::username() const
-{
+QString Task::username() const{
+
     return m_username;
 }
 
-void Task::setUsername(const QString &username)
-{
+void Task::setUsername(const QString &username){
+
     m_username = username;
 }
 
 QString Task::toString(){
+
     QString string ;
     string.append("TaskID: " );
     string.append(QString::number(m_taskID));
@@ -118,8 +120,8 @@ QString Task::toString(){
     string.append(m_date.toString("dd.MM.yyyy"));
     string.append("\nRepetition: ");
     string.append(m_repetition);
-    return string;
 
+    return string;
 }
 
 

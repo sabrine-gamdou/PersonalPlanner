@@ -24,7 +24,9 @@ public:
     Task(int t_taskID = -1, QString t_title = "", QDate t_date =  QDate(1,2,3), int t_importance = -1, QString m_username = "");
     ~Task();
 
-    QString toString();
+
+    int taskID() const;
+    void setTaskID(int taskID);
 
     QString title() const;
     void setTitle(const QString &title);
@@ -44,16 +46,16 @@ public:
     QString status() const;
     void setStatus(const QString &status);
 
-    int taskID() const;
-    void setTaskID(int taskID);
-
     QString repetition() const;
     void setRepetition(const QString &repetition);
 
     QString username() const;
     void setUsername(const QString &username);
+    //Brauchen wir die überhaupt? Werden nirgends benutzt.
     bool getActive() const;
     void setActive(bool value);
+
+    QString toString();
 };
 
 #endif // TASK_H

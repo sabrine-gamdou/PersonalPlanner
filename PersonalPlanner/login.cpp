@@ -12,9 +12,14 @@ Login::Login(QWidget *parent) :
     ui->passText->setInputMethodHints(Qt::ImhHiddenText| Qt::ImhNoPredictiveText|Qt::ImhNoAutoUppercase);
 }
 
-Login::~Login()
-{
+Login::~Login(){
+
     delete ui;
+}
+
+bool Login::login(QString un, QString pass){
+
+    return this->m_userManager->checkLogin(un,pass);
 }
 
 void Login::on_loginBtn_clicked(){
@@ -34,18 +39,13 @@ void Login::on_loginBtn_clicked(){
     }
 }
 
-
-bool Login::login(QString un, QString pass){
-    return this->m_userManager->checkLogin(un,pass);
-}
-
-
 void Login::on_registerBtn_clicked(){
+
     r.show();
 }
 
-
 void Login::initialize(const QString & un, const QString &pass) {
+
     w.setUsername(un);
     w.setPassword(pass);
     w.getUserData();

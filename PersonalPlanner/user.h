@@ -10,8 +10,6 @@ public:
     User(QString t_username, QString t_password, QString t_firstname, QString t_lastname, QString t_email);
     ~User();
 
-    QString toString();
-
     QString firstname() const;
     void setFirstname(const QString &firstname);
 
@@ -44,6 +42,8 @@ public:
 
     QByteArray getProfilePicture() const;
     void setProfilePicture(const QByteArray &profilePicture);
+
+    QString toString();
 
 private:
     QString m_firstname;

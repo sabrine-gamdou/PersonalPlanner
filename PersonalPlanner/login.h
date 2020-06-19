@@ -20,9 +20,9 @@ class Login : public QWidget
 
 public:
     explicit Login(QWidget *parent = 0);
-
-    bool login(QString un, QString pass);
     ~Login();
+    bool login(QString un, QString pass);
+
 
 private slots:
     void on_loginBtn_clicked();
@@ -38,7 +38,6 @@ private:
     UserDaoImp* m_userManager;
     TaskDaoImp* m_taskManager;
     void initialize(const QString &un, const QString &pass);
-
 
 };
 

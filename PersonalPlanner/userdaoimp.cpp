@@ -1,7 +1,9 @@
 #include "userdaoimp.h"
 #include "databasesingleton.h"
 
-UserDaoImp::UserDaoImp(){}
+UserDaoImp::UserDaoImp(){
+
+}
 
 
 UserDaoImp::~UserDaoImp(){
@@ -33,9 +35,7 @@ bool UserDaoImp::create (User &t_user){
         return false;
     }
 
-
     return true;
-
 }
 
 User UserDaoImp::read(const QString& t_username){
@@ -114,7 +114,6 @@ bool UserDaoImp::update(User &t_user){
 
 
 bool UserDaoImp::delete_(const QString &t_username){
-
 
     DatabaseSingleton::getInstance();
 

@@ -10,6 +10,7 @@
 #include <QList>
 #include <QDate>
 #include <QPen>
+#include <QPainter>
 
 class CalendarManager : public QCalendarWidget
 {

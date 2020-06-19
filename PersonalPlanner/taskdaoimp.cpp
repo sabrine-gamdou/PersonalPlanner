@@ -6,9 +6,11 @@
 
 
 TaskDaoImp::TaskDaoImp(){
+
 }
 
 TaskDaoImp::~TaskDaoImp(){
+
     delete taskModel;
 }
 
@@ -54,7 +56,7 @@ bool TaskDaoImp::readAll(QString &username){
         status = true;
     }
 
-    while (query.next()) {
+    while (query.next()){
 
         newTask.setTaskID(query.value(0).toInt());
         newTask.setTitle(query.value(1).toString());
@@ -73,8 +75,6 @@ bool TaskDaoImp::readAll(QString &username){
 
     }
 
-
-
     taskModel = new TaskListModel;
     taskModel->populateData(m_taskList);
 
@@ -85,8 +85,6 @@ bool TaskDaoImp::readAll(QString &username){
 Task TaskDaoImp::read(int t_taskID, QString &username){
 
     Task task(-1, "title",QDate(1,2,3), -1, username);
-
-
 
     DatabaseSingleton::getInstance();
 
@@ -139,6 +137,7 @@ bool TaskDaoImp::update(Task& task){
 }
 
 bool TaskDaoImp::delete_(Task task){ // or taskID?
+
     int t_id = task.taskID();
     DatabaseSingleton::getInstance();
     QSqlQuery query;
@@ -149,22 +148,22 @@ bool TaskDaoImp::delete_(Task task){ // or taskID?
     return query.exec();
 }
 
-TaskListModel *TaskDaoImp::getTaskModel() const
-{
+TaskListModel *TaskDaoImp::getTaskModel() const{
+
     return taskModel;
 }
 
-void TaskDaoImp::setTaskModel(TaskListModel *value)
-{
+void TaskDaoImp::setTaskModel(TaskListModel *value){
+
     taskModel = value;
 }
 
-QList<Task> TaskDaoImp::getTaskList() const
-{
+QList<Task> TaskDaoImp::getTaskList() const{
+
     return m_taskList;
 }
 
-void TaskDaoImp::setTaskList(const QList<Task> &taskList)
-{
+void TaskDaoImp::setTaskList(const QList<Task> &taskList){
+
     m_taskList = taskList;
 }
