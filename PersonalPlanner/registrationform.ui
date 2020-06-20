@@ -7,11 +7,17 @@
     <x>0</x>
     <y>0</y>
     <width>281</width>
-    <height>225</height>
+    <height>227</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Registration</string>
+  </property>
+  <property name="autoFillBackground">
+   <bool>false</bool>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget{ background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(9, 54, 119, 255), stop:1 rgba(255, 255, 255, 255))}</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
    <item row="2" column="0">
@@ -22,6 +28,11 @@
         <font>
          <family>URW Gothic L</family>
         </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton:hover { color: white} 
+QPushButton { background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(183, 183, 183, 255), stop:1 rgba(255, 255, 255, 255)); border-style: outset; border-radius: 8px; padding: 4px}
+</string>
        </property>
        <property name="text">
         <string>Cancel</string>
@@ -35,6 +46,11 @@
          <family>URW Gothic L</family>
         </font>
        </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton:hover { color: white} 
+QPushButton { background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(183, 183, 183, 255), stop:1 rgba(255, 255, 255, 255)); border-style: outset; border-radius: 8px; padding: 4px}
+</string>
+       </property>
        <property name="text">
         <string>Confirm</string>
        </property>
@@ -45,7 +61,11 @@
    <item row="0" column="0">
     <layout class="QGridLayout" name="gridLayout">
      <item row="0" column="1">
-      <widget class="QLineEdit" name="usernameTxt"/>
+      <widget class="QLineEdit" name="usernameTxt">
+       <property name="styleSheet">
+        <string notr="true">QLineEdit{ background: white}</string>
+       </property>
+      </widget>
      </item>
      <item row="0" column="0">
       <widget class="QLabel" name="usernameLb">
@@ -60,7 +80,11 @@
       </widget>
      </item>
      <item row="1" column="1">
-      <widget class="QLineEdit" name="passTxt"/>
+      <widget class="QLineEdit" name="passTxt">
+       <property name="styleSheet">
+        <string notr="true">QLineEdit{ background: white}</string>
+       </property>
+      </widget>
      </item>
      <item row="4" column="0">
       <widget class="QLabel" name="emailLb">
@@ -75,7 +99,11 @@
       </widget>
      </item>
      <item row="4" column="1">
-      <widget class="QLineEdit" name="emailTxt"/>
+      <widget class="QLineEdit" name="emailTxt">
+       <property name="styleSheet">
+        <string notr="true">QLineEdit{ background: white}</string>
+       </property>
+      </widget>
      </item>
      <item row="3" column="0">
       <widget class="QLabel" name="lastnameLb">
@@ -102,10 +130,18 @@
       </widget>
      </item>
      <item row="2" column="1">
-      <widget class="QLineEdit" name="firstnameTxt"/>
+      <widget class="QLineEdit" name="firstnameTxt">
+       <property name="styleSheet">
+        <string notr="true">QLineEdit{ background: white}</string>
+       </property>
+      </widget>
      </item>
      <item row="3" column="1">
-      <widget class="QLineEdit" name="lastnameTxt"/>
+      <widget class="QLineEdit" name="lastnameTxt">
+       <property name="styleSheet">
+        <string notr="true">QLineEdit{ background: white}</string>
+       </property>
+      </widget>
      </item>
      <item row="1" column="0">
       <widget class="QLabel" name="passwordLb">

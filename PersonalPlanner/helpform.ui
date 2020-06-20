@@ -18,13 +18,16 @@
   <property name="windowTitle">
    <string>Help</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget{ background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0.0225455, stop:0 rgba(43, 96, 172, 255), stop:1 rgba(255, 255, 255, 255))}</string>
+  </property>
   <widget class="QLabel" name="help">
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>10</y>
+     <y>0</y>
      <width>101</width>
-     <height>21</height>
+     <height>41</height>
     </rect>
    </property>
    <property name="font">

@@ -26,20 +26,31 @@
    <string>Personal Planner</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">
-font: 75 11pt &quot;URW Gothic L&quot;;</string>
+   <string notr="true">QWidget{ background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0.0225455, stop:0 rgba(43, 96, 172, 255), stop:1 rgba(255, 255, 255, 255))}</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
    <item row="0" column="0">
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
       <layout class="QVBoxLayout" name="verticalLayout_2">
+       <property name="spacing">
+        <number>6</number>
+       </property>
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_3">
+         <property name="spacing">
+          <number>0</number>
+         </property>
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_4">
+           <property name="spacing">
+            <number>0</number>
+           </property>
            <item>
             <layout class="QHBoxLayout" name="horizontalLayout_5">
+             <property name="spacing">
+              <number>0</number>
+             </property>
              <item>
               <widget class="QLabel" name="username">
                <property name="font">
@@ -50,6 +61,9 @@ font: 75 11pt &quot;URW Gothic L&quot;;</string>
                  <italic>false</italic>
                  <bold>false</bold>
                 </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true"/>
                </property>
                <property name="text">
                 <string>Username</string>
@@ -75,10 +89,13 @@ font: 75 11pt &quot;URW Gothic L&quot;;</string>
                 <font>
                  <family>URW Gothic L</family>
                  <pointsize>11</pointsize>
-                 <weight>9</weight>
+                 <weight>50</weight>
                  <italic>false</italic>
                  <bold>false</bold>
                 </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">background: white</string>
                </property>
               </widget>
              </item>
@@ -90,12 +107,29 @@ font: 75 11pt &quot;URW Gothic L&quot;;</string>
        </item>
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_3">
+         <property name="spacing">
+          <number>0</number>
+         </property>
          <item>
           <layout class="QVBoxLayout" name="verticalLayout_4">
+           <property name="spacing">
+            <number>0</number>
+           </property>
            <item>
             <layout class="QHBoxLayout" name="horizontalLayout_8">
+             <property name="spacing">
+              <number>0</number>
+             </property>
              <item>
               <widget class="QLabel" name="password">
+               <property name="font">
+                <font>
+                 <family>URW Gothic L</family>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true"/>
+               </property>
                <property name="text">
                 <string>Password</string>
                </property>
@@ -115,7 +149,16 @@ font: 75 11pt &quot;URW Gothic L&quot;;</string>
               </spacer>
              </item>
              <item>
-              <widget class="QLineEdit" name="passText"/>
+              <widget class="QLineEdit" name="passText">
+               <property name="font">
+                <font>
+                 <family>URW Gothic L</family>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">background: white</string>
+               </property>
+              </widget>
              </item>
             </layout>
            </item>
@@ -129,10 +172,15 @@ font: 75 11pt &quot;URW Gothic L&quot;;</string>
           <font>
            <family>URW Gothic L</family>
            <pointsize>11</pointsize>
-           <weight>9</weight>
+           <weight>50</weight>
            <italic>false</italic>
            <bold>false</bold>
           </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton:hover { color: white} 
+QPushButton { background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(183, 183, 183, 255), stop:1 rgba(255, 255, 255, 255)); border-style: outset; border-radius: 8px; padding: 4px}
+</string>
          </property>
          <property name="text">
           <string>Login</string>
@@ -141,6 +189,16 @@ font: 75 11pt &quot;URW Gothic L&quot;;</string>
        </item>
        <item>
         <widget class="QPushButton" name="registerBtn">
+         <property name="font">
+          <font>
+           <family>URW Gothic L</family>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton:hover { color: white} 
+QPushButton { background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(183, 183, 183, 255), stop:1 rgba(255, 255, 255, 255)); border-style: outset; border-radius: 8px; padding: 4px}
+</string>
+         </property>
          <property name="text">
           <string>Register</string>
          </property>
