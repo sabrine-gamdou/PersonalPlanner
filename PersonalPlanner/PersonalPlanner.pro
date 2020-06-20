@@ -35,7 +35,9 @@ SOURCES += \
     registrationform.cpp \
     tasklistmodel.cpp \
     statusform.cpp \
-    calendarmanager.cpp
+    calendarmanager.cpp \
+    helpform.cpp \
+    aboutform.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -48,13 +50,17 @@ HEADERS += \
     registrationform.h \
     tasklistmodel.h \
     statusform.h \
-    calendarmanager.h
+    calendarmanager.h \
+    helpform.h \
+    aboutform.h
 
 FORMS += \
         mainwindow.ui \
     login.ui \
     registrationform.ui \
-    statusform.ui
+    statusform.ui \
+    helpform.ui \
+    aboutform.ui
 
 STATECHARTS +=
 

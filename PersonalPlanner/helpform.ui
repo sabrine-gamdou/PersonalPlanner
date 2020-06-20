@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>HelpForm</class>
+ <widget class="QDialog" name="HelpForm">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>742</width>
+    <height>495</height>
+   </rect>
+  </property>
+  <property name="font">
+   <font>
+    <family>URW Gothic L</family>
+   </font>
+  </property>
+  <property name="windowTitle">
+   <string>Help</string>
+  </property>
+  <widget class="QLabel" name="help">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>10</y>
+     <width>101</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>15</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>Help</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="guidance1">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>50</y>
+     <width>111</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <italic>false</italic>
+     <strikeout>false</strikeout>
+    </font>
+   </property>
+   <property name="text">
+    <string>#Guidance 1</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="meaning">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>80</y>
+     <width>221</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Meaning of the status colors:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="meaning2">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>100</y>
+     <width>241</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Red means failed Task
+Orange means in-process Task
+Green means completed Task</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="guidance2">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>180</y>
+     <width>111</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <italic>false</italic>
+     <strikeout>false</strikeout>
+    </font>
+   </property>
+   <property name="text">
+    <string>#Guidance 2</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="picture">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>200</y>
+     <width>411</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Allowed file format when selecting the profile picture:
+*.png, *.xpm, *.jpg</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="guidance3">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>270</y>
+     <width>111</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <italic>false</italic>
+     <strikeout>false</strikeout>
+    </font>
+   </property>
+   <property name="text">
+    <string>#Guidance 3</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>300</y>
+     <width>661</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Each task must have a title. Please do not forget to change the date when creating a task.</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

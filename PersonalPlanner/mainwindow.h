@@ -5,6 +5,8 @@
 #include "taskdaoimp.h"
 #include "statusform.h"
 #include "calendarmanager.h"
+#include "helpform.h"
+#include "aboutform.h"
 
 #include <QMainWindow>
 #include <QFile>
@@ -93,7 +95,8 @@ private:
 
     Ui::MainWindow *ui;
     StatusForm sf;
-
+    HelpForm hf;
+    AboutForm af;
 
     UserDaoImp m_userManager;
     TaskDaoImp m_taskManager;

@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>Login</class>
  <widget class="QWidget" name="Login">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -12,7 +15,7 @@
   </property>
   <property name="font">
    <font>
-    <family>URW Bookman L</family>
+    <family>URW Gothic L</family>
     <pointsize>11</pointsize>
     <weight>9</weight>
     <italic>false</italic>
@@ -24,7 +27,7 @@
   </property>
   <property name="styleSheet">
    <string notr="true">
-font: 75 11pt &quot;URW Bookman L&quot;;</string>
+font: 75 11pt &quot;URW Gothic L&quot;;</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
    <item row="0" column="0">
@@ -41,7 +44,7 @@ font: 75 11pt &quot;URW Bookman L&quot;;</string>
               <widget class="QLabel" name="username">
                <property name="font">
                 <font>
-                 <family>URW Bookman L</family>
+                 <family>URW Gothic L</family>
                  <pointsize>11</pointsize>
                  <weight>9</weight>
                  <italic>false</italic>
@@ -70,7 +73,7 @@ font: 75 11pt &quot;URW Bookman L&quot;;</string>
               <widget class="QLineEdit" name="usernameText">
                <property name="font">
                 <font>
-                 <family>URW Bookman L</family>
+                 <family>URW Gothic L</family>
                  <pointsize>11</pointsize>
                  <weight>9</weight>
                  <italic>false</italic>
@@ -124,7 +127,7 @@ font: 75 11pt &quot;URW Bookman L&quot;;</string>
         <widget class="QPushButton" name="loginBtn">
          <property name="font">
           <font>
-           <family>URW Bookman L</family>
+           <family>URW Gothic L</family>
            <pointsize>11</pointsize>
            <weight>9</weight>
            <italic>false</italic>

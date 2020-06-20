@@ -407,40 +407,12 @@ void MainWindow::on_pictureBtn_clicked(){
 
 void MainWindow::on_actionAbout_clicked(){
 
-    QMessageBox about;
-       QFont font( "URW Gothic L" );
-       font.setPointSize(12);
-       font.setItalic(true);
-       about.setFont(font);
-       about.setText("<h1>About<h1>");
-       about.setInformativeText(tr("Our project idea is a personnel planner.\n"
-                                   "It should be possible for students from different universities and colleges to use it.\n"
-                                   "The application should offer three different functions: A calendar with an overview of all tasks, the creation of the actual tasks and a separate account with two additional subfunctions.\n"
-                                   "The tasks can be homework or other things that need to be done.\n"
-                                   "The user can assign a name, a description, a date and an importance to these ToDos.\n"
-                                   "The calendar is automatically synchronized when a new task is created and displays it by name.\n"
-                                   "The account of a user consists of two parts: The actual profile and a score, which is made up of homework.\n"
-                                   "The profile contains a profile picture and a profile name. Here the user can edit or delete his account."));
-       about.setStyleSheet("QLabel{min-width: 700px;}");
-       about.exec();
+    af.show();
 }
 
 void MainWindow::on_actionHelp_clicked(){
 
-    QMessageBox help;
-    QFont font("URW Gothic L");
-    font.setPointSize(12);
-    font.setItalic(true);
-    help.setFont(font);
-    help.setText("<h1>Help<h1>");
-    help.setInformativeText(tr("#Guidance 1\n"
-                            "Red is failed\n"
-                            "Orange is in-process\n"
-                            "Green is completed\n\n"
-                            "#Guidance 2\n"));
-    help.setStyleSheet("QLabel{min-width: 700px;}");
-
-    help.exec();
+    hf.show();
 }
 
 
