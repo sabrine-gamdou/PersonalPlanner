@@ -14,10 +14,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
     QObject::connect(&sf, &StatusForm::refreshGUI, this, &MainWindow::refreshData);
     QObject::connect(ui->editInfoCheckBox, &QCheckBox::stateChanged, this, &MainWindow::editInfoCheckBox_checked);
-    QObject::connect(ui->actionAbout, &QAction::triggered, this, &MainWindow::on_actionAbout_clicked);
-    QObject::connect(ui->actionHelp, &QAction::triggered, this, &MainWindow::on_actionHelp_clicked);
+    QObject::connect(ui->actionAbout, &QAction::triggered, this, &MainWindow::on_actionAboutClicked);
+    QObject::connect(ui->actionHelp, &QAction::triggered, this, &MainWindow::on_actionHelpClicked);
 
-    QObject::connect(ui->actionLogOut, &QAction::triggered, this, &MainWindow::on_menuLogOut_clicked);
+    QObject::connect(ui->actionLogOut, &QAction::triggered, this, &MainWindow::on_menuLogOutClicked);
 
     mode = 0;
 
@@ -405,18 +405,18 @@ void MainWindow::on_pictureBtn_clicked(){
     }
 }
 
-void MainWindow::on_actionAbout_clicked(){
+void MainWindow::on_actionAboutClicked(){
 
     af.show();
 }
 
-void MainWindow::on_actionHelp_clicked(){
+void MainWindow::on_actionHelpClicked(){
 
     hf.show();
 }
 
 
-void MainWindow::on_menuLogOut_clicked(){
+void MainWindow::on_menuLogOutClicked(){
 
     logout();
 }

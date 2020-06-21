@@ -78,11 +78,11 @@ private slots:
 
     void on_pictureBtn_clicked();
 
-    void on_actionAbout_clicked();
+    void on_actionAboutClicked();
 
-    void on_actionHelp_clicked();
+    void on_actionHelpClicked();
 
-    void on_menuLogOut_clicked();
+    void on_menuLogOutClicked();
 
     void refreshData();
 
