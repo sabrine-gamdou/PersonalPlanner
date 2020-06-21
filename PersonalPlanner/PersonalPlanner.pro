@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui sql
+QT       += core gui sql charts
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -37,7 +37,10 @@ SOURCES += \
     statusform.cpp \
     calendarmanager.cpp \
     helpform.cpp \
-    aboutform.cpp
+    aboutform.cpp \
+    statisticsform.cpp \
+    statisticmodel.cpp \
+    statisticview.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -52,7 +55,10 @@ HEADERS += \
     statusform.h \
     calendarmanager.h \
     helpform.h \
-    aboutform.h
+    aboutform.h \
+    statisticsform.h \
+    statisticmodel.h \
+    statisticview.h
 
 FORMS += \
         mainwindow.ui \
@@ -60,7 +66,8 @@ FORMS += \
     registrationform.ui \
     statusform.ui \
     helpform.ui \
-    aboutform.ui
+    aboutform.ui \
+    statisticsform.ui
 
 STATECHARTS +=
 

@@ -62,9 +62,9 @@ bool TaskDaoImp::readAll(QString &username){
         newTask.setTitle(query.value(1).toString());
         newTask.setDate(query.value(2).toDate());
         newTask.setDescription(query.value(3).toString());
-        newTask.setImportance(query.value(5).toInt());
-        newTask.setStatus(query.value(6).toString());
-        newTask.setRepetition(query.value(7).toString());
+        newTask.setImportance(query.value(4).toInt());
+        newTask.setStatus(query.value(5).toString());
+        newTask.setRepetition(query.value(6).toString());
 
         m_taskList.append(newTask);
 
@@ -101,9 +101,9 @@ Task TaskDaoImp::read(int t_taskID, QString &username){
         task.setTitle(query.value(1).toString());
         task.setDate(query.value(2).toDate());
         task.setDescription(query.value(3).toString());
-        task.setImportance(query.value(5).toInt());
-        task.setStatus(query.value(6).toString());
-        task.setRepetition(query.value(7).toString());
+        task.setImportance(query.value(4).toInt());
+        task.setStatus(query.value(5).toString());
+        task.setRepetition(query.value(6).toString());
 
         qDebug() << task.taskID() << task.title() << task.date()
                  << task.description() << task.importance()

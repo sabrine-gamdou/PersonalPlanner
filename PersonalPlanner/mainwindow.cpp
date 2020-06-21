@@ -450,3 +450,14 @@ void MainWindow::sort_() {
     proxyModel.setSourceModel(&model);
     ui->taskView->setModel(&proxyModel);
 }
+
+void MainWindow::on_statisticBtn_clicked()
+{
+    ssf.setUsername(m_username);
+    ssf.initializeData();
+
+//    ssf.layout()->addWidget(chartView);
+//    ssf.layout()->setAlignment(Qt::AlignCenter);
+    ssf.resize(480, 300);
+    ssf.show();
+}

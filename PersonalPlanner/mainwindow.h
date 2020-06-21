@@ -7,6 +7,7 @@
 #include "calendarmanager.h"
 #include "helpform.h"
 #include "aboutform.h"
+#include "statisticsform.h"
 
 #include <QMainWindow>
 #include <QFile>
@@ -20,6 +21,7 @@
 #include <QImageReader>
 #include <QPainter>
 #include <QByteArray>
+#include <QChartView>
 
 namespace Ui {
 class MainWindow;
@@ -90,6 +92,8 @@ private slots:
 
     void sort_();
 
+    void on_statisticBtn_clicked();
+
 private:
 
 
@@ -97,9 +101,12 @@ private:
     StatusForm sf;
     HelpForm hf;
     AboutForm af;
+    StatisticsForm ssf;
 
     UserDaoImp m_userManager;
     TaskDaoImp m_taskManager;
+
+
 
     int mode;
     int width;
