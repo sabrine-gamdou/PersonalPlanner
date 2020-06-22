@@ -39,14 +39,14 @@ void StatisticsForm::populateData() {
         QBarSet *monthlyStatus = new QBarSet(state);
         for (month = monthlyMap.begin(); month != monthlyMap.end(); ++month) {
             QBarSet *weeklyStatus = new QBarSet(state);
-            for (int week = 0; week < weeks.count(); week++) {
-                for (int i = 0; i < 2; i++) {
+            for (int week = 0; week < weeks.count(); ++week) {
+                for (int i = 0; i < 2; ++i) {
                     //qDebug() << month.value().at(week).at(i);
-                   // *weeklyStatus << month.value().at(week).at(i);
+                    *weeklyStatus << month.value().at(week).at(i);
                 }
             }
-            //++month;
-          //  monthModel->statisticModel(month.key())->append(weeklyStatus);
+
+             monthModel->statisticModel(month.key())->append(weeklyStatus);
             *monthlyStatus << weeklyStatus->sum();
         }
         monthModel->append(monthlyStatus);

@@ -22,6 +22,7 @@
 #include <QPainter>
 #include <QByteArray>
 #include <QChartView>
+#include <QProgressBar>
 
 namespace Ui {
 class MainWindow;
@@ -48,6 +49,7 @@ public:
     void userUpdatedConfirmed(const bool t_userUpdated);
     void deleteTask();
     int setRepetitionIndex(QString repetitionString);
+    void setRepetitionDuration(QDate date, Task task);
     void taskConfirmed(const bool taskUpdated);
     void resetTaskInput();
     void setStatusColor();
@@ -56,6 +58,7 @@ public:
     void synchronizeCalendar();
     QByteArray convertImageToByteArray(QImage &img);
     void convertByteArrayToImage(QByteArray &arr);
+    void setProgressbar();
 
 
 private slots:
@@ -94,6 +97,7 @@ private slots:
 
     void on_statisticBtn_clicked();
 
+
 private:
 
 
@@ -111,6 +115,7 @@ private:
     int mode;
     int width;
     int height;
+    int score;
 
     QString m_username;
     QString m_password;

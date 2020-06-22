@@ -116,8 +116,8 @@ bool MainWindow::readTaskFromMainWindow() {
         new_task.setRepetition(ui->repeatCb->currentText());
 
         qDebug() << new_task.toString();
+        setRepetitionDuration(ui->dateTimeEdit->date(), new_task);
         status =  m_taskManager.create(new_task,m_username);
-
     }
 
     mode = 0;
@@ -157,19 +157,47 @@ int MainWindow::setRepetitionIndex(QString repetitionString) {
     int index = -1;
     if (repetitionString == "Never") {
         index = 0;
-    } else if(repetitionString == "Hour") {
+    } else if(repetitionString == "Day") {
         index = 1;
-    }else if(repetitionString == "Day") {
-        index = 2;
     }else if(repetitionString == "Week") {
-        index = 3;
+        index = 2;
     }else if(repetitionString == "Month") {
-        index = 4;
+        index = 3;
     }else if(repetitionString == "Year") {
-        index = 5;
+        index = 4;
     }
 
     return index;
+}
+
+void MainWindow::setRepetitionDuration(QDate date, Task task) {
+
+    if ("Day" == task.repetition()) {
+        for (int i = 1; i < 31; i++) {
+            QDate dateTmp(date.year(), date.month(), date.day()+i);
+            task.setDate(dateTmp);
+            m_taskManager.create(task, m_username);
+        }
+    } else if ("Week" == task.repetition()) {
+        for (int i = 1; i < 5; i++) {
+            QDate dateTmp(date.year(), date.month(), date.day()+i*7);
+            task.setDate(dateTmp);
+            m_taskManager.create(task, m_username);
+        }
+    } else if ("Month" == task.repetition()) {
+        for (int i = 1; i < 4; i++) {
+            QDate dateTmp(date.year(), date.month()+i, date.day());
+            task.setDate(dateTmp);
+            m_taskManager.create(task, m_username);
+        }
+    } else if ("Year" == task.repetition()) {
+        for (int i = 1; i < 3; i++) {
+            QDate dateTmp(date.year()+i, date.month(), date.day());
+            qDebug() << date.year() << "Date.year(): ";
+            task.setDate(dateTmp);
+            m_taskManager.create(task, m_username);
+        }
+    }
 }
 
 void MainWindow::taskConfirmed(const bool taskUpdated) {
@@ -203,6 +231,7 @@ void MainWindow::setStatusColor(){
 
 void MainWindow::statusCounter(){
 
+
     int completed = 0;
     int failed = 0;
     int inProgress = 0;
@@ -216,9 +245,47 @@ void MainWindow::statusCounter(){
             ++inProgress;
         }
     }
+
+    score = completed * 10 - failed * 5;
+    m_userManager.updateScore(m_username, score);
+    setProgressbar();
+
     ui->completedLCD->display(completed);
     ui->failedLCD->display(failed);
     ui->progressLCD->display(inProgress);
+}
+
+void MainWindow::setProgressbar() {
+    if (score < 10) {
+        ui->levelPb->setMinimum(0);
+        ui->levelPb->setMaximum(10);
+        ui->levelPb->setValue(score);
+        ui->levelLb->setText("Level 1");
+    }
+    else if (score >= 10 && score < 30) {
+        ui->levelPb->setMinimum(10);
+        ui->levelPb->setMaximum(30);
+        ui->levelPb->setValue(score);
+        ui->levelLb->setText("Level 2");
+    }
+    else if (score >= 30 && score < 50) {
+        ui->levelPb->setMinimum(30);
+        ui->levelPb->setMaximum(50);
+        ui->levelPb->setValue(score);
+        ui->levelLb->setText("Level 3");
+    }
+    else if (score >= 50 && score < 100) {
+        ui->levelPb->setMinimum(50);
+        ui->levelPb->setMaximum(100);
+        ui->levelPb->setValue(score);
+        ui->levelLb->setText("Level 4");
+    }
+    else if (score >= 100 && score < 250) {
+        ui->levelPb->setMinimum(100);
+        ui->levelPb->setMaximum(250);
+        ui->levelPb->setValue(score);
+        ui->levelLb->setText("Level 5");
+    }
 }
 
 void MainWindow::loadImage(const QString& path) {
@@ -459,10 +526,8 @@ void MainWindow::on_statisticBtn_clicked()
     ssf.initializeData();
 
     //setCentralWidget(ssf);
-//    ssf.layout()->addWidget(chartView);
-//    ssf.layout()->setAlignment(Qt::AlignCenter);
-   // ssf.resize(480, 300);
-   // ssf.show();
+    //    ssf.layout()->addWidget(chartView);
+    //    ssf.layout()->setAlignment(Qt::AlignCenter);
+    // ssf.resize(480, 300);
+    // ssf.show();
 }
-
-

@@ -112,6 +112,21 @@ bool UserDaoImp::update(User &t_user){
     return query.exec();
 }
 
+bool UserDaoImp::updateScore(const QString &t_username, int score) {
+    DatabaseSingleton::getInstance();
+
+    QSqlQuery query;
+
+
+    qDebug() << "Prepare Query: "<< query.prepare("UPDATE users SET  score = (:score) WHERE username = (:un)");
+
+    query.bindValue(":un", t_username);
+    query.bindValue(":score", score);
+
+    return query.exec();
+}
+
+
 
 bool UserDaoImp::delete_(const QString &t_username){
 

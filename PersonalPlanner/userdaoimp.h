@@ -15,6 +15,7 @@ public:
     bool create (User &t_user);
     User read(const QString &t_username);
     bool update(User &t_user);
+    bool updateScore(const QString &t_username, int score);
     bool delete_(const QString& t_username);
     bool checkLogin(const QString& t_username, const QString& t_password);
     bool updateProfilePicture(QByteArray &arr, QString &username, int width, int height);
