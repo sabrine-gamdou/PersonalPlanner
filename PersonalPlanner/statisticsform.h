@@ -1,4 +1,4 @@
-#ifndef STATISTICSFORM_H
+﻿#ifndef STATISTICSFORM_H
 #define STATISTICSFORM_H
 
 #include <QWidget>

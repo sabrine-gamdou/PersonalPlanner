@@ -11,13 +11,13 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Registration</string>
+   <string>PersonalPlanner</string>
   </property>
   <property name="autoFillBackground">
    <bool>false</bool>
   </property>
   <property name="styleSheet">
-   <string notr="true">QWidget{ background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(9, 54, 119, 255), stop:1 rgba(255, 255, 255, 255))}</string>
+   <string notr="true">QWidget{ background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0.0225455, stop:0 rgba(43, 96, 172, 255), stop:1 rgba(255, 255, 255, 255))}</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
    <item row="2" column="0">
@@ -74,6 +74,9 @@ QPushButton { background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, st
          <family>URW Gothic L</family>
         </font>
        </property>
+       <property name="styleSheet">
+        <string notr="true">background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0.0225455, stop:0 rgba(0,0,0,0), stop:1 rgba(0,0,0,0))</string>
+       </property>
        <property name="text">
         <string>Username</string>
        </property>
@@ -92,6 +95,9 @@ QPushButton { background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, st
         <font>
          <family>URW Gothic L</family>
         </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0.0225455, stop:0 rgba(0,0,0,0), stop:1 rgba(0,0,0,0))</string>
        </property>
        <property name="text">
         <string>E-Mail</string>
@@ -112,6 +118,9 @@ QPushButton { background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, st
          <family>URW Gothic L</family>
         </font>
        </property>
+       <property name="styleSheet">
+        <string notr="true">background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0.0225455, stop:0 rgba(0,0,0,0), stop:1 rgba(0,0,0,0))</string>
+       </property>
        <property name="text">
         <string>Lastname</string>
        </property>
@@ -123,6 +132,9 @@ QPushButton { background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, st
         <font>
          <family>URW Gothic L</family>
         </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0.0225455, stop:0 rgba(0,0,0,0), stop:1 rgba(0,0,0,0))</string>
        </property>
        <property name="text">
         <string>Firstname</string>
@@ -149,6 +161,9 @@ QPushButton { background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, st
         <font>
          <family>URW Gothic L</family>
         </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0.0225455, stop:0 rgba(0,0,0,0), stop:1 rgba(0,0,0,0))</string>
        </property>
        <property name="text">
         <string>Password</string>

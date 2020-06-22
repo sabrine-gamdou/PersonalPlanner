@@ -17,7 +17,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(ui->actionAbout, &QAction::triggered, this, &MainWindow::on_actionAboutClicked);
     QObject::connect(ui->actionHelp, &QAction::triggered, this, &MainWindow::on_actionHelpClicked);
 
-    QObject::connect(ui->actionLogOut, &QAction::triggered, this, &MainWindow::on_menuLogOutClicked);
+    QObject::connect(ui->actionLogout, &QAction::triggered, this, &MainWindow::on_actionLogoutClicked);
 
     mode = 0;
 
@@ -416,7 +416,7 @@ void MainWindow::on_actionHelpClicked(){
 }
 
 
-void MainWindow::on_menuLogOutClicked(){
+void MainWindow::on_actionLogoutClicked(){
 
     logout();
 }
@@ -451,13 +451,13 @@ void MainWindow::sort_() {
     ui->taskView->setModel(&proxyModel);
 }
 
-void MainWindow::on_statisticBtn_clicked()
-{
+void MainWindow::on_statisticBtn_clicked(){
+
     ssf.setUsername(m_username);
     ssf.initializeData();
 
-//    ssf.layout()->addWidget(chartView);
-//    ssf.layout()->setAlignment(Qt::AlignCenter);
+    ssf.layout()->addWidget(chartView);
+    ssf.layout()->setAlignment(Qt::AlignCenter);
     ssf.resize(480, 300);
     ssf.show();
 }

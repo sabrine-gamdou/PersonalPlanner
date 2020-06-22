@@ -84,7 +84,7 @@ private slots:
 
     void on_actionHelpClicked();
 
-    void on_menuLogOutClicked();
+    void on_actionLogoutClicked();
 
     void refreshData();
 
@@ -92,7 +92,7 @@ private slots:
 
     void sort_();
 
-    void on_statisticBtn_clicked();
+    //void on_statisticBtn_clicked();
 
 private:
 
@@ -101,7 +101,7 @@ private:
     StatusForm sf;
     HelpForm hf;
     AboutForm af;
-    StatisticsForm ssf;
+    //StatisticsForm ssf;
 
     UserDaoImp m_userManager;
     TaskDaoImp m_taskManager;

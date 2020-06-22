@@ -16,7 +16,7 @@
    </font>
   </property>
   <property name="windowTitle">
-   <string>About</string>
+   <string>PersonalPlanner</string>
   </property>
   <property name="styleSheet">
    <string notr="true">QWidget{ background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0.0225455, stop:0 rgba(43, 96, 172, 255), stop:1 rgba(255, 255, 255, 255))}</string>
@@ -32,10 +32,14 @@
    </property>
    <property name="font">
     <font>
+     <family>URW Gothic L</family>
      <pointsize>20</pointsize>
      <weight>75</weight>
      <bold>true</bold>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0.0225455, stop:0 rgba(0,0,0,0), stop:1 rgba(0,0,0,0))</string>
    </property>
    <property name="text">
     <string>About</string>
@@ -49,6 +53,14 @@
      <width>781</width>
      <height>261</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>URW Gothic L</family>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0.0225455, stop:0 rgba(0,0,0,0), stop:1 rgba(0,0,0,0))</string>
    </property>
    <property name="text">
     <string>Our project idea is a personnel planner.
