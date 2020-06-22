@@ -521,13 +521,6 @@ void MainWindow::sort_() {
 
 void MainWindow::on_statisticBtn_clicked()
 {
-    ssf.setUsername(m_username);
     ssf.setTasksList(m_taskManager.getTaskList());
-    ssf.initializeData();
-
-    //setCentralWidget(ssf);
-    //    ssf.layout()->addWidget(chartView);
-    //    ssf.layout()->setAlignment(Qt::AlignCenter);
-    // ssf.resize(480, 300);
-    // ssf.show();
+    ssf.initializeChart();
 }

@@ -23,21 +23,14 @@ class StatisticsForm : public QMainWindow
 public:
     explicit StatisticsForm(QMainWindow *parent = 0);
     ~StatisticsForm();
+
     void createStructure();
     void populateData();
-    void initializeData();
-    void sortDateMonths(int month);
-    void sortDateWeeks(int month, int week);
-
-
-    void sortDateWeeks2();
-    void initializeMap();
+    void initializeChart();
+    void sortDateWeeks();
     void printMap() const;
     void printList(QList<QList<int>> t_combinedList) const;
-
-    StatisticView *getView() const;
-    void setUsername(const QString &value);
-
+    int statusToInt(QString status);
 
     QList<Task> getTasksList() const;
     void setTasksList(const QList<Task> &value);
@@ -49,13 +42,8 @@ private:
     StatisticModel *monthModel;
     StatisticModel *weeklyModel;
     StatisticView *view;
-    TaskDaoImp m_taskManager;
-    QString username;
 
     QList<Task> tasksList;
-    QList<int> statusMonthlyList;
-    QList<int> statusListStatistic;
-    QList<QList<int>> combinedList;
     QMap<int,QList<QList<int>>> monthlyMap;
 
 

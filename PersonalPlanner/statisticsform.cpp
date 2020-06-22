@@ -21,7 +21,7 @@ void StatisticsForm::createStructure(){
     monthModel->setName("Statistic of your Task Status from June - December");
 
     for (int month = 0; month < months.count(); month++) {
-        weeklyModel = new StatisticModel (weeks, 50, view);
+        weeklyModel = new StatisticModel (weeks, 10, view);
         monthModel->mapStatisticModel(month, weeklyModel);
         for ( int week = 0; week < weeks.count(); week++) {
             weeklyModel->mapStatisticModel(week, monthModel);
@@ -41,17 +41,11 @@ void StatisticsForm::populateData() {
         for (month = monthlyMap.begin();month != monthlyMap.end();++month) {
             QBarSet *weeklyStatus = new QBarSet(state);
             for (int week = 0; week < weeks.count(); ++week) {
-                for(int statusCounter = 0; statusCounter<3; ++statusCounter){
-                    qDebug() << "Map Keys list length: "<<monthlyMap.keys().length();
-                    qDebug() << "Week List length: " << month.value().length();
-                    qDebug() << "Status List length: " << month.value().at(week).length();
-                    qDebug() <<  month.value().at(week).at(statusCounter);
-                    *weeklyStatus <<  month.value().at(week).at(statusCounter);
-                }
-
-                // qDebug() << month.value().at(week).at(i);
-                // *weeklyStatus << month.value().at(week).at(monthC);
-
+                qDebug() << "Map Keys list length: "<<monthlyMap.keys().length();
+                qDebug() << "Week List length: " << month.value().length();
+                qDebug() << "Status List length: " << month.value().at(week).length();
+                qDebug() << "Month: "<< month.key()+6 << " Week: "<< week << "StatusType: "<< statusToInt(state)<< " Status: "<<month.value().at(week).at(statusToInt(state));
+                *weeklyStatus <<  month.value().at(week).at(statusToInt(state));
             }
             ++monthC;
             monthModel->statisticModel(month.key())->append(weeklyStatus);
@@ -62,12 +56,21 @@ void StatisticsForm::populateData() {
 
 }
 
+int StatisticsForm::statusToInt(QString status){
+    if(status == "Completed"){
+        return 0;
+    }else if(status == "Failed"){
+        return 1;
+    }else if(status == "In-Progress"){
+        return 2;
+    }
+    return -1;
+}
 
-
-void StatisticsForm::initializeData() {
+void StatisticsForm::initializeChart() {
     view = new StatisticView();
-    monthModel = new StatisticModel(months, 10, view);
-    initializeMap();
+    monthModel = new StatisticModel(months, 40, view);
+    sortDateWeeks();
     printMap();
     createStructure();
     populateData();
@@ -83,98 +86,45 @@ void StatisticsForm::initializeData() {
     //  ui->set
     QChartView *chartView = new QChartView(view);
     setCentralWidget(chartView);
-    resize(480,300);
+    resize(600,400);
     show();
 
 }
 
 
-
-void StatisticsForm::sortDateMonths(int month) {
-    int completed = 0;
-    int failed = 0;
-    int inProgress = 0;
-    int sum = 0;
-
-    for (int week = 0; week < 4; week++) {
-        sortDateWeeks(month, week);
-
-        completed += statusListStatistic.at(0);
-        failed += statusListStatistic.at(1);
-        inProgress += statusListStatistic.at(2);
-    }
-    sum = completed + failed + inProgress;
-}
-
-void StatisticsForm::sortDateWeeks(int month, int week) {
-    int completed = 0;
-    int failed = 0;
-    int inProgress = 0;
-
-    for ( int i = 0; i < m_taskManager.getTaskList().length(); i++) {
-        if (m_taskManager.getTaskList().at(i).date().month() == month) {
-            for (int i = 0; i < 4; i++) {
-                for (int j = 1; j < 8; j++) {
-                    if ((m_taskManager.getTaskList().at(i).date().day() == (j+(7*i))) && ((i+1) == week)){
-
-                        if ( m_taskManager.getTaskList().at(i).status() == "Completed")
-                            completed++;
-                        else if ( m_taskManager.getTaskList().at(i).status() == "Failed")
-                            failed++;
-                        else if  ( m_taskManager.getTaskList().at(i).status() == "In-Progress")
-                            inProgress++;
-                    }
-
-                }
-                statusListStatistic.append(completed);
-                statusListStatistic.append(failed);
-                statusListStatistic.append(inProgress);
-            }
-        }
-    }
-
-
-    // combinedList.at(week-1).append(statusList);
-}
-
-void StatisticsForm::sortDateWeeks2() {
-
-
-    for ( int i = 0; i < tasksList.length(); i++) {
-        for(int month = 0; month < months.length(); ++month){
-            QList<QList<int>> combinedMonths;
-            for(int week = 0; week < weeks.length(); ++week){
-                QList<int> weeklyStatusList;
-                qDebug() << "Week: "<< week<< ", Month: "<< month;
-                int completed = 0;
-                int failed = 0;
-                int inProgress = 0;
-                for (int j = 1; j < 8; j++) { // go through each day of chosen week of month
-                    if ((tasksList.at(i).date().month() == (month+6)) && (tasksList.at(i).date().day() == (j+(7*week)))) { // because we start at June(6) till December(12)
-
+void StatisticsForm::sortDateWeeks() {
+    qDebug() <<"Status: " <<status;
+    for(int month = 0; month < months.length(); ++month){
+        QList<QList<int>> combinedMonths;
+        for(int week = 0; week < weeks.length(); ++week){
+            QList<int> weeklyStatusList;
+            int completed = 0;
+            int failed = 0;
+            int inProgress = 0;
+            for (int j = 1; j < 8; j++) { // go through each day of chosen week of month
+                for ( int i = 0; i < tasksList.length(); ++i) {
+                    QString status = tasksList.at(i).status();// because we start at June(6) till December(12)
+                    if((tasksList.at(i).date().month() == (month+6)) && (tasksList.at(i).date().day() == (j+(7*week)))){
                         //   if { // go through all days
-                        qDebug() << "Day: "<< tasksList.at(i).date().day();
-                        if ( tasksList.at(i).status() == "Completed")
-                           ++completed;
-                        else if ( tasksList.at(i).status() == "Failed")
+                        qDebug() << "Day: "<< tasksList.at(i).date().day() << "Week: "<< week+1<< ", Month: "<< month+6;
+                        if ( status == "Completed")
+                            ++completed;
+                        else if ( status == "Failed")
                             ++failed;
-                        else if  ( tasksList.at(i).status() == "In-Progress")
+                        else if  ( status == "In-Progress")
                             ++inProgress;
                     }
-                    //  }
-
                 }
-                qDebug() << "Completed: "<<  ++completed;
-                qDebug() << "Failed:  "<< ++failed;
-                qDebug() << "In-Progress: "<< ++inProgress;
-                weeklyStatusList.append(completed);
-                weeklyStatusList.append(failed);
-                weeklyStatusList.append(inProgress);
-                combinedMonths.append(weeklyStatusList);
             }
-            monthlyMap.insert(month,combinedMonths);
+            qDebug() << "Completed: "<<  completed;
+            qDebug() << "Failed:  "<< failed;
+            qDebug() << "In-Progress: "<< inProgress;
+            weeklyStatusList.append(completed);
+            weeklyStatusList.append(failed);
+            weeklyStatusList.append(inProgress);
+            combinedMonths.append(weeklyStatusList);
         }
-
+        monthlyMap.insert(month,combinedMonths);
     }
 }
 
@@ -194,10 +144,6 @@ void StatisticsForm::printList(QList<QList<int>> t_combinedList) const{
     }
 }
 
-void StatisticsForm::initializeMap(){
-    sortDateWeeks2();
-
-}
 QList<Task> StatisticsForm::getTasksList() const
 {
     return tasksList;
@@ -208,13 +154,6 @@ void StatisticsForm::setTasksList(const QList<Task> &value)
     tasksList = value;
 }
 
-StatisticView *StatisticsForm::getView() const
-{
-    return view;
-}
 
-void StatisticsForm::setUsername(const QString &value)
-{
-    username = value;
-}
+
 

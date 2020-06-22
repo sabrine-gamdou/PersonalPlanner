@@ -334,7 +334,8 @@ QPushButton { background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, st
               </font>
              </property>
              <property name="styleSheet">
-              <string notr="true">background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0.0225455, stop:0 rgba(0,0,0,0), stop:1 rgba(0,0,0,0))</string>
+              <string notr="true">
+background-color: rgba(191, 64, 64, 0);</string>
              </property>
              <property name="text">
               <string>Title</string>
@@ -665,7 +666,7 @@ QPushButton { background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, st
            <rect>
             <x>460</x>
             <y>10</y>
-            <width>131</width>
+            <width>141</width>
             <height>23</height>
            </rect>
           </property>
@@ -868,7 +869,7 @@ QPushButton { background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, st
            <rect>
             <x>20</x>
             <y>300</y>
-            <width>101</width>
+            <width>111</width>
             <height>25</height>
            </rect>
           </property>
@@ -891,7 +892,7 @@ QPushButton { background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, st
            <rect>
             <x>420</x>
             <y>270</y>
-            <width>121</width>
+            <width>131</width>
             <height>25</height>
            </rect>
           </property>
