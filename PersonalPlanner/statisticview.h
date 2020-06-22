@@ -17,20 +17,21 @@ class StatisticView : public QChart
 public:
     explicit StatisticView(QGraphicsItem *parent = nullptr, Qt::WindowFlags wFlags = {});
 
-    void changeSeries(StatisticModel model);
+    void changeSeries(StatisticModel *model);
 
 
 public Q_SLOTS:
     void handleClicked(int index, QBarSet *barset);
 
 private:
-    StatisticModel m_currentModel;
+    StatisticModel *m_currentModel;
     QBarCategoryAxis *m_axisX;
     QValueAxis *m_axisY;
 
 };
 
 #endif // STATISTICVIEW_H
+
 
 
 

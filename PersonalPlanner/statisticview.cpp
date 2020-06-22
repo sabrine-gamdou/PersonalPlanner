@@ -14,7 +14,7 @@ StatisticView::StatisticView (QGraphicsItem *parent, Qt::WindowFlags wFlags)
   addAxis(m_axisX, Qt::AlignBottom);
 }
 
-void StatisticView::changeSeries(StatisticModel model)
+void StatisticView::changeSeries(StatisticModel *model)
 {
     if (m_currentModel)
         removeSeries(m_currentModel);
@@ -22,12 +22,12 @@ void StatisticView::changeSeries(StatisticModel model)
     m_currentModel = model;
 
     // Reset axis
-    m_axisX->setCategories(m_currentModel.categories());
+    m_axisX->setCategories(m_currentModel->categories());
     addSeries(model);
-    model.attachAxis(m_axisX);
-    model.attachAxis(m_axisY);
-    m_axisY->setRange(0,m_currentModel.maxValue());
-    setTitle(model.name());
+    model->attachAxis(m_axisX);
+    model->attachAxis(m_axisY);
+    m_axisY->setRange(0,m_currentModel->maxValue());
+    setTitle(model->name());
 }
 
 void StatisticView::handleClicked(int index, QBarSet *barset)

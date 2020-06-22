@@ -2,10 +2,8 @@
 
 QT_CHARTS_USE_NAMESPACE
 
-StatisticModel::StatisticModel
-(QStringList categories, int maxValue, QObject *parent)
-    : QStackedBarSeries(parent),
-      m_maxValue(maxValue)
+StatisticModel::StatisticModel(QStringList categories, int maxValue, QObject *parent)
+    : QStackedBarSeries(parent),m_maxValue(maxValue)
 {
     m_categories = categories;
 }
@@ -29,4 +27,3 @@ int StatisticModel::maxValue()
 {
     return m_maxValue;
 }
-

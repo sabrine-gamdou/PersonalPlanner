@@ -451,13 +451,18 @@ void MainWindow::sort_() {
     ui->taskView->setModel(&proxyModel);
 }
 
-void MainWindow::on_statisticBtn_clicked(){
 
+void MainWindow::on_statisticBtn_clicked()
+{
     ssf.setUsername(m_username);
+    ssf.setTasksList(m_taskManager.getTaskList());
     ssf.initializeData();
 
-    ssf.layout()->addWidget(chartView);
-    ssf.layout()->setAlignment(Qt::AlignCenter);
-    ssf.resize(480, 300);
-    ssf.show();
+    //setCentralWidget(ssf);
+//    ssf.layout()->addWidget(chartView);
+//    ssf.layout()->setAlignment(Qt::AlignCenter);
+   // ssf.resize(480, 300);
+   // ssf.show();
 }
+
+
