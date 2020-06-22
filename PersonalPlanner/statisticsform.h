@@ -30,8 +30,10 @@ public:
     void sortDateWeeks(int month, int week);
 
 
-    void sortDateWeeks2(int month, int week);
+    void sortDateWeeks2();
     void initializeMap();
+    void printMap() const;
+    void printList(QList<QList<int>> t_combinedList) const;
 
     StatisticView *getView() const;
     void setUsername(const QString &value);
