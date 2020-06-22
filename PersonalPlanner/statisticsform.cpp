@@ -131,7 +131,7 @@ void StatisticsForm::sortDateWeeks() {
 void StatisticsForm::printMap() const{
     QMap<int, QList<QList<int>>>::const_iterator month;
     int i = 0;
-    for (month = monthlyMap.begin(); month != monthlyMap.end(), i<months.length(); ++i,++month) {
+    for (int i = 0;i<months.length(); ++i) {
         printList(monthlyMap.value(i));
     }
 }
