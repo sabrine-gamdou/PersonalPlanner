@@ -7,6 +7,8 @@ StatisticsForm::StatisticsForm(QMainWindow *parent) :
 {
 
     ui->setupUi(this);
+    this->adjustSize();
+    this->move(QApplication::desktop()->screen()->rect().center() - this->rect().center());
 }
 
 StatisticsForm::~StatisticsForm()
@@ -15,10 +17,11 @@ StatisticsForm::~StatisticsForm()
 }
 
 
+
 void StatisticsForm::createStructure(){
 
 
-    monthModel->setName("Statistic of your Task Status from June - December");
+    monthModel->setName("Statistic of your Task Status from June - December " + QString::number(QDate::currentDate().year()));
 
     for (int month = 0; month < months.count(); month++) {
         weeklyModel = new StatisticModel (weeks, 10, view);
@@ -33,6 +36,8 @@ void StatisticsForm::createStructure(){
     QObject::connect(monthModel, &StatisticModel::clicked, view, &StatisticView::handleClicked);
 }
 
+
+
 void StatisticsForm::populateData() {
     QMap<int, QList<QList<int>>>::const_iterator month;
     for (const QString &state : status) {
@@ -41,10 +46,6 @@ void StatisticsForm::populateData() {
         for (month = monthlyMap.begin();month != monthlyMap.end();++month) {
             QBarSet *weeklyStatus = new QBarSet(state);
             for (int week = 0; week < weeks.count(); ++week) {
-                qDebug() << "Map Keys list length: "<<monthlyMap.keys().length();
-                qDebug() << "Week List length: " << month.value().length();
-                qDebug() << "Status List length: " << month.value().at(week).length();
-                qDebug() << "Month: "<< month.key()+6 << " Week: "<< week << "StatusType: "<< statusToInt(state)<< " Status: "<<month.value().at(week).at(statusToInt(state));
                 *weeklyStatus <<  month.value().at(week).at(statusToInt(state));
             }
             ++monthC;
@@ -55,6 +56,8 @@ void StatisticsForm::populateData() {
     }
 
 }
+
+
 
 int StatisticsForm::statusToInt(QString status){
     if(status == "Completed"){
@@ -67,33 +70,33 @@ int StatisticsForm::statusToInt(QString status){
     return -1;
 }
 
+
+
 void StatisticsForm::initializeChart() {
+
     view = new StatisticView();
     monthModel = new StatisticModel(months, 40, view);
+
     sortDateWeeks();
-    printMap();
     createStructure();
     populateData();
 
-
-    // Show season series in initial view
     view->changeSeries(monthModel);
     view->setTitle(monthModel->name());
 
     view->axes(Qt::Horizontal).first()->setGridLineVisible(false);
     view->legend()->setVisible(true);
     view->legend()->setAlignment(Qt::AlignBottom);
-    //  ui->set
     QChartView *chartView = new QChartView(view);
+    chartView->setChart(view);
     setCentralWidget(chartView);
     resize(600,400);
     show();
-
 }
 
 
 void StatisticsForm::sortDateWeeks() {
-    qDebug() <<"Status: " <<status;
+
     for(int month = 0; month < months.length(); ++month){
         QList<QList<int>> combinedMonths;
         for(int week = 0; week < weeks.length(); ++week){
@@ -101,17 +104,13 @@ void StatisticsForm::sortDateWeeks() {
             int completed = 0;
             int failed = 0;
             int inProgress = 0;
-            for (int j = 1; j < 8; j++) { // go through each day of chosen week of month
-                for ( int i = 0; i < tasksList.length(); ++i) {
-                    QString status = tasksList.at(i).status();// because we start at June(6) till December(12)
-
-                if ((tasksList.at(i).date().month() == (month+6)) && ((tasksList.at(i).date().day() == (j+(7*week))) ||
-                        (checkEndOfMonth(tasksList.at(i).date().day(), tasksList.at(i).date().month()) && (week == 3))))
-
-
-                    {
-                        //   if { // go through all days
-                        qDebug() << "Day: "<< tasksList.at(i).date().day() << "Week: "<< week+1<< ", Month: "<< month+6;
+            for (int dayOfWeek = 1; dayOfWeek < 8; dayOfWeek++) { // go through each day of chosen week of month
+                for ( int task = 0; task < tasksList.length(); ++task) {
+                    if(tasksList.at(task).date().year() == QDate::currentDate().year()){
+                    QString status = tasksList.at(task).status();
+                    //check the first 28 days
+                    if((tasksList.at(task).date().month() == (month+6)) && (tasksList.at(task).date().day() == (dayOfWeek+(7*week)))){
+                        //this could also go in  a seperate method
                         if ( status == "Completed")
                             ++completed;
                         else if ( status == "Failed")
@@ -120,10 +119,22 @@ void StatisticsForm::sortDateWeeks() {
                             ++inProgress;
                     }
                 }
+                }
             }
-            qDebug() << "Completed: "<<  completed;
-            qDebug() << "Failed:  "<< failed;
-            qDebug() << "In-Progress: "<< inProgress;
+            //check days 29, 30 and 31 seperately
+            //this could go in a seperate method
+            //checked outside of days-loop, so they are checked only once per week and not 7 times
+            for( int task = 0; task < tasksList.length(); ++task){
+                QString status = tasksList.at(task).status();
+                if((tasksList.at(task).date().month() == (month+6)) && (week == 3) && (tasksList.at(task).date().year() == QDate::currentDate().year()) && checkEndOfMonth(tasksList.at(task).date().day(), tasksList.at(task).date().month())){
+                    if ( status == "Completed")
+                        ++completed;
+                    else if ( status == "Failed")
+                        ++failed;
+                    else if  ( status == "In-Progress")
+                        ++inProgress;
+                }
+            }
             weeklyStatusList.append(completed);
             weeklyStatusList.append(failed);
             weeklyStatusList.append(inProgress);
@@ -133,16 +144,10 @@ void StatisticsForm::sortDateWeeks() {
     }
 }
 
-bool StatisticsForm::checkEndOfMonth(int day, int month) {
 
-    qDebug() << "Month: " << month << "Day: " << day;
-    bool status = (((month == 6 || month == 9 || month == 11) && (day == 29 || day == 30))) ||
-            (((month == 7 || month == 8 || month == 10 || month == 12) && (day == 29 || day == 30 || day == 31)));
-    qDebug() << "Status End of Month: " << status;
-    return status;
+bool StatisticsForm::checkEndOfMonth(int day, int month){
+    return ((((month == 7) || (month == 8) || (month == 10) || (month == 12)) && ((day == 29) || (day == 30) || (day == 31))) || (((month == 6) || (month == 9) || (month == 11)) && ((day == 29) || (day == 30) || (day == 31))));
 }
-
-
 
 void StatisticsForm::printMap() const{
     for (int i = 0;i<months.length(); ++i) {

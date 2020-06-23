@@ -2,6 +2,7 @@
 #define STATISTICSFORM_H
 
 #include <QMainWindow>
+#include <QDesktopWidget>
 #include <QtCharts/QChart>
 #include <QtWidgets/QApplication>
 #include <QtCharts/QChartView>
@@ -31,13 +32,14 @@ public:
     void printMap() const;
     void printList(QList<QList<int>> t_combinedList) const;
     int statusToInt(QString status);
-    QList<Task> getTasksList() const;
-    void setTasksList(const QList<Task> &value);
     bool checkEndOfMonth(int day, int month);
 
+    QList<Task> getTasksList() const;
+    void setTasksList(const QList<Task> &value);
 
-private:
-    Ui::StatisticsForm *ui;
+
+    private:
+        Ui::StatisticsForm *ui;
 
     StatisticModel *monthModel;
     StatisticModel *weeklyModel;
@@ -45,9 +47,6 @@ private:
 
     QList<Task> tasksList;
     QMap<int,QList<QList<int>>> monthlyMap;
-
-
-
 
     //Define categories
     const QStringList months = {

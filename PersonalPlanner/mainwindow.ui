@@ -688,7 +688,7 @@ QPushButton { background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, st
            <rect>
             <x>240</x>
             <y>290</y>
-            <width>121</width>
+            <width>131</width>
             <height>41</height>
            </rect>
           </property>

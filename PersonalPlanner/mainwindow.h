@@ -45,20 +45,23 @@ public:
     void getTasks();
     void getUserData();
     void editInfoCheckBox_checked(const bool checked);
-    bool readTaskFromMainWindow();
+    bool titleExists(QString title);
+    Task readTaskData();
+    bool readTaskAndCheckIfValid();
     void userUpdatedConfirmed(const bool t_userUpdated);
     void deleteTask();
     int setRepetitionIndex(QString repetitionString);
     void setRepetitionDuration(QDate date, Task task);
     void taskConfirmed(const bool taskUpdated);
     void resetTaskInput();
-    void setStatusColor();
     void statusCounter();
+    int countScore(int completed, int failed);
     void loadImage(const QString& path);
     void synchronizeCalendar();
     QByteArray convertImageToByteArray(QImage &img);
     void convertByteArrayToImage(QByteArray &arr);
     void setProgressbar();
+    void resetButtons();
 
 
 private slots:
