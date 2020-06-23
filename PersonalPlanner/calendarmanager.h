@@ -26,7 +26,6 @@ public:
     QColor getColor() const;
 
     void getDates(QDate &date);
-    void selectTaskDate();
 
 protected:
     virtual void paintCell(QPainter *painter, const QRect &rect, const QDate &date) const;

@@ -38,7 +38,3 @@ void CalendarManager::paintCell(QPainter *painter, const QRect &rect, const QDat
         painter->drawRect(rect.adjusted(0, 0, -1, -1));
     }
 }
-
-void CalendarManager::selectTaskDate(){
-
-}
