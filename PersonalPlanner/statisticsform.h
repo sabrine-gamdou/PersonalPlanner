@@ -31,9 +31,9 @@ public:
     void printMap() const;
     void printList(QList<QList<int>> t_combinedList) const;
     int statusToInt(QString status);
-
     QList<Task> getTasksList() const;
     void setTasksList(const QList<Task> &value);
+    bool checkEndOfMonth(int day, int month);
 
 
 private:

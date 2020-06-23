@@ -104,7 +104,12 @@ void StatisticsForm::sortDateWeeks() {
             for (int j = 1; j < 8; j++) { // go through each day of chosen week of month
                 for ( int i = 0; i < tasksList.length(); ++i) {
                     QString status = tasksList.at(i).status();// because we start at June(6) till December(12)
-                    if((tasksList.at(i).date().month() == (month+6)) && (tasksList.at(i).date().day() == (j+(7*week)))){
+
+                if ((tasksList.at(i).date().month() == (month+6)) && ((tasksList.at(i).date().day() == (j+(7*week))) ||
+                        (checkEndOfMonth(tasksList.at(i).date().day(), tasksList.at(i).date().month()) && (week == 3))))
+
+
+                    {
                         //   if { // go through all days
                         qDebug() << "Day: "<< tasksList.at(i).date().day() << "Week: "<< week+1<< ", Month: "<< month+6;
                         if ( status == "Completed")
@@ -127,6 +132,17 @@ void StatisticsForm::sortDateWeeks() {
         monthlyMap.insert(month,combinedMonths);
     }
 }
+
+bool StatisticsForm::checkEndOfMonth(int day, int month) {
+
+    qDebug() << "Month: " << month << "Day: " << day;
+    bool status = (((month == 6 || month == 9 || month == 11) && (day == 29 || day == 30))) ||
+            (((month == 7 || month == 8 || month == 10 || month == 12) && (day == 29 || day == 30 || day == 31)));
+    qDebug() << "Status End of Month: " << status;
+    return status;
+}
+
+
 
 void StatisticsForm::printMap() const{
     for (int i = 0;i<months.length(); ++i) {
