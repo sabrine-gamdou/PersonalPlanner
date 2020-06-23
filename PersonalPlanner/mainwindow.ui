@@ -116,7 +116,7 @@
               <bool>false</bool>
              </property>
              <property name="styleSheet">
-              <string notr="true">QPushButton:hover { color: white} 
+              <string notr="true">QPushButton:hover { color: rgb(7, 26, 212)} 
 QPushButton { background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(183, 183, 183, 255), stop:1 rgba(255, 255, 255, 255)); border-style: outset; border-radius: 8px; padding: 4px}
 </string>
              </property>
@@ -144,7 +144,7 @@ QPushButton { background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, st
               <bool>false</bool>
              </property>
              <property name="styleSheet">
-              <string notr="true">QPushButton:hover { color: white} 
+              <string notr="true">QPushButton:hover { color: rgb(7, 26, 212)} 
 QPushButton { background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(183, 183, 183, 255), stop:1 rgba(255, 255, 255, 255)); border-style: outset; border-radius: 8px; padding: 4px}
 </string>
              </property>
@@ -172,7 +172,7 @@ QPushButton { background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, st
               <bool>false</bool>
              </property>
              <property name="styleSheet">
-              <string notr="true">QPushButton:hover { color: white} 
+              <string notr="true">QPushButton:hover { color: rgb(7, 26, 212)} 
 QPushButton { background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(183, 183, 183, 255), stop:1 rgba(255, 255, 255, 255)); border-style: outset; border-radius: 8px; padding: 4px}
 </string>
              </property>
@@ -204,206 +204,6 @@ QPushButton { background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, st
          <attribute name="title">
           <string>Add </string>
          </attribute>
-         <widget class="QWidget" name="layoutWidget">
-          <property name="geometry">
-           <rect>
-            <x>270</x>
-            <y>40</y>
-            <width>221</width>
-            <height>261</height>
-           </rect>
-          </property>
-          <layout class="QVBoxLayout" name="verticalLayout_8">
-           <property name="spacing">
-            <number>0</number>
-           </property>
-           <item>
-            <widget class="QLineEdit" name="titleTxt">
-             <property name="font">
-              <font>
-               <family>URW Gothic L</family>
-              </font>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">background: white</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLineEdit" name="descriptionTxt">
-             <property name="font">
-              <font>
-               <family>URW Gothic L</family>
-              </font>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">background: white</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QSpinBox" name="importanceSb">
-             <property name="font">
-              <font>
-               <family>URW Gothic L</family>
-              </font>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">background: white</string>
-             </property>
-             <property name="maximum">
-              <number>5</number>
-             </property>
-             <property name="value">
-              <number>1</number>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QDateTimeEdit" name="dateTimeEdit">
-             <property name="font">
-              <font>
-               <family>URW Gothic L</family>
-              </font>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">background: white</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QComboBox" name="repeatCb">
-             <property name="font">
-              <font>
-               <family>URW Gothic L</family>
-              </font>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">background: white</string>
-             </property>
-             <property name="currentIndex">
-              <number>0</number>
-             </property>
-             <item>
-              <property name="text">
-               <string>Never</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Day</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Week</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Month</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Year</string>
-              </property>
-             </item>
-            </widget>
-           </item>
-          </layout>
-         </widget>
-         <widget class="QWidget" name="layoutWidget">
-          <property name="geometry">
-           <rect>
-            <x>110</x>
-            <y>40</y>
-            <width>151</width>
-            <height>261</height>
-           </rect>
-          </property>
-          <layout class="QVBoxLayout" name="verticalLayout_6">
-           <property name="spacing">
-            <number>0</number>
-           </property>
-           <item>
-            <widget class="QLabel" name="titleLb">
-             <property name="font">
-              <font>
-               <family>URW Gothic L</family>
-              </font>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">
-background-color: rgba(191, 64, 64, 0);</string>
-             </property>
-             <property name="text">
-              <string>Title</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="descriptionLb">
-             <property name="font">
-              <font>
-               <family>URW Gothic L</family>
-              </font>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0.0225455, stop:0 rgba(0,0,0,0), stop:1 rgba(0,0,0,0))</string>
-             </property>
-             <property name="text">
-              <string>Description</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="importancLb">
-             <property name="font">
-              <font>
-               <family>URW Gothic L</family>
-              </font>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0.0225455, stop:0 rgba(0,0,0,0), stop:1 rgba(0,0,0,0))</string>
-             </property>
-             <property name="text">
-              <string>Importance</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="durationLb">
-             <property name="font">
-              <font>
-               <family>URW Gothic L</family>
-              </font>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0.0225455, stop:0 rgba(0,0,0,0), stop:1 rgba(0,0,0,0))</string>
-             </property>
-             <property name="text">
-              <string>Duration</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="repeatLb">
-             <property name="font">
-              <font>
-               <family>URW Gothic L</family>
-              </font>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0.0225455, stop:0 rgba(0,0,0,0), stop:1 rgba(0,0,0,0))</string>
-             </property>
-             <property name="text">
-              <string>Repeat Task every...</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </widget>
          <widget class="QDialogButtonBox" name="confirm_cancelBtnB">
           <property name="geometry">
            <rect>
@@ -422,7 +222,7 @@ background-color: rgba(191, 64, 64, 0);</string>
            <enum>Qt::LeftToRight</enum>
           </property>
           <property name="styleSheet">
-           <string notr="true">QPushButton:hover { color: white} 
+           <string notr="true">QPushButton:hover { color: rgb(7, 26, 212)} 
 QPushButton { background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(183, 183, 183, 255), stop:1 rgba(255, 255, 255, 255)); border-style: outset; border-radius: 8px; padding: 4px}
 </string>
           </property>
@@ -431,6 +231,242 @@ QPushButton { background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, st
           </property>
           <property name="centerButtons">
            <bool>false</bool>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="titleTxt">
+          <property name="geometry">
+           <rect>
+            <x>280</x>
+            <y>50</y>
+            <width>219</width>
+            <height>27</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>URW Gothic L</family>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background: white</string>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="descriptionTxt">
+          <property name="geometry">
+           <rect>
+            <x>280</x>
+            <y>100</y>
+            <width>219</width>
+            <height>27</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>URW Gothic L</family>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background: white</string>
+          </property>
+         </widget>
+         <widget class="QDateTimeEdit" name="dateTimeEdit">
+          <property name="geometry">
+           <rect>
+            <x>280</x>
+            <y>200</y>
+            <width>219</width>
+            <height>27</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>URW Gothic L</family>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background: white</string>
+          </property>
+         </widget>
+         <widget class="QComboBox" name="repeatCb">
+          <property name="geometry">
+           <rect>
+            <x>280</x>
+            <y>250</y>
+            <width>219</width>
+            <height>27</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>URW Gothic L</family>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QComboBox QAbstractItemView {
+  background-color: rgba(0, 0, 0, 0.39);
+}
+QComboBox{background: white}
+
+
+</string>
+          </property>
+          <property name="currentIndex">
+           <number>0</number>
+          </property>
+          <item>
+           <property name="text">
+            <string>Never</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Day</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Week</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Month</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Year</string>
+           </property>
+          </item>
+         </widget>
+         <widget class="QSpinBox" name="importanceSb">
+          <property name="geometry">
+           <rect>
+            <x>280</x>
+            <y>150</y>
+            <width>219</width>
+            <height>27</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>URW Gothic L</family>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background: white</string>
+          </property>
+          <property name="maximum">
+           <number>5</number>
+          </property>
+          <property name="value">
+           <number>1</number>
+          </property>
+         </widget>
+         <widget class="QLabel" name="descriptionLb">
+          <property name="geometry">
+           <rect>
+            <x>130</x>
+            <y>80</y>
+            <width>149</width>
+            <height>65</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>URW Gothic L</family>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0.0225455, stop:0 rgba(0,0,0,0), stop:1 rgba(0,0,0,0))</string>
+          </property>
+          <property name="text">
+           <string>Description</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="importancLb">
+          <property name="geometry">
+           <rect>
+            <x>130</x>
+            <y>130</y>
+            <width>149</width>
+            <height>65</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>URW Gothic L</family>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0.0225455, stop:0 rgba(0,0,0,0), stop:1 rgba(0,0,0,0))</string>
+          </property>
+          <property name="text">
+           <string>Importance</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="durationLb">
+          <property name="geometry">
+           <rect>
+            <x>130</x>
+            <y>170</y>
+            <width>149</width>
+            <height>87</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>URW Gothic L</family>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0.0225455, stop:0 rgba(0,0,0,0), stop:1 rgba(0,0,0,0))</string>
+          </property>
+          <property name="text">
+           <string>Duration</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="repeatLb">
+          <property name="geometry">
+           <rect>
+            <x>130</x>
+            <y>200</y>
+            <width>149</width>
+            <height>129</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>URW Gothic L</family>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0.0225455, stop:0 rgba(0,0,0,0), stop:1 rgba(0,0,0,0))</string>
+          </property>
+          <property name="text">
+           <string>Repeat Task every...</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="titleLb">
+          <property name="geometry">
+           <rect>
+            <x>130</x>
+            <y>40</y>
+            <width>149</width>
+            <height>41</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>URW Gothic L</family>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">
+background-color: rgba(191, 64, 64, 0);</string>
+          </property>
+          <property name="text">
+           <string>Title</string>
           </property>
          </widget>
         </widget>
@@ -456,7 +492,7 @@ QPushButton { background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, st
            </font>
           </property>
           <property name="styleSheet">
-           <string notr="true">QPushButton:hover { color: white} 
+           <string notr="true">QPushButton:hover { color: rgb(7, 26, 212)} 
 QPushButton { background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(183, 183, 183, 255), stop:1 rgba(255, 255, 255, 255)); border-style: outset; border-radius: 8px; padding: 4px}
 </string>
           </property>
@@ -464,118 +500,128 @@ QPushButton { background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, st
            <string>Statistics</string>
           </property>
          </widget>
-         <widget class="QWidget" name="layoutWidget">
+         <widget class="QLabel" name="completedLb">
           <property name="geometry">
            <rect>
-            <x>100</x>
-            <y>70</y>
-            <width>461</width>
-            <height>191</height>
+            <x>80</x>
+            <y>60</y>
+            <width>228</width>
+            <height>62</height>
            </rect>
           </property>
-          <layout class="QHBoxLayout" name="horizontalLayout">
-           <property name="spacing">
-            <number>0</number>
-           </property>
-           <item>
-            <layout class="QVBoxLayout" name="verticalLayout_4">
-             <property name="spacing">
-              <number>0</number>
-             </property>
-             <item>
-              <widget class="QLabel" name="completedLb">
-               <property name="font">
-                <font>
-                 <family>URW Gothic L</family>
-                </font>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0.0225455, stop:0 rgba(0,0,0,0), stop:1 rgba(0,0,0,0))</string>
-               </property>
-               <property name="text">
-                <string>Completed Tasks</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLabel" name="failedLb">
-               <property name="font">
-                <font>
-                 <family>URW Gothic L</family>
-                </font>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0.0225455, stop:0 rgba(0,0,0,0), stop:1 rgba(0,0,0,0))</string>
-               </property>
-               <property name="text">
-                <string>Failed Tasks</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLabel" name="progressLb">
-               <property name="font">
-                <font>
-                 <family>URW Gothic L</family>
-                </font>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0.0225455, stop:0 rgba(0,0,0,0), stop:1 rgba(0,0,0,0))</string>
-               </property>
-               <property name="text">
-                <string>Tasks in progress</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-           <item>
-            <layout class="QVBoxLayout" name="verticalLayout_5">
-             <property name="spacing">
-              <number>0</number>
-             </property>
-             <item>
-              <widget class="QLCDNumber" name="completedLCD">
-               <property name="font">
-                <font>
-                 <family>URW Gothic L</family>
-                </font>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0.0225455, stop:0 rgba(0,0,0,0), stop:1 rgba(0,0,0,0))</string>
-               </property>
-               <property name="digitCount">
-                <number>5</number>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLCDNumber" name="failedLCD">
-               <property name="font">
-                <font>
-                 <family>URW Gothic L</family>
-                </font>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0.0225455, stop:0 rgba(0,0,0,0), stop:1 rgba(0,0,0,0))</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLCDNumber" name="progressLCD">
-               <property name="font">
-                <font>
-                 <family>URW Gothic L</family>
-                </font>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0.0225455, stop:0 rgba(0,0,0,0), stop:1 rgba(0,0,0,0))</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-          </layout>
+          <property name="font">
+           <font>
+            <family>URW Gothic L</family>
+            <pointsize>15</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0.0225455, stop:0 rgba(0,0,0,0), stop:1 rgba(0,0,0,0))</string>
+          </property>
+          <property name="text">
+           <string>Completed Tasks</string>
+          </property>
+         </widget>
+         <widget class="QLCDNumber" name="completedLCD">
+          <property name="geometry">
+           <rect>
+            <x>320</x>
+            <y>60</y>
+            <width>231</width>
+            <height>62</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>URW Gothic L</family>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0.0225455, stop:0 rgba(0,0,0,0), stop:1 rgba(0,0,0,0))</string>
+          </property>
+          <property name="digitCount">
+           <number>5</number>
+          </property>
+         </widget>
+         <widget class="QLabel" name="failedLb">
+          <property name="geometry">
+           <rect>
+            <x>80</x>
+            <y>130</y>
+            <width>228</width>
+            <height>51</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>URW Gothic L</family>
+            <pointsize>15</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0.0225455, stop:0 rgba(0,0,0,0), stop:1 rgba(0,0,0,0))</string>
+          </property>
+          <property name="text">
+           <string>Failed Tasks</string>
+          </property>
+         </widget>
+         <widget class="QLCDNumber" name="failedLCD">
+          <property name="geometry">
+           <rect>
+            <x>320</x>
+            <y>130</y>
+            <width>231</width>
+            <height>61</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>URW Gothic L</family>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0.0225455, stop:0 rgba(0,0,0,0), stop:1 rgba(0,0,0,0))</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="progressLb">
+          <property name="geometry">
+           <rect>
+            <x>80</x>
+            <y>190</y>
+            <width>228</width>
+            <height>71</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>URW Gothic L</family>
+            <pointsize>15</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0.0225455, stop:0 rgba(0,0,0,0), stop:1 rgba(0,0,0,0))</string>
+          </property>
+          <property name="text">
+           <string>Tasks in progress</string>
+          </property>
+         </widget>
+         <widget class="QLCDNumber" name="progressLCD">
+          <property name="geometry">
+           <rect>
+            <x>320</x>
+            <y>200</y>
+            <width>231</width>
+            <height>61</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>URW Gothic L</family>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0.0225455, stop:0 rgba(0,0,0,0), stop:1 rgba(0,0,0,0))</string>
+          </property>
          </widget>
         </widget>
         <widget class="QWidget" name="accountTab">
@@ -601,7 +647,7 @@ QPushButton { background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, st
            </rect>
           </property>
           <property name="styleSheet">
-           <string notr="true"/>
+           <string notr="true">background: white</string>
           </property>
           <property name="frameShape">
            <enum>QFrame::Box</enum>
@@ -682,7 +728,9 @@ QPushButton { background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, st
            <bool>false</bool>
           </property>
           <property name="styleSheet">
-           <string notr="true">background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0.0225455, stop:0 rgba(0,0,0,0), stop:1 rgba(0,0,0,0))</string>
+           <string notr="true">background: white; border-style: outset; border-radius: 8px; padding: 4px
+
+</string>
           </property>
           <property name="text">
            <string>Edit Information</string>
@@ -693,173 +741,6 @@ QPushButton { background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, st
           <property name="checked">
            <bool>false</bool>
           </property>
-         </widget>
-         <widget class="QWidget" name="gridLayoutWidget_2">
-          <property name="geometry">
-           <rect>
-            <x>19</x>
-            <y>89</y>
-            <width>321</width>
-            <height>164</height>
-           </rect>
-          </property>
-          <layout class="QGridLayout" name="gridLayout_3">
-           <property name="horizontalSpacing">
-            <number>6</number>
-           </property>
-           <property name="verticalSpacing">
-            <number>0</number>
-           </property>
-           <item row="0" column="0">
-            <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="0">
-             <property name="spacing">
-              <number>6</number>
-             </property>
-             <item>
-              <layout class="QVBoxLayout" name="verticalLayout_2">
-               <property name="spacing">
-                <number>0</number>
-               </property>
-               <item>
-                <widget class="QLabel" name="firstnameLb">
-                 <property name="font">
-                  <font>
-                   <family>URW Gothic L</family>
-                  </font>
-                 </property>
-                 <property name="styleSheet">
-                  <string notr="true">background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0.0225455, stop:0 rgba(0,0,0,0), stop:1 rgba(0,0,0,0));</string>
-                 </property>
-                 <property name="text">
-                  <string>Firstname</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLabel" name="lastnameLb">
-                 <property name="font">
-                  <font>
-                   <family>URW Gothic L</family>
-                  </font>
-                 </property>
-                 <property name="styleSheet">
-                  <string notr="true">background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0.0225455, stop:0 rgba(0,0,0,0), stop:1 rgba(0,0,0,0))</string>
-                 </property>
-                 <property name="text">
-                  <string>Lastname</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLabel" name="emailLb">
-                 <property name="font">
-                  <font>
-                   <family>URW Gothic L</family>
-                  </font>
-                 </property>
-                 <property name="styleSheet">
-                  <string notr="true">background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0.0225455, stop:0 rgba(0,0,0,0), stop:1 rgba(0,0,0,0))</string>
-                 </property>
-                 <property name="text">
-                  <string>E-Mail</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLabel" name="birthdayLb">
-                 <property name="font">
-                  <font>
-                   <family>URW Gothic L</family>
-                  </font>
-                 </property>
-                 <property name="styleSheet">
-                  <string notr="true">background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0.0225455, stop:0 rgba(0,0,0,0), stop:1 rgba(0,0,0,0))</string>
-                 </property>
-                 <property name="text">
-                  <string>Birthday</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLabel" name="addressLb">
-                 <property name="font">
-                  <font>
-                   <family>URW Gothic L</family>
-                  </font>
-                 </property>
-                 <property name="styleSheet">
-                  <string notr="true">background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0.0225455, stop:0 rgba(0,0,0,0), stop:1 rgba(0,0,0,0))</string>
-                 </property>
-                 <property name="text">
-                  <string>Address</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-            </layout>
-           </item>
-           <item row="0" column="1">
-            <layout class="QVBoxLayout" name="verticalLayout_3">
-             <property name="spacing">
-              <number>6</number>
-             </property>
-             <item>
-              <widget class="QLineEdit" name="firstnameTxt">
-               <property name="enabled">
-                <bool>false</bool>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">background: white</string>
-               </property>
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLineEdit" name="lastnameTxt">
-               <property name="enabled">
-                <bool>false</bool>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">background: white</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLineEdit" name="emailTxt">
-               <property name="enabled">
-                <bool>false</bool>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">background: white</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QDateEdit" name="dateEdit">
-               <property name="enabled">
-                <bool>false</bool>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">background: white</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLineEdit" name="addressTxt">
-               <property name="enabled">
-                <bool>false</bool>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">background: white</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-          </layout>
          </widget>
          <widget class="QPushButton" name="saveChangesBtn">
           <property name="enabled">
@@ -879,7 +760,7 @@ QPushButton { background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, st
            </font>
           </property>
           <property name="styleSheet">
-           <string notr="true">QPushButton:hover { color: white} 
+           <string notr="true">QPushButton:hover { color: rgb(7, 26, 212)} 
 QPushButton { background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(183, 183, 183, 255), stop:1 rgba(255, 255, 255, 255)); border-style: outset; border-radius: 8px; padding: 4px}
 </string>
           </property>
@@ -902,12 +783,201 @@ QPushButton { background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, st
            </font>
           </property>
           <property name="styleSheet">
-           <string notr="true">QPushButton:hover { color: white} 
+           <string notr="true">QPushButton:hover { color: rgb(7, 26, 212)} 
+
 QPushButton { background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(183, 183, 183, 255), stop:1 rgba(255, 255, 255, 255)); border-style: outset; border-radius: 8px; padding: 4px}
 </string>
           </property>
           <property name="text">
            <string>Change picture</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="firstnameLb">
+          <property name="geometry">
+           <rect>
+            <x>20</x>
+            <y>70</y>
+            <width>72</width>
+            <height>32</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>URW Gothic L</family>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0.0225455, stop:0 rgba(0,0,0,0), stop:1 rgba(0,0,0,0));</string>
+          </property>
+          <property name="text">
+           <string>Firstname</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="lastnameLb">
+          <property name="geometry">
+           <rect>
+            <x>20</x>
+            <y>100</y>
+            <width>72</width>
+            <height>40</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>URW Gothic L</family>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0.0225455, stop:0 rgba(0,0,0,0), stop:1 rgba(0,0,0,0))</string>
+          </property>
+          <property name="text">
+           <string>Lastname</string>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="firstnameTxt">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="geometry">
+           <rect>
+            <x>110</x>
+            <y>70</y>
+            <width>248</width>
+            <height>25</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background: white</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="lastnameTxt">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="geometry">
+           <rect>
+            <x>110</x>
+            <y>110</y>
+            <width>248</width>
+            <height>25</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background: white</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="emailLb">
+          <property name="geometry">
+           <rect>
+            <x>20</x>
+            <y>150</y>
+            <width>59</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>URW Gothic L</family>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0.0225455, stop:0 rgba(0,0,0,0), stop:1 rgba(0,0,0,0))</string>
+          </property>
+          <property name="text">
+           <string>E-Mail</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="addressLb">
+          <property name="geometry">
+           <rect>
+            <x>20</x>
+            <y>220</y>
+            <width>59</width>
+            <height>41</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>URW Gothic L</family>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0.0225455, stop:0 rgba(0,0,0,0), stop:1 rgba(0,0,0,0))</string>
+          </property>
+          <property name="text">
+           <string>Address</string>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="emailTxt">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="geometry">
+           <rect>
+            <x>110</x>
+            <y>150</y>
+            <width>248</width>
+            <height>25</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background: white</string>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="addressTxt">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="geometry">
+           <rect>
+            <x>110</x>
+            <y>230</y>
+            <width>248</width>
+            <height>25</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background: white</string>
+          </property>
+         </widget>
+         <widget class="QDateEdit" name="dateEdit">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="geometry">
+           <rect>
+            <x>110</x>
+            <y>190</y>
+            <width>251</width>
+            <height>25</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background: white</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="birthdayLb">
+          <property name="geometry">
+           <rect>
+            <x>20</x>
+            <y>190</y>
+            <width>81</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <family>URW Gothic L</family>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0.0225455, stop:0 rgba(0,0,0,0), stop:1 rgba(0,0,0,0))</string>
+          </property>
+          <property name="text">
+           <string>Birthday</string>
           </property>
          </widget>
         </widget>
