@@ -174,4 +174,20 @@ bool UserDaoImp::updateProfilePicture(QByteArray &arr, QString &username, int wi
     return query.exec();
 }
 
+bool UserDaoImp::checkUserExist(const QString &t_username) {
+
+    DatabaseSingleton::getInstance();
+
+    QSqlQuery query;
+
+    qDebug() << "Prepare Query: "<< query.prepare("SELECT username FROM users WHERE username = (:un)");
+    query.bindValue(":un", t_username);
+
+    if( query.exec()){
+        if (query.next()){
+            return true;
+        }
+    }
+    return false;
+}
 

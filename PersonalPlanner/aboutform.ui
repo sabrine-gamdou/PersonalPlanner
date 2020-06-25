@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>734</width>
-    <height>410</height>
+    <width>699</width>
+    <height>500</height>
    </rect>
   </property>
   <property name="font">
@@ -49,9 +49,9 @@
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>80</y>
-     <width>781</width>
-     <height>261</height>
+     <y>90</y>
+     <width>651</width>
+     <height>371</height>
     </rect>
    </property>
    <property name="font">
@@ -63,18 +63,7 @@
     <string notr="true">background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0.0225455, stop:0 rgba(0,0,0,0), stop:1 rgba(0,0,0,0))</string>
    </property>
    <property name="text">
-    <string>Our project idea is a personnel planner.
-It should be possible for students from different universities and colleges to use it.
-The application should offer three different functions:
-A calendar with an overview of all tasks, the creation of the actual tasks
-and a separate account with two additional subfunctions.
-The tasks can be homework or other things that need to be done.
-The user can assign a name, a description, a date and an importance to these ToDos.
-The calendar is automatically synchronized when a new task is created and displays it by name.
-The account of a user consists of two parts:
-The actual profile and a score, which is made up of homework.
-The profile contains a profile picture and a profile name.
-Here the user can edit or delete his account.</string>
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Our project idea is a &amp;quot;Personal Planner&amp;quot;.&lt;/p&gt;&lt;p&gt;It was implemented for students from different universities to organize their day with tasks.&lt;/p&gt;&lt;p&gt;The application offers three different functionalities: &lt;br/&gt;- A calendar with an overview of all tasks&lt;br/&gt;- Adding/Deleting/Editing a task&lt;br/&gt;- Creating an account to hold all information&lt;/p&gt;&lt;p&gt;A task can be homework, grocery shopping, a meeting and so on. &lt;/p&gt;&lt;p&gt;The user can assign a title, a description, a date and an importance to one of the &lt;br/&gt;mentioned ToDos. &lt;/p&gt;&lt;p&gt;The calendar will automatically synchronize when a new task is created and &lt;br/&gt;marks the specific date with a red border.&lt;/p&gt;&lt;p&gt;A user has not only the actual profile that can be edited but also a score which increases &lt;br/&gt;after finishing a task successfully and decreases when a task was failed to do. &lt;br/&gt;The account also contains a changeable profile picture. Here the user is also able to&lt;br/&gt;delete its own account or edit it.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
  </widget>

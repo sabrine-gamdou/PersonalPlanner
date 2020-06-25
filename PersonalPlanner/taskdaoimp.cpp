@@ -119,6 +119,8 @@ bool TaskDaoImp::update(Task& task){
 
     QSqlQuery query;
 
+    task.setStatus("In-Progress");
+
     qDebug() << "Prepare Query: "<< query.prepare("UPDATE tasks SET title = (:title), date = (:date), "
                                                   "description = (:description), importance = (:importance), "
                                                   "status = (:status), repetition = (:repetition) "

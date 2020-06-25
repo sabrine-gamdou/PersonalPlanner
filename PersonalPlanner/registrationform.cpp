@@ -104,7 +104,10 @@ void RegistrationForm::on_confirmBtn_clicked(){
         ui->errLb->setText("");
         ui->errLb->setEnabled(false);
         User t_user(un,pass,firstname,lastname,email);
+        if (!m_userManager->checkUserExist(un))
         userCreatedConfirmed(m_userManager->create(t_user));
+        else
+          QMessageBox::warning(this, "Warning", "The username '" + un + "' is already taken... Please choose another username");
     }
 }
 

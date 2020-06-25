@@ -10,6 +10,8 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->taskView->setSelectionBehavior(QAbstractItemView::SelectRows);
+    ui->taskView->setStyleSheet("QTableView::item:selected { color:white; background:#000000; font-weight:900; }");
+
     this->move(QApplication::desktop()->screen()->rect().center() - this->rect().center());
 
     QObject::connect(&sf, &StatusForm::refreshGUI, this, &MainWindow::refreshData);
@@ -53,12 +55,10 @@ void MainWindow::getTasks(){
 
     m_taskManager.readAll(m_username);
 
+    synchronizeCalendar();
     ui->taskView->setModel(m_taskManager.getTaskModel());
     ui->taskView->horizontalHeader()->setVisible(true);
-
     statusCounter();
-    synchronizeCalendar();
-
     ui->taskView->show();
 }
 
@@ -92,19 +92,17 @@ void MainWindow::editInfoCheckBox_checked(const bool checked){
 
 }
 
-bool MainWindow::titleExists(QString title){
+bool MainWindow::titleExists(const QString title){
 
     if(title == "")
     {
         ui->titleTxt->setStyleSheet("border: 1px solid red" );
         ui->titleTxt->setPlaceholderText("Task Title EMPTY!");
         return false;
-    }else{
-        ui->titleTxt->setStyleSheet("");
-        ui->titleTxt->setPlaceholderText("");
-        return true;
     }
-    return false;
+    ui->titleTxt->setStyleSheet("");
+    ui->titleTxt->setPlaceholderText("");
+    return true;
 }
 
 Task MainWindow::readTaskData(){
@@ -114,7 +112,7 @@ Task MainWindow::readTaskData(){
         new_task.setRepetition(ui->repeatCb->currentText());
         return new_task;
     }
-    return NULL;
+    return Task();
 }
 
 bool MainWindow::readTaskAndCheckIfValid() {
@@ -186,7 +184,7 @@ int MainWindow::setRepetitionIndex(QString repetitionString) {
     return -1;
 }
 
-void MainWindow::setRepetitionDuration(QDate date, Task task) {
+void MainWindow::setRepetitionDuration(const QDate &date, Task task) {
 
     if ("Day" == task.repetition()) {
         for (int i = 1; i < 31; i++) {
@@ -221,7 +219,7 @@ void MainWindow::taskConfirmed(const bool taskUpdated) {
     if(taskUpdated){
         QMessageBox::information(this, "Information", "You successfully added/updated your task!");
     }else{
-        QMessageBox::warning(this, "Warning", "Something went wrong ... Please try again later.");
+        QMessageBox::warning(this, "Warning", "Please enter a task title to create a task.");
     }
 }
 
@@ -274,7 +272,7 @@ int MainWindow::countScore(int completed, int failed){
 
 void MainWindow::setProgressbar() {
 
-    QList<int> levelsScoresList = {0,10,30,50,100,150};
+    QList<int> levelsScoresList = {0,10,30,50,100,150,250,300,600,1000,2000};
     for(int level = 1; level < levelsScoresList.length(); ++level){
         if(score >= levelsScoresList.at(level-1) && score < levelsScoresList.at(level)){
             ui->levelPb->setMinimum(levelsScoresList.at(level-1));
@@ -312,9 +310,10 @@ void MainWindow::loadImage(const QString& path) {
 
 void MainWindow::synchronizeCalendar(){
 
+    ui->calendarWidget->setDates(QList<QDate>());
     for(int i =0 ; i<m_taskManager.getTaskList().length(); ++i){
         QDate date = m_taskManager.getTaskList().at(i).date();
-        ui->calendarWidget->getDates(date);
+        ui->calendarWidget->getDate(date);
     }
 }
 
@@ -354,19 +353,18 @@ void MainWindow::on_deleteAccountBtn_clicked(){
     msgBox.addButton(QMessageBox::No);
     msgBox.setDefaultButton(QMessageBox::No);
     if(msgBox.exec() == QMessageBox::Yes){
-      m_userManager.delete_(this->m_username);
+        m_userManager.delete_(this->m_username);
+        this->close();
     }else {
-      QMessageBox::information(this, "Information", "We are glad you did not leave!");
+        QMessageBox::information(this, "Information", "We are glad you did not leave!");
     }
 }
 
 void MainWindow::on_logoutBtn_clicked(){
-
     logout();
 }
 
 void MainWindow::on_confirm_cancelBtnB_accepted() {
-
     taskConfirmed(readTaskAndCheckIfValid());
     getTasks();
     resetTaskInput();
@@ -374,7 +372,6 @@ void MainWindow::on_confirm_cancelBtnB_accepted() {
 
 
 void MainWindow::on_confirm_cancelBtnB_rejected() {
-
     resetTaskInput();
 }
 
@@ -383,6 +380,7 @@ void MainWindow::on_deleteBtn_clicked() {
         deleteTask();
         resetButtons();
     }
+     getTasks();
 }
 
 
@@ -395,7 +393,6 @@ void MainWindow::on_taskView_pressed() {
 }
 
 void MainWindow::on_editBtn_clicked() {
-
     if(ui->taskView->currentIndex().isValid()){
         QModelIndex index = ui->taskView->selectionModel()->currentIndex();
         Task task = m_taskManager.getTaskModel()->taskList().at(index.row());
@@ -414,7 +411,6 @@ void MainWindow::on_editBtn_clicked() {
 }
 
 void MainWindow::on_saveChangesBtn_clicked(){
-
     User m_user(m_username, m_password, "", "", "");
     bool stop = false;
     QString style = "border: 1px solid red" ;
@@ -427,21 +423,17 @@ void MainWindow::on_saveChangesBtn_clicked(){
     }else{
         ui->firstnameTxt->setStyleSheet("");
         m_user.setFirstname(ui->firstnameTxt->text());
-        stop = false;
     }
-
 
     if(ui->lastnameTxt->text() == "")
     {
         ui->lastnameTxt->setStyleSheet(style);
         ui->lastnameTxt->setPlaceholderText("Last Name EMPTY!");
-        stop = false;
+        stop = true;
     }else{
         ui->lastnameTxt->setStyleSheet("");
         m_user.setLastname(ui->lastnameTxt->text());
-        stop = false;
     }
-
 
     if(ui->emailTxt->text() == "")
     {
@@ -451,19 +443,17 @@ void MainWindow::on_saveChangesBtn_clicked(){
     }else{
         ui->emailTxt->setStyleSheet("");
         m_user.setEmail(ui->emailTxt->text());
-        stop = false;
     }
 
     m_user.setBirthday(ui->dateEdit->date());
     m_user.setAddress(ui->addressTxt->text());
 
-    if(!stop){
+    if(!stop)
         userUpdatedConfirmed(m_userManager.update(m_user));
-    }
+
 }
 
 void MainWindow::on_statusBtn_clicked(){
-
     if(ui->taskView->currentIndex().isValid()){
         QModelIndex index = ui->taskView->selectionModel()->currentIndex();
         Task task = m_taskManager.getTaskModel()->taskList().at(index.row());
@@ -475,7 +465,6 @@ void MainWindow::on_statusBtn_clicked(){
 }
 
 void MainWindow::on_pictureBtn_clicked(){
-
     QString pathToImgFile = QFileDialog::getOpenFileName(this, tr("Open Image"), "/home/", tr("Image Files (*.png *.xpm *.jpg)"));
     if(!pathToImgFile.size())
         QMessageBox::critical(this, "Error", "No image selected. Please pick an Image first!");
@@ -485,29 +474,23 @@ void MainWindow::on_pictureBtn_clicked(){
 }
 
 void MainWindow::on_actionAboutClicked(){
-
     af.show();
 }
 
 void MainWindow::on_actionHelpClicked(){
-
     hf.show();
 }
 
-
 void MainWindow::on_actionLogoutClicked(){
-
     logout();
 }
 
 void MainWindow::refreshData(){
-
     sf.readStatusFromWindow();
     getTasks();
 }
 
 void MainWindow::on_calendarWidget_clicked(const QDate &date){
-
     ui->taskView->clearSelection();
     QList<int> indexes;
     ui->taskView->setSelectionMode(QAbstractItemView::MultiSelection);
@@ -519,11 +502,11 @@ void MainWindow::on_calendarWidget_clicked(const QDate &date){
     for (int i = 0; i < indexes.length(); ++i)
         ui->taskView->selectRow(indexes.at(i));
 
+    resetButtons();
     ui->taskView->setSelectionMode(QAbstractItemView::SingleSelection);
 }
 
 void MainWindow::sort_() {
-
     TaskListModel model;
     QSortFilterProxyModel proxyModel;
     proxyModel.setSourceModel(&model);
@@ -531,8 +514,7 @@ void MainWindow::sort_() {
 }
 
 
-void MainWindow::on_statisticBtn_clicked()
-{
+void MainWindow::on_statisticBtn_clicked() {
     ssf.setTasksList(m_taskManager.getTaskList());
     ssf.initializeChart();
 }

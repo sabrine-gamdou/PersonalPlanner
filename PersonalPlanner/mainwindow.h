@@ -45,13 +45,13 @@ public:
     void getTasks();
     void getUserData();
     void editInfoCheckBox_checked(const bool checked);
-    bool titleExists(QString title);
+    bool titleExists(const QString title);
     Task readTaskData();
     bool readTaskAndCheckIfValid();
     void userUpdatedConfirmed(const bool t_userUpdated);
     void deleteTask();
     int setRepetitionIndex(QString repetitionString);
-    void setRepetitionDuration(QDate date, Task task);
+    void setRepetitionDuration(const QDate &date, Task task);
     void taskConfirmed(const bool taskUpdated);
     void resetTaskInput();
     void statusCounter();

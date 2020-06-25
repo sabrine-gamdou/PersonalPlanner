@@ -19,6 +19,7 @@ public:
     bool delete_(const QString& t_username);
     bool checkLogin(const QString& t_username, const QString& t_password);
     bool updateProfilePicture(QByteArray &arr, QString &username, int width, int height);
+    bool checkUserExist(const QString &t_username);
 
 };
 

@@ -24,8 +24,10 @@ public:
 
     void setColor(const QColor &color);
     QColor getColor() const;
+    void getDate(QDate &date);
+    QList<QDate> getDates() const;
 
-    void getDates(QDate &date);
+    void setDates(const QList<QDate> &dates);
 
 protected:
     virtual void paintCell(QPainter *painter, const QRect &rect, const QDate &date) const;

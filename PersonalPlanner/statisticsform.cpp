@@ -146,7 +146,7 @@ void StatisticsForm::sortDateWeeks() {
 
 
 bool StatisticsForm::checkEndOfMonth(int day, int month){
-    return ((((month == 7) || (month == 8) || (month == 10) || (month == 12)) && ((day == 29) || (day == 30) || (day == 31))) || (((month == 6) || (month == 9) || (month == 11)) && ((day == 29) || (day == 30) || (day == 31))));
+    return ((((month == 7) || (month == 8) || (month == 10) || (month == 12)) && ((day == 29) || (day == 30) || (day == 31))) || (((month == 6) || (month == 9) || (month == 11)) && ((day == 29) || (day == 30))));
 }
 
 void StatisticsForm::printMap() const{

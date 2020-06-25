@@ -61,13 +61,13 @@ QVariant TaskListModel::data(const QModelIndex &index, int role) const{
 
     case Qt::BackgroundRole: {
         if (m_taskList[index.row()].status() == "Completed")
-            return QBrush (QColor(50,205,50));
+            return QBrush (QColor(32,159,223));
 
         else if (m_taskList[index.row()].status() == "Failed")
-            return QBrush (QColor(255,0,0));
+            return QBrush (QColor(246,166,37));
 
         else if (m_taskList[index.row()].status() == "In-Progress")
-            return QBrush (QColor(255,215,0));
+            return QBrush (QColor(153,202,83));
         break;
     default:break;
     }

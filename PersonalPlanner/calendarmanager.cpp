@@ -22,14 +22,13 @@ QColor CalendarManager::getColor() const{
     return ( m_outlinePen.color() );
 }
 
-void CalendarManager::getDates(QDate &date){
+void CalendarManager::getDate(QDate &date){
 
     if(!m_dates.contains(date))
         m_dates.append(date);
 }
 
 void CalendarManager::paintCell(QPainter *painter, const QRect &rect, const QDate &date) const{
-
     QCalendarWidget::paintCell(painter, rect, date);
 
     if( m_dates.contains(date) ) {
@@ -37,4 +36,14 @@ void CalendarManager::paintCell(QPainter *painter, const QRect &rect, const QDat
         painter->setBrush(m_transparentBrush);
         painter->drawRect(rect.adjusted(0, 0, -1, -1));
     }
+}
+
+void CalendarManager::setDates(const QList<QDate> &dates)
+{
+    m_dates = dates;
+}
+
+QList<QDate> CalendarManager::getDates() const
+{
+    return m_dates;
 }
