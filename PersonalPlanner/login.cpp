@@ -13,17 +13,24 @@ Login::Login(QWidget *parent) :
 }
 
 Login::~Login(){
-
     delete ui;
 }
 
 bool Login::login(QString un, QString pass){
-
     return this->m_userManager->checkLogin(un,pass);
 }
 
-void Login::on_loginBtn_clicked(){
+void Login::initialize(const QString & un, const QString &pass) {
+    w.setUsername(un);
+    w.setPassword(pass);
+    w.getUserData();
+    w.getTasks();
+    w.show();
+    this->close();
+}
 
+//Slots
+void Login::on_loginBtn_clicked(){
     m_username = ui->usernameText->text();
     m_password = ui->passText->text();
 
@@ -40,16 +47,7 @@ void Login::on_loginBtn_clicked(){
 }
 
 void Login::on_registerBtn_clicked(){
-
     r.show();
 }
 
-void Login::initialize(const QString & un, const QString &pass) {
 
-    w.setUsername(un);
-    w.setPassword(pass);
-    w.getUserData();
-    w.getTasks();
-    w.show();
-    this->close();
-}

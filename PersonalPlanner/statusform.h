@@ -26,7 +26,6 @@ public:
 
 private slots:
     void on_confirm_cancel_btn_accepted();
-
     void on_confirm_cancel_btn_rejected();
 
 signals:
@@ -34,11 +33,11 @@ signals:
 
 private:
     Ui::StatusForm *ui;
+
     QString status;
     TaskDaoImp m_taskDao;
     Task m_task;
     TaskListModel m_taskModel;
-
 };
 
 #endif // STATUSFORM_H

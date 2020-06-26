@@ -55,6 +55,7 @@ private:
     QString m_username;
     QString m_password;
     QByteArray m_profilePicture;
+
     int m_score;
 
     int width;

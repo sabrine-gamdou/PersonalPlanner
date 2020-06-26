@@ -23,11 +23,8 @@ private:
 public:
     // ~DatabaseSingleton();
 
-    /* Static Access Method. */
+    //Static Access Method.
     static QSqlDatabase getInstance();
-
-
-
 };
 
 

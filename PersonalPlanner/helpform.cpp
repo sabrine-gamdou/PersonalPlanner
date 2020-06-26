@@ -8,7 +8,6 @@ HelpForm::HelpForm(QWidget *parent) :
     ui->setupUi(this);
 }
 
-HelpForm::~HelpForm()
-{
+HelpForm::~HelpForm(){
     delete ui;
 }

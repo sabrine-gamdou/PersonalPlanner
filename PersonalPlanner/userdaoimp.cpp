@@ -13,7 +13,6 @@ UserDaoImp::~UserDaoImp(){
 
 
 bool UserDaoImp::create (User &t_user){
-
     DatabaseSingleton::getInstance();
 
     QSqlQuery query;
@@ -39,7 +38,6 @@ bool UserDaoImp::create (User &t_user){
 }
 
 User UserDaoImp::read(const QString& t_username){
-
     QString t_firstname;
     QString t_lastname;
     QString t_email;
@@ -91,7 +89,6 @@ User UserDaoImp::read(const QString& t_username){
 
 
 bool UserDaoImp::update(User &t_user){
-
     DatabaseSingleton::getInstance();
 
     QSqlQuery query;
@@ -112,7 +109,7 @@ bool UserDaoImp::update(User &t_user){
     return query.exec();
 }
 
-bool UserDaoImp::updateScore(const QString &t_username, int score) {
+bool UserDaoImp::updateScore(const QString &t_username, int score){
     DatabaseSingleton::getInstance();
 
     QSqlQuery query;
@@ -129,7 +126,6 @@ bool UserDaoImp::updateScore(const QString &t_username, int score) {
 
 
 bool UserDaoImp::delete_(const QString &t_username){
-
     DatabaseSingleton::getInstance();
 
     QSqlQuery query;
@@ -142,7 +138,6 @@ bool UserDaoImp::delete_(const QString &t_username){
 
 
 bool UserDaoImp::checkLogin(const QString &t_username, const QString &t_password){
-
     DatabaseSingleton::getInstance();
 
     QSqlQuery query;
@@ -160,7 +155,6 @@ bool UserDaoImp::checkLogin(const QString &t_username, const QString &t_password
 }
 
 bool UserDaoImp::updateProfilePicture(QByteArray &arr, QString &username, int width, int height){
-
     DatabaseSingleton::getInstance();
 
     QSqlQuery query;
@@ -174,8 +168,7 @@ bool UserDaoImp::updateProfilePicture(QByteArray &arr, QString &username, int wi
     return query.exec();
 }
 
-bool UserDaoImp::checkUserExist(const QString &t_username) {
-
+bool UserDaoImp::checkUserExist(const QString &t_username){
     DatabaseSingleton::getInstance();
 
     QSqlQuery query;

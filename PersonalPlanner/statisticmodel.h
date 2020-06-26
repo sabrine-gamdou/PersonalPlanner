@@ -10,21 +10,18 @@ QT_CHARTS_USE_NAMESPACE
 class StatisticModel : public QStackedBarSeries
 {
     Q_OBJECT
-    public:
-        StatisticModel(QStringList categories, int maxValue, QObject *parent = 0);
+public:
+    StatisticModel(QStringList categories, int maxValue, QObject *parent = 0);
 
-        void mapStatisticModel(int index, StatisticModel *statisticModel);
+    void mapStatisticModel(int index, StatisticModel *statisticModel);
+    StatisticModel *statisticModel(int index);
+    QStringList categories();
+    int maxValue();
 
-        StatisticModel *statisticModel(int index);
-
-        QStringList categories();
-
-        int maxValue();
-
-    private:
-        QMap<int, StatisticModel *> m_statisticModel;
-        QStringList m_categories;
-        int m_maxValue;
-    };
+private:
+    QMap<int, StatisticModel *> m_statisticModel;
+    QStringList m_categories;
+    int m_maxValue;
+};
 
 #endif // STATISTICMODEL_H

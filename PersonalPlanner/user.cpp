@@ -9,37 +9,30 @@ User::~User(){
 }
 
 QString User::firstname() const{
-
     return m_firstname;
 }
 
 void User::setFirstname(const QString &firstname){
-
     m_firstname = firstname;
 }
 
 QString User::lastname() const{
-
     return m_lastname;
 }
 
 void User::setLastname(const QString &lastname){
-
     m_lastname = lastname;
 }
 
 QString User::email() const{
-
     return m_email;
 }
 
 void User::setEmail(const QString &email){
-
     m_email = email;
 }
 
 QDate User::birthday() const{
-
     return m_birthday;
 }
 
@@ -49,77 +42,62 @@ void User::setBirthday(const QDate &birthday){
 }
 
 QString User::address() const{
-
     return m_address;
 }
 
 void User::setAddress(const QString &address){
-
     m_address = address;
 }
 
 QString User::username() const{
-
     return m_username;
 }
 
 void User::setUsername(const QString &username){
-
     m_username = username;
 }
 
 QString User::password() const{
-
     return m_password;
 }
 
 void User::setPassword(const QString &password){
-
     m_password = password;
 }
 
 int User::score() const{
-
     return m_score;
 }
 
 void User::setScore(int score){
-
     m_score = score;
 }
 
 int User::getWidth() const{
-
     return width;
 }
 
 void User::setWidth(int value){
-
     width = value;
 }
 
 int User::getHeight() const{
-
     return height;
 }
 
 void User::setHeight(int value){
-
     height = value;
 }
 
 QByteArray User::getProfilePicture() const{
-
     return m_profilePicture;
 }
 
 void User::setProfilePicture(const QByteArray &profilePicture){
-
     m_profilePicture = profilePicture;
 }
 
 QString User::toString(){
-
     QString string ;
     string.append("Username: " );
     string.append(m_username);

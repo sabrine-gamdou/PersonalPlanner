@@ -14,8 +14,7 @@ StatisticView::StatisticView (QGraphicsItem *parent, Qt::WindowFlags wFlags)
   addAxis(m_axisX, Qt::AlignBottom);
 }
 
-void StatisticView::changeSeries(StatisticModel *model)
-{
+void StatisticView::changeSeries(StatisticModel *model){
     if (m_currentModel)
         removeSeries(m_currentModel);
 
@@ -30,8 +29,8 @@ void StatisticView::changeSeries(StatisticModel *model)
     setTitle(model->name());
 }
 
-void StatisticView::handleClicked(int index, QBarSet *barset)
-{
+//Slot
+void StatisticView::handleClicked(int index, QBarSet *barset){
     Q_UNUSED(barset)
     StatisticModel *model = static_cast<StatisticModel *>(sender());
     changeSeries(model->statisticModel(index));

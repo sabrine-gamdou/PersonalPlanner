@@ -11,16 +11,11 @@ StatisticsForm::StatisticsForm(QMainWindow *parent) :
     this->move(QApplication::desktop()->screen()->rect().center() - this->rect().center());
 }
 
-StatisticsForm::~StatisticsForm()
-{
+StatisticsForm::~StatisticsForm(){
     delete ui;
 }
 
-
-
 void StatisticsForm::createStructure(){
-
-
     monthModel->setName("Statistic of your Task Status from June - December " + QString::number(QDate::currentDate().year()));
 
     for (int month = 0; month < months.count(); month++) {
@@ -30,16 +25,14 @@ void StatisticsForm::createStructure(){
             weeklyModel->mapStatisticModel(week, monthModel);
             weeklyModel->setName(QString("Status by week - " + months.at(month)));
         }
-
         QObject::connect(weeklyModel, &StatisticModel::clicked, view, &StatisticView::handleClicked);
     }
     QObject::connect(monthModel, &StatisticModel::clicked, view, &StatisticView::handleClicked);
 }
 
-
-
-void StatisticsForm::populateData() {
+void StatisticsForm::populateData(){
     QMap<int, QList<QList<int>>>::const_iterator month;
+
     for (const QString &state : status) {
         QBarSet *monthlyStatus = new QBarSet(state);
         int monthC = 0;
@@ -54,7 +47,6 @@ void StatisticsForm::populateData() {
         }
         monthModel->append(monthlyStatus);
     }
-
 }
 
 
@@ -72,8 +64,7 @@ int StatisticsForm::statusToInt(QString status){
 
 
 
-void StatisticsForm::initializeChart() {
-
+void StatisticsForm::initializeChart(){
     view = new StatisticView();
     monthModel = new StatisticModel(months, 40, view);
 
@@ -87,6 +78,7 @@ void StatisticsForm::initializeChart() {
     view->axes(Qt::Horizontal).first()->setGridLineVisible(false);
     view->legend()->setVisible(true);
     view->legend()->setAlignment(Qt::AlignBottom);
+
     QChartView *chartView = new QChartView(view);
     chartView->setChart(view);
     setCentralWidget(chartView);
@@ -94,9 +86,7 @@ void StatisticsForm::initializeChart() {
     show();
 }
 
-
-void StatisticsForm::sortDateWeeks() {
-
+void StatisticsForm::sortDateWeeks(){
     for(int month = 0; month < months.length(); ++month){
         QList<QList<int>> combinedMonths;
         for(int week = 0; week < weeks.length(); ++week){
@@ -163,13 +153,11 @@ void StatisticsForm::printList(QList<QList<int>> t_combinedList) const{
     }
 }
 
-QList<Task> StatisticsForm::getTasksList() const
-{
+QList<Task> StatisticsForm::getTasksList() const{
     return tasksList;
 }
 
-void StatisticsForm::setTasksList(const QList<Task> &value)
-{
+void StatisticsForm::setTasksList(const QList<Task> &value){
     tasksList = value;
 }
 

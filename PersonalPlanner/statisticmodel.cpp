@@ -8,22 +8,18 @@ StatisticModel::StatisticModel(QStringList categories, int maxValue, QObject *pa
     m_categories = categories;
 }
 
-void StatisticModel::mapStatisticModel(int index, StatisticModel *statisticModel)
-{
+void StatisticModel::mapStatisticModel(int index, StatisticModel *statisticModel){
     m_statisticModel[index] = statisticModel;
 }
 
-StatisticModel *StatisticModel::statisticModel(int index)
-{
+StatisticModel *StatisticModel::statisticModel(int index){
     return m_statisticModel[index];
 }
 
-QStringList StatisticModel::categories()
-{
+QStringList StatisticModel::categories(){
     return m_categories;
 }
 
-int StatisticModel::maxValue()
-{
+int StatisticModel::maxValue(){
     return m_maxValue;
 }

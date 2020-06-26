@@ -56,54 +56,32 @@ public:
     void resetTaskInput();
     void statusCounter();
     int countScore(int completed, int failed);
-    void loadImage(const QString& path);
+    void setProgressbar();
+    void resetButtons();    void loadImage(const QString& path);
     void synchronizeCalendar();
     QByteArray convertImageToByteArray(QImage &img);
     void convertByteArrayToImage(QByteArray &arr);
-    void setProgressbar();
-    void resetButtons();
-
 
 private slots:
-
     void on_deleteAccountBtn_clicked();
-
     void on_logoutBtn_clicked();
-
     void on_confirm_cancelBtnB_accepted();
-
     void on_confirm_cancelBtnB_rejected();
-
     void on_deleteBtn_clicked();
-
     void on_taskView_pressed();
-
     void on_editBtn_clicked();
-
     void on_saveChangesBtn_clicked();
-
     void on_statusBtn_clicked();
-
     void on_pictureBtn_clicked();
-
     void on_actionAboutClicked();
-
     void on_actionHelpClicked();
-
     void on_actionLogoutClicked();
-
     void refreshData();
-
     void on_calendarWidget_clicked(const QDate &date);
-
     void sort_();
-
     void on_statisticBtn_clicked();
 
-
 private:
-
-
     Ui::MainWindow *ui;
     StatusForm sf;
     HelpForm hf;
@@ -112,8 +90,6 @@ private:
 
     UserDaoImp m_userManager;
     TaskDaoImp m_taskManager;
-
-
 
     int mode;
     int width;

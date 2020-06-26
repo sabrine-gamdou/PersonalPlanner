@@ -19,7 +19,6 @@ public:
 
     void changeSeries(StatisticModel *model);
 
-
 public Q_SLOTS:
     void handleClicked(int index, QBarSet *barset);
 

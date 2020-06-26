@@ -12,6 +12,7 @@ class UserDaoImp
 public:
     UserDaoImp();
     ~UserDaoImp();
+
     bool create (User &t_user);
     User read(const QString &t_username);
     bool update(User &t_user);
@@ -20,7 +21,6 @@ public:
     bool checkLogin(const QString& t_username, const QString& t_password);
     bool updateProfilePicture(QByteArray &arr, QString &username, int width, int height);
     bool checkUserExist(const QString &t_username);
-
 };
 
 #endif // USERDAOIMP_H

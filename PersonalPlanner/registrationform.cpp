@@ -16,13 +16,23 @@ RegistrationForm::RegistrationForm(QWidget *parent) :
 }
 
 RegistrationForm::~RegistrationForm(){
-
     delete ui;
 }
 
 
-void RegistrationForm::on_confirmBtn_clicked(){
+void RegistrationForm::userCreatedConfirmed(const bool t_userCreated){
+    qDebug() << "User created status: "<< t_userCreated;
 
+    if(t_userCreated){
+        QMessageBox::information(this, "Information", "Welcome to Personal Planner!");
+        this->close();
+    }else{
+        QMessageBox::warning(this, "Warning", "Something went wrong ... Please try again later.");
+    }
+}
+
+//Slots
+void RegistrationForm::on_confirmBtn_clicked(){
     QString un;
     QString pass;
     QString firstname;
@@ -33,9 +43,7 @@ void RegistrationForm::on_confirmBtn_clicked(){
 
     bool stop = false;
 
-
-    if(ui->usernameTxt->text() == "")
-    {
+    if(ui->usernameTxt->text() == ""){
         ui->usernameTxt->setStyleSheet(style);
         ui->usernameTxt->setPlaceholderText("Username EMPTY!");
         stop = true;
@@ -45,9 +53,7 @@ void RegistrationForm::on_confirmBtn_clicked(){
         stop = false;
     }
 
-
-    if(ui->passTxt->text() == "")
-    {
+    if(ui->passTxt->text() == ""){
         ui->passTxt->setStyleSheet(style);
         ui->passTxt->setPlaceholderText("Password EMPTY!");
         stop = true;
@@ -57,9 +63,7 @@ void RegistrationForm::on_confirmBtn_clicked(){
         stop = false;
     }
 
-
-    if(ui->firstnameTxt->text() == "")
-    {
+    if(ui->firstnameTxt->text() == ""){
         ui->firstnameTxt->setStyleSheet(style);
         ui->firstnameTxt->setPlaceholderText("First Name EMPTY!");
         stop = true;
@@ -69,9 +73,7 @@ void RegistrationForm::on_confirmBtn_clicked(){
         stop = false;
     }
 
-
-    if(ui->lastnameTxt->text() == "")
-    {
+    if(ui->lastnameTxt->text() == ""){
         ui->lastnameTxt->setStyleSheet(style);
         ui->lastnameTxt->setPlaceholderText("Last Name EMPTY!");
         stop = false;
@@ -81,9 +83,7 @@ void RegistrationForm::on_confirmBtn_clicked(){
         stop = false;
     }
 
-
-    if(ui->emailTxt->text() == "")
-    {
+    if(ui->emailTxt->text() == ""){
         ui->emailTxt->setStyleSheet(style);
         ui->emailTxt->setPlaceholderText("E-mail EMPTY!");
         stop = true;
@@ -112,18 +112,6 @@ void RegistrationForm::on_confirmBtn_clicked(){
 }
 
 void RegistrationForm::on_cancelBtn_clicked(){
-
     this->close();
 }
 
-void RegistrationForm::userCreatedConfirmed(const bool t_userCreated){
-
-    qDebug() << "User created status: "<< t_userCreated;
-
-    if(t_userCreated){
-        QMessageBox::information(this, "Information", "Welcome to Personal Planner!");
-        this->close();
-    }else{
-        QMessageBox::warning(this, "Warning", "Something went wrong ... Please try again later.");
-    }
-}

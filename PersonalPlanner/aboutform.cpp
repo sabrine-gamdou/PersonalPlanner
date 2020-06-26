@@ -8,7 +8,6 @@ AboutForm::AboutForm(QWidget *parent) :
     ui->setupUi(this);
 }
 
-AboutForm::~AboutForm()
-{
+AboutForm::~AboutForm(){
     delete ui;
 }

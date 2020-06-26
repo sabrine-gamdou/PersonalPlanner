@@ -10,12 +10,10 @@ TaskDaoImp::TaskDaoImp(){
 }
 
 TaskDaoImp::~TaskDaoImp(){
-
     delete taskModel;
 }
 
 bool TaskDaoImp::create(Task& task, const QString& username){
-
     DatabaseSingleton::getInstance();
 
     QSqlQuery query;
@@ -38,7 +36,6 @@ bool TaskDaoImp::create(Task& task, const QString& username){
 
 
 bool TaskDaoImp::readAll(QString &username){
-
     m_taskList.clear();
 
     Task newTask(-1, "title",QDate(1,2,3), -1, username);
@@ -57,7 +54,6 @@ bool TaskDaoImp::readAll(QString &username){
     }
 
     while (query.next()){
-
         newTask.setTaskID(query.value(0).toInt());
         newTask.setTitle(query.value(1).toString());
         newTask.setDate(query.value(2).toDate());
@@ -72,7 +68,6 @@ bool TaskDaoImp::readAll(QString &username){
         qDebug() << newTask.taskID() << newTask.title() << newTask.date()
                  << newTask.description() << newTask.importance()
                  << newTask.status() << newTask.repetition() << newTask.username();
-
     }
 
     taskModel = new TaskListModel;
@@ -83,7 +78,6 @@ bool TaskDaoImp::readAll(QString &username){
 
 
 Task TaskDaoImp::read(int t_taskID, QString &username){
-
     Task task(-1, "title",QDate(1,2,3), -1, username);
 
     DatabaseSingleton::getInstance();
@@ -114,7 +108,6 @@ Task TaskDaoImp::read(int t_taskID, QString &username){
 }
 
 bool TaskDaoImp::update(Task& task){
-
     DatabaseSingleton::getInstance();
 
     QSqlQuery query;
@@ -139,7 +132,6 @@ bool TaskDaoImp::update(Task& task){
 }
 
 bool TaskDaoImp::delete_(Task task){ // or taskID?
-
     int t_id = task.taskID();
     DatabaseSingleton::getInstance();
     QSqlQuery query;
@@ -151,21 +143,17 @@ bool TaskDaoImp::delete_(Task task){ // or taskID?
 }
 
 TaskListModel *TaskDaoImp::getTaskModel() const{
-
     return taskModel;
 }
 
 void TaskDaoImp::setTaskModel(TaskListModel *value){
-
     taskModel = value;
 }
 
 QList<Task> TaskDaoImp::getTaskList() const{
-
     return m_taskList;
 }
 
 void TaskDaoImp::setTaskList(const QList<Task> &taskList){
-
     m_taskList = taskList;
 }

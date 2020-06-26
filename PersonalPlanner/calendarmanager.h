@@ -26,16 +26,13 @@ public:
     QColor getColor() const;
     void getDate(QDate &date);
     QList<QDate> getDates() const;
-
     void setDates(const QList<QDate> &dates);
 
 protected:
     virtual void paintCell(QPainter *painter, const QRect &rect, const QDate &date) const;
 
 private:
-
     QList<QDate> m_dates;
-
     QPen m_outlinePen;
     QBrush m_transparentBrush;
 
