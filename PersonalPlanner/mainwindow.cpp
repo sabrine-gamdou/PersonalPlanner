@@ -45,6 +45,7 @@ void MainWindow::setPassword(const QString &password){
 }
 
 void MainWindow::getTasks(){
+    resetTaskInput();
     m_taskManager.readAll(m_username);
 
     synchronizeCalendar();
@@ -118,8 +119,11 @@ bool MainWindow::readTaskAndCheckIfValid(){
         qDebug() << taskID ;
         Task new_task = readTaskData();
         new_task.setTaskID(taskID);
+        new_task.setStatus("In-Progress");
+        setRepetitionDuration(new_task.date(),new_task);
         qDebug() << new_task.toString();
         status =  m_taskManager.update(new_task);
+
     }else if(titleExists(ui->titleTxt->text())){
         Task new_task = readTaskData();
         qDebug() << new_task.toString();
@@ -175,27 +179,74 @@ int MainWindow::setRepetitionIndex(QString repetitionString){
 }
 
 void MainWindow::setRepetitionDuration(const QDate &date, Task task){
+    QDate dateTmp;
     if ("Day" == task.repetition()) {
-        for (int i = 1; i < 31; i++) {
-            QDate dateTmp(date.year(), date.month(), date.day()+i);
+        if (date.day() == 1) { //Wenn Tag 1 angegeben wurde, dann 30 weitere Tage hinzufügen
+        for (int i = 1; i < 30; i++) {
+            dateTmp = QDate(date.year(), date.month(), (date.day()+i) % 31);
             task.setDate(dateTmp);
             m_taskManager.create(task, m_username);
         }
+        }
+        else {
+            if (date.day() == 30) {
+                for (int i = 1; i < 30; i++) {
+                    if ((date.day()+i) % 30 == 0) {
+                       dateTmp = QDate(date.year(), date.month()+1, date.day()); // Wenn der Tag = 30 ist und i = 30, dann ist % 0
+                    }
+                    if(date.day()+i > 30) {
+                         dateTmp = QDate(date.year(), date.month(), (date.day() % 30));
+                    }
+                }
+            }
+        }
+
+
+
+//        for (int i = 1; i < 31; i++) {
+
+//            if ((date.day()+i) % 31 == 0) {
+//                if (date.day() == 31 || date.day()+i == 31)
+//                    dateTmp = QDate(date.year(), date.month(), 31);
+//                else if (date.day() == 1 || (date.day()+i) % 30 == 1)
+//                    dateTmp = QDate(date.year(), date.month()+1, 1);
+//            }
+//            else
+//                dateTmp = QDate(date.year(), date.month(), (date.day()+i) % 31);
+
+
+
+            //            if(((date.day()+i) % 30) == 0)
+            //                dateTmp = QDate(date.year(), date.month()+1, i);
+            //            else if(date.day()== 31)
+            //                dateTmp = QDate(date.year(), date.month(), i);
+            //            else
+            //                dateTmp = QDate(date.year(), date.month(), (date.day()+i) % 31); // gibt jeden Tag bis 30 aus
+
+//            task.setDate(dateTmp);
+//            m_taskManager.create(task, m_username);
+  //      }
     } else if ("Week" == task.repetition()) {
-        for (int i = 1; i < 5; i++) {
-            QDate dateTmp(date.year(), date.month(), date.day()+i*7);
+        for (int i = 1; i < 4; i++) {
+            if ((date.day() == 31))
+                dateTmp = QDate(date.year(), date.month()+1, (date.day()+i*7) % 31);
+            else if ((date.day()+i*7 > 30))
+                dateTmp = QDate(date.year(), date.month()+1, (date.day()+i*7) % 30);
+            else
+                dateTmp = QDate(date.year(), date.month(), date.day()+i*7);
+
             task.setDate(dateTmp);
             m_taskManager.create(task, m_username);
         }
     } else if ("Month" == task.repetition()) {
         for (int i = 1; i < 4; i++) {
-            QDate dateTmp(date.year(), date.month()+i, date.day());
+            dateTmp = QDate(date.year(), date.month()+i, date.day());
             task.setDate(dateTmp);
             m_taskManager.create(task, m_username);
         }
     } else if ("Year" == task.repetition()) {
         for (int i = 1; i < 3; i++) {
-            QDate dateTmp(date.year()+i, date.month(), date.day());
+            dateTmp = QDate(date.year()+i, date.month(), date.day());
             task.setDate(dateTmp);
             m_taskManager.create(task, m_username);
         }
@@ -213,9 +264,10 @@ void MainWindow::taskConfirmed(const bool taskUpdated){
 
 void MainWindow::resetTaskInput(){
     ui->titleTxt->clear();
-    ui->dateTimeEdit->clear();
+    ui->dateTimeEdit->setDate(QDate::currentDate());
     ui->descriptionTxt->clear();
-    ui->importanceSb->clear();
+    ui->importanceSb->setValue(1);
+    ui->repeatCb->setCurrentIndex(0);
 }
 
 void MainWindow::statusCounter(){
@@ -362,7 +414,7 @@ void MainWindow::on_deleteBtn_clicked(){
         deleteTask();
         resetButtons();
     }
-     getTasks();
+    getTasks();
 }
 
 void MainWindow::on_taskView_pressed(){
@@ -499,4 +551,23 @@ void MainWindow::sort_(){
 void MainWindow::on_statisticBtn_clicked(){
     ssf.setTasksList(m_taskManager.getTaskList());
     ssf.initializeChart();
+}
+
+void MainWindow::on_deleteAllBtn_clicked(){
+    if (!m_taskManager.getTaskList().isEmpty()) {
+        QMessageBox msgBox;
+        msgBox.setWindowTitle("Delete all your tasks");
+        msgBox.setText("\nAre you sure you want to delete all your tasks?\nThis cannot be undone!");
+        msgBox.setStandardButtons(QMessageBox::Yes);
+        msgBox.addButton(QMessageBox::No);
+        msgBox.setDefaultButton(QMessageBox::No);
+        if(msgBox.exec() == QMessageBox::Yes) {
+            m_taskManager.deleteAllTasks(this->m_username);
+            getTasks();
+        }
+        else
+            QMessageBox::information(this, "Information", "\nYour tasks are still on your account, don't worry!");
+    }
+    else
+        QMessageBox::information(this, "Information", "\nThere are no tasks to delete!");
 }

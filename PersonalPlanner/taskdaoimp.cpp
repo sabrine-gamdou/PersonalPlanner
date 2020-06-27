@@ -35,7 +35,7 @@ bool TaskDaoImp::create(Task& task, const QString& username){
 }
 
 
-bool TaskDaoImp::readAll(QString &username){
+bool TaskDaoImp::readAll(const QString &username){
     m_taskList.clear();
 
     Task newTask(-1, "title",QDate(1,2,3), -1, username);
@@ -44,7 +44,7 @@ bool TaskDaoImp::readAll(QString &username){
 
     QSqlQuery query;
 
-   // query.prepare( " SELECT * FROM tasks WHERE username=" ":t_username");
+    // query.prepare( " SELECT * FROM tasks WHERE username=" ":t_username");
     query.prepare("SELECT * FROM tasks WHERE username=(:username) ORDER BY date ASC,  (CASE status WHEN 'Completed' THEN 1 WHEN 'In-Progress' THEN 2 WHEN 'Failed' THEN 3 END), status DESC");
     query.bindValue(":username", username);
 
@@ -112,8 +112,6 @@ bool TaskDaoImp::update(Task& task){
 
     QSqlQuery query;
 
-    task.setStatus("In-Progress");
-
     qDebug() << "Prepare Query: "<< query.prepare("UPDATE tasks SET title = (:title), date = (:date), "
                                                   "description = (:description), importance = (:importance), "
                                                   "status = (:status), repetition = (:repetition) "
@@ -138,6 +136,16 @@ bool TaskDaoImp::delete_(Task task){ // or taskID?
 
     qDebug() << "id is : " << t_id<< "Prepare Query: "<< query.prepare("DELETE FROM tasks WHERE task_id=:t_id");
     query.bindValue(":t_id", t_id);
+
+    return query.exec();
+}
+
+bool TaskDaoImp::deleteAllTasks(const QString &username) {
+    DatabaseSingleton::getInstance();
+    QSqlQuery query;
+
+    qDebug() << "Prepare Query: "<< query.prepare("DELETE FROM tasks WHERE username=:username");
+    query.bindValue(":username", username);
 
     return query.exec();
 }

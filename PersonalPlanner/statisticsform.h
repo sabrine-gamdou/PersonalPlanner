@@ -30,6 +30,7 @@ public:
     int statusToInt(QString status);
     void initializeChart();
     void sortDateWeeks();
+    void countStatus(const QString& status);
     bool checkEndOfMonth(int day, int month);
     void printMap() const;
     void printList(QList<QList<int>> t_combinedList) const;
@@ -56,5 +57,9 @@ private:
     const QStringList status = {
         "Completed", "In-Progress", "Failed"
     };
+
+    int completed;
+    int failed;
+    int inProgress;
 };
 #endif // STATISTICSFORM_H

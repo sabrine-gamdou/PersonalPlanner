@@ -52,12 +52,14 @@ public:
     void deleteTask();
     int setRepetitionIndex(QString repetitionString);
     void setRepetitionDuration(const QDate &date, Task task);
+
     void taskConfirmed(const bool taskUpdated);
     void resetTaskInput();
     void statusCounter();
     int countScore(int completed, int failed);
     void setProgressbar();
-    void resetButtons();    void loadImage(const QString& path);
+    void resetButtons();
+    void loadImage(const QString& path);
     void synchronizeCalendar();
     QByteArray convertImageToByteArray(QImage &img);
     void convertByteArrayToImage(QByteArray &arr);
@@ -80,6 +82,8 @@ private slots:
     void on_calendarWidget_clicked(const QDate &date);
     void sort_();
     void on_statisticBtn_clicked();
+
+    void on_deleteAllBtn_clicked();
 
 private:
     Ui::MainWindow *ui;
