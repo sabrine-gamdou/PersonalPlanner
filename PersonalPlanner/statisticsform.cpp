@@ -9,6 +9,8 @@ StatisticsForm::StatisticsForm(QMainWindow *parent) :
     ui->setupUi(this);
     this->adjustSize();
     this->move(QApplication::desktop()->screen()->rect().center() - this->rect().center());
+
+
 }
 
 StatisticsForm::~StatisticsForm(){

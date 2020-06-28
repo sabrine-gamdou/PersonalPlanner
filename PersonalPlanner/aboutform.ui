@@ -60,7 +60,8 @@
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0.0225455, stop:0 rgba(0,0,0,0), stop:1 rgba(0,0,0,0))</string>
+    <string notr="true">background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0.0225455, stop:0 rgba(0,0,0,0), stop:1 rgba(0,0,0,0))
+</string>
    </property>
    <property name="text">
     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Our project idea is a &amp;quot;Personal Planner&amp;quot;.&lt;/p&gt;&lt;p&gt;It was implemented for students from different universities to organize their day with tasks.&lt;/p&gt;&lt;p&gt;The application offers three different functionalities: &lt;br/&gt;- A calendar with an overview of all tasks&lt;br/&gt;- Adding/Deleting/Editing a task&lt;br/&gt;- Creating an account to hold all information&lt;/p&gt;&lt;p&gt;A task can be homework, grocery shopping, a meeting and so on. &lt;/p&gt;&lt;p&gt;The user can assign a title, a description, a date and an importance to one of the &lt;br/&gt;mentioned ToDos. &lt;/p&gt;&lt;p&gt;The calendar will automatically synchronize when a new task is created and &lt;br/&gt;marks the specific date with a red border.&lt;/p&gt;&lt;p&gt;A user has not only the actual profile that can be edited but also a score which increases &lt;br/&gt;after finishing a task successfully and decreases when a task was failed to do. &lt;br/&gt;The account also contains a changeable profile picture. Here the user is also able to&lt;br/&gt;delete its own account or edit it.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
