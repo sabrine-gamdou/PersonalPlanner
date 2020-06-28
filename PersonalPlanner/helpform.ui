@@ -115,7 +115,7 @@
         </property>
         <property name="text">
          <string>Orange means failed Task
-Green means in-process Task
+Green means in-progress Task
 Blue means completed Task</string>
         </property>
        </widget>

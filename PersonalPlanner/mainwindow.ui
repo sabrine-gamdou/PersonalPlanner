@@ -320,8 +320,8 @@ QPushButton { background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, st
 
 QComboBox:!editable, QComboBox::drop-down:editable {
      background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                 stop: 0 #E1E1E1F, stop: 0.4 #DDDDDDF,
-                                 stop: 0.5 #D8D8D8F, stop: 1.0 #D3D3D3F);
+                                 stop: 0 #FFFFFF, stop: 0.4 #FFFFFF,
+                                 stop: 0.5 #FFFFFF, stop: 1.0);
 }
 
 QComboBox QAbstractItemView {
@@ -329,9 +329,6 @@ QComboBox QAbstractItemView {
 }
 
 QComboBox{background-color: rgba(255,255,255,255)}
-
-
-
 </string>
           </property>
           <property name="currentIndex">
