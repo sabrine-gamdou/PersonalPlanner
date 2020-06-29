@@ -20,7 +20,7 @@ bool Login::login(QString un, QString pass){
     return this->m_userManager->checkLogin(un,pass);
 }
 
-void Login::initialize(const QString & un, const QString &pass) {
+void Login::initialize(const QString & un, const QString &pass){
     w.setUsername(un);
     w.setPassword(pass);
     w.getUserData();

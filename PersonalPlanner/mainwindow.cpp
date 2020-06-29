@@ -21,7 +21,6 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(ui->actionLogout, &QAction::triggered, this, &MainWindow::on_actionLogoutClicked);
 
     mode = 0;
-
 }
 
 MainWindow::~MainWindow(){
@@ -141,7 +140,12 @@ void MainWindow::userUpdatedConfirmed(const bool t_userUpdated){
     qDebug() << "User Updated status: "<< t_userUpdated;
 
     if(t_userUpdated){
-        QMessageBox::information(this, "Information", "You successfully updated your profile information!");
+        QMessageBox msg;
+        msg.setIcon(QMessageBox::Information);
+        msg.setText(tr("Information\n"));
+        msg.setStyleSheet("font-family: URW Gothic L");
+        msg.show();
+        //QMessageBox::information(this, "Information", "You successfully updated your profile information!");
     }else{
         QMessageBox::warning(this, "Warning", "Something went wrong ... Please try again later.");
     }
