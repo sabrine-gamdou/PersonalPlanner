@@ -25,6 +25,7 @@ void RegistrationForm::userCreatedConfirmed(const bool t_userCreated){
 
     if(t_userCreated){
         QMessageBox::information(this, "Information", "Welcome to Personal Planner!");
+        resetUserInput();
         this->close();
     }else
         QMessageBox::warning(this, "Warning", "Something went wrong ... Please try again later.");   
@@ -109,6 +110,27 @@ void RegistrationForm::on_confirmBtn_clicked(){
 }
 
 void RegistrationForm::on_cancelBtn_clicked(){
+    resetUserInput();
     this->close();
 }
 
+void RegistrationForm::resetUserInput() {
+    ui->usernameTxt->clear();
+    ui->passTxt->clear();
+    ui->firstnameTxt->clear();
+    ui->lastnameTxt->clear();
+    ui->emailTxt->clear();
+    ui->errLb->clear();
+
+    ui->usernameTxt->setPlaceholderText("");
+    ui->passTxt->setPlaceholderText("");
+    ui->firstnameTxt->setPlaceholderText("");
+    ui->lastnameTxt->setPlaceholderText("");
+    ui->emailTxt->setPlaceholderText("");
+
+    ui->usernameTxt->setStyleSheet("");
+    ui->passTxt->setStyleSheet("");
+    ui->firstnameTxt->setStyleSheet("");
+    ui->lastnameTxt->setStyleSheet("");
+    ui->emailTxt->setStyleSheet("");
+}

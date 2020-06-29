@@ -42,7 +42,7 @@ private:
     UserDaoImp* m_userManager;
     TaskDaoImp* m_taskManager;
 
-    void initialize(const QString &un, const QString &pass);
+    void initialize(QString &un, QString &pass);
 };
 
 #endif // LOGIN_H

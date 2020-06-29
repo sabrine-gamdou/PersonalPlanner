@@ -19,6 +19,7 @@ class RegistrationForm : public QWidget
 public:
     explicit RegistrationForm(QWidget *parent = 0);
     ~RegistrationForm();
+    void resetUserInput();
 
 private slots:
     void on_confirmBtn_clicked();
@@ -27,8 +28,8 @@ private slots:
 private:
     Ui::RegistrationForm *ui;
     UserDaoImp* m_userManager;
-
     void userCreatedConfirmed(const bool t_userCreated);
+
 };
 
 #endif // REGISTRATIONFORM_H
