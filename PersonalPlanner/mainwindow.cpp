@@ -520,6 +520,7 @@ void MainWindow::on_deleteAllBtn_clicked(){
     if (!m_taskManager.getTaskList().isEmpty()) {
         QMessageBox msgBox;
         msgBox.setStyleSheet("font-family: URW Gothic L");
+        msgBox.setIcon(QMessageBox::Warning);
         msgBox.setWindowTitle("Delete all your tasks");
         msgBox.setText("\nAre you sure you want to delete all your tasks?\nThis cannot be undone!");
         msgBox.setStandardButtons(QMessageBox::Yes);
