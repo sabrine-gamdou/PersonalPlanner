@@ -140,14 +140,13 @@ void MainWindow::userUpdatedConfirmed(const bool t_userUpdated){
     qDebug() << "User Updated status: "<< t_userUpdated;
 
     if(t_userUpdated){
-        QMessageBox msg;
-        msg.setIcon(QMessageBox::Information);
-        msg.setText(tr("Information\n"));
-        msg.setStyleSheet("font-family: URW Gothic L");
-        msg.show();
-        QMessageBox::information(this, "Information", "You successfully updated your profile information!");
+        QMessageBox msgInfo(QMessageBox::Information, "Information", "You successfully updated your profile information!");
+        msgInfo.setStyleSheet("font-family: URW Gothic L");
+        msgInfo.exec();
     }else{
-        QMessageBox::warning(this, "Warning", "Something went wrong ... Please try again later.");
+        QMessageBox msgWarn(QMessageBox::Warning, "Warning", "Something went wrong ... Please try again later.");
+        msgWarn.setStyleSheet("font-family: URW Gothic L");
+        msgWarn.exec();
     }
 }
 
@@ -211,9 +210,13 @@ void MainWindow::setRepetitionDuration(const QDate &date, Task task){
 void MainWindow::taskConfirmed(const bool taskUpdated){
     qDebug() << "Task Updated status: "<< taskUpdated;
     if(taskUpdated){
-        QMessageBox::information(this, "Information", "You successfully added/updated your task!");
+        QMessageBox msgInfo(QMessageBox::Information, "Information", "You successfully added/updated your task!");
+        msgInfo.setStyleSheet("font-family: URW Gothic L");
+        msgInfo.exec();
     }else{
-        QMessageBox::warning(this, "Warning", "Please enter a task title to create a task.");
+        QMessageBox msgWarn(QMessageBox::Warning, "Warning", "Please enter a task title to create a task.");
+        msgWarn.setStyleSheet("font-family: URW Gothic L");
+        msgWarn.exec();
     }
 }
 
@@ -285,7 +288,7 @@ void MainWindow::loadImage(const QString& path){
     QImage img(reader.read());
 
     if(img.isNull()) {
-        QMessageBox::information(this, QGuiApplication::applicationDisplayName(), "Could not open image");
+        QMessageBox::information(this, QGuiApplication::applicationDisplayName(), "<span style='font-family: UWR Gothic L'>Could not open image</span>");
     } else {
         width = img.width();
         height = img.height();
@@ -336,6 +339,7 @@ void MainWindow::logout(){
 //Slots
 void MainWindow::on_deleteAccountBtn_clicked(){
     QMessageBox msgBox;
+    msgBox.setStyleSheet("font-family: URW Gothic L");
     msgBox.setWindowTitle("Delete Account");
     msgBox.setText("Are you sure you want to delete your account?");
     msgBox.setStandardButtons(QMessageBox::Yes);
@@ -345,7 +349,9 @@ void MainWindow::on_deleteAccountBtn_clicked(){
         m_userManager.delete_(this->m_username);
         this->close();
     }else {
-        QMessageBox::information(this, "Information", "We are glad you did not leave!");
+        QMessageBox msgInfo(QMessageBox::Information, "Information", "We are glad you did not leave!");
+        msgInfo.setStyleSheet("font-family: URW Gothic L");
+        msgInfo.exec();
     }
 }
 
@@ -452,9 +458,11 @@ void MainWindow::on_statusBtn_clicked(){
 void MainWindow::on_pictureBtn_clicked(){
     QString pathToImgFile = QFileDialog::getOpenFileName(this, tr("Open Image"), "/home/", tr("Image Files (*.png *.xpm *.jpg)"));
 
-    if(!pathToImgFile.size())
-        QMessageBox::critical(this, "Error", "No image selected. Please pick an Image first!");
-    else{
+    if(!pathToImgFile.size()){
+        QMessageBox msgCri(QMessageBox::Critical, "Error", "No image selected. Please pick an Image first!");
+        msgCri.setStyleSheet("font-family: URW Gothic L");
+        msgCri.exec();
+    }else{
         loadImage(pathToImgFile);
     }
 }
@@ -511,6 +519,7 @@ void MainWindow::on_statisticBtn_clicked(){
 void MainWindow::on_deleteAllBtn_clicked(){
     if (!m_taskManager.getTaskList().isEmpty()) {
         QMessageBox msgBox;
+        msgBox.setStyleSheet("font-family: URW Gothic L");
         msgBox.setWindowTitle("Delete all your tasks");
         msgBox.setText("\nAre you sure you want to delete all your tasks?\nThis cannot be undone!");
         msgBox.setStandardButtons(QMessageBox::Yes);
@@ -520,11 +529,16 @@ void MainWindow::on_deleteAllBtn_clicked(){
             m_taskManager.deleteAllTasks(this->m_username);
             getTasks();
         }
-        else
-            QMessageBox::information(this, "Information", "\nYour tasks are still on your account, don't worry!");
+        else{
+            QMessageBox msgInfo(QMessageBox::Information, "Information", "Your tasks are still on your account, don't worry!");
+            msgInfo.setStyleSheet("font-family: URW Gothic L");
+            msgInfo.exec();
+        }
+    }else{
+        QMessageBox msgInfo(QMessageBox::Information, "Information", "There are no tasks to delete!");
+        msgInfo.setStyleSheet("font-family: URW Gothic L");
+        msgInfo.exec();
     }
-    else
-        QMessageBox::information(this, "Information", "\nThere are no tasks to delete!");
 
     resetButtons();
 }
