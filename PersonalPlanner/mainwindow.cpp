@@ -145,7 +145,7 @@ void MainWindow::userUpdatedConfirmed(const bool t_userUpdated){
         msg.setText(tr("Information\n"));
         msg.setStyleSheet("font-family: URW Gothic L");
         msg.show();
-        //QMessageBox::information(this, "Information", "You successfully updated your profile information!");
+        QMessageBox::information(this, "Information", "You successfully updated your profile information!");
     }else{
         QMessageBox::warning(this, "Warning", "Something went wrong ... Please try again later.");
     }
