@@ -6,9 +6,11 @@ DatabaseSingleton::DatabaseSingleton(){
 
 }
 
+
 DatabaseSingleton::~DatabaseSingleton(){
     closeConnection();
 }
+
 
 void DatabaseSingleton::openConnection() {
     m_pInstance = QSqlDatabase::addDatabase("QPSQL");
@@ -21,10 +23,12 @@ void DatabaseSingleton::openConnection() {
     qDebug()<<"Database connection established: "<<success;
 }
 
+
 void DatabaseSingleton::closeConnection(){
     if (m_pInstance.isOpen())
         m_pInstance.close();
 }
+
 
 QSqlDatabase DatabaseSingleton::getInstance(){
     if(!m_pInstance.isOpen())

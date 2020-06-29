@@ -11,6 +11,7 @@ Login::Login(QWidget *parent) :
     ui->passText->setInputMethodHints(Qt::ImhHiddenText| Qt::ImhNoPredictiveText|Qt::ImhNoAutoUppercase);
 }
 
+
 Login::~Login(){
     delete ui;
 }
@@ -19,6 +20,7 @@ Login::~Login(){
 bool Login::login(QString &un, QString &pass){
     return this->m_userManager->checkLogin(un,pass);
 }
+
 
 void Login::initialize(QString &un, QString &pass){
     w.setUsername(un);
@@ -45,6 +47,7 @@ void Login::on_loginBtn_clicked(){
         ui->passText->setStyleSheet("border: 2px solid red");
     }
 }
+
 
 void Login::on_registerBtn_clicked(){
     r.resetUserInput();

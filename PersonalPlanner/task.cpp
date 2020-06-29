@@ -5,17 +5,21 @@ Task::Task(int t_taskID, QString t_title, QDate t_date, int t_importance, QStrin
 
 }
 
+
 Task::~Task(){
 
 }
+
 
 int Task::taskID() const{
     return m_taskID;
 }
 
+
 void Task::setTaskID(int taskID){
     m_taskID = taskID;
 }
+
 
 QString Task::title() const{
     return m_title;
@@ -25,51 +29,63 @@ void Task::setTitle(const QString &title){
     m_title = title;
 }
 
+
 QDate Task::date() const{
     return m_date;
 }
 
+
 void Task::setDate(const QDate &date){
     m_date = date;
 }
+
 
 QString Task::description() const{
 
     return m_description;
 }
 
+
 void Task::setDescription(const QString &description){
 
     m_description = description;
 }
 
+
 int Task::importance() const{
     return m_importance;
 }
+
 
 void Task::setImportance(int importance){
     m_importance = importance;
 }
 
+
 QString Task::status() const{
     return m_status;
 }
+
 
 void Task::setStatus(const QString &status){
     m_status = status;
 }
 
+
 QString Task::repetition() const{
     return m_repetition;
 }
+
 
 void Task::setRepetition(const QString &repetition){
     m_repetition = repetition;
 }
 
+
 QString Task::username() const{
     return m_username;
 }
+
 
 void Task::setUsername(const QString &username){
     m_username = username;

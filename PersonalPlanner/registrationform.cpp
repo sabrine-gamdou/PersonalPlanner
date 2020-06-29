@@ -24,11 +24,16 @@ void RegistrationForm::userCreatedConfirmed(const bool t_userCreated){
     qDebug() << "User created status: "<< t_userCreated;
 
     if(t_userCreated){
-        QMessageBox::information(this, "Information", "Welcome to Personal Planner!");
+        QMessageBox msgInfo(QMessageBox::Information, "Information", "\nWelcome to Personal Planner!");
+        msgInfo.setStyleSheet("font-family: URW Gothic L");
+        msgInfo.exec();
         resetUserInput();
         this->close();
-    }else
-        QMessageBox::warning(this, "Warning", "Something went wrong ... Please try again later.");   
+    }else{
+        QMessageBox msgWarn(QMessageBox::Warning, "Warning", "\nSomething went wrong... Please try again later.");
+        msgWarn.setStyleSheet("font-family: URW Gothic L");
+        msgWarn.exec();
+    }
 }
 
 //Slots
@@ -104,15 +109,20 @@ void RegistrationForm::on_confirmBtn_clicked(){
         User t_user(un,pass,firstname,lastname,email);
         if (!m_userManager->checkUserExist(un))
         userCreatedConfirmed(m_userManager->create(t_user));
-        else
-          QMessageBox::warning(this, "Warning", "The username '" + un + "' is already taken... Please choose another username");
+        else{
+            QMessageBox msgWarn(QMessageBox::Warning, "Warning", "\nThe username '" + un + "' is already taken... Please choose another username");
+            msgWarn.setStyleSheet("font-family: URW Gothic L");
+            msgWarn.exec();
+        }
     }
 }
+
 
 void RegistrationForm::on_cancelBtn_clicked(){
     resetUserInput();
     this->close();
 }
+
 
 void RegistrationForm::resetUserInput() {
     ui->usernameTxt->clear();

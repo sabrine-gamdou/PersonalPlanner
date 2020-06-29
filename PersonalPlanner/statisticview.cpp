@@ -12,6 +12,7 @@ StatisticView::StatisticView (QGraphicsItem *parent, Qt::WindowFlags wFlags)
   addAxis(m_axisX, Qt::AlignBottom);
 }
 
+
 void StatisticView::changeSeries(StatisticModel *model){
     if (m_currentModel)
         removeSeries(m_currentModel);

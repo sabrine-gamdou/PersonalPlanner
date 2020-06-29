@@ -4,14 +4,15 @@
 #include "user.h"
 #include "tasklistmodel.h"
 
-
 TaskDaoImp::TaskDaoImp(){
 
 }
 
+
 TaskDaoImp::~TaskDaoImp(){
     delete taskModel;
 }
+
 
 bool TaskDaoImp::create(Task& task, const QString& username){
     DatabaseSingleton::getInstance();
@@ -74,6 +75,7 @@ bool TaskDaoImp::readAll(const QString &username){
     return status;
 }
 
+
 bool TaskDaoImp::update(const Task &task){
     DatabaseSingleton::getInstance();
 
@@ -96,6 +98,7 @@ bool TaskDaoImp::update(const Task &task){
     return query.exec();
 }
 
+
 bool TaskDaoImp::delete_(const Task &task){
     int t_id = task.taskID();
     DatabaseSingleton::getInstance();
@@ -106,6 +109,7 @@ bool TaskDaoImp::delete_(const Task &task){
 
     return query.exec();
 }
+
 
 bool TaskDaoImp::deleteAllTasks(const QString &username) {
     DatabaseSingleton::getInstance();
@@ -121,9 +125,11 @@ TaskListModel *TaskDaoImp::getTaskModel() const{
     return taskModel;
 }
 
+
 QList<Task> TaskDaoImp::getTaskList() const{
     return m_taskList;
 }
+
 
 void TaskDaoImp::setTaskList(const QList<Task> &taskList){
     m_taskList = taskList;

@@ -3,7 +3,6 @@
 #include "tasklistmodel.h"
 #include "taskdaoimp.h"
 
-
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -23,6 +22,7 @@ MainWindow::MainWindow(QWidget *parent) :
     mode = 0;
 }
 
+
 MainWindow::~MainWindow(){
     delete ui;
 }
@@ -31,17 +31,21 @@ QString MainWindow::username() const{
     return m_username;
 }
 
+
 void MainWindow::setUsername(const QString &username){
     m_username = username;
 }
+
 
 QString MainWindow::password() const{
     return m_password;
 }
 
+
 void MainWindow::setPassword(const QString &password){
     m_password = password;
 }
+
 
 void MainWindow::getTasks(){
     resetTaskInput();
@@ -56,6 +60,7 @@ void MainWindow::getTasks(){
 
     ui->taskView->show();
 }
+
 
 void MainWindow::getUserData(){
     User t_user=  this->m_userManager.read(m_username);
@@ -74,6 +79,7 @@ void MainWindow::getUserData(){
     convertByteArrayToImage(profile_picture);
 }
 
+
 void MainWindow::editInfoCheckBox_checked(const bool checked){
     ui->firstnameTxt->setEnabled(checked);
     ui->lastnameTxt->setEnabled(checked);
@@ -83,6 +89,7 @@ void MainWindow::editInfoCheckBox_checked(const bool checked){
 
     ui->saveChangesBtn->setEnabled(checked);
 }
+
 
 bool MainWindow::titleExists(const QString title){
     if(title == "")
@@ -97,6 +104,7 @@ bool MainWindow::titleExists(const QString title){
     return true;
 }
 
+
 Task MainWindow::readTaskData(){
     if(titleExists(ui->titleTxt->text())){
         Task new_task (0, ui->titleTxt->text(), ui->dateTimeEdit->date(), ui->importanceSb->text().toInt(), m_username);
@@ -107,6 +115,7 @@ Task MainWindow::readTaskData(){
 
     return Task();
 }
+
 
 bool MainWindow::readTaskAndCheckIfValid(){
     bool status = false;
@@ -136,19 +145,21 @@ bool MainWindow::readTaskAndCheckIfValid(){
     return status;
 }
 
+
 void MainWindow::userUpdatedConfirmed(const bool t_userUpdated){
     qDebug() << "User Updated status: "<< t_userUpdated;
 
     if(t_userUpdated){
-        QMessageBox msgInfo(QMessageBox::Information, "Information", "You successfully updated your profile information!");
+        QMessageBox msgInfo(QMessageBox::Information, "Information", "\nYou successfully updated your profile information!");
         msgInfo.setStyleSheet("font-family: URW Gothic L");
         msgInfo.exec();
     }else{
-        QMessageBox msgWarn(QMessageBox::Warning, "Warning", "Something went wrong ... Please try again later.");
+        QMessageBox msgWarn(QMessageBox::Warning, "Warning", "\nSomething went wrong ... Please try again later.");
         msgWarn.setStyleSheet("font-family: URW Gothic L");
         msgWarn.exec();
     }
 }
+
 
 void MainWindow::deleteTask (){
     QModelIndex index = ui->taskView->selectionModel()->currentIndex();
@@ -165,6 +176,7 @@ void MainWindow::deleteTask (){
     ui->deleteBtn->setEnabled(false);
 }
 
+
 int MainWindow::setRepetitionIndex(QString repetitionString){
     if (repetitionString == "Never") {
         return 0;
@@ -180,6 +192,7 @@ int MainWindow::setRepetitionIndex(QString repetitionString){
 
     return -1;
 }
+
 
 void MainWindow::setRepetitionDuration(const QDate &date, Task task){
     if ("Day" == task.repetition()) {
@@ -210,15 +223,16 @@ void MainWindow::setRepetitionDuration(const QDate &date, Task task){
 void MainWindow::taskConfirmed(const bool taskUpdated){
     qDebug() << "Task Updated status: "<< taskUpdated;
     if(taskUpdated){
-        QMessageBox msgInfo(QMessageBox::Information, "Information", "You successfully added/updated your task!");
+        QMessageBox msgInfo(QMessageBox::Information, "Information", "\nYou successfully added/updated your task!");
         msgInfo.setStyleSheet("font-family: URW Gothic L");
         msgInfo.exec();
     }else{
-        QMessageBox msgWarn(QMessageBox::Warning, "Warning", "Please enter a task title to create a task.");
+        QMessageBox msgWarn(QMessageBox::Warning, "Warning", "\nPlease enter a task title to create a task.");
         msgWarn.setStyleSheet("font-family: URW Gothic L");
         msgWarn.exec();
     }
 }
+
 
 void MainWindow::resetTaskInput(){
     ui->titleTxt->clear();
@@ -253,6 +267,7 @@ void MainWindow::statusCounter(){
     ui->progressLCD->display(inProgress);
 }
 
+
 int MainWindow::countScore(int completed, int failed){
     //Score should always be positive
     //we count the score and save it in a temporary variable
@@ -263,6 +278,7 @@ int MainWindow::countScore(int completed, int failed){
     else
         return 0;
 }
+
 
 void MainWindow::setProgressbar(){
     QList<int> levelsScoresList = {0,10,30,50,100,150,250,300,600,1000,2000};
@@ -283,12 +299,13 @@ void MainWindow::resetButtons(){
     ui->deleteBtn->setEnabled(false);
 }
 
+
 void MainWindow::loadImage(const QString& path){
     QImageReader reader(path);
     QImage img(reader.read());
 
     if(img.isNull()) {
-        QMessageBox::information(this, QGuiApplication::applicationDisplayName(), "<span style='font-family: UWR Gothic L'>Could not open image</span>");
+        QMessageBox::information(this, QGuiApplication::applicationDisplayName(), "<span style='font-family: UWR Gothic L'>\nCould not open image</span>");
     } else {
         width = img.width();
         height = img.height();
@@ -301,6 +318,7 @@ void MainWindow::loadImage(const QString& path){
         m_userManager.updateProfilePicture(arr, m_username, width, height);
     }
 }
+
 
 void MainWindow::synchronizeCalendar(){
     ui->calendarWidget->setDates(QList<QDate>());
@@ -316,6 +334,7 @@ QByteArray MainWindow::convertImageToByteArray(QImage &img){
     return arr;
 }
 
+
 void MainWindow::convertByteArrayToImage(QByteArray &arr){
     QImage img(reinterpret_cast<unsigned char*>(arr.data()),width,height, QImage::Format_ARGB32);
 
@@ -327,6 +346,7 @@ void MainWindow::convertByteArrayToImage(QByteArray &arr){
     ui->pictureLb->setPixmap(pixmap);
     ui->pictureLb->setScaledContents(true);
 }
+
 
 void MainWindow::logout(){
     this->m_username = "";
@@ -341,7 +361,7 @@ void MainWindow::on_deleteAccountBtn_clicked(){
     QMessageBox msgBox;
     msgBox.setStyleSheet("font-family: URW Gothic L");
     msgBox.setWindowTitle("Delete Account");
-    msgBox.setText("Are you sure you want to delete your account?");
+    msgBox.setText("\nAre you sure you want to delete your account?");
     msgBox.setStandardButtons(QMessageBox::Yes);
     msgBox.addButton(QMessageBox::No);
     msgBox.setDefaultButton(QMessageBox::No);
@@ -349,15 +369,17 @@ void MainWindow::on_deleteAccountBtn_clicked(){
         m_userManager.delete_(this->m_username);
         this->close();
     }else {
-        QMessageBox msgInfo(QMessageBox::Information, "Information", "We are glad you did not leave!");
+        QMessageBox msgInfo(QMessageBox::Information, "Information", "\nWe are glad you did not leave!");
         msgInfo.setStyleSheet("font-family: URW Gothic L");
         msgInfo.exec();
     }
 }
 
+
 void MainWindow::on_logoutBtn_clicked(){
     logout();
 }
+
 
 void MainWindow::on_confirm_cancelBtnB_accepted(){
     taskConfirmed(readTaskAndCheckIfValid());
@@ -370,6 +392,7 @@ void MainWindow::on_confirm_cancelBtnB_rejected(){
     resetTaskInput();
 }
 
+
 void MainWindow::on_deleteBtn_clicked(){
     if(ui->taskView->currentIndex().isValid()){
         deleteTask();
@@ -378,12 +401,14 @@ void MainWindow::on_deleteBtn_clicked(){
     getTasks();
 }
 
+
 void MainWindow::on_taskView_pressed(){
     ui->deleteBtn->setEnabled(ui->taskView->currentIndex().isValid());
     ui->editBtn->setEnabled(ui->taskView->currentIndex().isValid());
     ui->statusBtn->setEnabled(ui->taskView->currentIndex().isValid());
     ui->calendarWidget->setSelectedDate(m_taskManager.getTaskList().at(ui->taskView->currentIndex().row()).date());
 }
+
 
 void MainWindow::on_editBtn_clicked(){
     if(ui->taskView->currentIndex().isValid()){
@@ -401,6 +426,7 @@ void MainWindow::on_editBtn_clicked(){
         mode = 1;
     }
 }
+
 
 void MainWindow::on_saveChangesBtn_clicked(){
     User m_user(m_username, m_password, "", "", "");
@@ -444,6 +470,7 @@ void MainWindow::on_saveChangesBtn_clicked(){
         userUpdatedConfirmed(m_userManager.update(m_user));
 }
 
+
 void MainWindow::on_statusBtn_clicked(){
     if(ui->taskView->currentIndex().isValid()){
         QModelIndex index = ui->taskView->selectionModel()->currentIndex();
@@ -459,7 +486,7 @@ void MainWindow::on_pictureBtn_clicked(){
     QString pathToImgFile = QFileDialog::getOpenFileName(this, tr("Open Image"), "/home/", tr("Image Files (*.png *.xpm *.jpg)"));
 
     if(!pathToImgFile.size()){
-        QMessageBox msgCri(QMessageBox::Critical, "Error", "No image selected. Please pick an Image first!");
+        QMessageBox msgCri(QMessageBox::Critical, "Error", "\nNo image selected. Please pick an Image first!");
         msgCri.setStyleSheet("font-family: URW Gothic L");
         msgCri.exec();
     }else{
@@ -467,22 +494,27 @@ void MainWindow::on_pictureBtn_clicked(){
     }
 }
 
+
 void MainWindow::on_actionAboutClicked(){
     af.show();
 }
+
 
 void MainWindow::on_actionHelpClicked(){
     hf.show();
 }
 
+
 void MainWindow::on_actionLogoutClicked(){
     logout();
 }
+
 
 void MainWindow::refreshData(){
     sf.readStatusFromWindow();
     getTasks();
 }
+
 
 void MainWindow::on_calendarWidget_clicked(const QDate &date){
     ui->taskView->clearSelection();
@@ -503,6 +535,7 @@ void MainWindow::on_calendarWidget_clicked(const QDate &date){
     ui->taskView->setSelectionMode(QAbstractItemView::SingleSelection);
 }
 
+
 void MainWindow::sort_(){
     TaskListModel model;
     QSortFilterProxyModel proxyModel;
@@ -515,6 +548,7 @@ void MainWindow::on_statisticBtn_clicked(){
     ssf.setTasksList(m_taskManager.getTaskList());
     ssf.initializeChart();
 }
+
 
 void MainWindow::on_deleteAllBtn_clicked(){
     if (!m_taskManager.getTaskList().isEmpty()) {
@@ -531,12 +565,12 @@ void MainWindow::on_deleteAllBtn_clicked(){
             getTasks();
         }
         else{
-            QMessageBox msgInfo(QMessageBox::Information, "Information", "Your tasks are still on your account, don't worry!");
+            QMessageBox msgInfo(QMessageBox::Information, "Information", "\nYour tasks are still on your account, don't worry!");
             msgInfo.setStyleSheet("font-family: URW Gothic L");
             msgInfo.exec();
         }
     }else{
-        QMessageBox msgInfo(QMessageBox::Information, "Information", "There are no tasks to delete!");
+        QMessageBox msgInfo(QMessageBox::Information, "Information", "\nThere are no tasks to delete!");
         msgInfo.setStyleSheet("font-family: URW Gothic L");
         msgInfo.exec();
     }

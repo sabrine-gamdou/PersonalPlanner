@@ -10,9 +10,11 @@ StatisticsForm::StatisticsForm(QMainWindow *parent) :
     this->move(QApplication::desktop()->screen()->rect().center() - this->rect().center());
 }
 
+
 StatisticsForm::~StatisticsForm(){
     delete ui;
 }
+
 
 void StatisticsForm::createStructure(){
     monthModel->setName("Statistic of your Task Status from June - December " + QString::number(QDate::currentDate().year()));
@@ -28,6 +30,7 @@ void StatisticsForm::createStructure(){
     }
     QObject::connect(monthModel, &StatisticModel::clicked, view, &StatisticView::handleClicked);
 }
+
 
 void StatisticsForm::populateData(){
     QMap<int, QList<QList<int>>>::const_iterator month;
@@ -47,6 +50,7 @@ void StatisticsForm::populateData(){
     }
 }
 
+
 int StatisticsForm::statusToInt(const QString &status){
     if(status == "Completed")
         return 0;
@@ -57,7 +61,6 @@ int StatisticsForm::statusToInt(const QString &status){
 
     return -1;
 }
-
 
 
 void StatisticsForm::initializeChart(){
@@ -81,6 +84,7 @@ void StatisticsForm::initializeChart(){
     resize(600,400);
     show();
 }
+
 
 void StatisticsForm::sortDateWeeks(){
     for(int month = 0; month < months.length(); ++month){ //go through all months
@@ -112,6 +116,7 @@ void StatisticsForm::sortDateWeeks(){
     }
 }
 
+
 void StatisticsForm::countStatus(const QString &status){
     if(status == "Completed")
         ++completed;
@@ -125,6 +130,7 @@ void StatisticsForm::countStatus(const QString &status){
 bool StatisticsForm::checkEndOfMonth(int day, int month){
     return ((((month == 7) || (month == 8) || (month == 10) || (month == 12)) && ((day == 29) || (day == 30) || (day == 31))) || (((month == 6) || (month == 9) || (month == 11)) && ((day == 29) || (day == 30))));
 }
+
 
 void StatisticsForm::setTasksList(const QList<Task> &value){
     tasksList = value;

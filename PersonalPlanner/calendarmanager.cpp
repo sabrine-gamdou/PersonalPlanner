@@ -8,26 +8,32 @@ CalendarManager::CalendarManager(QWidget *parent)
     m_transparentBrush.setColor(Qt::transparent);
 }
 
+
 CalendarManager::~CalendarManager(){
 
 }
+
 
 void CalendarManager::setColor(const QColor &color){
     m_outlinePen.setColor(color);
 }
 
+
 QColor CalendarManager::getColor() const{
     return m_outlinePen.color();
 }
+
 
 void CalendarManager::getDate(QDate &date){
     if(!m_dates.contains(date))
         m_dates.append(date);
 }
 
+
 void CalendarManager::setDates(const QList<QDate> &dates){
     m_dates = dates;
 }
+
 
 void CalendarManager::paintCell(QPainter *painter, const QRect &rect, const QDate &date) const{
     QCalendarWidget::paintCell(painter, rect, date);

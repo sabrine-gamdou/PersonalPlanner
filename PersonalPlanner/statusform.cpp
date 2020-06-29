@@ -1,7 +1,6 @@
 #include "statusform.h"
 #include "ui_statusform.h"
 
-
 StatusForm::StatusForm(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::StatusForm)
@@ -10,9 +9,11 @@ StatusForm::StatusForm(QWidget *parent) :
     ui->setupUi(this);
 }
 
+
 StatusForm::~StatusForm(){
     delete ui;
 }
+
 
 Task* StatusForm::readStatusFromWindow(){
     if(ui->completedRb->isChecked())
@@ -28,6 +29,7 @@ Task* StatusForm::readStatusFromWindow(){
     return &m_task;
 }
 
+
 void StatusForm::giveTask(const Task &task){
     m_task = task;
 }
@@ -36,6 +38,7 @@ void StatusForm::giveTask(const Task &task){
 void StatusForm::on_confirm_cancel_btn_accepted(){
     emit refreshGUI();
 }
+
 
 void StatusForm::on_confirm_cancel_btn_rejected(){
     this->close();

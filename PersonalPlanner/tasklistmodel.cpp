@@ -1,23 +1,28 @@
 #include "tasklistmodel.h"
 #include <QDebug>
+
 TaskListModel::TaskListModel(QObject *parent) : QAbstractTableModel(parent){
 
 }
+
 
 void TaskListModel::populateData(const QList<Task>& taskList){
     m_taskList.clear();
     m_taskList = taskList;
 }
 
+
 int TaskListModel::rowCount(const QModelIndex &parent) const{
     Q_UNUSED(parent);
     return m_taskList.length();
 }
 
+
 int TaskListModel::columnCount(const QModelIndex &parent) const{
     Q_UNUSED(parent);
     return static_cast<int>(ColumnNames::Count);
 }
+
 
 bool TaskListModel::removeRow(int position, int rows, const QModelIndex &parent){
     beginRemoveRows(QModelIndex(), position, position+rows-1);
@@ -29,6 +34,7 @@ bool TaskListModel::removeRow(int position, int rows, const QModelIndex &parent)
 
     return true;
 }
+
 
 QVariant TaskListModel::data(const QModelIndex &index, int role) const{
     if (!index.isValid())
@@ -70,6 +76,7 @@ QVariant TaskListModel::data(const QModelIndex &index, int role) const{
     return QVariant();
 }
 
+
 QVariant TaskListModel::headerData(int section, Qt::Orientation orientation, int role) const{
     if (role == Qt::DisplayRole && orientation == Qt::Horizontal) {
         switch(static_cast<ColumnNames>(section)){
@@ -91,9 +98,11 @@ QVariant TaskListModel::headerData(int section, Qt::Orientation orientation, int
     return QVariant();
 }
 
+
 QList<Task> TaskListModel::taskList() const{
     return m_taskList;
 }
+
 
 void TaskListModel::setTaskList(const QList<Task> &taskList){
     m_taskList = taskList;
