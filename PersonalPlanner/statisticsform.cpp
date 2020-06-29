@@ -6,6 +6,8 @@ StatisticsForm::StatisticsForm(QMainWindow *parent) :
     ui(new Ui::StatisticsForm)
 {
     ui->setupUi(this);
+    this->setFixedSize(500, 400);
+    this->setStyleSheet("background-color: black");
     this->adjustSize();
     this->move(QApplication::desktop()->screen()->rect().center() - this->rect().center());
 }
@@ -17,14 +19,14 @@ StatisticsForm::~StatisticsForm(){
 
 
 void StatisticsForm::createStructure(){
-    monthModel->setName("Statistic of your Task Status from June - December " + QString::number(QDate::currentDate().year()));
+    monthModel->setName("<span style='font-family: URW Gothic L'>Statistic of your Task Status from June - December " + QString::number(QDate::currentDate().year()) + "</span>");
 
     for (int month = 0; month < months.count(); month++) {
         weeklyModel = new StatisticModel (weeks, 10, view);
         monthModel->mapStatisticModel(month, weeklyModel);
         for ( int week = 0; week < weeks.count(); week++) {
             weeklyModel->mapStatisticModel(week, monthModel);
-            weeklyModel->setName(QString("Status by week - " + months.at(month)));
+            weeklyModel->setName(QString("<span style='font-family: URW Gothic L'>Status by week - " + months.at(month) + " </span>"));
         }
         QObject::connect(weeklyModel, &StatisticModel::clicked, view, &StatisticView::handleClicked);
     }
@@ -74,9 +76,12 @@ void StatisticsForm::initializeChart(){
     view->changeSeries(monthModel);
     view->setTitle(monthModel->name());
 
+    QFont f("URW Gothic L");
+
     view->axes(Qt::Horizontal).first()->setGridLineVisible(false);
     view->legend()->setVisible(true);
     view->legend()->setAlignment(Qt::AlignBottom);
+    view->legend()->setFont(f);
 
     QChartView *chartView = new QChartView(view);
     chartView->setChart(view);

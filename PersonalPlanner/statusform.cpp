@@ -7,6 +7,7 @@ StatusForm::StatusForm(QWidget *parent) :
 {
     m_task = Task(-1,"", QDate(1,2,3), -1, "");
     ui->setupUi(this);
+    this->setFixedSize(402, 300);
 }
 
 

@@ -5,6 +5,7 @@ RegistrationForm::RegistrationForm(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::RegistrationForm)
 {
+    this->setFixedSize(381, 359);
     this->adjustSize();
     this->move(QApplication::desktop()->screen()->rect().center() - this->rect().center());
 

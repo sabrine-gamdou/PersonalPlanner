@@ -8,6 +8,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    this->setFixedSize(1340, 558);
     ui->taskView->setSelectionBehavior(QAbstractItemView::SelectRows);
     ui->taskView->setStyleSheet("QTableView::item:selected { color:white; background:#000000; font-weight:900; }");
 
@@ -305,7 +306,7 @@ void MainWindow::loadImage(const QString& path){
     QImage img(reader.read());
 
     if(img.isNull()) {
-        QMessageBox::information(this, QGuiApplication::applicationDisplayName(), "<span style='font-family: UWR Gothic L'>\nCould not open image</span>");
+        QMessageBox::information(this, QGuiApplication::applicationDisplayName(), "<span style='font-family: URW Gothic L'>\nCould not open image</span>");
     } else {
         width = img.width();
         height = img.height();

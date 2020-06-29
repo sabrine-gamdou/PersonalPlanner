@@ -6,6 +6,7 @@ AboutForm::AboutForm(QWidget *parent) :
     ui(new Ui::AboutForm)
 {
     ui->setupUi(this);
+    this->setFixedSize(699, 500);
 }
 
 AboutForm::~AboutForm(){

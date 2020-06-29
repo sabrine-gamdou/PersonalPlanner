@@ -6,6 +6,7 @@ Login::Login(QWidget *parent) :
     ui(new Ui::Login)
 {
     ui->setupUi(this);
+    this->setFixedSize(379, 342);
     this->move(QApplication::desktop()->screen()->rect().center() - this->rect().center());
     ui->passText->setEchoMode(QLineEdit::Password);
     ui->passText->setInputMethodHints(Qt::ImhHiddenText| Qt::ImhNoPredictiveText|Qt::ImhNoAutoUppercase);
