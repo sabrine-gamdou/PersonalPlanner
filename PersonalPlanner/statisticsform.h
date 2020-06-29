@@ -46,10 +46,11 @@ private:
 
     //Define categories
     const QStringList months = {
-        "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+        "<span style='font-family: URW Gothic L'>Jun</span>", "<span style='font-family: URW Gothic L'>Jul</span>", "<span style='font-family: URW Gothic L'>Aug</span>", "<span style='font-family: URW Gothic L'>Sep</span>",
+        "<span style='font-family: URW Gothic L'>Oct</span>", "<span style='font-family: URW Gothic L'>Nov</span>", "<span style='font-family: URW Gothic L'>Dec</span>"
     };
     const QStringList weeks = {
-        "week 1", "week 2", "week 3", "week 4"
+        "<span style='font-family: URW Gothic L'>week 1</span>", "<span style='font-family: URW Gothic L'>week 2</span>", "<span style='font-family: URW Gothic L'>week 3</span>", "<span style='font-family: URW Gothic L'>week 4</span>"
     };
     const QStringList status = {
         "Completed", "In-Progress", "Failed"
