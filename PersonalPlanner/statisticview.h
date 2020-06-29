@@ -1,8 +1,11 @@
 #ifndef STATISTICVIEW_H
 #define STATISTICVIEW_H
 
-#include <QtCharts/QChart>
 #include "statisticmodel.h"
+
+#include <QtCharts/QChart>
+#include <QtCharts/QBarCategoryAxis>
+#include <QtCharts/QValueAxis>
 
 namespace QtCharts {
 class QBarCategoryAxis;

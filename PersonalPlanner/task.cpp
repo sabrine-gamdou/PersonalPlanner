@@ -1,11 +1,7 @@
 #include "task.h"
 
-/*how to generate taskID? It shouldnt be the user who generates it! */
-
-
-
-
-Task::Task(int t_taskID, QString t_title, QDate t_date, int t_importance, QString t_username) : m_taskID(t_taskID), m_title(t_title), m_date(t_date), m_importance(t_importance), m_username(t_username){
+Task::Task(int t_taskID, QString t_title, QDate t_date, int t_importance, QString t_username) : m_taskID(t_taskID), m_title(t_title), m_date(t_date), m_importance(t_importance), m_username(t_username)
+{
 
 }
 
@@ -47,15 +43,6 @@ void Task::setDescription(const QString &description){
     m_description = description;
 }
 
-QImage Task::icon() const{
-
-    return m_icon;
-}
-
-void Task::setIcon(const QImage &icon){
-    m_icon = icon;
-}
-
 int Task::importance() const{
     return m_importance;
 }
@@ -88,20 +75,28 @@ void Task::setUsername(const QString &username){
     m_username = username;
 }
 
+/*For us to see in console*/
 QString Task::toString(){
-    QString string ;
+    QString string;
+
     string.append("TaskID: " );
     string.append(QString::number(m_taskID));
+
     string.append("\nTitle: ");
     string.append(m_title);
+
     string.append("\nDescription: ");
     string.append(m_description);
+
     string.append("\nImportance: ");
     string.append(QString::number(m_importance));
+
     string.append("\nStatus: ");
     string.append(m_status);
+
     string.append("\nDate: ");
     string.append(m_date.toString("dd.MM.yyyy"));
+
     string.append("\nRepetition: ");
     string.append(m_repetition);
 

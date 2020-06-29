@@ -26,9 +26,8 @@ void RegistrationForm::userCreatedConfirmed(const bool t_userCreated){
     if(t_userCreated){
         QMessageBox::information(this, "Information", "Welcome to Personal Planner!");
         this->close();
-    }else{
-        QMessageBox::warning(this, "Warning", "Something went wrong ... Please try again later.");
-    }
+    }else
+        QMessageBox::warning(this, "Warning", "Something went wrong ... Please try again later.");   
 }
 
 //Slots
@@ -39,7 +38,8 @@ void RegistrationForm::on_confirmBtn_clicked(){
     QString lastname;
     QString email;
 
-    QString style = "border: 1px solid red";
+    QString style = "border: 2px solid red;";
+    QString styleLb = "color:red;";
 
     bool stop = false;
 
@@ -93,11 +93,8 @@ void RegistrationForm::on_confirmBtn_clicked(){
         stop = false;
     }
 
-    //check if username available
-    //check if email available
-
     if(stop){
-        ui->errLb->setStyleSheet(style);
+        ui->errLb->setStyleSheet(styleLb);
         ui->errLb->setEnabled(true);
         ui->errLb->setText("Please correct your mistakes.");
     }else{

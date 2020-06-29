@@ -6,6 +6,10 @@
 
 
 class DatabaseSingleton{
+public:
+    /*Static Access Method.*/
+    static QSqlDatabase getInstance();
+
 private:
     /* Instance is stored here */
     static QSqlDatabase m_pInstance;
@@ -19,12 +23,6 @@ private:
 
     /* Close Connection to Database */
     static void closeConnection();
-
-public:
-    // ~DatabaseSingleton();
-
-    //Static Access Method.
-    static QSqlDatabase getInstance();
 };
 
 

@@ -2,6 +2,7 @@
 #define REGISTRATIONFORM_H
 
 #include "userdaoimp.h"
+
 #include <QWidget>
 #include <QDesktopWidget>
 #include <QDebug>

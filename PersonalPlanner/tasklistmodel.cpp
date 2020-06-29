@@ -31,9 +31,9 @@ bool TaskListModel::removeRow(int position, int rows, const QModelIndex &parent)
 }
 
 QVariant TaskListModel::data(const QModelIndex &index, int role) const{
-    if (!index.isValid()) {
+    if (!index.isValid())
         return QVariant();
-    }
+
 
     switch(role ) {
     case Qt::DisplayRole:{

@@ -1,6 +1,6 @@
 #include "databasesingleton.h"
 
-QSqlDatabase DatabaseSingleton::m_pInstance ;
+QSqlDatabase DatabaseSingleton::m_pInstance;
 
 DatabaseSingleton::DatabaseSingleton(){
 

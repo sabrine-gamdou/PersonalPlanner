@@ -2,6 +2,7 @@
 #define USERDAOIMP_H
 
 #include "user.h"
+
 #include <QtSql/QSqlDatabase>
 #include <QtSql/QSqlQuery>
 #include <QDebug>

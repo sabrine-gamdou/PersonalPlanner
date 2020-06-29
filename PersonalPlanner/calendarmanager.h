@@ -2,11 +2,8 @@
 #define CALENDARMANAGER_H
 
 #include <QCalendarWidget>
-
-#include <QStringList>
 #include <QBrush>
 #include <QColor>
-#include <QFile>
 #include <QList>
 #include <QDate>
 #include <QPen>
@@ -15,7 +12,6 @@
 class CalendarManager : public QCalendarWidget
 {
     Q_OBJECT
-
     Q_PROPERTY(QColor color READ getColor WRITE setColor)
 
 public:
@@ -25,7 +21,6 @@ public:
     void setColor(const QColor &color);
     QColor getColor() const;
     void getDate(QDate &date);
-    QList<QDate> getDates() const;
     void setDates(const QList<QDate> &dates);
 
 protected:

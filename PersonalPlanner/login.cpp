@@ -6,7 +6,6 @@ Login::Login(QWidget *parent) :
     ui(new Ui::Login)
 {
     ui->setupUi(this);
-    this->adjustSize();
     this->move(QApplication::desktop()->screen()->rect().center() - this->rect().center());
     ui->passText->setEchoMode(QLineEdit::Password);
     ui->passText->setInputMethodHints(Qt::ImhHiddenText| Qt::ImhNoPredictiveText|Qt::ImhNoAutoUppercase);
@@ -16,7 +15,8 @@ Login::~Login(){
     delete ui;
 }
 
-bool Login::login(QString un, QString pass){
+/*using const here crashes the program!*/
+bool Login::login(QString &un, QString &pass){
     return this->m_userManager->checkLogin(un,pass);
 }
 
@@ -41,8 +41,8 @@ void Login::on_loginBtn_clicked(){
     }
     else {
         ui->loginLabel->setText("Login failed: Invalid credentials!");
-        ui->usernameText->setStyleSheet("border: 1px solid #4A001F");
-        ui->passText->setStyleSheet("border: 1px solid #4A001F");
+        ui->usernameText->setStyleSheet("border: 2px solid red");
+        ui->passText->setStyleSheet("border: 2px solid red");
     }
 }
 

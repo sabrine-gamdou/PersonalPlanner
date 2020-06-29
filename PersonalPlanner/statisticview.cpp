@@ -1,6 +1,4 @@
 #include "statisticview.h"
-#include <QtCharts/QBarCategoryAxis>
-#include <QtCharts/QValueAxis>
 
 QT_CHARTS_USE_NAMESPACE
 

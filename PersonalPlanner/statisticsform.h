@@ -27,14 +27,11 @@ public:
 
     void createStructure();
     void populateData();
-    int statusToInt(QString status);
+    int statusToInt(const QString &status);
     void initializeChart();
     void sortDateWeeks();
-    void countStatus(const QString& status);
+    void countStatus(const QString &status);
     bool checkEndOfMonth(int day, int month);
-    void printMap() const;
-    void printList(QList<QList<int>> t_combinedList) const;
-    QList<Task> getTasksList() const;
     void setTasksList(const QList<Task> &value);
 
 private:

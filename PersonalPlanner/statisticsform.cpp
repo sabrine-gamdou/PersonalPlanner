@@ -5,12 +5,9 @@ StatisticsForm::StatisticsForm(QMainWindow *parent) :
     QMainWindow(parent),
     ui(new Ui::StatisticsForm)
 {
-
     ui->setupUi(this);
     this->adjustSize();
     this->move(QApplication::desktop()->screen()->rect().center() - this->rect().center());
-
-
 }
 
 StatisticsForm::~StatisticsForm(){
@@ -40,9 +37,8 @@ void StatisticsForm::populateData(){
         int monthC = 0;
         for (month = monthlyMap.begin();month != monthlyMap.end();++month) {
             QBarSet *weeklyStatus = new QBarSet(state);
-            for (int week = 0; week < weeks.count(); ++week) {
+            for (int week = 0; week < weeks.count(); ++week)
                 *weeklyStatus <<  month.value().at(week).at(statusToInt(state));
-            }
             ++monthC;
             monthModel->statisticModel(month.key())->append(weeklyStatus);
             *monthlyStatus << weeklyStatus->sum();
@@ -51,16 +47,14 @@ void StatisticsForm::populateData(){
     }
 }
 
-
-
-int StatisticsForm::statusToInt(QString status){
-    if(status == "Completed"){
+int StatisticsForm::statusToInt(const QString &status){
+    if(status == "Completed")
         return 0;
-    }else if(status == "Failed"){
+    else if(status == "Failed")
         return 1;
-    }else if(status == "In-Progress"){
+    else if(status == "In-Progress")
         return 2;
-    }
+
     return -1;
 }
 
@@ -118,7 +112,7 @@ void StatisticsForm::sortDateWeeks(){
     }
 }
 
-void StatisticsForm::countStatus(const QString& status){
+void StatisticsForm::countStatus(const QString &status){
     if(status == "Completed")
         ++completed;
     else if (status == "Failed")
@@ -130,24 +124,6 @@ void StatisticsForm::countStatus(const QString& status){
 
 bool StatisticsForm::checkEndOfMonth(int day, int month){
     return ((((month == 7) || (month == 8) || (month == 10) || (month == 12)) && ((day == 29) || (day == 30) || (day == 31))) || (((month == 6) || (month == 9) || (month == 11)) && ((day == 29) || (day == 30))));
-}
-
-void StatisticsForm::printMap() const{
-    for (int i = 0;i<months.length(); ++i) {
-        printList(monthlyMap.value(i));
-    }
-}
-
-void StatisticsForm::printList(QList<QList<int>> t_combinedList) const{
-    for(int week = 0; week < weeks.length(); ++week){
-        for(int state = 0; state < status.length() ; ++state){
-            qDebug() << "Week: "<< week<< "Status: "<< state<< " "<< t_combinedList.at(week).at(state);
-        }
-    }
-}
-
-QList<Task> StatisticsForm::getTasksList() const{
-    return tasksList;
 }
 
 void StatisticsForm::setTasksList(const QList<Task> &value){

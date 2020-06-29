@@ -44,14 +44,12 @@ bool TaskDaoImp::readAll(const QString &username){
 
     QSqlQuery query;
 
-    // query.prepare( " SELECT * FROM tasks WHERE username=" ":t_username");
     query.prepare("SELECT * FROM tasks WHERE username=(:username) ORDER BY date ASC,  (CASE status WHEN 'Completed' THEN 1 WHEN 'In-Progress' THEN 2 WHEN 'Failed' THEN 3 END), status DESC");
     query.bindValue(":username", username);
 
     bool status = false;
-    if(query.exec()){
+    if(query.exec())
         status = true;
-    }
 
     while (query.next()){
         newTask.setTaskID(query.value(0).toInt());
@@ -76,38 +74,7 @@ bool TaskDaoImp::readAll(const QString &username){
     return status;
 }
 
-
-Task TaskDaoImp::read(int t_taskID, QString &username){
-    Task task(-1, "title",QDate(1,2,3), -1, username);
-
-    DatabaseSingleton::getInstance();
-
-    QSqlQuery query;
-
-    query.prepare( " SELECT * FROM tasks WHERE task_id=(:t_taskID) AND username=(:username)");
-    query.bindValue(":t_taskID", t_taskID);
-    query.bindValue(":username", username);
-
-    query.exec();
-
-    while (query.next()) {
-        task.setTaskID(query.value(0).toInt());
-        task.setTitle(query.value(1).toString());
-        task.setDate(query.value(2).toDate());
-        task.setDescription(query.value(3).toString());
-        task.setImportance(query.value(4).toInt());
-        task.setStatus(query.value(5).toString());
-        task.setRepetition(query.value(6).toString());
-
-        qDebug() << task.taskID() << task.title() << task.date()
-                 << task.description() << task.importance()
-                 << task.status() << task.repetition() << task.username();
-    }
-
-    return task;
-}
-
-bool TaskDaoImp::update(Task& task){
+bool TaskDaoImp::update(const Task &task){
     DatabaseSingleton::getInstance();
 
     QSqlQuery query;
@@ -129,7 +96,7 @@ bool TaskDaoImp::update(Task& task){
     return query.exec();
 }
 
-bool TaskDaoImp::delete_(Task task){ // or taskID?
+bool TaskDaoImp::delete_(const Task &task){
     int t_id = task.taskID();
     DatabaseSingleton::getInstance();
     QSqlQuery query;
@@ -152,10 +119,6 @@ bool TaskDaoImp::deleteAllTasks(const QString &username) {
 
 TaskListModel *TaskDaoImp::getTaskModel() const{
     return taskModel;
-}
-
-void TaskDaoImp::setTaskModel(TaskListModel *value){
-    taskModel = value;
 }
 
 QList<Task> TaskDaoImp::getTaskList() const{

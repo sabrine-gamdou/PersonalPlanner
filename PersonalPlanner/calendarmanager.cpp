@@ -17,16 +17,12 @@ void CalendarManager::setColor(const QColor &color){
 }
 
 QColor CalendarManager::getColor() const{
-    return ( m_outlinePen.color() );
+    return m_outlinePen.color();
 }
 
 void CalendarManager::getDate(QDate &date){
     if(!m_dates.contains(date))
         m_dates.append(date);
-}
-
-QList<QDate> CalendarManager::getDates() const{
-    return m_dates;
 }
 
 void CalendarManager::setDates(const QList<QDate> &dates){

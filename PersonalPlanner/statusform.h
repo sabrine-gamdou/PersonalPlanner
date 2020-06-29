@@ -19,10 +19,8 @@ public:
     explicit StatusForm(QWidget *parent = 0);
     ~StatusForm();
 
-    QString getStatus() const;
-    void setStatus(const QString &value);
     Task *readStatusFromWindow();
-    void giveTask(Task &task);
+    void giveTask(const Task &task);
 
 private slots:
     void on_confirm_cancel_btn_accepted();
@@ -35,7 +33,7 @@ private:
     Ui::StatusForm *ui;
 
     QString status;
-    TaskDaoImp m_taskDao;
+    TaskDaoImp m_taskManager;
     Task m_task;
     TaskListModel m_taskModel;
 };

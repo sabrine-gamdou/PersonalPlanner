@@ -14,29 +14,21 @@ StatusForm::~StatusForm(){
     delete ui;
 }
 
-QString StatusForm::getStatus() const{
-    return status;
-}
-
-void StatusForm::setStatus(const QString &value){
-    status = value;
-}
-
 Task* StatusForm::readStatusFromWindow(){
-    if(ui->completedRb->isChecked()){
+    if(ui->completedRb->isChecked())
         status = "Completed";
-    } else if(ui->failedRb->isChecked()){
+    else if(ui->failedRb->isChecked())
         status = "Failed";
-    } else if(ui->inProgressRb->isChecked()){
+    else if(ui->inProgressRb->isChecked())
         status = "In-Progress";
-    }
+
     m_task.setStatus(status);
-    m_taskDao.update(m_task);
+    m_taskManager.update(m_task);
 
     return &m_task;
 }
 
-void StatusForm::giveTask(Task &task){
+void StatusForm::giveTask(const Task &task){
     m_task = task;
 }
 

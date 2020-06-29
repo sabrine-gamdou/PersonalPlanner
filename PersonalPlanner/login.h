@@ -5,6 +5,7 @@
 #include "taskdaoimp.h"
 #include "mainwindow.h"
 #include "registrationform.h"
+
 #include <QMessageBox>
 #include <QFile>
 #include <QDesktopWidget>
@@ -22,7 +23,7 @@ public:
     explicit Login(QWidget *parent = 0);
     ~Login();
 
-    bool login(QString un, QString pass);
+    bool login(QString &un, QString &pass);
 
 private slots:
     void on_loginBtn_clicked();

@@ -1,16 +1,14 @@
 #include "userdaoimp.h"
 #include "databasesingleton.h"
 
-UserDaoImp::UserDaoImp(){
+UserDaoImp::UserDaoImp()
+{
 
 }
-
 
 UserDaoImp::~UserDaoImp(){
-    // delete m_user;
+
 }
-
-
 
 bool UserDaoImp::create (User &t_user){
     DatabaseSingleton::getInstance();
@@ -28,8 +26,7 @@ bool UserDaoImp::create (User &t_user){
     query.bindValue(":address", t_user.address());
     query.bindValue(":score", t_user.score());
 
-    if( !query.exec())
-    {
+    if( !query.exec()) {
         qDebug() << query.lastError().text();
         return false;
     }
@@ -38,13 +35,14 @@ bool UserDaoImp::create (User &t_user){
 }
 
 User UserDaoImp::read(const QString& t_username){
+    QString t_password;
     QString t_firstname;
     QString t_lastname;
     QString t_email;
     QDate t_birthday(1,2,3);
     QString t_address;
-    QString t_password;
     QByteArray t_profilePicture;
+
     int t_score = 0;
     int width;
     int height;
@@ -59,7 +57,6 @@ User UserDaoImp::read(const QString& t_username){
     query.exec();
 
     while (query.next()) {
-        //t_username = query.value(0).toString();
         t_password = query.value(1).toString();
         t_firstname = query.value(2).toString();
         t_lastname = query.value(3).toString();
@@ -114,7 +111,6 @@ bool UserDaoImp::updateScore(const QString &t_username, int score){
 
     QSqlQuery query;
 
-
     qDebug() << "Prepare Query: "<< query.prepare("UPDATE users SET  score = (:score) WHERE username = (:un)");
 
     query.bindValue(":un", t_username);
@@ -147,9 +143,8 @@ bool UserDaoImp::checkLogin(const QString &t_username, const QString &t_password
     query.bindValue(":pass", t_password);
 
     if( query.exec()){
-        if (query.next()){
+        if (query.next())
             return true;
-        }
     }
     return false;
 }
@@ -177,10 +172,8 @@ bool UserDaoImp::checkUserExist(const QString &t_username){
     query.bindValue(":un", t_username);
 
     if( query.exec()){
-        if (query.next()){
+        if (query.next())
             return true;
-        }
     }
     return false;
 }
-
