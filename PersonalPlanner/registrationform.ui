@@ -98,7 +98,7 @@ QPushButton { background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, st
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">QLineEdit{ background: white}</string>
+        <string notr="true">QLineEdit{ background-color: white}</string>
        </property>
       </widget>
      </item>
@@ -125,7 +125,7 @@ QPushButton { background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, st
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">QLineEdit{ background: white}</string>
+        <string notr="true">QLineEdit{ background-color: white}</string>
        </property>
       </widget>
      </item>
@@ -152,7 +152,7 @@ QPushButton { background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, st
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">QLineEdit{ background: white}</string>
+        <string notr="true">background-color: white</string>
        </property>
       </widget>
      </item>
@@ -194,7 +194,7 @@ QPushButton { background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, st
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">QLineEdit{ background: white}</string>
+        <string notr="true">QLineEdit{ background-color: white}</string>
        </property>
       </widget>
      </item>
@@ -206,7 +206,7 @@ QPushButton { background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, st
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">QLineEdit{ background: white}</string>
+        <string notr="true">QLineEdit{ background-color: white}</string>
        </property>
       </widget>
      </item>

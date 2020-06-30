@@ -44,8 +44,8 @@ void Login::on_loginBtn_clicked(){
     }
     else {
         ui->loginLabel->setText("Login failed: Invalid credentials!");
-        ui->usernameText->setStyleSheet("border: 2px solid red");
-        ui->passText->setStyleSheet("border: 2px solid red");
+        ui->usernameText->setStyleSheet("background-color: white; border: 2px solid red");
+        ui->passText->setStyleSheet("background-color: white; border: 2px solid red");
     }
 }
 

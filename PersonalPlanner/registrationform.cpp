@@ -45,7 +45,7 @@ void RegistrationForm::on_confirmBtn_clicked(){
     QString lastname;
     QString email;
 
-    QString style = "border: 2px solid red;";
+    QString style = "background-color: white; border: 2px solid red;";
     QString styleLb = "color:red;";
 
     bool stop = false;
