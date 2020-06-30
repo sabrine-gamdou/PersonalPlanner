@@ -11,6 +11,7 @@ MainWindow::MainWindow(QWidget *parent) :
     this->setFixedSize(1340, 558);
     ui->taskView->setSelectionBehavior(QAbstractItemView::SelectRows);
     ui->taskView->setStyleSheet("QTableView::item:selected { color:white; background:#000000; font-weight:900; }");
+    ui->taskView->horizontalHeader()->setStyleSheet("QHeaderView {font-family: URW Gothic L;}");
 
     this->move(QApplication::desktop()->screen()->rect().center() - this->rect().center());
 
