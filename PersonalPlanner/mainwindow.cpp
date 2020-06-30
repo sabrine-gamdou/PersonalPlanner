@@ -29,6 +29,7 @@ MainWindow::~MainWindow(){
     delete ui;
 }
 
+
 QString MainWindow::username() const{
     return m_username;
 }
@@ -96,11 +97,11 @@ void MainWindow::editInfoCheckBox_checked(const bool checked){
 bool MainWindow::titleExists(const QString title){
     if(title == "")
     {
-        ui->titleTxt->setStyleSheet("border: 1px solid red" );
+        ui->titleTxt->setStyleSheet("border: 1px solid red");
         ui->titleTxt->setPlaceholderText("Task Title EMPTY!");
         return false;
     }
-    ui->titleTxt->setStyleSheet("");
+    ui->titleTxt->setStyleSheet("background-color: white");
     ui->titleTxt->setPlaceholderText("");
 
     return true;
