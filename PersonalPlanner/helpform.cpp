@@ -6,7 +6,7 @@ HelpForm::HelpForm(QWidget *parent) :
     ui(new Ui::HelpForm)
 {
     ui->setupUi(this);
-    this->setFixedSize(771, 536);
+    this->setFixedSize(1064, 592);
 }
 
 HelpForm::~HelpForm(){
