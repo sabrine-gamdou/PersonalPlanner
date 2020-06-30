@@ -4,6 +4,7 @@
 #include "task.h"
 #include "taskdaoimp.h"
 #include "tasklistmodel.h"
+
 #include <QDialog>
 #include <QString>
 

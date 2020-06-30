@@ -23,7 +23,7 @@ public:
     explicit Login(QWidget *parent = 0);
     ~Login();
 
-    bool login(QString &un, QString &pass);
+    bool login(const QString &un, const QString &pass);
 
 private slots:
     void on_loginBtn_clicked();
@@ -42,7 +42,7 @@ private:
     UserDaoImp* m_userManager;
     TaskDaoImp* m_taskManager;
 
-    void initialize(QString &un, QString &pass);
+    void initialize(const QString &un, const QString &pass);
 };
 
 #endif // LOGIN_H

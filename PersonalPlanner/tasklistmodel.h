@@ -1,9 +1,10 @@
 #ifndef TASKLISTMODEL_H
 #define TASKLISTMODEL_H
 
+#include "task.h"
+
 #include <QAbstractTableModel>
 #include <QBrush>
-#include "task.h"
 
 class TaskListModel : public QAbstractTableModel
 {

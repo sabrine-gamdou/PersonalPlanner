@@ -12,7 +12,7 @@ DatabaseSingleton::~DatabaseSingleton(){
 }
 
 
-void DatabaseSingleton::openConnection() {
+void DatabaseSingleton::openConnection(){
     m_pInstance = QSqlDatabase::addDatabase("QPSQL");
     m_pInstance.setHostName("personalplaner.c8g5ukkpvryv.eu-central-1.rds.amazonaws.com");
     m_pInstance.setDatabaseName("PersonalPlanner");

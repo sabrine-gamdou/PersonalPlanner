@@ -7,7 +7,7 @@
 
 class DatabaseSingleton{
 public:
-    /*Static Access Method.*/
+    /* Static Access Method.*/
     static QSqlDatabase getInstance();
 
 private:

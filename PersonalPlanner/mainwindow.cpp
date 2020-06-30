@@ -21,7 +21,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(ui->actionHelp, &QAction::triggered, this, &MainWindow::on_actionHelpClicked);
     QObject::connect(ui->actionLogout, &QAction::triggered, this, &MainWindow::on_actionLogoutClicked);
 
-    mode = 0;
+    mode = 0; /*This variable is to differentiate between two functions of the ok/cancel- button. This effects adding or editing a task.*/
 }
 
 
@@ -49,7 +49,8 @@ void MainWindow::setPassword(const QString &password){
     m_password = password;
 }
 
-
+/* This method is used for reading all tasks from database, synchronizing the calendar, setting the taskModel, counting the
+ * statuses and viewing all tasks in a tableView. */
 void MainWindow::getTasks(){
     resetTaskInput();
     m_taskManager.readAll(m_username);
@@ -64,7 +65,7 @@ void MainWindow::getTasks(){
     ui->taskView->show();
 }
 
-
+/* This method reads all user data from database and sets it in the MainWindow. See 'Account page' on GUI. */
 void MainWindow::getUserData(){
     User t_user=  this->m_userManager.read(m_username);
     QByteArray profile_picture = t_user.getProfilePicture();
@@ -77,7 +78,7 @@ void MainWindow::getUserData(){
     ui->addressTxt->setText(t_user.address());
 
     width = t_user.getWidth();
-    height = t_user.getWidth();
+    height = t_user.getHeight();
 
     convertByteArrayToImage(profile_picture);
 }
@@ -93,10 +94,9 @@ void MainWindow::editInfoCheckBox_checked(const bool checked){
     ui->saveChangesBtn->setEnabled(checked);
 }
 
-
+/* This method checks if a task title was added. */
 bool MainWindow::titleExists(const QString title){
-    if(title == "")
-    {
+    if(title == ""){
         ui->titleTxt->setStyleSheet("border: 1px solid red");
         ui->titleTxt->setPlaceholderText("Task Title EMPTY!");
         return false;
@@ -107,7 +107,7 @@ bool MainWindow::titleExists(const QString title){
     return true;
 }
 
-
+/* This method reads the task data from MainWindow if it was added, it returns that task. */
 Task MainWindow::readTaskData(){
     if(titleExists(ui->titleTxt->text())){
         Task new_task (0, ui->titleTxt->text(), ui->dateTimeEdit->date(), ui->importanceSb->text().toInt(), m_username);
@@ -119,7 +119,10 @@ Task MainWindow::readTaskData(){
     return Task();
 }
 
-
+/* This method checks if the task is valid. We differentiate between two modes:
+ * mode 1: means that the user clicked on the edit button and wants to update the selected task.The edited task will have
+ * the default status of "In-Progress". When the ok-button is clicked the update-method(of task) will be called.
+ * mode 0: means that the user wants to create a new task. When the ok-button is clicked the create-method(of task) will be called. */
 bool MainWindow::readTaskAndCheckIfValid(){
     bool status = false;
 
@@ -148,7 +151,8 @@ bool MainWindow::readTaskAndCheckIfValid(){
     return status;
 }
 
-
+/* This method will notify the user with a messageBox. If the given bool value is true an informationBox will be shown, otherwise a
+ * warningBox will occure. */
 void MainWindow::userUpdatedConfirmed(const bool t_userUpdated){
     qDebug() << "User Updated status: "<< t_userUpdated;
 
@@ -171,7 +175,6 @@ void MainWindow::deleteTask (){
     m_taskManager.getTaskModel()->removeRow( index.row(),1 , index);
 
     qDebug() << "list size" << m_taskManager.getTaskModel()->taskList().size();
-
     qDebug() << "Task deleted: " << index.row() << m_taskManager.delete_(task);
 
     m_taskManager.setTaskList(m_taskManager.getTaskModel()->taskList());

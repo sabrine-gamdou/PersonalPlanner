@@ -38,7 +38,7 @@ void CalendarManager::setDates(const QList<QDate> &dates){
 void CalendarManager::paintCell(QPainter *painter, const QRect &rect, const QDate &date) const{
     QCalendarWidget::paintCell(painter, rect, date);
 
-    if( m_dates.contains(date) ) {
+    if(m_dates.contains(date)){
         painter->setPen(m_outlinePen);
         painter->setBrush(m_transparentBrush);
         painter->drawRect(rect.adjusted(0, 0, -1, -1));

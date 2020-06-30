@@ -1,6 +1,10 @@
 ﻿#ifndef STATISTICSFORM_H
 #define STATISTICSFORM_H
 
+#include "statisticmodel.h"
+#include "statisticview.h"
+#include "taskdaoimp.h"
+
 #include <QMainWindow>
 #include <QDesktopWidget>
 #include <QtCharts/QChart>
@@ -9,9 +13,6 @@
 #include <QtCharts/QBarSet>
 #include <QtCharts/QLegend>
 #include <QMap>
-#include "statisticmodel.h"
-#include "statisticview.h"
-#include "taskdaoimp.h"
 
 namespace Ui {
 class StatisticsForm;
