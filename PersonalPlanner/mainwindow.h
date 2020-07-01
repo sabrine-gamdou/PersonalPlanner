@@ -43,7 +43,7 @@ public:
     bool titleExists(const QString title);
     Task readTaskData();
     bool readTaskAndCheckIfValid();
-    void userUpdatedConfirmed(const bool t_userUpdated);
+    void userUpdatedConfirmed(const bool isUserUpdated);
     void deleteTask();
     int setRepetitionIndex(QString repetitionString);
     void setRepetitionDuration(const QDate &date, Task task);

@@ -154,10 +154,10 @@ bool MainWindow::readTaskAndCheckIfValid(){
 
 /*! \brief This method will notify the user with a messageBox. If the given bool value is true an informationBox will be shown, otherwise a
  * warningBox will occure. */
-void MainWindow::userUpdatedConfirmed(const bool t_userUpdated){
-    qDebug() << "User Updated status: "<< t_userUpdated;
+void MainWindow::userUpdatedConfirmed(const bool isUserUpdated){
+    qDebug() << "User Updated status: "<< isUserUpdated;
 
-    if(t_userUpdated){
+    if(isUserUpdated){
         QMessageBox msgInfo(QMessageBox::Information, "Information", "\nYou successfully updated your profile information!");
         msgInfo.setStyleSheet("font-family: URW Gothic L");
         msgInfo.exec();
