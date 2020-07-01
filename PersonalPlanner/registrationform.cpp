@@ -83,7 +83,7 @@ void RegistrationForm::on_confirmBtn_clicked(){
     if(ui->lastnameTxt->text() == ""){
         ui->lastnameTxt->setStyleSheet(style);
         ui->lastnameTxt->setPlaceholderText("Last Name EMPTY!");
-        isInvalid = false;
+        isInvalid = true;
     }else{
         ui->lastnameTxt->setStyleSheet("");
         lastname = ui->lastnameTxt->text();
