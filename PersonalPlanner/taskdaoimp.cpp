@@ -14,9 +14,8 @@ TaskDaoImp::~TaskDaoImp(){
 }
 
 
-bool TaskDaoImp::create(Task& task, const QString& username){
+bool TaskDaoImp::create(Task &task, const QString &username){
     DatabaseSingleton::getInstance();
-
     QSqlQuery query;
 
     task.setStatus("In-Progress");
@@ -40,9 +39,7 @@ bool TaskDaoImp::readAll(const QString &username){
     m_taskList.clear();
 
     Task newTask(-1, "title",QDate(1,2,3), -1, username);
-
     DatabaseSingleton::getInstance();
-
     QSqlQuery query;
 
     query.prepare("SELECT * FROM tasks WHERE username=(:username) ORDER BY date ASC,  (CASE status WHEN 'Completed' THEN 1 WHEN 'In-Progress' THEN 2 WHEN 'Failed' THEN 3 END), status DESC");
@@ -78,7 +75,6 @@ bool TaskDaoImp::readAll(const QString &username){
 
 bool TaskDaoImp::update(const Task &task){
     DatabaseSingleton::getInstance();
-
     QSqlQuery query;
 
     qDebug() << "Prepare Query: "<< query.prepare("UPDATE tasks SET title = (:title), date = (:date), "

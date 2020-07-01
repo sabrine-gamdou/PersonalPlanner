@@ -3,9 +3,9 @@
 
 #include "statisticmodel.h"
 
-#include <QtCharts/QChart>
-#include <QtCharts/QBarCategoryAxis>
-#include <QtCharts/QValueAxis>
+#include <QChart>
+#include <QBarCategoryAxis>
+#include <QValueAxis>
 
 namespace QtCharts {
 class QBarCategoryAxis;
@@ -22,7 +22,7 @@ public:
 
     void changeSeries(StatisticModel *model);
 
-public Q_SLOTS:
+public slots:
     void handleClicked(int index, QBarSet *barset);
 
 private:

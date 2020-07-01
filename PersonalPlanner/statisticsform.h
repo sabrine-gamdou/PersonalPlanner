@@ -7,11 +7,11 @@
 
 #include <QMainWindow>
 #include <QDesktopWidget>
-#include <QtCharts/QChart>
-#include <QtWidgets/QApplication>
-#include <QtCharts/QChartView>
-#include <QtCharts/QBarSet>
-#include <QtCharts/QLegend>
+#include <QChart>
+#include <QApplication>
+#include <QChartView>
+#include <QBarSet>
+#include <QLegend>
 #include <QMap>
 
 namespace Ui {

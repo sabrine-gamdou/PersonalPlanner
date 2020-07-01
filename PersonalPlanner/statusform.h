@@ -6,7 +6,6 @@
 #include "tasklistmodel.h"
 
 #include <QDialog>
-#include <QString>
 
 namespace Ui {
 class StatusForm;
@@ -22,6 +21,8 @@ public:
 
     Task *readStatusFromWindow();
     void giveTask(const Task &task);
+    void setStatus(const QString &value);
+    void initializeStatusForm();
 
 private slots:
     void on_confirm_cancel_btn_accepted();

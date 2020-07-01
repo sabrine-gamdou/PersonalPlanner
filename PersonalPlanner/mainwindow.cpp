@@ -49,7 +49,7 @@ void MainWindow::setPassword(const QString &password){
     m_password = password;
 }
 
-/* This method is used for reading all tasks from database, synchronizing the calendar, setting the taskModel, counting the
+/*! \brief This method is used for reading all tasks from database, synchronizing the calendar, setting the taskModel, counting the
  * statuses and viewing all tasks in a tableView. */
 void MainWindow::getTasks(){
     resetTaskInput();
@@ -65,7 +65,7 @@ void MainWindow::getTasks(){
     ui->taskView->show();
 }
 
-/* This method reads all user data from database and sets it in the MainWindow. See 'Account page' on GUI. */
+/*! \brief This method reads all user data from database and sets it in the MainWindow. See 'Account page' on GUI. */
 void MainWindow::getUserData(){
     User t_user=  this->m_userManager.read(m_username);
     QByteArray profile_picture = t_user.getProfilePicture();
@@ -90,11 +90,12 @@ void MainWindow::editInfoCheckBox_checked(const bool checked){
     ui->emailTxt->setEnabled(checked);
     ui->dateEdit->setEnabled(checked);
     ui->addressTxt->setEnabled(checked);
+    ui->editInfoCheckBox->setChecked(checked);
 
     ui->saveChangesBtn->setEnabled(checked);
 }
 
-/* This method checks if a task title was added. */
+/*! \brief This method checks if a task title was added. */
 bool MainWindow::titleExists(const QString title){
     if(title == ""){
         ui->titleTxt->setStyleSheet("border: 1px solid red");
@@ -107,7 +108,7 @@ bool MainWindow::titleExists(const QString title){
     return true;
 }
 
-/* This method reads the task data from MainWindow if it was added, it returns that task. */
+/*! \brief This method reads the task data from MainWindow if it was added, it returns that task. */
 Task MainWindow::readTaskData(){
     if(titleExists(ui->titleTxt->text())){
         Task new_task (0, ui->titleTxt->text(), ui->dateTimeEdit->date(), ui->importanceSb->text().toInt(), m_username);
@@ -119,7 +120,7 @@ Task MainWindow::readTaskData(){
     return Task();
 }
 
-/* This method checks if the task is valid. We differentiate between two modes:
+/*! \brief This method checks if the task is valid. We differentiate between two modes:
  * mode 1: means that the user clicked on the edit button and wants to update the selected task.The edited task will have
  * the default status of "In-Progress". When the ok-button is clicked the update-method(of task) will be called.
  * mode 0: means that the user wants to create a new task. When the ok-button is clicked the create-method(of task) will be called. */
@@ -151,7 +152,7 @@ bool MainWindow::readTaskAndCheckIfValid(){
     return status;
 }
 
-/* This method will notify the user with a messageBox. If the given bool value is true an informationBox will be shown, otherwise a
+/*! \brief This method will notify the user with a messageBox. If the given bool value is true an informationBox will be shown, otherwise a
  * warningBox will occure. */
 void MainWindow::userUpdatedConfirmed(const bool t_userUpdated){
     qDebug() << "User Updated status: "<< t_userUpdated;
@@ -167,12 +168,12 @@ void MainWindow::userUpdatedConfirmed(const bool t_userUpdated){
     }
 }
 
-
+/*! \brief This method removes a selected row that represents a full task. The task will also be removed in the database. */
 void MainWindow::deleteTask (){
     QModelIndex index = ui->taskView->selectionModel()->currentIndex();
     Task task = m_taskManager.getTaskModel()->taskList().at(index.row());
 
-    m_taskManager.getTaskModel()->removeRow( index.row(),1 , index);
+    m_taskManager.getTaskModel()->removeRow( index.row(),1);
 
     qDebug() << "list size" << m_taskManager.getTaskModel()->taskList().size();
     qDebug() << "Task deleted: " << index.row() << m_taskManager.delete_(task);
@@ -184,29 +185,27 @@ void MainWindow::deleteTask (){
 
 
 int MainWindow::setRepetitionIndex(QString repetitionString){
-    if (repetitionString == "Never") {
+    if (repetitionString == "Never")
         return 0;
-    } else if(repetitionString == "Day") {
+    else if(repetitionString == "Day")
         return 1;
-    }else if(repetitionString == "Week") {
+    else if(repetitionString == "Week")
         return 2;
-    }else if(repetitionString == "Month") {
+    else if(repetitionString == "Month")
         return 3;
-    }else if(repetitionString == "Year") {
+    else if(repetitionString == "Year")
         return 4;
-    }
 
     return -1;
 }
 
-
+/*! \brief This method makes it possible to extend the duration of a task, depending on the chosen repetition. */
 void MainWindow::setRepetitionDuration(const QDate &date, Task task){
     if ("Day" == task.repetition()) {
         for(int i = 1; i<31;i++){
             task.setDate(date.addDays(i));
             m_taskManager.create(task, m_username);
         }
-
     } else if ("Week" == task.repetition()) {
         for (int i = 1; i < 4; i++) {
             task.setDate(date.addDays(7*i));
@@ -225,10 +224,11 @@ void MainWindow::setRepetitionDuration(const QDate &date, Task task){
     }
 }
 
-
-void MainWindow::taskConfirmed(const bool taskUpdated){
-    qDebug() << "Task Updated status: "<< taskUpdated;
-    if(taskUpdated){
+/*! \brief This method will notify the user with a messageBox if the given bool value is true an informationBox will be shown. Otherwise
+ * a warningBox will show up. */
+void MainWindow::taskConfirmed(const bool isTaskUpdated){
+    qDebug() << "Task Updated status: " << isTaskUpdated;
+    if(isTaskUpdated){
         QMessageBox msgInfo(QMessageBox::Information, "Information", "\nYou successfully added/updated your task!");
         msgInfo.setStyleSheet("font-family: URW Gothic L");
         msgInfo.exec();
@@ -248,19 +248,19 @@ void MainWindow::resetTaskInput(){
     ui->repeatCb->setCurrentIndex(0);
 }
 
+/*! \brief This method goes through the taskList, counts each status and than updates the score of the user onto the GUI and database. */
 void MainWindow::statusCounter(){
     int completed = 0;
     int failed = 0;
     int inProgress = 0;
 
     for(int i = 0; i<m_taskManager.getTaskList().length();++i){
-        if(m_taskManager.getTaskList().at(i).status() == "Completed"){
+        if(m_taskManager.getTaskList().at(i).status() == "Completed")
             ++completed;
-        }else if(m_taskManager.getTaskList().at(i).status() == "Failed"){
+        else if(m_taskManager.getTaskList().at(i).status() == "Failed")
             ++failed;
-        }else if(m_taskManager.getTaskList().at(i).status() == "In-Progress"){
+        else if(m_taskManager.getTaskList().at(i).status() == "In-Progress")
             ++inProgress;
-        }
     }
 
     score = countScore(completed, failed);
@@ -273,19 +273,18 @@ void MainWindow::statusCounter(){
     ui->progressLCD->display(inProgress);
 }
 
-
+/*! \brief This method counts the score and save it in a temporary variable. The score should always be positive. If its positive it returns
+ * the current score value, otherwise the method returns a 0. */
 int MainWindow::countScore(int completed, int failed){
-    //Score should always be positive
-    //we count the score and save it in a temporary variable
     int score_tmp = 10*completed - 5*failed;
-    //then we check if it positive: if yes, we return the correct value
+
     if(score_tmp >=0 )
         return score_tmp;
     else
         return 0;
 }
 
-
+/*! \brief This method shows the current level that the user is in and the sets the maximum and minimum value of the progressBar for each level. */
 void MainWindow::setProgressbar(){
     QList<int> levelsScoresList = {0,10,30,50,100,150,250,300,600,1000,2000};
 
@@ -299,20 +298,22 @@ void MainWindow::setProgressbar(){
     }
 }
 
+
 void MainWindow::resetButtons(){
     ui->statusBtn->setEnabled(false);
     ui->editBtn->setEnabled(false);
     ui->deleteBtn->setEnabled(false);
 }
 
-
-void MainWindow::loadImage(const QString& path){
+/*! \brief This method loads a picture into the user profile and also saves it into the database, so the user does not need to
+ * choose a picture every time the program restarts. The database also saves the width and height of the picture to load it correctly next time */
+void MainWindow::loadImage(const QString &path){
     QImageReader reader(path);
     QImage img(reader.read());
 
-    if(img.isNull()) {
+    if(img.isNull())
         QMessageBox::information(this, QGuiApplication::applicationDisplayName(), "<span style='font-family: URW Gothic L'>\nCould not open image</span>");
-    } else {
+    else {
         width = img.width();
         height = img.height();
         QByteArray arr = convertImageToByteArray(img);
@@ -325,7 +326,8 @@ void MainWindow::loadImage(const QString& path){
     }
 }
 
-
+/*! \brief This method reads in the dates of our tasks in the taskLists and will be added to the calendarList. The calendar will paint the given
+ * dates red (See Calendarmanager class.). */
 void MainWindow::synchronizeCalendar(){
     ui->calendarWidget->setDates(QList<QDate>());
     for(int i =0 ; i<m_taskManager.getTaskList().length(); ++i){
@@ -333,6 +335,7 @@ void MainWindow::synchronizeCalendar(){
         ui->calendarWidget->getDate(date);
     }
 }
+
 
 QByteArray MainWindow::convertImageToByteArray(QImage &img){
     QByteArray arr = QByteArray::fromRawData((const char*)img.bits(), img.byteCount());
@@ -358,6 +361,13 @@ void MainWindow::logout(){
     this->m_username = "";
     this->m_password = "";
 
+    closeAllWindows();
+}
+
+void MainWindow::closeAllWindows() {
+    hf.close();
+    af.close();
+    sf.close();
     ssf.close();
     this->close();
 }
@@ -367,13 +377,14 @@ void MainWindow::on_deleteAccountBtn_clicked(){
     QMessageBox msgBox;
     msgBox.setStyleSheet("font-family: URW Gothic L");
     msgBox.setWindowTitle("Delete Account");
+    msgBox.setIcon(QMessageBox::Critical);
     msgBox.setText("\nAre you sure you want to delete your account?");
     msgBox.setStandardButtons(QMessageBox::Yes);
     msgBox.addButton(QMessageBox::No);
     msgBox.setDefaultButton(QMessageBox::No);
     if(msgBox.exec() == QMessageBox::Yes){
         m_userManager.delete_(this->m_username);
-        this->close();
+        closeAllWindows();
     }else {
         QMessageBox msgInfo(QMessageBox::Information, "Information", "\nWe are glad you did not leave!");
         msgInfo.setStyleSheet("font-family: URW Gothic L");
@@ -386,7 +397,7 @@ void MainWindow::on_logoutBtn_clicked(){
     logout();
 }
 
-
+/*! \brief This slot checks if the user has entered a task title, loads the updated taskList and then resets the taskInput. */
 void MainWindow::on_confirm_cancelBtnB_accepted(){
     taskConfirmed(readTaskAndCheckIfValid());
     getTasks();
@@ -398,7 +409,7 @@ void MainWindow::on_confirm_cancelBtnB_rejected(){
     resetTaskInput();
 }
 
-
+/*! \brief This slot deletes a task if a user clicked on one task in the table and loads the updated list. */
 void MainWindow::on_deleteBtn_clicked(){
     if(ui->taskView->currentIndex().isValid()){
         deleteTask();
@@ -412,10 +423,12 @@ void MainWindow::on_taskView_pressed(){
     ui->deleteBtn->setEnabled(ui->taskView->currentIndex().isValid());
     ui->editBtn->setEnabled(ui->taskView->currentIndex().isValid());
     ui->statusBtn->setEnabled(ui->taskView->currentIndex().isValid());
+
     ui->calendarWidget->setSelectedDate(m_taskManager.getTaskList().at(ui->taskView->currentIndex().row()).date());
 }
 
-
+/*! \brief This slot copies the selected task data into the Add-Page and disables the buttons on the Tasks-Page.
+ * At the end of the method the mode will be changed to value = 1, this is important for the readTaskAndCheckIfValid()-method. */
 void MainWindow::on_editBtn_clicked(){
     if(ui->taskView->currentIndex().isValid()){
         QModelIndex index = ui->taskView->selectionModel()->currentIndex();
@@ -433,61 +446,65 @@ void MainWindow::on_editBtn_clicked(){
     }
 }
 
-
+/*! \brief This slot reads the user data from the Account-Page. If it is valid the user data will be updated in the database. If not the user
+ * will be notified on the GUI that something is missing/wrong. */
 void MainWindow::on_saveChangesBtn_clicked(){
     User m_user(m_username, m_password, "", "", "");
-    bool stop = false;
+    bool isInvalid = false;
     QString style = "border: 1px solid red" ;
 
-    if(ui->firstnameTxt->text() == "")
-    {
+    if(ui->firstnameTxt->text() == ""){
         ui->firstnameTxt->setStyleSheet(style);
         ui->firstnameTxt->setPlaceholderText("First Name EMPTY!");
-        stop = true;
+        isInvalid = true;
     }else{
-        ui->firstnameTxt->setStyleSheet("");
+        ui->firstnameTxt->setStyleSheet("background-color: white");
         m_user.setFirstname(ui->firstnameTxt->text());
     }
 
-    if(ui->lastnameTxt->text() == "")
-    {
+    if(ui->lastnameTxt->text() == ""){
         ui->lastnameTxt->setStyleSheet(style);
         ui->lastnameTxt->setPlaceholderText("Last Name EMPTY!");
-        stop = true;
+        isInvalid = true;
     }else{
-        ui->lastnameTxt->setStyleSheet("");
+        ui->lastnameTxt->setStyleSheet("background-color: white");
         m_user.setLastname(ui->lastnameTxt->text());
     }
 
-    if(ui->emailTxt->text() == "")
-    {
+    if(ui->emailTxt->text() == ""){
         ui->emailTxt->setStyleSheet(style);
         ui->emailTxt->setPlaceholderText("E-mail EMPTY!");
-        stop = true;
+        isInvalid = true;
     }else{
-        ui->emailTxt->setStyleSheet("");
+        ui->emailTxt->setStyleSheet("background-color: white");
         m_user.setEmail(ui->emailTxt->text());
     }
 
     m_user.setBirthday(ui->dateEdit->date());
     m_user.setAddress(ui->addressTxt->text());
 
-    if(!stop)
+    if(!isInvalid){
         userUpdatedConfirmed(m_userManager.update(m_user));
+        editInfoCheckBox_checked(false);
+    }
 }
 
-
+/*! \brief This slot will allow the user to choose between the statuses for a single task to change the current working state. Choosing the status
+ * will be taking place in the StatusForm. */
 void MainWindow::on_statusBtn_clicked(){
     if(ui->taskView->currentIndex().isValid()){
         QModelIndex index = ui->taskView->selectionModel()->currentIndex();
         Task task = m_taskManager.getTaskModel()->taskList().at(index.row());
         sf.giveTask(task);
+        sf.setStatus(task.status());
+        sf.initializeStatusForm();
         task = *sf.readStatusFromWindow();
         sf.show();
         resetButtons();
     }
 }
 
+/*! \brief This slot allows the user to pick a picture from his directory. If something went wrong, a criticalMessageBox is shown. */
 void MainWindow::on_pictureBtn_clicked(){
     QString pathToImgFile = QFileDialog::getOpenFileName(this, tr("Open Image"), "/home/", tr("Image Files (*.png *.xpm *.jpg)"));
 
@@ -495,9 +512,8 @@ void MainWindow::on_pictureBtn_clicked(){
         QMessageBox msgCri(QMessageBox::Critical, "Error", "\nNo image selected. Please pick an Image first!");
         msgCri.setStyleSheet("font-family: URW Gothic L");
         msgCri.exec();
-    }else{
+    }else
         loadImage(pathToImgFile);
-    }
 }
 
 
@@ -521,7 +537,10 @@ void MainWindow::refreshData(){
     getTasks();
 }
 
-
+/*! \brief This slot allows the user to click in the calender and sees in the table the corresponding tasks selected.
+ * First for-loop: Goes through the taskList and checks which dates have the selected date on the calendar. Matching rows will be appended
+ * into the indexesList.
+ * Second for-loop: Goes through each element of the indexesList and selects the rows with the same date in the table. */
 void MainWindow::on_calendarWidget_clicked(const QDate &date){
     ui->taskView->clearSelection();
 
@@ -539,14 +558,6 @@ void MainWindow::on_calendarWidget_clicked(const QDate &date){
 
     resetButtons();
     ui->taskView->setSelectionMode(QAbstractItemView::SingleSelection);
-}
-
-
-void MainWindow::sort_(){
-    TaskListModel model;
-    QSortFilterProxyModel proxyModel;
-    proxyModel.setSourceModel(&model);
-    ui->taskView->setModel(&proxyModel);
 }
 
 
@@ -580,6 +591,5 @@ void MainWindow::on_deleteAllBtn_clicked(){
         msgInfo.setStyleSheet("font-family: URW Gothic L");
         msgInfo.exec();
     }
-
     resetButtons();
 }

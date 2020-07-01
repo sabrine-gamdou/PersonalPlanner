@@ -4,7 +4,7 @@
 #include <QApplication>
 
 
-/* Our application starts with the LoginForm. */
+/*! \brief  Our application starts with the LoginForm. */
 int main(int argc, char *argv[]){
 
     QApplication a(argc, argv);

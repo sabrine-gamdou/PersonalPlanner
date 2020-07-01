@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1046</width>
-    <height>592</height>
+    <width>1065</width>
+    <height>604</height>
    </rect>
   </property>
   <property name="font">
@@ -50,7 +50,7 @@
     <rect>
      <x>20</x>
      <y>50</y>
-     <width>1014</width>
+     <width>1034</width>
      <height>531</height>
     </rect>
    </property>
@@ -350,7 +350,7 @@ Blue means completed Task</string>
          <string notr="true">background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0.0225455, stop:0 rgba(0,0,0,0), stop:1 rgba(0,0,0,0))</string>
         </property>
         <property name="text">
-         <string>By clicking on the bar of the statistics you can switch to the weekly view. To switch back to the monthly view, just click on the statistic again.</string>
+         <string>By clicking on the bar of the statistics you can switch to the weekly view. To switch back to the monthly view, just click on a random bar again.</string>
         </property>
        </widget>
       </item>

@@ -23,6 +23,9 @@ Task* StatusForm::readStatusFromWindow(){
         status = "Failed";
     else if(ui->inProgressRb->isChecked())
         status = "In-Progress";
+    else{
+     return &m_task;
+    }
 
     m_task.setStatus(status);
     m_taskManager.update(m_task);
@@ -35,6 +38,20 @@ void StatusForm::giveTask(const Task &task){
     m_task = task;
 }
 
+void StatusForm::setStatus(const QString &value){
+    status = value;
+}
+
+
+void StatusForm::initializeStatusForm(){
+    if(status == "Completed")
+        ui->completedRb->setChecked(true);
+    else if(status == "Failed")
+        ui->failedRb->setChecked(true);
+    else if(status == "In-Progress")
+        ui->inProgressRb->setChecked(true);
+}
+
 //Slots
 void StatusForm::on_confirm_cancel_btn_accepted(){
     emit refreshGUI();
@@ -44,3 +61,4 @@ void StatusForm::on_confirm_cancel_btn_accepted(){
 void StatusForm::on_confirm_cancel_btn_rejected(){
     this->close();
 }
+

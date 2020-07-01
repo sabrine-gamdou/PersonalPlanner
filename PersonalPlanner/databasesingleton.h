@@ -1,27 +1,27 @@
 #ifndef DATABASESINGLETON_H
 #define DATABASESINGLETON_H
 
-#include <QtSql/QSqlDatabase>
+#include <QSqlDatabase>
 #include <QDebug>
 
 
 class DatabaseSingleton{
 public:
-    /* Static Access Method.*/
+    /*! \brief Static Access Method.*/
     static QSqlDatabase getInstance();
 
 private:
-    /* Instance is stored here */
+    /*! \brief Instance is stored here */
     static QSqlDatabase m_pInstance;
 
-    /* Private constructor to prevent instancing. */
+    /*! \brief Private constructor to prevent instancing. */
     DatabaseSingleton();
     ~DatabaseSingleton();
 
-    /* Create and Open Connection to Database */
+    /*! \brief Create and Open Connection to Database */
     static void openConnection();
 
-    /* Close Connection to Database */
+    /*! \brief Close Connection to Database */
     static void closeConnection();
 };
 

@@ -17,9 +17,14 @@ StatisticsForm::~StatisticsForm(){
     delete ui;
 }
 
-
+/*! \brief This method creates the drilldown structure. We first create our top level model, which we call monthModel.
+ * For each month in monthModel we create a drilldown model called weeklyModel which contains more detailed data for that month.
+ * In weeklyModel, we use the drilldown handler to bring us back to monthModel. To do so we add mapping to the model. The monthModel
+ * is mapped to weeklyModel for each month. Every weeklyModel is mapped back to the monthModel. To make mapping work, we connect the
+ * clicked signals from our model to the statisticView.*/
 void StatisticsForm::createStructure(){
-    monthModel->setName("<span style='font-family: URW Gothic L'>Statistic of your Task Status from June - December " + QString::number(QDate::currentDate().year()) + "</span>");
+    monthModel->setName("<span style='font-family: URW Gothic L'>Statistic of your Task Status from June - December " +
+                        QString::number(QDate::currentDate().year()) + "</span>");
 
     for (int month = 0; month < months.count(); month++) {
         weeklyModel = new StatisticModel (weeks, 10, view);
@@ -33,7 +38,9 @@ void StatisticsForm::createStructure(){
     QObject::connect(monthModel, &StatisticModel::clicked, view, &StatisticView::handleClicked);
 }
 
-
+/*! \brief This method creates for every status a monthly and weekly QBarSet. The data will be read from the sorted QMap to the weeklyBarSet. The
+ * monthlyBarSet data will be the sum of the weeklyBarSet data.
+*/
 void StatisticsForm::populateData(){
     QMap<int, QList<QList<int>>>::const_iterator month;
 
@@ -64,7 +71,8 @@ int StatisticsForm::statusToInt(const QString &status){
     return -1;
 }
 
-
+/*! \brief This method creates a view and a model, sorts the QMap, creates the structure and populates the data. Initializes the view to the monthlyModel and sets
+ * the given title. */
 void StatisticsForm::initializeChart(){
     view = new StatisticView();
     monthModel = new StatisticModel(months, 40, view);
@@ -90,7 +98,8 @@ void StatisticsForm::initializeChart(){
     show();
 }
 
-
+/*! \brief This method mainly sorts the dates after months and weeks and counts the statuses of each week. The status counters will be saved in a corresponding List.
+ * Afterwards the List is stored in another combinedMonths List. Each combinedMonths List is mapped to a corresponging integer value (describing a month). */
 void StatisticsForm::sortDateWeeks(){
     for(int month = 0; month < months.length(); ++month){ //go through all months
         QList<QList<int>> combinedMonths;
@@ -106,8 +115,9 @@ void StatisticsForm::sortDateWeeks(){
                         //count the status for the first 28 days
                         if((tasksList.at(task).date().month() == (month+6)) && (tasksList.at(task).date().day() == (dayOfWeek+(7*week)))) countStatus(status);
                 }
-                //count status for the days 29, 30 and 31 seperately (checked outside of days-loop, so they are checked only once per week and not 7 times)
-                //if the task has a date of current year AND month = given month AND it is the 4th week of the month (week == 3, cause week counter starts at 0) AND day is either 29/30/31 THEN count status!
+                /*count status for the days 29, 30 and 31 seperately (checked outside of days-loop, so they are checked only once per week and not 7 times)
+                 *if the task has a date of current year AND month = given month AND it is the 4th week of the month (week == 3, cause week counter starts at 0)
+                 *AND day is either 29/30/31 THEN count status!*/
                 if((tasksList.at(task).date().month() == (month+6)) && (week == 3) && (tasksList.at(task).date().year() == QDate::currentDate().year()) &&
                         checkEndOfMonth(tasksList.at(task).date().day(), tasksList.at(task).date().month()))
                     countStatus(status);
@@ -131,9 +141,13 @@ void StatisticsForm::countStatus(const QString &status){
         ++inProgress;
 }
 
-
+/*! \brief This method checks the end of the month.
+ * returns true if the months == 7,8,10 or 12 AND the day is 29,30 or 31
+ * OR if the months == 6,9 or 11 AND the day is 29 or 30.
+ * This method is meant to differentiate between months with 30 or 31 days. */
 bool StatisticsForm::checkEndOfMonth(int day, int month){
-    return ((((month == 7) || (month == 8) || (month == 10) || (month == 12)) && ((day == 29) || (day == 30) || (day == 31))) || (((month == 6) || (month == 9) || (month == 11)) && ((day == 29) || (day == 30))));
+    return ((((month == 7) || (month == 8) || (month == 10) || (month == 12)) && ((day == 29) || (day == 30) || (day == 31))) ||
+            (((month == 6) || (month == 9) || (month == 11)) && ((day == 29) || (day == 30))));
 }
 
 

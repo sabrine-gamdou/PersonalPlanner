@@ -1,6 +1,7 @@
 #include "task.h"
 
-Task::Task(int t_taskID, QString t_title, QDate t_date, int t_importance, QString t_username) : m_taskID(t_taskID), m_title(t_title), m_date(t_date), m_importance(t_importance), m_username(t_username)
+Task::Task(int t_taskID, QString t_title, QDate t_date, int t_importance, QString t_username) :
+    m_taskID(t_taskID), m_title(t_title), m_date(t_date), m_importance(t_importance), m_username(t_username)
 {
 
 }
@@ -91,11 +92,11 @@ void Task::setUsername(const QString &username){
     m_username = username;
 }
 
-/*For us to see in console*/
+/*! \brief For us to see in console*/
 QString Task::toString(){
     QString string;
 
-    string.append("TaskID: " );
+    string.append("TaskID: ");
     string.append(QString::number(m_taskID));
 
     string.append("\nTitle: ");

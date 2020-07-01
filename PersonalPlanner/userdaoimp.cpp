@@ -27,16 +27,15 @@ bool UserDaoImp::create (User &t_user){
     query.bindValue(":address", t_user.address());
     query.bindValue(":score", t_user.score());
 
-    if( !query.exec()) {
+    if( !query.exec()){
         qDebug() << query.lastError().text();
         return false;
     }
-
     return true;
 }
 
 
-User UserDaoImp::read(const QString& t_username){
+User UserDaoImp::read(const QString &t_username){
     QString t_password;
     QString t_firstname;
     QString t_lastname;
@@ -50,7 +49,6 @@ User UserDaoImp::read(const QString& t_username){
     int height;
 
     DatabaseSingleton::getInstance();
-
     QSqlQuery query;
 
     query.prepare( " SELECT * FROM users WHERE username=" ":t_username");
@@ -88,9 +86,7 @@ User UserDaoImp::read(const QString& t_username){
 
 bool UserDaoImp::update(User &t_user){
     DatabaseSingleton::getInstance();
-
     QSqlQuery query;
-
 
     qDebug() << "Prepare Query: "<< query.prepare("UPDATE users SET pass = (:pass), firstname = (:firstname), "
                                                   "lastname = (:lastname), email = (:email), birthday = (:birthday),"
@@ -110,11 +106,9 @@ bool UserDaoImp::update(User &t_user){
 
 bool UserDaoImp::updateScore(const QString &t_username, int score){
     DatabaseSingleton::getInstance();
-
     QSqlQuery query;
 
     qDebug() << "Prepare Query: "<< query.prepare("UPDATE users SET  score = (:score) WHERE username = (:un)");
-
     query.bindValue(":un", t_username);
     query.bindValue(":score", score);
 
@@ -124,7 +118,6 @@ bool UserDaoImp::updateScore(const QString &t_username, int score){
 
 bool UserDaoImp::delete_(const QString &t_username){
     DatabaseSingleton::getInstance();
-
     QSqlQuery query;
 
     qDebug() << "Prepare Query: "<< query.prepare("DELETE FROM users WHERE username = (:un)");
@@ -136,7 +129,6 @@ bool UserDaoImp::delete_(const QString &t_username){
 
 bool UserDaoImp::checkLogin(const QString &t_username, const QString &t_password){
     DatabaseSingleton::getInstance();
-
     QSqlQuery query;
 
     qDebug() << "Prepare Query: "<< query.prepare("SELECT username FROM users WHERE username = (:un) AND pass = (:pass)");
@@ -153,7 +145,6 @@ bool UserDaoImp::checkLogin(const QString &t_username, const QString &t_password
 
 bool UserDaoImp::updateProfilePicture(QByteArray &arr, QString &username, int width, int height){
     DatabaseSingleton::getInstance();
-
     QSqlQuery query;
 
     qDebug() << "Prepare updateProfilePicture Query: "<< query.prepare("UPDATE users SET profile_picture = (:pic), width = (:width), height = (:height) WHERE username = (:un)");
@@ -168,7 +159,6 @@ bool UserDaoImp::updateProfilePicture(QByteArray &arr, QString &username, int wi
 
 bool UserDaoImp::checkUserExist(const QString &t_username){
     DatabaseSingleton::getInstance();
-
     QSqlQuery query;
 
     qDebug() << "Prepare Query: "<< query.prepare("SELECT username FROM users WHERE username = (:un)");

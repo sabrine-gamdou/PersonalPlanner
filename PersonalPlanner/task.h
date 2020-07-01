@@ -2,7 +2,6 @@
 #define TASK_H
 
 #include <QDate>
-#include <QString>
 
 class Task{
 

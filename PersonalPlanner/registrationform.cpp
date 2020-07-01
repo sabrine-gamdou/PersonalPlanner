@@ -20,11 +20,12 @@ RegistrationForm::~RegistrationForm(){
     delete ui;
 }
 
+/*! \brief This method will notify the user with a messageBox if the given bool value is true an informationBox will be shown. Otherwise
+ * a warningBox will show up. */
+void RegistrationForm::userCreatedConfirmed(const bool isUserCreated){
+    qDebug() << "User created status: "<< isUserCreated;
 
-void RegistrationForm::userCreatedConfirmed(const bool t_userCreated){
-    qDebug() << "User created status: "<< t_userCreated;
-
-    if(t_userCreated){
+    if(isUserCreated){
         QMessageBox msgInfo(QMessageBox::Information, "Information", "\nWelcome to Personal Planner!");
         msgInfo.setStyleSheet("font-family: URW Gothic L");
         msgInfo.exec();
@@ -38,6 +39,8 @@ void RegistrationForm::userCreatedConfirmed(const bool t_userCreated){
 }
 
 //Slots
+/*! \brief This slot reads the user data from the RegistrationForm. If it is valid the user data will be created and saved in the database.
+ * If not the user will be notified on the GUI that something is missing/wrong. */
 void RegistrationForm::on_confirmBtn_clicked(){
     QString un;
     QString pass;
@@ -48,59 +51,54 @@ void RegistrationForm::on_confirmBtn_clicked(){
     QString style = "background-color: white; border: 2px solid red;";
     QString styleLb = "color:red;";
 
-    bool stop = false;
+    bool isInvalid = false;
 
     if(ui->usernameTxt->text() == ""){
         ui->usernameTxt->setStyleSheet(style);
         ui->usernameTxt->setPlaceholderText("Username EMPTY!");
-        stop = true;
+        isInvalid = true;
     }else{
         ui->usernameTxt->setStyleSheet("");
         un = ui->usernameTxt->text();
-        stop = false;
     }
 
     if(ui->passTxt->text() == ""){
         ui->passTxt->setStyleSheet(style);
         ui->passTxt->setPlaceholderText("Password EMPTY!");
-        stop = true;
+        isInvalid = true;
     }else{
         ui->passTxt->setStyleSheet("");
         pass = ui->passTxt->text();
-        stop = false;
     }
 
     if(ui->firstnameTxt->text() == ""){
         ui->firstnameTxt->setStyleSheet(style);
         ui->firstnameTxt->setPlaceholderText("First Name EMPTY!");
-        stop = true;
+        isInvalid = true;
     }else{
         ui->firstnameTxt->setStyleSheet("");
         firstname = ui->firstnameTxt->text();
-        stop = false;
     }
 
     if(ui->lastnameTxt->text() == ""){
         ui->lastnameTxt->setStyleSheet(style);
         ui->lastnameTxt->setPlaceholderText("Last Name EMPTY!");
-        stop = false;
+        isInvalid = false;
     }else{
         ui->lastnameTxt->setStyleSheet("");
         lastname = ui->lastnameTxt->text();
-        stop = false;
     }
 
     if(ui->emailTxt->text() == ""){
         ui->emailTxt->setStyleSheet(style);
         ui->emailTxt->setPlaceholderText("E-mail EMPTY!");
-        stop = true;
+        isInvalid = true;
     }else{
         ui->emailTxt->setStyleSheet("");
         email = ui->emailTxt->text();
-        stop = false;
     }
 
-    if(stop){
+    if(isInvalid){
         ui->errLb->setStyleSheet(styleLb);
         ui->errLb->setEnabled(true);
         ui->errLb->setText("Please correct your mistakes.");
@@ -108,10 +106,11 @@ void RegistrationForm::on_confirmBtn_clicked(){
         ui->errLb->setText("");
         ui->errLb->setEnabled(false);
         User t_user(un,pass,firstname,lastname,email);
+
         if (!m_userManager->checkUserExist(un))
-        userCreatedConfirmed(m_userManager->create(t_user));
+            userCreatedConfirmed(m_userManager->create(t_user));
         else{
-            QMessageBox msgWarn(QMessageBox::Warning, "Warning", "\nThe username '" + un + "' is already taken... Please choose another username");
+            QMessageBox msgWarn(QMessageBox::Warning, "Warning", "\nThe username '" + un + "' is already taken... \nPlease choose another username!");
             msgWarn.setStyleSheet("font-family: URW Gothic L");
             msgWarn.exec();
         }

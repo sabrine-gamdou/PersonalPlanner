@@ -1,8 +1,8 @@
 #ifndef STATISTICMODEL_H
 #define STATISTICMODEL_H
 
-#include <QtCharts/QStackedBarSeries>
-#include <QtCore/QMap>
+#include <QStackedBarSeries>
+#include <QMap>
 
 QT_CHARTS_USE_NAMESPACE
 

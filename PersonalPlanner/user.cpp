@@ -1,6 +1,7 @@
 #include "user.h"
 
-User::User(QString t_username, QString t_password, QString t_firstname, QString t_lastname, QString t_email) : m_username(t_username), m_password(t_password), m_firstname(t_firstname), m_lastname(t_lastname), m_email(t_email){
+User::User(QString t_username, QString t_password, QString t_firstname, QString t_lastname, QString t_email) :
+    m_username(t_username), m_password(t_password), m_firstname(t_firstname), m_lastname(t_lastname), m_email(t_email){
 
 }
 
@@ -110,21 +111,29 @@ void User::setProfilePicture(const QByteArray &profilePicture){
 
 
 QString User::toString(){
-    QString string ;
-    string.append("Username: " );
+    QString string;
+
+    string.append("Username: ");
     string.append(m_username);
+
     string.append("\nPassword: ");
     string.append(m_password);
+
     string.append("\nFirstname: ");
     string.append(m_firstname);
+
     string.append("\nLastname: ");
     string.append(m_lastname);
+
     string.append("\nEmail: ");
     string.append(m_email);
+
     string.append("\nBirthday: ");
     string.append(m_birthday.toString("dd.MM.yyyy"));
+
     string.append("\nAddress: ");
     string.append(m_address);
+
     string.append("\nScore: ");
     string.append(QString::number(m_score));
 

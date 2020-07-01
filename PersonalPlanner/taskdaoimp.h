@@ -4,8 +4,8 @@
 #include "task.h"
 #include "tasklistmodel.h"
 
-#include <QtSql/QSqlDatabase>
-#include <QtSql/QSqlQuery>
+#include <QSqlDatabase>
+#include <QSqlQuery>
 #include <QDate>
 #include <QDebug>
 
@@ -26,7 +26,7 @@ public:
     void setTaskList(const QList<Task> &taskList);
 
 private:
-    TaskListModel* taskModel;
+    TaskListModel *taskModel;
     QList<Task> m_taskList;
 };
 

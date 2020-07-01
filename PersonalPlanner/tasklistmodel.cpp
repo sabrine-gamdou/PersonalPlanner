@@ -24,12 +24,11 @@ int TaskListModel::columnCount(const QModelIndex &parent) const{
 }
 
 
-bool TaskListModel::removeRow(int position, int rows, const QModelIndex &parent){
+bool TaskListModel::removeRow(int position, int rows){
     beginRemoveRows(QModelIndex(), position, position+rows-1);
 
     for (int row = 0; row < rows; ++row)
         m_taskList.removeAt(position);
-
     endRemoveRows();
 
     return true;
@@ -39,7 +38,6 @@ bool TaskListModel::removeRow(int position, int rows, const QModelIndex &parent)
 QVariant TaskListModel::data(const QModelIndex &index, int role) const{
     if (!index.isValid())
         return QVariant();
-
 
     switch(role ) {
     case Qt::DisplayRole:{
@@ -55,10 +53,12 @@ QVariant TaskListModel::data(const QModelIndex &index, int role) const{
         case ColumnNames::Repetition:
             return m_taskList[index.row()].repetition();
         case ColumnNames::Status:
-           return m_taskList[index.row()].status();
-
+            return m_taskList[index.row()].status();
+        case ColumnNames::Count:
+            return QVariant();
         }
     }
+
     case Qt::BackgroundRole: {
         if (m_taskList[index.row()].status() == "Completed")
             return QBrush (QColor(32,159,223));
@@ -70,8 +70,7 @@ QVariant TaskListModel::data(const QModelIndex &index, int role) const{
             return QBrush (QColor(153,202,83));
         break;
     default:break;
-    }
-
+        }
     }
     return QVariant();
 }
