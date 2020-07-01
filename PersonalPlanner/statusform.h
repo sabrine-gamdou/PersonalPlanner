@@ -34,7 +34,7 @@ signals:
 private:
     Ui::StatusForm *ui;
 
-    QString status;
+    QString m_status;
     TaskDaoImp m_taskManager;
     Task m_task;
     TaskListModel m_taskModel;

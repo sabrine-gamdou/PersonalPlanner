@@ -511,7 +511,7 @@
                          <context>GUI Layer</context>
                          <name>StatisticsForm</name>
                          <pos>x:300;y:-20</pos>
-                         <rect>x:-125;y:-175;w:250;h:350</rect>
+                         <rect>x:-125;y:-180;w:250;h:360</rect>
                          <visual-role>0</visual-role>
                         </DObject>
                        </base-DObject>
@@ -943,7 +943,7 @@
                     </item>
                    </qlist>
                   </elements>
-                  <last-modified>1593511134104</last-modified>
+                  <last-modified>1593608990871</last-modified>
                   <toolbarid>General</toolbarid>
                  </MDiagram>
                 </base-MDiagram>

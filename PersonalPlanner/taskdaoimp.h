@@ -26,7 +26,7 @@ public:
     void setTaskList(const QList<Task> &taskList);
 
 private:
-    TaskListModel *taskModel;
+    TaskListModel *p_taskModel;
     QList<Task> m_taskList;
 };
 

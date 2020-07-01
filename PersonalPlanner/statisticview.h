@@ -26,9 +26,9 @@ public slots:
     void handleClicked(int index, QBarSet *barset);
 
 private:
-    StatisticModel *m_currentModel;
-    QBarCategoryAxis *m_axisX;
-    QValueAxis *m_axisY;
+    StatisticModel *p_currentModel;
+    QBarCategoryAxis *p_axisX;
+    QValueAxis *p_axisY;
 
 };
 

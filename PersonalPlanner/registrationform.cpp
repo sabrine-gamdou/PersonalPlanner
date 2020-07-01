@@ -107,8 +107,8 @@ void RegistrationForm::on_confirmBtn_clicked(){
         ui->errLb->setEnabled(false);
         User t_user(un,pass,firstname,lastname,email);
 
-        if (!m_userManager->checkUserExist(un))
-            userCreatedConfirmed(m_userManager->create(t_user));
+        if (!p_userManager->checkUserExist(un))
+            userCreatedConfirmed(p_userManager->create(t_user));
         else{
             QMessageBox msgWarn(QMessageBox::Warning, "Warning", "\nThe username '" + un + "' is already taken... \nPlease choose another username!");
             msgWarn.setStyleSheet("font-family: URW Gothic L");

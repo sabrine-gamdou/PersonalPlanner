@@ -80,18 +80,18 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    StatusForm sf;
-    HelpForm hf;
-    AboutForm af;
-    StatisticsForm ssf;
+    StatusForm m_sf;
+    HelpForm m_hf;
+    AboutForm m_af;
+    StatisticsForm m_ssf;
 
     UserDaoImp m_userManager;
     TaskDaoImp m_taskManager;
 
-    int mode;
-    int width;
-    int height;
-    int score;
+    int m_mode;
+    int m_width;
+    int m_height;
+    int m_score;
 
     QString m_username;
     QString m_password;

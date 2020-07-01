@@ -11,21 +11,21 @@ UserDaoImp::~UserDaoImp(){
 }
 
 
-bool UserDaoImp::create (User &t_user){
+bool UserDaoImp::create (User &user){
     DatabaseSingleton::getInstance();
 
     QSqlQuery query;
 
     qDebug() << "Prepare Query: "<< query.prepare("INSERT INTO users (username, pass, firstname, lastname, email, birthday, address, score) "
                                                   "VALUES (:username, :pass, :firstname, :lastname, :email, :birthday, :address, :score)");
-    query.bindValue(":username", t_user.username());
-    query.bindValue(":pass", t_user.password());
-    query.bindValue(":firstname", t_user.firstname());
-    query.bindValue(":lastname", t_user.lastname());
-    query.bindValue(":email", t_user.email());
-    query.bindValue(":birthday", t_user.birthday());
-    query.bindValue(":address", t_user.address());
-    query.bindValue(":score", t_user.score());
+    query.bindValue(":username", user.username());
+    query.bindValue(":pass", user.password());
+    query.bindValue(":firstname", user.firstname());
+    query.bindValue(":lastname", user.lastname());
+    query.bindValue(":email", user.email());
+    query.bindValue(":birthday", user.birthday());
+    query.bindValue(":address", user.address());
+    query.bindValue(":score", user.score());
 
     if( !query.exec()){
         qDebug() << query.lastError().text();
@@ -35,48 +35,48 @@ bool UserDaoImp::create (User &t_user){
 }
 
 
-User UserDaoImp::read(const QString &t_username){
-    QString t_password;
-    QString t_firstname;
-    QString t_lastname;
-    QString t_email;
-    QDate t_birthday(1,2,3);
-    QString t_address;
-    QByteArray t_profilePicture;
+User UserDaoImp::read(const QString &username){
+    QString password;
+    QString firstname;
+    QString lastname;
+    QString email;
+    QDate birthday(1,2,3);
+    QString address;
+    QByteArray profilePicture;
 
-    int t_score = 0;
+    int score = 0;
     int width;
     int height;
 
     DatabaseSingleton::getInstance();
     QSqlQuery query;
 
-    query.prepare( " SELECT * FROM users WHERE username=" ":t_username");
-    query.bindValue(":t_username", t_username);
+    query.prepare( " SELECT * FROM users WHERE username=" ":username");
+    query.bindValue(":username", username);
 
     query.exec();
 
     while (query.next()) {
-        t_password = query.value(1).toString();
-        t_firstname = query.value(2).toString();
-        t_lastname = query.value(3).toString();
-        t_email = query.value(4).toString();
-        t_birthday = query.value(5).toDate();
-        t_address = query.value(6).toString();
-        t_score = query.value(7).toInt();
-        t_profilePicture = query.value(8).toByteArray();
+        password = query.value(1).toString();
+        firstname = query.value(2).toString();
+        lastname = query.value(3).toString();
+        email = query.value(4).toString();
+        birthday = query.value(5).toDate();
+        address = query.value(6).toString();
+        score = query.value(7).toInt();
+        profilePicture = query.value(8).toByteArray();
         width = query.value(9).toInt();
         height = query.value(10).toInt();
 
-        qDebug() << t_username << t_password << t_firstname << t_lastname << t_email
-                 << t_birthday << t_address << t_score;
+        qDebug() << username << password << firstname << lastname << email
+                 << birthday << address << score;
     }
 
-    User user(t_username, t_password, t_firstname, t_lastname, t_email);
-    user.setBirthday(t_birthday);
-    user.setAddress(t_address);
-    user.setScore(t_score);
-    user.setProfilePicture(t_profilePicture);
+    User user(username, password, firstname, lastname, email);
+    user.setBirthday(birthday);
+    user.setAddress(address);
+    user.setScore(score);
+    user.setProfilePicture(profilePicture);
     user.setWidth(width);
     user.setHeight(height);
 
@@ -84,56 +84,56 @@ User UserDaoImp::read(const QString &t_username){
 }
 
 
-bool UserDaoImp::update(User &t_user){
+bool UserDaoImp::update(User &user){
     DatabaseSingleton::getInstance();
     QSqlQuery query;
 
     qDebug() << "Prepare Query: "<< query.prepare("UPDATE users SET pass = (:pass), firstname = (:firstname), "
                                                   "lastname = (:lastname), email = (:email), birthday = (:birthday),"
                                                   "address = (:address), score = (:score) WHERE username = (:un)");
-    query.bindValue(":un", t_user.username());
-    query.bindValue(":pass", t_user.password());
-    query.bindValue(":firstname", t_user.firstname());
-    query.bindValue(":lastname", t_user.lastname());
-    query.bindValue(":email", t_user.email());
-    query.bindValue(":birthday", t_user.birthday());
-    query.bindValue(":address", t_user.address());
-    query.bindValue(":score", t_user.score());
+    query.bindValue(":un", user.username());
+    query.bindValue(":pass", user.password());
+    query.bindValue(":firstname", user.firstname());
+    query.bindValue(":lastname", user.lastname());
+    query.bindValue(":email", user.email());
+    query.bindValue(":birthday", user.birthday());
+    query.bindValue(":address", user.address());
+    query.bindValue(":score", user.score());
 
     return query.exec();
 }
 
 
-bool UserDaoImp::updateScore(const QString &t_username, int score){
+bool UserDaoImp::updateScore(const QString &username, int score){
     DatabaseSingleton::getInstance();
     QSqlQuery query;
 
     qDebug() << "Prepare Query: "<< query.prepare("UPDATE users SET  score = (:score) WHERE username = (:un)");
-    query.bindValue(":un", t_username);
+    query.bindValue(":un", username);
     query.bindValue(":score", score);
 
     return query.exec();
 }
 
 
-bool UserDaoImp::delete_(const QString &t_username){
+bool UserDaoImp::delete_(const QString &username){
     DatabaseSingleton::getInstance();
     QSqlQuery query;
 
     qDebug() << "Prepare Query: "<< query.prepare("DELETE FROM users WHERE username = (:un)");
-    query.bindValue(":un", t_username);
+    query.bindValue(":un", username);
 
     return query.exec();
 }
 
 
-bool UserDaoImp::checkLogin(const QString &t_username, const QString &t_password){
+bool UserDaoImp::checkLogin(const QString &username, const QString &password){
     DatabaseSingleton::getInstance();
     QSqlQuery query;
 
     qDebug() << "Prepare Query: "<< query.prepare("SELECT username FROM users WHERE username = (:un) AND pass = (:pass)");
-    query.bindValue(":un", t_username);
-    query.bindValue(":pass", t_password);
+    query.bindValue(":un", username);
+    query.bindValue(":pass", password);
 
     if( query.exec()){
         if (query.next())
@@ -157,12 +157,12 @@ bool UserDaoImp::updateProfilePicture(QByteArray &arr, QString &username, int wi
 }
 
 
-bool UserDaoImp::checkUserExist(const QString &t_username){
+bool UserDaoImp::checkUserExist(const QString &username){
     DatabaseSingleton::getInstance();
     QSqlQuery query;
 
     qDebug() << "Prepare Query: "<< query.prepare("SELECT username FROM users WHERE username = (:un)");
-    query.bindValue(":un", t_username);
+    query.bindValue(":un", username);
 
     if( query.exec()){
         if (query.next())

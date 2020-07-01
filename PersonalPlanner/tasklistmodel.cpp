@@ -6,7 +6,7 @@ TaskListModel::TaskListModel(QObject *parent) : QAbstractTableModel(parent){
 }
 
 
-void TaskListModel::populateData(const QList<Task>& taskList){
+void TaskListModel::populateData(const QList<Task> &taskList){
     m_taskList.clear();
     m_taskList = taskList;
 }

@@ -18,16 +18,16 @@ StatusForm::~StatusForm(){
 
 Task* StatusForm::readStatusFromWindow(){
     if(ui->completedRb->isChecked())
-        status = "Completed";
+        m_status = "Completed";
     else if(ui->failedRb->isChecked())
-        status = "Failed";
+        m_status = "Failed";
     else if(ui->inProgressRb->isChecked())
-        status = "In-Progress";
+        m_status = "In-Progress";
     else{
      return &m_task;
     }
 
-    m_task.setStatus(status);
+    m_task.setStatus(m_status);
     m_taskManager.update(m_task);
 
     return &m_task;
@@ -39,16 +39,16 @@ void StatusForm::giveTask(const Task &task){
 }
 
 void StatusForm::setStatus(const QString &value){
-    status = value;
+    m_status = value;
 }
 
 
 void StatusForm::initializeStatusForm(){
-    if(status == "Completed")
+    if(m_status == "Completed")
         ui->completedRb->setChecked(true);
-    else if(status == "Failed")
+    else if(m_status == "Failed")
         ui->failedRb->setChecked(true);
-    else if(status == "In-Progress")
+    else if(m_status == "In-Progress")
         ui->inProgressRb->setChecked(true);
 }
 

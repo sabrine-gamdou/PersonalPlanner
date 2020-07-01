@@ -4,27 +4,27 @@ QT_CHARTS_USE_NAMESPACE
 
 StatisticView::StatisticView (QGraphicsItem *parent, Qt::WindowFlags wFlags)
 : QChart(QChart::ChartTypeCartesian, parent, wFlags),
-  m_currentModel(0),
-  m_axisX(new QBarCategoryAxis()),
-  m_axisY(new QValueAxis())
+  p_currentModel(0),
+  p_axisX(new QBarCategoryAxis()),
+  p_axisY(new QValueAxis())
 {
-  addAxis(m_axisY, Qt::AlignLeft);
-  addAxis(m_axisX, Qt::AlignBottom);
+  addAxis(p_axisY, Qt::AlignLeft);
+  addAxis(p_axisX, Qt::AlignBottom);
 }
 
 
 void StatisticView::changeSeries(StatisticModel *model){
-    if (m_currentModel)
-        removeSeries(m_currentModel);
+    if (p_currentModel)
+        removeSeries(p_currentModel);
 
-    m_currentModel = model;
+    p_currentModel = model;
 
     // Reset axis
-    m_axisX->setCategories(m_currentModel->categories());
+    p_axisX->setCategories(p_currentModel->categories());
     addSeries(model);
-    model->attachAxis(m_axisX);
-    model->attachAxis(m_axisY);
-    m_axisY->setRange(0,m_currentModel->maxValue());
+    model->attachAxis(p_axisX);
+    model->attachAxis(p_axisY);
+    p_axisY->setRange(0,p_currentModel->maxValue());
     setTitle(model->name());
 }
 

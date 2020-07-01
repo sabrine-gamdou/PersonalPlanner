@@ -81,22 +81,22 @@ void User::setScore(int score){
 
 
 int User::getWidth() const{
-    return width;
+    return m_width;
 }
 
 
 void User::setWidth(int value){
-    width = value;
+    m_width = value;
 }
 
 
 int User::getHeight() const{
-    return height;
+    return m_height;
 }
 
 
 void User::setHeight(int value){
-    height = value;
+    m_height = value;
 }
 
 

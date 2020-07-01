@@ -23,19 +23,19 @@ StatisticsForm::~StatisticsForm(){
  * is mapped to weeklyModel for each month. Every weeklyModel is mapped back to the monthModel. To make mapping work, we connect the
  * clicked signals from our model to the statisticView.*/
 void StatisticsForm::createStructure(){
-    monthModel->setName("<span style='font-family: URW Gothic L'>Statistic of your Task Status from June - December " +
+    p_monthModel->setName("<span style='font-family: URW Gothic L'>Statistic of your Task Status from June - December " +
                         QString::number(QDate::currentDate().year()) + "</span>");
 
-    for (int month = 0; month < months.count(); month++) {
-        weeklyModel = new StatisticModel (weeks, 10, view);
-        monthModel->mapStatisticModel(month, weeklyModel);
-        for ( int week = 0; week < weeks.count(); week++) {
-            weeklyModel->mapStatisticModel(week, monthModel);
-            weeklyModel->setName(QString("<span style='font-family: URW Gothic L'>Status by week - " + months.at(month) + " </span>"));
+    for (int month = 0; month < m_months.count(); month++) {
+        p_weeklyModel = new StatisticModel (m_weeks, 10, p_view);
+        p_monthModel->mapStatisticModel(month, p_weeklyModel);
+        for ( int week = 0; week < m_weeks.count(); week++) {
+            p_weeklyModel->mapStatisticModel(week, p_monthModel);
+            p_weeklyModel->setName(QString("<span style='font-family: URW Gothic L'>Status by week - " + m_months.at(month) + " </span>"));
         }
-        QObject::connect(weeklyModel, &StatisticModel::clicked, view, &StatisticView::handleClicked);
+        QObject::connect(p_weeklyModel, &StatisticModel::clicked, p_view, &StatisticView::handleClicked);
     }
-    QObject::connect(monthModel, &StatisticModel::clicked, view, &StatisticView::handleClicked);
+    QObject::connect(p_monthModel, &StatisticModel::clicked, p_view, &StatisticView::handleClicked);
 }
 
 /*! \brief This method creates for every status a monthly and weekly QBarSet. The data will be read from the sorted QMap to the weeklyBarSet. The
@@ -44,18 +44,18 @@ void StatisticsForm::createStructure(){
 void StatisticsForm::populateData(){
     QMap<int, QList<QList<int>>>::const_iterator month;
 
-    for (const QString &state : status) {
+    for (const QString &state : m_status) {
         QBarSet *monthlyStatus = new QBarSet(state);
         int monthC = 0;
-        for (month = monthlyMap.begin();month != monthlyMap.end();++month) {
+        for (month = m_monthlyMap.begin();month != m_monthlyMap.end();++month) {
             QBarSet *weeklyStatus = new QBarSet(state);
-            for (int week = 0; week < weeks.count(); ++week)
+            for (int week = 0; week < m_weeks.count(); ++week)
                 *weeklyStatus <<  month.value().at(week).at(statusToInt(state));
             ++monthC;
-            monthModel->statisticModel(month.key())->append(weeklyStatus);
+            p_monthModel->statisticModel(month.key())->append(weeklyStatus);
             *monthlyStatus << weeklyStatus->sum();
         }
-        monthModel->append(monthlyStatus);
+        p_monthModel->append(monthlyStatus);
     }
 }
 
@@ -74,25 +74,25 @@ int StatisticsForm::statusToInt(const QString &status){
 /*! \brief This method creates a view and a model, sorts the QMap, creates the structure and populates the data. Initializes the view to the monthlyModel and sets
  * the given title. */
 void StatisticsForm::initializeChart(){
-    view = new StatisticView();
-    monthModel = new StatisticModel(months, 40, view);
+    p_view = new StatisticView();
+    p_monthModel = new StatisticModel(m_months, 40, p_view);
 
     sortDateWeeks();
     createStructure();
     populateData();
 
-    view->changeSeries(monthModel);
-    view->setTitle(monthModel->name());
+    p_view->changeSeries(p_monthModel);
+    p_view->setTitle(p_monthModel->name());
 
     QFont f("URW Gothic L");
 
-    view->axes(Qt::Horizontal).first()->setGridLineVisible(false);
-    view->legend()->setVisible(true);
-    view->legend()->setAlignment(Qt::AlignBottom);
-    view->legend()->setFont(f);
+    p_view->axes(Qt::Horizontal).first()->setGridLineVisible(false);
+    p_view->legend()->setVisible(true);
+    p_view->legend()->setAlignment(Qt::AlignBottom);
+    p_view->legend()->setFont(f);
 
-    QChartView *chartView = new QChartView(view);
-    chartView->setChart(view);
+    QChartView *chartView = new QChartView(p_view);
+    chartView->setChart(p_view);
     setCentralWidget(chartView);
     resize(600,400);
     show();
@@ -101,44 +101,44 @@ void StatisticsForm::initializeChart(){
 /*! \brief This method mainly sorts the dates after months and weeks and counts the statuses of each week. The status counters will be saved in a corresponding List.
  * Afterwards the List is stored in another combinedMonths List. Each combinedMonths List is mapped to a corresponging integer value (describing a month). */
 void StatisticsForm::sortDateWeeks(){
-    for(int month = 0; month < months.length(); ++month){ //go through all months
+    for(int month = 0; month < m_months.length(); ++month){ //go through all months
         QList<QList<int>> combinedMonths;
-        for(int week = 0; week < weeks.length(); ++week){ //go through the 4 weeks of each month
+        for(int week = 0; week < m_weeks.length(); ++week){ //go through the 4 weeks of each month
             QList<int> weeklyStatusList;
-            completed = 0;
-            failed = 0;
-            inProgress = 0;
-            for ( int task = 0; task < tasksList.length(); ++task) {
-                QString status = tasksList.at(task).status();
+            m_completed = 0;
+            m_failed = 0;
+            m_inProgress = 0;
+            for ( int task = 0; task < m_tasksList.length(); ++task) {
+                QString status = m_tasksList.at(task).status();
                 for (int dayOfWeek = 1; dayOfWeek < 8; dayOfWeek++) { // go through each day of chosen week of month
-                    if(tasksList.at(task).date().year() == QDate::currentDate().year()) //check the day and count status ONLY if its a day of the current year
+                    if(m_tasksList.at(task).date().year() == QDate::currentDate().year()) //check the day and count status ONLY if its a day of the current year
                         //count the status for the first 28 days
-                        if((tasksList.at(task).date().month() == (month+6)) && (tasksList.at(task).date().day() == (dayOfWeek+(7*week)))) countStatus(status);
+                        if((m_tasksList.at(task).date().month() == (month+6)) && (m_tasksList.at(task).date().day() == (dayOfWeek+(7*week)))) countStatus(status);
                 }
                 /*count status for the days 29, 30 and 31 seperately (checked outside of days-loop, so they are checked only once per week and not 7 times)
                  *if the task has a date of current year AND month = given month AND it is the 4th week of the month (week == 3, cause week counter starts at 0)
                  *AND day is either 29/30/31 THEN count status!*/
-                if((tasksList.at(task).date().month() == (month+6)) && (week == 3) && (tasksList.at(task).date().year() == QDate::currentDate().year()) &&
-                        checkEndOfMonth(tasksList.at(task).date().day(), tasksList.at(task).date().month()))
+                if((m_tasksList.at(task).date().month() == (month+6)) && (week == 3) && (m_tasksList.at(task).date().year() == QDate::currentDate().year()) &&
+                        checkEndOfMonth(m_tasksList.at(task).date().day(), m_tasksList.at(task).date().month()))
                     countStatus(status);
             }
-            weeklyStatusList.append(completed);
-            weeklyStatusList.append(failed);
-            weeklyStatusList.append(inProgress);
+            weeklyStatusList.append(m_completed);
+            weeklyStatusList.append(m_failed);
+            weeklyStatusList.append(m_inProgress);
             combinedMonths.append(weeklyStatusList);
         }
-        monthlyMap.insert(month,combinedMonths);
+        m_monthlyMap.insert(month,combinedMonths);
     }
 }
 
 
 void StatisticsForm::countStatus(const QString &status){
     if(status == "Completed")
-        ++completed;
+        ++m_completed;
     else if (status == "Failed")
-        ++failed;
+        ++m_failed;
     else if  (status == "In-Progress")
-        ++inProgress;
+        ++m_inProgress;
 }
 
 /*! \brief This method checks the end of the month.
@@ -152,7 +152,7 @@ bool StatisticsForm::checkEndOfMonth(int day, int month){
 
 
 void StatisticsForm::setTasksList(const QList<Task> &value){
-    tasksList = value;
+    m_tasksList = value;
 }
 
 

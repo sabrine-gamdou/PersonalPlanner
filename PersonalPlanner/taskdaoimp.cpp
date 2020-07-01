@@ -10,7 +10,7 @@ TaskDaoImp::TaskDaoImp(){
 
 
 TaskDaoImp::~TaskDaoImp(){
-    delete taskModel;
+    delete p_taskModel;
 }
 
 
@@ -66,8 +66,8 @@ bool TaskDaoImp::readAll(const QString &username){
                  << newTask.status() << newTask.repetition() << newTask.username();
     }
 
-    taskModel = new TaskListModel;
-    taskModel->populateData(m_taskList);
+    p_taskModel = new TaskListModel;
+    p_taskModel->populateData(m_taskList);
 
     return status;
 }
@@ -96,12 +96,12 @@ bool TaskDaoImp::update(const Task &task){
 
 
 bool TaskDaoImp::delete_(const Task &task){
-    int t_id = task.taskID();
+    int id = task.taskID();
     DatabaseSingleton::getInstance();
     QSqlQuery query;
 
-    qDebug() << "id is : " << t_id<< "Prepare Query: "<< query.prepare("DELETE FROM tasks WHERE task_id=:t_id");
-    query.bindValue(":t_id", t_id);
+    qDebug() << "id is : " << id<< "Prepare Query: "<< query.prepare("DELETE FROM tasks WHERE task_id=:id");
+    query.bindValue(":id", id);
 
     return query.exec();
 }
@@ -118,7 +118,7 @@ bool TaskDaoImp::deleteAllTasks(const QString &username) {
 }
 
 TaskListModel *TaskDaoImp::getTaskModel() const{
-    return taskModel;
+    return p_taskModel;
 }
 
 

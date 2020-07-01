@@ -54,8 +54,8 @@ private:
     QByteArray m_profilePicture;
 
     int m_score;
-    int width;
-    int height;
+    int m_width;
+    int m_height;
 };
 
 #endif // USER_H

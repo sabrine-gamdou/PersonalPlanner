@@ -27,7 +27,7 @@ private slots:
 
 private:
     Ui::RegistrationForm *ui;
-    UserDaoImp *m_userManager;
+    UserDaoImp *p_userManager;
     void userCreatedConfirmed(const bool isUserCreated);
 
 };

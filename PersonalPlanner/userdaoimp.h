@@ -14,14 +14,14 @@ public:
     UserDaoImp();
     ~UserDaoImp();
 
-    bool create (User &t_user);
-    User read(const QString &t_username);
-    bool update(User &t_user);
-    bool updateScore(const QString &t_username, int score);
-    bool delete_(const QString &t_username);
-    bool checkLogin(const QString &t_username, const QString &t_password);
+    bool create (User &user);
+    User read(const QString &username);
+    bool update(User &user);
+    bool updateScore(const QString &username, int score);
+    bool delete_(const QString &username);
+    bool checkLogin(const QString &username, const QString &password);
     bool updateProfilePicture(QByteArray &arr, QString &username, int width, int height);
-    bool checkUserExist(const QString &t_username);
+    bool checkUserExist(const QString &username);
 };
 
 #endif // USERDAOIMP_H
